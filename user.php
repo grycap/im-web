@@ -1,0 +1,220 @@
+<?php
+/*
+ IM - Infrastructure Manager
+ Copyright (C) 2011 - GRyCAP - Universitat Politecnica de Valencia
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+function check_session_user() {
+    include('config.php');
+ 
+    if (!isset($_SESSION['user'])) return false;
+    if (!isset($_SESSION['password'])) return false;
+
+    if (!isset($_SESSION['user'])) return false;
+    if (!isset($_SESSION['password'])) return false;
+
+    $password = $_SESSION['password'];
+    $user = $_SESSION['user'];
+
+    $res = false;
+    $db = new IMDB();
+    $fields = array();
+    $fields["username"] = "'" . $db->escapeString($user) . "'";
+    $fields["password"] = "'" . $db->escapeString($password) . "'";
+    $res = $db->get_items_from_table("user", $fields);
+    if (count($res) > 0) {
+        $res = true;
+    }
+    $db->close();
+
+    return $res;
+}
+
+function check_admin_user() {
+    include('config.php');
+    
+    $password = $_SESSION['password'];
+    $user = $_SESSION['user'];
+
+    $res = false;
+    $db = new IMDB();
+    $fields = array();
+    $fields["username"] = "'" . $db->escapeString($user) . "'";
+    $fields["password"] = "'" . $db->escapeString($password) . "'";
+    $fields["permissions"] = "1";
+    $res = $db->get_items_from_table("user", $fields);
+    if (count($res) > 0) {
+        $res = true;
+    }
+
+    $db->close();
+
+    return $res;
+}
+
+function get_users() {
+    include('config.php');
+
+    $db = new IMDB();
+    $res = $db->get_items_from_table("user");
+    $db->close();
+    return $res;
+}
+
+function get_user($username) {
+    include('config.php');
+
+    $db = new IMDB();
+    $res = $db->get_items_from_table("user", array("username" => "'" . $db->escapeString($username) . "'"));
+    $db->close();
+    if (count($res) > 0)
+        return $res[0];
+    else
+        return NULL;
+}
+
+function get_user_groups($username) {
+    include('config.php');
+
+    $db = new IMDB();
+    $res = $db->get_items_from_table("users_grp", array("username" => "'" . $db->escapeString($username) . "'"));
+    $db->close();
+    return $res;
+}
+
+function insert_user($username, $password, $groups, $permissions) {
+    include('config.php');
+
+    $res = "";
+    $db = new IMDB();
+    $fields = array();
+    $fields[] = "'" . $db->escapeString($username) . "'";
+    $fields[] = "'" . $db->escapeString($password) . "'";
+    $fields[] = "'" . strval($permissions) . "'";
+    $res = $db->insert_item_into_table("user",$fields);
+
+    if ($res != "") {
+        return $res;
+    }
+
+    $all_ok = true;
+    $error_msg = "";
+    foreach ($groups as $group) {
+	$fields = array();
+	$fields[] = "'" . $db->escapeString($group) . "'";
+	$fields[] = "'" . $db->escapeString($username) . "'";
+	$res = $db->insert_item_into_table("users_grp",$fields);
+        if ($res != "") {
+            $all_ok = false;
+            $error_msg = $res;
+        }
+
+    }
+    if (!$all_ok) {
+        $res = "Error adding user groups: " . $error_msg;
+    }
+
+    $db->close();
+
+    return $res;
+}
+
+function change_password($username, $password) {
+    include('config.php');
+
+    $res = "";
+    $db = new IMDB();
+    $fields = array();
+    $fields["password"] = "'" . $db->escapeString($password) . "'";
+    $where = array("username" => "'" . $username . "'");
+    $res = $db->edit_item_from_table("user",$fields,$where);
+    $db->close();
+
+    return $res;
+}
+
+function edit_user($username, $new_username, $password, $groups, $permissions) {
+    include('config.php');
+
+    $res = "";
+    $db = new IMDB();
+    $fields = array();
+    $fields["username"] = "'" . $db->escapeString($new_username) . "'";
+    $fields["permissions"] = strval($permissions);
+    if (strlen(trim($password)) > 0) {
+        $fields["password"] = "'" . $db->escapeString($password) . "'";
+    }
+    $where = array("username" => "'" . $username . "'");
+    $res = $db->edit_item_from_table("user",$fields,$where);
+
+    if ($res != "") {
+            $res = $db->lastErrorMsg() . $sql;
+    }
+
+    // borramos para volver a anyadirlos
+    $grp_res = $db->delete_item_from_table("users_grp", array("username" => "'" . $username . "'"));
+    if ($grp_res != "") {
+        $res = "Error adding user groups: " . $grp_res;
+    }
+
+    $all_ok = true;
+    $error_msg = "";
+    foreach ($groups as $group) {
+        $fields = array();
+        $fields[] = "'" . $db->escapeString($group) . "'";
+        $fields[] = "'" . $db->escapeString($username) . "'";
+        $grp_res = $db->insert_item_into_table("users_grp",$fields);
+        if ($grp_res != "") {
+            $all_ok = false;
+            $error_msg = $grp_res;
+        }
+    }
+    if (!$all_ok) {
+        $res = "Error adding user groups: " . $error_msg;
+    }
+
+    $db->close();
+            
+    return $res;
+}
+
+function delete_user($username) {
+    include('config.php');
+
+    $res = "";
+    $db = new IMDB();
+    $res = $db->delete_item_from_table("user", array("username" => "'" . $username . "'"));
+            
+    // borramos los grupos
+    $res = $db->delete_item_from_table("users_grp", array("username" => "'" . $username . "'"));
+    
+    // borramos las credenciales
+    $res = $db->delete_item_from_table("credentials", array("imuser" => "'" . $username . "'"));
+    
+    // borramos los radls
+    $res = $db->delete_item_from_table("radls", array("imuser" => "'" . $username . "'"));
+
+    // borramos las credenciales
+    $res = $db->delete_item_from_table("credentials", array("imuser" => "'" . $username . "'"));
+    
+    // borramos los radls
+    $res = $db->delete_item_from_table("radls", array("imuser" => "'" . $username . "'"));
+
+    $db->close();
+
+    return $res;
+}
+?>

@@ -1,0 +1,213 @@
+/* Starter CSS for Flyout Menu */
+#cssmenu {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+#cssmenu ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#cssmenu ul {
+  position: relative;
+  z-index: 597;
+  float: left;
+}
+#cssmenu ul li {
+  float: left;
+  min-height: 1px;
+  line-height: 1em;
+  vertical-align: middle;
+ border-top:1px dotted  black;
+  
+}
+#cssmenu ul li.hover,
+#cssmenu ul li:hover {
+  position: relative;
+  z-index: 599;
+  cursor: default;
+}
+#cssmenu ul ul {
+  visibility: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 598;
+  width: 100%;
+}
+#cssmenu ul ul li {
+  float: none;
+}
+#cssmenu ul li:hover > ul {
+  visibility: visible;
+}
+#cssmenu ul ul {
+  top: 0;
+  left: 100%;
+}
+#cssmenu ul li {
+  float: none;
+}
+/* Custom Stuff */
+#cssmenu span,
+#cssmenu a {
+  display: inline-block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+}
+#cssmenu {
+  width: 190px;
+}
+#cssmenu:after,
+#cssmenu ul:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+#cssmenu > ul > li:first-child {
+  -moz-border-radius: 0px 0px 0 0;
+  -webkit-border-radius: 0px 0px 0 0;
+  border-radius: 0px 0px 0 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+#cssmenu > ul > li:last-child {
+  -moz-border-radius: 0 0 0px 0px;
+  -webkit-border-radius: 0 0 0px 0px;
+  border-radius: 0 0 0px 0px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+#cssmenu > ul > li ul ul li:first-child {
+  -moz-border-radius: 0 0px 0 0;
+  -webkit-border-radius: 0 0px 0 0;
+  border-radius: 0 0px 0 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+#cssmenu > ul > li ul ul li:last-child {
+  -moz-border-radius: 0 0 0px 0;
+  -webkit-border-radius: 0 0 0px 0;
+  border-radius: 0 0 0px 0;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+#cssmenu ul,
+#cssmenu li {
+  width:190px;
+}
+#cssmenu li {
+  background: ;
+
+
+
+}
+#cssmenu li:hover{
+  background: #EEE;
+}
+#cssmenu li:hover > a{
+  color: #000;
+font-weight:;
+}
+
+
+
+
+
+
+
+
+#cssmenu a {
+  color: #111;
+  padding: 8px 6px 8px 15px;
+  width: 169px;
+}
+
+
+
+
+
+
+
+
+#cssmenu ul ul {
+  width: 190px;
+}
+#cssmenu ul ul li {
+  background: #606a76;
+  border-bottom: 1px solid #59636F;
+  -moz-box-shadow: inset 0 0px 0 #66707c;
+  -webkit-box-shadow: inset 0 0px 0 #66707c;
+  box-shadow: inset 0 0px 0 #66707c;
+}
+#cssmenu ul ul li:hover {
+  background: #4a5662;
+}
+#cssmenu ul ul li a {
+  color: #FFF;
+}
+#cssmenu ul ul a,
+#cssmenu ul ul a span {
+  font-size: 12px;
+}
+
+
+
+
+
+
+#cssmenu .has-sub:hover ul {
+  display: block;
+}
+#cssmenu .has-sub ul {
+  display: none;
+  position: absolute;
+  top: 41px;
+  left: 0px;
+  min-width: 100%;
+  text-align: center;
+  padding-bottom:4px;
+  /* IE7 */
+
+  *width: 100%;
+}
+#cssmenu .has-sub ul li {
+  text-align: center;
+  background-color:#FFF;
+  height:36px;
+  border-top:1px dotted #000;
+  border-bottom:0px dotted #000;
+
+}
+
+
+#cssmenu .has-sub ul li:hover {
+  background-color:#EEE;
+
+}
+
+#cssmenu .has-sub ul li a {
+  text-align: left;
+  display: block;
+  color: #222;
+  
+  
+}
+
+
+
+
+
+
+
+.seleccionado{
+font-weight:bold;
+background: #CCC;
+}

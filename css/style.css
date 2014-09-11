@@ -1,0 +1,239 @@
+body {
+	font-family: 'Open Sans', sans-serif; 
+}
+#menu {
+	width:250px;
+        float: left;
+	height: 700px;
+}
+
+#menu a {
+	text-decoration: none;
+	color: inherit;
+}
+
+#menu li {
+	border-bottom: 1px solid #4297d7;
+	border-top: 1px solid #4297d7;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	padding: 7px 7px;
+}
+
+#menu ul {
+	margin-right: 40px;
+	list-style-type: none;
+	border-bottom: 1px solid #137ed0;
+	border-top: 1px solid #137ed0;
+}
+
+#main {
+	padding-top: 1px;
+	display: block;
+       margin-left:30px;
+       margin-right:30px;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif; 
+	border: 0px solid black;
+}
+
+textarea, select, input {
+	border: 0px solid #137ed0;
+}
+
+
+
+#main table.login  {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+
+#main table  {
+	width: 100%;
+font-family: 'Open Sans', sans-serif; 
+}
+
+
+
+
+#main table.list  {	
+font-family: 'Open Sans', sans-serif; 
+border-bottom: white 15px solid;
+}
+
+#main table.list thead th {
+	padding-right: 20px;
+}
+	
+#main table.list thead td {
+	text-align: center;
+	font-weight: ;
+}
+#main table.list tbody td {
+	border: 1px solid #FFF;
+	padding: 3px 3px;
+	text-align: center;
+       vertical-align:middle;
+}
+
+#main table.list tbody td td{
+	border: 0px solid #FFF;
+	padding: 3px 3px;
+	text-align: left;
+       vertical-align:middle;
+}
+
+
+
+
+
+
+
+
+
+
+#main table.list th {
+	color:#fff;
+	background-color: #a27c3b;	
+	padding: 4px 4px;
+	border: 1px solid #FFF;
+}
+
+#main table.list tr.odd {
+	background-color: white;
+}
+
+#main table.list tr.even {
+	background-color: #f6ead4;
+}
+
+
+#main table.list tr:hover {
+	background-color: #cfb486;
+}
+
+
+
+#main table.list a{
+color:#333;
+text-decoration:underline;
+}
+
+
+
+#main table.list tbody td td:hover{
+	background:#c1a87d;
+}
+
+
+
+
+#main table.list tbody tr td table tbody tr{
+	border-top:1px solid #cfb486;
+	border-bottom:1px solid #cfb486;
+}
+
+
+#main table.list tbody tr td table tbody tr td{
+	width:200px;
+       padding-left:18px;
+	border-right:1px solid #cfb486;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#header {
+	font-size: 40px;
+	text-align: center;
+}
+
+#footer {
+	margin-top: 20px;
+	text-align: center;
+	font-size: small;
+}
+
+#float {
+	border: 1px solid #cfb486;
+	display: none;
+	position: absolute;
+	z-index:10;
+	background-color: #FFF;
+	width: 600px;
+	margin: auto;
+	padding: 10px;
+       overflow-y:auto;
+       overflow-x:auto;
+}
+
+
+
+
+
+
+#radl_opciones_app_tabla table  {
+	width: 94%;
+	font-family: 'Open Sans', sans-serif; 
+	background-color: #BBB;
+	padding-bottom:10px;
+}
+
+
+
+
+#radl_opciones_app_tabla table.list  {	
+font-family: 'Open Sans', sans-serif; 
+padding:0px;
+border-bottom: #AAA 0px solid;
+}
+
+#radl_opciones_app_tabla table.list thead th {
+	padding-right: 0px;
+	border: 1px solid #AAA;
+	}
+	
+#radl_opciones_app_tabla table.list thead td {
+	text-align: center;
+	font-weight: ;
+}
+#radl_opciones_app_tabla table.list tbody td {
+	border: 1px solid #AAA;
+	padding: 2px 2px;
+	text-align: center;
+       vertical-align:middle;
+	font-size:9pt;
+}
+#radl_opciones_app_tabla table.list th {
+	color:#EEE;
+	background-color: #999;	
+	padding: 2px 2px;
+	border: 1px solid #999;
+}
+
+#radl_opciones_app_tabla table.list tr.odd {
+	background-color: white;
+}
+
+#radl_opciones_app_tabla table.list tr.even {
+	background-color: #f6ead4;
+
+
+}
+
+#radl_opciones_app_tabla table.list tr:hover {
+	background-color: #CCC;
+}
+
+
+

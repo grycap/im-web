@@ -1,0 +1,211 @@
+@import url(http://fonts.googleapis.com/css?family=Capriola);
+/* Let's import the lovely google font, please keep this line at the top of your stylesheet */
+/* Menu CSS */#cssmenutab,
+#cssmenutab ul,
+#cssmenutab ul li,
+#cssmenutab ul li a {
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  font-family: 'Open Sans', sans-serif;
+}
+#cssmenutab:before,
+#cssmenutab:after,
+#cssmenutab > ul:before,
+#cssmenutab > ul:after {
+  content: '';
+  display: table;
+}
+#cssmenutab:after,
+#cssmenutab > ul:after {
+  clear: both;
+}
+#cssmenutab {
+  zoom: 1;
+  height: 35px;
+  background: ;
+  border-radius: 5px;
+  width: auto;
+}
+#cssmenutab ul {
+  background: ;
+  height: 35px;
+  opacity:;
+}
+#cssmenutab ul li {
+  float: left;
+  list-style: none;
+}
+#cssmenutab ul li a {
+  display: block;
+  height: 26px;
+  padding: 8px 40px 0;
+  margin: 4px 2px 0;
+  border-radius: 10px 10px 0 0;
+  text-decoration: none;
+  font-size: 14px;
+  color: black;
+  
+  font-weight: 400;
+ filter:alpha(opacity=90); /* For IE8 and earlier */
+  opacity: .9;
+}
+#cssmenutab ul li:first-child a {
+  margin: 4px 2px 0 0;
+}
+#cssmenutab ul li a:hover,
+#cssmenutab ul li.active a {
+  background: white;
+  display: block;
+  height: 26px;
+  margin-top: 0px;
+  padding-top: 12px;
+  color: black;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+  opacity:1;
+}
+
+
+
+
+
+
+
+
+/* Menu CSS */#cssmenutabRADL,
+#cssmenutabRADL ul,
+#cssmenutabRADL ul li,
+#cssmenutabRADL ul li a {
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  font-family: 'Open Sans', sans-serif;
+}
+#cssmenutabRADL:before,
+#cssmenutabRADL:after,
+#cssmenutabRADL > ul:before,
+#cssmenutabRADL > ul:after {
+  content: '';
+  display: table;
+}
+#cssmenutabRADL:after,
+#cssmenutabRADL > ul:after {
+  clear: both;
+}
+#cssmenutabRADL {
+  zoom: 1;
+  height: 35px;
+  background: ;
+  border-radius: 5px;
+  width: auto;
+}
+#cssmenutabRADL ul {
+  background: ;
+  height: 35px;
+  opacity:;
+}
+#cssmenutabRADL ul li {
+  float: left;
+  list-style: none;
+}
+#cssmenutabRADL ul li a {
+  display: block;
+  height: 26px;
+  padding: 8px 20px 0;
+  margin: 4px 2px 0;
+  border-radius: 10px 10px 0 0;
+  text-decoration: none;
+  font-size: 13px;
+  color: black;
+  
+  font-weight: 400;
+ 
+}
+#cssmenutabRADL ul li:first-child a {
+  margin: 4px 2px 0 0;
+}
+#cssmenutabRADL ul li a:hover,
+#cssmenutabRADL ul li.active a {
+  background: #DDD;
+  display: block;
+  height: 26px;
+  margin-top: 0px;
+  padding-top: 12px;
+  color: black;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+  opacity:1;
+}
+
+
+
+
+
+
+
+
+/* Menu CSS */#cssmenutabRADLRADL,
+#cssmenutabRADLRADL ul,
+#cssmenutabRADLRADL ul li,
+#cssmenutabRADLRADL ul li a {
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  font-family: 'Open Sans', sans-serif;
+}
+#cssmenutabRADLRADL:before,
+#cssmenutabRADLRADL:after,
+#cssmenutabRADLRADL > ul:before,
+#cssmenutabRADLRADL > ul:after {
+  content: '';
+  display: table;
+}
+#cssmenutabRADLRADL:after,
+#cssmenutabRADLRADL > ul:after {
+  clear: both;
+}
+#cssmenutabRADLRADL {
+  zoom: 1;
+  height: 35px;
+  background: ;
+  border-radius: 5px;
+  width: auto;
+}
+#cssmenutabRADLRADL ul {
+  background: ;
+  height: 35px;
+  opacity:;
+}
+#cssmenutabRADLRADL ul li {
+  float: left;
+  list-style: none;
+}
+#cssmenutabRADLRADL ul li a {
+  display: block;
+  height: 26px;
+  padding: 8px 20px 0;
+  margin: 4px 2px 0;
+  border-radius: 10px 10px 0 0;
+  text-decoration: none;
+  font-size: 13px;
+  color: black;
+  
+  font-weight: 400;
+ 
+}
+#cssmenutabRADLRADL ul li:first-child a {
+  margin: 4px 2px 0 0;
+}
+#cssmenutabRADLRADL ul li a:hover,
+#cssmenutabRADLRADL ul li.active a {
+  background: #BBB;
+  display: block;
+  height: 26px;
+  margin-top: 0px;
+  padding-top: 12px;
+  color: black;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+  opacity:1;
+}
+
+
+
