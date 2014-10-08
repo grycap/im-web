@@ -40,7 +40,7 @@ $ chown -R www-data /var/www/im
 Adjust the configuration settings in the file config.php:
 
 * Address of the IM host
-$im_host="servproject.i3m.upv.es";
+$im_host="im-server.domain.com";
 * Port of the IM service
 $im_port=8899;
 * Path of the IM web interface DB. The original path will be /var/www/im/im.db
