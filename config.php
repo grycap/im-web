@@ -18,9 +18,8 @@
 */
 
 include_once('db.php');
-$im_host="servproject.i3m.upv.es";
+$im_host="localhost";
 $im_port=8899;
-$im_types = array("OpenNebula","EC2","OpenStack","OCCI","LibVirt","VMRC", "InfrastructureManager");
 $im_db="/home/www-data/im.db";
 # To use that feature the IM recipes file must accesible to the web server
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
