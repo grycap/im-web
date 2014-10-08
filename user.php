@@ -17,52 +17,53 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+include_once('crypt.php');
+
 function check_session_user() {
     include('config.php');
- 
-    if (!isset($_SESSION['user'])) return false;
-    if (!isset($_SESSION['password'])) return false;
 
-    if (!isset($_SESSION['user'])) return false;
-    if (!isset($_SESSION['password'])) return false;
-
-    $password = $_SESSION['password'];
-    $user = $_SESSION['user'];
-
-    $res = false;
-    $db = new IMDB();
-    $fields = array();
-    $fields["username"] = "'" . $db->escapeString($user) . "'";
-    $fields["password"] = "'" . $db->escapeString($password) . "'";
-    $res = $db->get_items_from_table("user", $fields);
-    if (count($res) > 0) {
-        $res = true;
+    if (!isset($_SESSION['user']) || !isset($_SESSION['password'])) {
+    	return false;
+    } else {
+	    $password = $_SESSION['password'];
+	    $username = $_SESSION['user'];
+	
+	    $res = false;
+    	$db = new IMDB();
+    	$res = $db->get_items_from_table("user", array("username" => "'" . $db->escapeString($username) . "'"));
+	    $db->close();
+	    
+	    if (count($res) > 0) {
+	   		$res = check_password($password, $res[0]["password"]);
+	    }
+	
+	    return $res;
     }
-    $db->close();
-
-    return $res;
 }
 
 function check_admin_user() {
     include('config.php');
     
-    $password = $_SESSION['password'];
-    $user = $_SESSION['user'];
-
-    $res = false;
-    $db = new IMDB();
-    $fields = array();
-    $fields["username"] = "'" . $db->escapeString($user) . "'";
-    $fields["password"] = "'" . $db->escapeString($password) . "'";
-    $fields["permissions"] = "1";
-    $res = $db->get_items_from_table("user", $fields);
-    if (count($res) > 0) {
-        $res = true;
+	if (!isset($_SESSION['user']) || !isset($_SESSION['password'])) {
+    	return false;
+    } else {    
+	    $password = $_SESSION['password'];
+	    $user = $_SESSION['user'];
+	
+	    $res = false;
+	    $db = new IMDB();
+	    $fields = array();
+	    $fields["username"] = "'" . $db->escapeString($user) . "'";
+	    $fields["permissions"] = "1";
+	    $res = $db->get_items_from_table("user", $fields);
+	    $db->close();
+	    
+	    if (count($res) > 0) {
+	   		$res = check_password($password, $res[0]["password"]);
+	    }
+	
+	    return $res;
     }
-
-    $db->close();
-
-    return $res;
 }
 
 function get_users() {
@@ -102,7 +103,7 @@ function insert_user($username, $password, $groups, $permissions) {
     $db = new IMDB();
     $fields = array();
     $fields[] = "'" . $db->escapeString($username) . "'";
-    $fields[] = "'" . $db->escapeString($password) . "'";
+    $fields[] = "'" . $db->escapeString(crypt_password($password)) . "'";
     $fields[] = "'" . strval($permissions) . "'";
     $res = $db->insert_item_into_table("user",$fields);
 
@@ -138,7 +139,7 @@ function change_password($username, $password) {
     $res = "";
     $db = new IMDB();
     $fields = array();
-    $fields["password"] = "'" . $db->escapeString($password) . "'";
+    $fields["password"] = "'" . $db->escapeString(crypt_password($password)) . "'";
     $where = array("username" => "'" . $username . "'");
     $res = $db->edit_item_from_table("user",$fields,$where);
     $db->close();
@@ -155,7 +156,7 @@ function edit_user($username, $new_username, $password, $groups, $permissions) {
     $fields["username"] = "'" . $db->escapeString($new_username) . "'";
     $fields["permissions"] = strval($permissions);
     if (strlen(trim($password)) > 0) {
-        $fields["password"] = "'" . $db->escapeString($password) . "'";
+        $fields["password"] = "'" . $db->escapeString(crypt_password($password)) . "'";
     }
     $where = array("username" => "'" . $username . "'");
     $res = $db->edit_item_from_table("user",$fields,$where);
@@ -198,19 +199,13 @@ function delete_user($username) {
     $db = new IMDB();
     $res = $db->delete_item_from_table("user", array("username" => "'" . $username . "'"));
             
-    // borramos los grupos
+    // remove the groups
     $res = $db->delete_item_from_table("users_grp", array("username" => "'" . $username . "'"));
     
-    // borramos las credenciales
+    // remove the credencials
     $res = $db->delete_item_from_table("credentials", array("imuser" => "'" . $username . "'"));
     
-    // borramos los radls
-    $res = $db->delete_item_from_table("radls", array("imuser" => "'" . $username . "'"));
-
-    // borramos las credenciales
-    $res = $db->delete_item_from_table("credentials", array("imuser" => "'" . $username . "'"));
-    
-    // borramos los radls
+    // remove the radls
     $res = $db->delete_item_from_table("radls", array("imuser" => "'" . $username . "'"));
 
     $db->close();

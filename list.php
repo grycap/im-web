@@ -162,10 +162,11 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                     	$cont_out = $inf_info['cont_out'];
 
                     	$vm_info = GetVMInfo($im_host,$im_port,$inf, $vm_list[count($vm_list)-1]);
-                    	if (is_string($vm_info) && strpos($res, "Error")) {
+                    	$radl_tokens = parseRADL($vm_info);
+                    	if (is_string($vm_info) && strpos($vm_info, "Error")) {
 							$status = "N/A";
 						} else {
-							$status = formatState($vm_info['state']);
+							$status = formatState($radl_tokens['state']);
 						}
                     }
                 ?>
@@ -211,7 +212,7 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                 </td>
                 <td>
 		<?php
-		if ($vm_info['state'] == "configured" || $vm_info['state'] == "failed")
+		if ($radl_tokens['state'] == "configured" || $radl_tokens['state'] == "failed")
 		{
 		?>
                     <a href="operate.php?op=reconfigure&infid=<?php echo $inf;?>"><img src="images/reload.png" border="0" alt="Reconfigure" title="Reconfigure"></a>

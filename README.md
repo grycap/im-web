@@ -18,6 +18,8 @@ fully functional infrastructure.
 
 IM web interface is based on PHP, so a web server with PHP support must be installed.
 
+Also the mcrypt PHP module must be installed and enabled.
+
 It is also required to install the PHP module to access SQLite databases.
 
 1.2 INSTALLING
@@ -51,3 +53,7 @@ $im_db="/home/www-data/im.db";
   the web server user. In other case set "".
 $recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 
+1.3 DEFAULT USER
+----------------
+
+The default administrator user is admin with password admin.

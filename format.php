@@ -31,24 +31,18 @@
         return $res;
     }
     
-    function formatCloud($cloud) {
+    function formatCloud($tokens) {
         $res = "";
-        $parts = explode(",", $cloud);
-        $type = explode("=", $parts[0]);
-	if (strcmp(trim($type[1]),"EC2") == 0) {
-		return "EC2";
-	} else {
-	        $res = $res . $type[1] . "<br>";
-        	$server = explode("=", $parts[1]);
-	        $port = explode("=", $parts[2]);
-        	$res = $res . $server[1] . ":" . $port[1] . "<br>";
-	        return $res;
-	}
+		if (strcmp($tokens["provider.type"],"EC2") == 0) {
+			return "EC2";
+		} else {
+		        $res = $res . $tokens["provider.type"] . "<br>";
+	        	$res = $res . $tokens["provider.host"] . ":" . $tokens["provider.port"] . "<br>";
+		        return $res;
+		}
     }
     
-    function formatIPs($radl) {
-        $tokens = parseRADL($radl);
- 
+    function formatIPs($tokens) {
         $res = "";
         for ($i=0;in_array('net_interface.' . $i . '.ip', array_keys($tokens));$i++) {
             $res = $res . str_replace("'","",$tokens['net_interface.' . $i . '.ip']) . '<br>';
@@ -57,13 +51,11 @@
         return $res;
     }
     
-    function formatRADL($radl) {
-        $tokens = parseRADL($radl);
-
+    function formatRADL($tokens) {
         $res = "<table>";
         
         foreach ($tokens as $key => $value) {
-            if (strpos($key,"net_interface") === false) {
+            if ($key != "state" && strpos($key,"net_interface") === false && strpos($key,"provider.") === false) {
                     $res = $res . "<tr>\n";
                     $res = $res . "<td>" . $key . "</td>\n";
                     $res = $res . "<td>" . str_replace("\n","\n<br>",$value) . "</td>\n";

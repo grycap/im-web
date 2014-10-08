@@ -34,6 +34,7 @@
         if (is_string($res) && strpos($res, "Error")) {
             header('Location: error.php?msg=' + $res);
         } else {
+        	$radl_tokens = parseRADL($res);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -107,19 +108,19 @@
             <tr>
 		  <td style="width:10px;background:#777;"><img src="images/icon_state.png"></td>
                 <th style="width:90px; background:#777;padding-left:0px;">State</th>  		  
-                <td style="text-align:left; padding-left:20px; font-weight:bold;background:#CCC;"><?php echo formatState($res['state']);?></td>
+                <td style="text-align:left; padding-left:20px; font-weight:bold;background:#CCC;"><?php echo formatState($radl_tokens['state']);?></td>
             </tr>
             <tr>
 		  <td style="width:10px;background:#777;"><img src="images/icon_deploy.png"></td>
                 <th style="width:90px; background:#777;padding-left:0px;">Deployment</th>
-                <td style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatCloud($res['cloud']);?>
+                <td style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatCloud($radl_tokens);?>
                 </td>
             </tr>
 
 		<tr>
 		  <td style="width:10px;background:#777;"><img src="images/icon_ip.png"></td>
                 <th style="width:90px; background:#777;padding-left:0px;">IPs</th>
-                <td style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatIPs($res['info']);?></td>
+                <td style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatIPs($radl_tokens);?></td>
             </tr>
    </tbody>
         </table>
@@ -131,7 +132,7 @@
             <tr>
 		  <td style="width:10px;background:#a27c3b;"><img src="images/icon_info.png"></td>
                 <th style="width:90px;">Information</th>
-                <td style="text-align:left;background:#e9d6b5;"><?php echo formatRADL($res['info']);?></td>
+                <td style="text-align:left;background:#e9d6b5;"><?php echo formatRADL($radl_tokens);?></td>
             </tr>
             
            
