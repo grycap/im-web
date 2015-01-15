@@ -1388,3 +1388,7 @@ border:0px;
 outline:none;
 }
 
+#log {
+	text-align:left;
+	font-family: monospace;
+}

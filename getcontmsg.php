@@ -94,11 +94,11 @@
 
         <div class='h1'>:: Contextualization Log ::</div>
 		<br>
-        <p align="left">
+        <div id='log'>
 <?php
 		echo str_replace("\n","<br>",$cont_msg);
 ?>
-		</p>
+		</div>
 
 
 </div>
