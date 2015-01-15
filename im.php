@@ -120,6 +120,27 @@ function GetInfrastructureInfo($host, $port, $id) {
         }
 }
 
+function GetInfrastructureContMsg($host, $port, $id) {
+	$auth = get_auth_data();
+	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
+	$xmlrpc_msg = new xmlrpcmsg('GetInfrastructureContMsg', array(new xmlrpcval((int)$id, "int"), $auth));
+
+	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
+
+	if ($xmlrpc_resp->faultCode())
+		return 'Error: ' . $xmlrpc_resp->faultString();
+	else
+		$res = php_xmlrpc_decode($xmlrpc_resp->value());
+	$success = $res[0];
+	$cont_msg = $res[1];
+
+	if ($success) {
+		return $cont_msg;
+	} else {
+		return 'Error';
+	}
+}
+
 function GetVMInfo($host, $port, $inf_id, $vm_id) {
     $auth = get_auth_data();
     $xmlrpc_client = new xmlrpc_client('/',$host,$port);

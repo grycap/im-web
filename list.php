@@ -152,15 +152,11 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
     <?php
         
             foreach ($res as $inf) {
-                    $inf_info = GetInfrastructureInfo($im_host,$im_port,$inf);
-                    
-                    if (is_string($inf_info)) {
-						$vm_list = array("N/A");
-						$cont_out = "ERROR!";
-					} else {
-                    	$vm_list = $inf_info['vm_list'];
-                    	$cont_out = $inf_info['cont_out'];
+                    $vm_list = GetInfrastructureInfo($im_host,$im_port,$inf);
 
+                    if (is_string($vm_list)) {
+						$vm_list = array("N/A");
+					} else {
                     	$vm_info = GetVMInfo($im_host,$im_port,$inf, $vm_list[count($vm_list)-1]);
                     	$radl_tokens = parseRADL($vm_info);
                     	if (is_string($vm_info) && strpos($vm_info, "Error")) {
@@ -182,30 +178,7 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
 ?>
                 </td>
 		<td>
-<?php
-                    if (strlen(trim($cont_out)) > 0) {
-?>
-
-<script type="text/javascript" charset="utf-8">
-	$(function() {
-		// this initializes the dialog (and uses some common options that I do)
-		$("#dialog_<?php echo $inf;?>").dialog({autoOpen : false, modal : true, show : "blind", hide : "blind", height: 500, width: 'auto'});
-		// next add the onclick handler
-		$("#showdiv_<?php echo $inf;?>").click(function() {
-			$("#dialog_<?php echo $inf;?>").dialog("open");
-			return false;
-		});
-	});
-</script>
-                <a id="showdiv_<?php echo $inf;?>" href="#">Show</a>
-                <div id="dialog_<?php echo $inf;?>" title="Cont">
-			<?php echo "'" . str_replace("\n","<br>",$cont_out) . "'";?>
-		</div>
-<?php
-                    } else {
-                            echo "N/A";
-                    }
-?>
+				<a href="getcontmsg.php?id=<?php echo $inf;?>">Show</a>
 		</td>
                 <td>
                     <?php echo $status;?>
