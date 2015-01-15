@@ -39,7 +39,7 @@ function get_credential($id) {
         return NULL;
 }
 
-function insert_credential($imuser, $id, $type, $host, $username, $password, $order) {
+function insert_credential($imuser, $id, $type, $host, $username, $password, $proxy, $order) {
     include('config.php');
 
     $res = "";
@@ -52,6 +52,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $or
     $fields[] = "'" . $db->escapeString($username) . "'";
     $fields[] = "'" . $db->escapeString($password) . "'";
     $fields[] = 1;
+    $fields[] = "'" . $db->escapeString($proxy) . "'";
 
     $res = $db->direct_query("select max(ord) as max_ord from credentials where imuser = '" . $imuser . "'");
     $fields[] = $res[0]['max_ord']+1;
@@ -62,7 +63,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $or
     return $res;
 }
 
-function edit_credential($rowid, $id, $type, $host, $username, $password, $order) {
+function edit_credential($rowid, $id, $type, $host, $username, $password, $proxy, $order) {
     include('config.php');
 
     $res = "";
@@ -73,7 +74,10 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $order
     $fields["host"] = "'" . $db->escapeString($host) . "'";
     $fields["username"] = "'" . $db->escapeString($username) . "'";
     if (strlen(trim($password)) > 0) {
-        $fields["password"] = "'" . $db->escapeString($password) . "'";
+    	$fields["password"] = "'" . $db->escapeString($password) . "'";
+    }
+    if (strlen(trim($proxy)) > 0) {
+    	$fields["proxy"] = "'" . $db->escapeString($proxy) . "'";
     }
     $where = array("rowid" => $rowid);
     $res = $db->edit_item_from_table("credentials",$fields,$where);

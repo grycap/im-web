@@ -92,6 +92,7 @@
             $host = "";
             $username = "";
             $password = "";
+            $proxy = "";
             
             if (isset($rowid)) {
                 $cred = get_credential($rowid);
@@ -105,7 +106,7 @@
         <div class='h1'>:: Edit Credential ::</div>
 
 
-         <form action="credinfo.php" method="post">
+         <form action="credinfo.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="op" value="edit"/>
             <input type="hidden" name="rowid" value="<?php echo $rowid;?>"/>
 
@@ -185,13 +186,25 @@
                                         <td>
                                            <input type="text" name="host" value="<?php echo $host;?>">
                                          </td>
-						<th align="left">
+										<th align="left">
                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspPassword:
                                         </th>
                                         <td>
                                             <input type="password" name="password">
                                         </td>
-				</tr>
+							</tr>
+                               <tr>
+                                        <th align="left">
+                                            Proxy:&nbsp&nbsp&nbsp&nbsp&nbsp
+                                        </th>
+                                        <td colspan="3">
+                                           <input type="file" name="proxy">
+                                         </td>
+										<th align="left">
+                                        </th>
+                                        <td>
+                                        </td>
+							</tr>
 				<tr>
 					<td colspan="4" align="right">
 						 <input type="submit" value="Save"/>

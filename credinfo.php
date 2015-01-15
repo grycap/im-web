@@ -53,8 +53,12 @@
                 $username = $_POST['username'];
                 $password = $_POST['password'];
                 $imuser = $_SESSION['user'];
+                $proxy = "";
                 
-                $err = insert_credential($imuser, $id, $type, $host, $username, $password);
+                if (isset($_FILES['proxy']['tmp_name'])) {
+                	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
+                }
+                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $proxy);
                 if (strlen($err) > 0) {
                     header('Location: error.php?msg=' . $err);
                 } else {
@@ -69,8 +73,13 @@
                     $host = $_POST['host'];
                     $username = $_POST['username'];
                     $password = $_POST['password'];
+                    $proxy = "";
                     
-                    $err = edit_credential($rowid, $id, $type, $host, $username, $password);
+                    if (isset($_FILES['proxy']['tmp_name'])) {
+                    	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
+                    }
+
+                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $proxy);
                     if (strlen($err) > 0) {
                         header('Location: error.php?msg=' . $err);
                     } else {

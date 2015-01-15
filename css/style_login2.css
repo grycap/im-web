@@ -135,14 +135,16 @@ input {
   font-size: 14px;
 }
 
-input[type=submit]:hover,[type=button]:hover {
-  font-family: 'Open Sans', sans-serif;
-  cursor:pointer;
-  background-color:#c89f5a;
+
+input[type=file] {
+font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  margin-top: 10px;
+  margin-right: 5px;
+  color: #404040;
+  background: #EEE;
+  border: 0px solid;
 }
-
-
-
 
 input[type=text], input[type=password] {
 font-family: 'Open Sans', sans-serif;
@@ -154,23 +156,13 @@ font-family: 'Open Sans', sans-serif;
   height: 28px;
   color: #404040;
   background: #EEE;
-
-
-
   border: 0px solid;
-
-
-
 }
 input[type=text]:focus, input[type=password]:focus {
   border-color:;
   outline-color: white ;
   outline-offset: 0;
 }
-
-
-
-
 
 
 input[type=descr]{
@@ -217,6 +209,11 @@ input[type=descr_radl]:focus{
 
 
 
+input[type=submit]:hover,[type=button]:hover {
+  font-family: 'Open Sans', sans-serif;
+  cursor:pointer;
+  background-color:#c89f5a;
+}
 
 input[type=submit], input[type=button] {
   padding: 0 20px;
