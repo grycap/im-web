@@ -144,9 +144,15 @@
 
 <input type="radio" id="radio4" name="type" value="OCCI" <?php if ($type == "OCCI") echo 'checked="checked"'  ?>>
    <label for="radio4"><img src="images/logosVM/OCCI.png"></label> 
+   
+<input type="radio" id="radio9" name="type" value="FogBow" <?php if ($type == "FogBow") echo 'checked="checked"'  ?>>
+   <label for="radio9"><img src="images/logosVM/FogBow.png"></label> 
 
 <br>
 
+<input type="radio" id="radio10" name="type" value="Docker" <?php if ($type == "Docker") echo 'checked="checked"'  ?>>
+   <label for="radio10"><img src="images/logosVM/Docker.png"></label> &nbsp&nbsp&nbsp&nbsp
+   
 <input type="radio" id="radio5" name="type" value="LibVirt" <?php if ($type == "LibVirt") echo 'checked="checked"'  ?>>
    <label for="radio5"><img src="images/logosVM/libvirt.png"></label> &nbsp&nbsp&nbsp&nbsp
 
@@ -155,6 +161,9 @@
 
 <input type="radio" id="radio7" name="type" value="InfrastructureManager" <?php if ($type == "InfrastructureManager") echo 'checked="checked"'  ?>>
    <label for="radio7"><img src="images/logosVM/IM.png"></label> 
+   
+<input type="radio" id="radio8" name="type" value="GCE" <?php if ($type == "GCE") echo 'checked="checked"'  ?>>
+   <label for="radio7"><img src="images/logosVM/GCE.png"></label> 
 
 </div>
 

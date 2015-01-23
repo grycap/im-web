@@ -172,6 +172,18 @@
 			<?php if (strcmp($cred['type'],"InfrastructureManager") == 0){ ?>
 			<img src="images/logosVM/IMRow.png">
 			<?php } ?>
+			
+			<?php if (strcmp($cred['type'],"GCE") == 0){ ?>
+			<img src="images/logosVM/GCERow.png">
+			<?php } ?>
+			
+			<?php if (strcmp($cred['type'],"FogBow") == 0){ ?>
+			<img src="images/logosVM/FogBowRow.png">
+			<?php } ?>
+			
+			<?php if (strcmp($cred['type'],"Docker") == 0){ ?>
+			<img src="images/logosVM/DockerRow.png">
+			<?php } ?>
 
 
 
