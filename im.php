@@ -27,6 +27,7 @@ function get_auth_data() {
                 }
                 $auth_cloud['username'] = new xmlrpcval($cred['username']);
                 $auth_cloud['password'] = new xmlrpcval($cred['password']);
+                $auth_cloud['proxy'] = new xmlrpcval($cred['proxy']);
                 $auth[] = new xmlrpcval($auth_cloud, "struct");
             }
         }
