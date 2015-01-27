@@ -39,7 +39,7 @@ function get_credential($id) {
         return NULL;
 }
 
-function insert_credential($imuser, $id, $type, $host, $username, $password, $proxy, $order) {
+function insert_credential($imuser, $id, $type, $host, $username, $password, $proxy) {
     include('config.php');
 
     $res = "";
@@ -52,10 +52,11 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $pr
     $fields[] = "'" . $db->escapeString($username) . "'";
     $fields[] = "'" . $db->escapeString($password) . "'";
     $fields[] = 1;
-    $fields[] = "'" . $db->escapeString($proxy) . "'";
 
     $res = $db->direct_query("select max(ord) as max_ord from credentials where imuser = '" . $imuser . "'");
     $fields[] = $res[0]['max_ord']+1;
+    
+    $fields[] = "'" . $db->escapeString($proxy) . "'";
 
     $res = $db->insert_item_into_table("credentials",$fields);
     $db->close();
@@ -63,7 +64,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $pr
     return $res;
 }
 
-function edit_credential($rowid, $id, $type, $host, $username, $password, $proxy, $order) {
+function edit_credential($rowid, $id, $type, $host, $username, $password, $proxy) {
     include('config.php');
 
     $res = "";
