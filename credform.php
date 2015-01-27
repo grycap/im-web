@@ -117,7 +117,7 @@
         <div class='h1'>:: Add new Credential ::</div>
 
 
- <form action="credinfo.php" method="post">
+ <form action="credinfo.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="op" value="add"/>
 
 
