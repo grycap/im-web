@@ -185,7 +185,7 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                 </td>
                 <td>
 		<?php
-		if ($radl_tokens['state'] == "configured" || $radl_tokens['state'] == "failed")
+		if ($radl_tokens['state'] == "configured" || $radl_tokens['state'] == "unconfigured")
 		{
 		?>
                     <a href="operate.php?op=reconfigure&infid=<?php echo $inf;?>"><img src="images/reload.png" border="0" alt="Reconfigure" title="Reconfigure"></a>

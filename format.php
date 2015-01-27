@@ -58,7 +58,7 @@
             if ($key != "state" && strpos($key,"net_interface") === false && strpos($key,"provider.") === false) {
                     $res = $res . "<tr>\n";
                     $res = $res . "<td>" . $key . "</td>\n";
-                    $res = $res . "<td>" . str_replace("\n","\n<br>",$value) . "</td>\n";
+                    $res = $res . "<td><pre>" . $value . "</pre></td>\n";
                     $res = $res . "</tr>\n";
                 }
         }
