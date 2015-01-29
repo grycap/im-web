@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>IM Web Interface &mdash; IM-web 1.2.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/scrolls.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/grycap.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.2.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="top" title="IM-web 1.2.0 documentation" href="index.html" />
+    <link rel="prev" title="About IM - Infrastructure Manager client" href="intro.html" /> 
+  </head>
+  <body>
+<div id="main-wrapper">
+    <div id="logo">
+       <div class="img"><img height="90" src="_static/logo.png"></img></div>
+    </div>
+    <div class="break hole"></div>
+    <div id="menu">
+      <div id="menu-text">
+         <ul>
+            <li><a href="../index.php">Home</a>
+            </li><li><a href="../overview.php">Overview</a>            
+            </li><li><a href="../usecases.php">Use Cases</a>
+            </li><li><a href="../download.php">Download</a>
+            </li><li><a href="index.html">Documentation</a>
+            </li><li class="last"><a href="../about.php">About</a>
+         </li></ul>
+      </div>
+    </div>
+    <div class="break hole"></div>
+    <div id="content">
+      <div id="contentwrapper">
+        
+  <div class="section" id="im-web-interface">
+<h1>IM Web Interface<a class="headerlink" href="#im-web-interface" title="Permalink to this headline">¶</a></h1>
+<p>The IM Web client is a graphical interface to access the XML-RPC API of IM Server.</p>
+<div class="section" id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>As a web application it needs a web server (e.g. Apache) with support to PHP language
+and with the SQLite D.B. support. It must have access to the XML-RPC API of the IM Server.</p>
+</div>
+<div class="section" id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<p>The web interface reads the configuration from <tt class="file docutils literal"><span class="pre">$IM_WEB_PATH/config.php</span></tt>. It has
+the following variables:</p>
+<div class="highlight-python"><div class="highlight"><pre>$im_host=&quot;localhost&quot;;
+$im_port=8899;
+$im_db=&quot;/home/www-data/im.db&quot;;
+# To use that feature the IM recipes file must accesible to the web server
+#$recipes_db=&quot;/usr/local/im/contextualization/recipes_ansible.db&quot;;
+# If not set &quot;&quot;
+$recipes_db=&quot;&quot;;
+# To activate the EC3 functionality, currently unavailable
+$ec3=False;
+$ec3_path=&quot;/var/www/im/ec3&quot;;
+</pre></div>
+</div>
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="infrastructures">
+<h3>Infrastructures<a class="headerlink" href="#infrastructures" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="credentials">
+<h3>Credentials<a class="headerlink" href="#credentials" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="radls">
+<h3>RADLs<a class="headerlink" href="#radls" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="recipes">
+<h3>Recipes<a class="headerlink" href="#recipes" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="admin">
+<h3>Admin<a class="headerlink" href="#admin" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+      </div>
+        <div class="credits">
+&copy; I3M-GRyCAP-UPV, - Universitat Polit&egrave;cnica de Val&egrave;ncia - 46022, Valencia.<br>
+Contact: micafer1 _at_ upv.es
+        </div>
+        <div class="break hole"></div>
+    </div>
+</div>
+
+    <div class="footer">
+    </div>
+  </body>
+</html>
