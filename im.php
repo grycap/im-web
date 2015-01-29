@@ -25,9 +25,18 @@ function get_auth_data() {
                 if (!is_null($cred['host']) && strlen(trim($cred['host'])) > 0) {
                     $auth_cloud['host'] = new xmlrpcval($cred['host']);
                 }
-                $auth_cloud['username'] = new xmlrpcval($cred['username']);
-                $auth_cloud['password'] = new xmlrpcval($cred['password']);
-                $auth_cloud['proxy'] = new xmlrpcval($cred['proxy']);
+                if (!is_null($cred['username']) && strlen(trim($cred['username'])) > 0) {
+                	$auth_cloud['username'] = new xmlrpcval($cred['username']);
+                }
+                if (!is_null($cred['password']) && strlen(trim($cred['password'])) > 0) {
+                	$auth_cloud['password'] = new xmlrpcval($cred['password']);
+                }
+                if (!is_null($cred['proxy']) && strlen(trim($cred['proxy'])) > 0) {
+                	$auth_cloud['proxy'] = new xmlrpcval($cred['proxy']);
+                }
+                if (!is_null($cred['token_type']) && strlen(trim($cred['token_type'])) > 0) {
+                	$auth_cloud['token_type'] = new xmlrpcval($cred['token_type']);
+                }
                 $auth[] = new xmlrpcval($auth_cloud, "struct");
             }
         }
