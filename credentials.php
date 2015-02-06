@@ -184,6 +184,10 @@
 			<?php if (strcmp($cred['type'],"Docker") == 0){ ?>
 			<img src="images/logosVM/DockerRow.png">
 			<?php } ?>
+			
+			<?php if (strcmp($cred['type'],"Azure") == 0){ ?>
+			<img src="images/logosVM/AzureRow.png">
+			<?php } ?>
 
 
 

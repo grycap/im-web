@@ -133,11 +133,19 @@
 <div id="caja_logosVM">
 <div class='h1'>Select type:</div>
 
-<input type="radio" id="radio1" name="type" value="OpenNebula" <?php if ($type == "OpenNebula") echo 'checked="checked"'  ?> >
-   <label for="radio1" ><img src="images/logosVM/OpenNebula.png"></label>&nbsp&nbsp&nbsp&nbsp
-
 <input type="radio" id="radio2" name="type" value="EC2" <?php if ($type == "EC2") echo 'checked="checked"'  ?>>
    <label for="radio2"><img src="images/logosVM/ec2.png"></label>&nbsp&nbsp&nbsp&nbsp
+   
+<input type="radio" id="radio8" name="type" value="GCE" <?php if ($type == "GCE") echo 'checked="checked"'  ?>>
+   <label for="radio8"><img src="images/logosVM/GCE.png"></label>
+   
+<input type="radio" id="radio11" name="type" value="Azure" <?php if ($type == "Azure") echo 'checked="checked"'  ?>>
+   <label for="radio11"><img src="images/logosVM/Azure.png"></label>
+   
+<br>
+
+<input type="radio" id="radio1" name="type" value="OpenNebula" <?php if ($type == "OpenNebula") echo 'checked="checked"'  ?> >
+   <label for="radio1" ><img src="images/logosVM/OpenNebula.png"></label>&nbsp&nbsp&nbsp&nbsp
 
 <input type="radio" id="radio3" name="type" value="OpenStack" <?php if ($type == "OpenStack") echo 'checked="checked"'  ?>>
    <label for="radio3"><img src="images/logosVM/openstack.png"></label> &nbsp&nbsp&nbsp&nbsp
@@ -147,6 +155,8 @@
    
 <input type="radio" id="radio9" name="type" value="FogBow" <?php if ($type == "FogBow") echo 'checked="checked"'  ?>>
    <label for="radio9"><img src="images/logosVM/FogBow.png"></label> 
+   
+
 
 <br>
 
@@ -162,8 +172,7 @@
 <input type="radio" id="radio7" name="type" value="InfrastructureManager" <?php if ($type == "InfrastructureManager") echo 'checked="checked"'  ?>>
    <label for="radio7"><img src="images/logosVM/IM.png"></label> 
    
-<input type="radio" id="radio8" name="type" value="GCE" <?php if ($type == "GCE") echo 'checked="checked"'  ?>>
-   <label for="radio7"><img src="images/logosVM/GCE.png"></label> 
+
 
 </div>
 

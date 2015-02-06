@@ -74,7 +74,7 @@ of user credentials. In this list there are two related with the IM components:
 
 When a new user is registered the web UI automatically creates credentials to both of them to make easier
 the creation of credentials process. The rest of elements of this list are the user credentials to access
- diferent Cloud providers.
+diferent Cloud providers.
 
 .. _figure_cred_list:
 .. figure:: images/cred_list.png
