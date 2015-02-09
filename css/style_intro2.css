@@ -405,15 +405,19 @@ z-index: 15;
  }
 
 
-#caja_form_credentials {
+.caja_form_credentials {
   position:relative;
   z-index:1;
   margin:auto;
   padding:20px;
   background-color: #DDD ;
   width:550px;
+  display:none;
  }
-
+ 
+.logoVM {
+  margin-right:40px;
+}
 
 #caja_form_radls {
   position:relative;

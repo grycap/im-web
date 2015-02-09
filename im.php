@@ -37,6 +37,18 @@ function get_auth_data() {
                 if (!is_null($cred['token_type']) && strlen(trim($cred['token_type'])) > 0) {
                 	$auth_cloud['token_type'] = new xmlrpcval($cred['token_type']);
                 }
+                if (!is_null($cred['project']) && strlen(trim($cred['project'])) > 0) {
+                	$auth_cloud['project'] = new xmlrpcval($cred['project']);
+                }
+                if (!is_null($cred['public_key']) && strlen(trim($cred['public_key'])) > 0) {
+                	$auth_cloud['public_key'] = new xmlrpcval($cred['public_key']);
+                }
+                if (!is_null($cred['private_key']) && strlen(trim($cred['private_key'])) > 0) {
+                	$auth_cloud['private_key'] = new xmlrpcval($cred['private_key']);
+                }
+                if (!is_null($cred['certificate']) && strlen(trim($cred['certificate'])) > 0) {
+                	$auth_cloud['certificate'] = new xmlrpcval($cred['certificate']);
+                }
                 $auth[] = new xmlrpcval($auth_cloud, "struct");
             }
         }

@@ -39,7 +39,7 @@ function get_credential($id) {
         return NULL;
 }
 
-function insert_credential($imuser, $id, $type, $host, $username, $password, $proxy) {
+function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate) {
     include('config.php');
 
     $res = "";
@@ -57,6 +57,11 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $pr
     $fields[] = $res[0]['max_ord']+1;
     
     $fields[] = "'" . $db->escapeString($proxy) . "'";
+    $fields[] = "'" . $db->escapeString($token_type) . "'";
+    $fields[] = "'" . $db->escapeString($project) . "'";
+    $fields[] = "'" . $db->escapeString($public_key) . "'";
+    $fields[] = "'" . $db->escapeString($private_key) . "'";
+    $fields[] = "'" . $db->escapeString($certificate) . "'";
 
     $res = $db->insert_item_into_table("credentials",$fields);
     $db->close();
@@ -64,7 +69,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $pr
     return $res;
 }
 
-function edit_credential($rowid, $id, $type, $host, $username, $password, $proxy) {
+function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate) {
     include('config.php');
 
     $res = "";
@@ -74,11 +79,22 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $proxy
     $fields["type"] = "'" . $type . "'";
     $fields["host"] = "'" . $db->escapeString($host) . "'";
     $fields["username"] = "'" . $db->escapeString($username) . "'";
+    $fields["token_type"] = "'" . $db->escapeString($token_type) . "'";
+    $fields["project"] = "'" . $db->escapeString($project) . "'";
     if (strlen(trim($password)) > 0) {
     	$fields["password"] = "'" . $db->escapeString($password) . "'";
     }
     if (strlen(trim($proxy)) > 0) {
     	$fields["proxy"] = "'" . $db->escapeString($proxy) . "'";
+    }
+    if (strlen(trim($public_key)) > 0) {
+    	$fields["public_key"] = "'" . $db->escapeString($public_key) . "'";
+    }
+    if (strlen(trim($private_key)) > 0) {
+    	$fields["private_key"] = "'" . $db->escapeString($private_key) . "'";
+    }
+    if (strlen(trim($certificate)) > 0) {
+    	$fields["certificate"] = "'" . $db->escapeString($certificate) . "'";
     }
     $where = array("rowid" => $rowid);
     $res = $db->edit_item_from_table("credentials",$fields,$where);

@@ -21,6 +21,7 @@
  
     include('config.php');   
     include('user.php');
+    include('cred.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
@@ -41,15 +42,52 @@
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
 
+    <script type="text/javascript" charset="utf-8">
+        function showForm(form_id) {
+            // Function to show/hide and enable/disable the correct fields
+            // of the credentials form for the type selected
+            var x = document.getElementsByClassName("caja_form_credentials");
+            var i;
+            for (i = 0; i < x.length; i++) {
+            	x[i].style.display = "none";
+
+                var inputs = x[i].getElementsByTagName("input");
+                var j;
+                for (j = 0; j < inputs.length; j++) {
+                	inputs[j].disabled = true;
+                }
+            }
+            var elem = document.getElementById(form_id);
+            elem.style.display="block";
+            var inputs = elem.getElementsByTagName("input");
+            for (i = 0; i < inputs.length; i++) {
+            	inputs[i].disabled = false;
+            }
+        }
+    </script>
 </head>
 
 
+    <?php
+            $id = "";
+            $type = "";
+            $host = "";
+            $username = "";
+            $password = "";
+            $proxy = "";
+            
+            if (isset($rowid)) {
+                $cred = get_credential($rowid);
+                $id = $cred['id'];
+                $type = $cred['type'];
+                $host = $cred['host'];
+                $username = $cred['username'];
+            }
+    ?>
 
 
 
-<body>
-        <?php include('cred.php')?>
-
+<body onload="showForm('<?php echo $type;?>')">
 
 <div id="caja_total_blanca">
 
@@ -86,20 +124,8 @@
 
     <div id="main">
     
-    <?php
-            $id = "";
-            $type = "";
-            $host = "";
-            $username = "";
-            $password = "";
-            $proxy = "";
-            
+    <?php            
             if (isset($rowid)) {
-                $cred = get_credential($rowid);
-                $id = $cred['id'];
-                $type = $cred['type'];
-                $host = $cred['host'];
-                $username = $cred['username'];
     ?>
 
          <br>
@@ -115,69 +141,62 @@
     ?>
         <br> 
         <div class='h1'>:: Add new Credential ::</div>
-
-
+ 
  <form action="credinfo.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="op" value="add"/>
-
-
-
-
 
     <?php
             }
     ?>
-<br>
-
 
 <div id="caja_logosVM">
 <div class='h1'>Select type:</div>
 
-<input type="radio" id="radio2" name="type" value="EC2" <?php if ($type == "EC2") echo 'checked="checked"'  ?>>
-   <label for="radio2"><img src="images/logosVM/ec2.png"></label>&nbsp&nbsp&nbsp&nbsp
+<input onchange="showForm('EC2')" type="radio" id="radio2" name="type" value="EC2" <?php if ($type == "EC2") echo 'checked="checked"'  ?>>
+   <label for="radio2"><img class="logoVM" src="images/logosVM/ec2.png"></label>
    
-<input type="radio" id="radio8" name="type" value="GCE" <?php if ($type == "GCE") echo 'checked="checked"'  ?>>
-   <label for="radio8"><img src="images/logosVM/GCE.png"></label>
+<input onchange="showForm('GCE')" type="radio" id="radio8" name="type" value="GCE" <?php if ($type == "GCE") echo 'checked="checked"'  ?>>
+   <label for="radio8"><img class="logoVM" src="images/logosVM/GCE.png"></label>
    
-<input type="radio" id="radio11" name="type" value="Azure" <?php if ($type == "Azure") echo 'checked="checked"'  ?>>
-   <label for="radio11"><img src="images/logosVM/Azure.png"></label>
+<input onchange="showForm('Azure')" type="radio" id="radio11" name="type" value="Azure" <?php if ($type == "Azure") echo 'checked="checked"'  ?>>
+   <label for="radio11"><img class="logoVM" src="images/logosVM/Azure.png"></label>
    
 <br>
 
-<input type="radio" id="radio1" name="type" value="OpenNebula" <?php if ($type == "OpenNebula") echo 'checked="checked"'  ?> >
-   <label for="radio1" ><img src="images/logosVM/OpenNebula.png"></label>&nbsp&nbsp&nbsp&nbsp
+<input onchange="showForm('OpenNebula')" type="radio" id="radio1" name="type" value="OpenNebula" <?php if ($type == "OpenNebula") echo 'checked="checked"'  ?> >
+   <label for="radio1" ><img class="logoVM" src="images/logosVM/OpenNebula.png"></label>
 
-<input type="radio" id="radio3" name="type" value="OpenStack" <?php if ($type == "OpenStack") echo 'checked="checked"'  ?>>
-   <label for="radio3"><img src="images/logosVM/openstack.png"></label> &nbsp&nbsp&nbsp&nbsp
+<input onchange="showForm('OpenStack')" type="radio" id="radio3" name="type" value="OpenStack" <?php if ($type == "OpenStack") echo 'checked="checked"'  ?>>
+   <label for="radio3"><img class="logoVM" src="images/logosVM/openstack.png"></label>
 
-<input type="radio" id="radio4" name="type" value="OCCI" <?php if ($type == "OCCI") echo 'checked="checked"'  ?>>
-   <label for="radio4"><img src="images/logosVM/OCCI.png"></label> 
+<input onchange="showForm('OCCI')" type="radio" id="radio4" name="type" value="OCCI" <?php if ($type == "OCCI") echo 'checked="checked"'  ?>>
+   <label for="radio4"><img class="logoVM" src="images/logosVM/OCCI.png"></label>
    
-<input type="radio" id="radio9" name="type" value="FogBow" <?php if ($type == "FogBow") echo 'checked="checked"'  ?>>
-   <label for="radio9"><img src="images/logosVM/FogBow.png"></label> 
+<input onchange="showForm('FogBow')" type="radio" id="radio9" name="type" value="FogBow" <?php if ($type == "FogBow") echo 'checked="checked"'  ?>>
+   <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png"></label> 
    
 
 
 <br>
 
-<input type="radio" id="radio10" name="type" value="Docker" <?php if ($type == "Docker") echo 'checked="checked"'  ?>>
-   <label for="radio10"><img src="images/logosVM/Docker.png"></label> &nbsp&nbsp&nbsp&nbsp
-   
-<input type="radio" id="radio5" name="type" value="LibVirt" <?php if ($type == "LibVirt") echo 'checked="checked"'  ?>>
-   <label for="radio5"><img src="images/logosVM/libvirt.png"></label> &nbsp&nbsp&nbsp&nbsp
+<input onchange="showForm('Docker')" type="radio" id="radio10" name="type" value="Docker" <?php if ($type == "Docker") echo 'checked="checked"'  ?>>
+   <label for="radio10"><img class="logoVM" src="images/logosVM/Docker.png"></label>
 
-<input type="radio" id="radio6" name="type" value="VMRC" <?php if ($type == "VMRC") echo 'checked="checked"'  ?>>
-   <label for="radio6"><img src="images/logosVM/VMRC.png"></label> &nbsp&nbsp&nbsp&nbsp
+<!--
+<input onchange="showForm('LibVirt')" type="radio" id="radio5" name="type" value="LibVirt" <?php if ($type == "LibVirt") echo 'checked="checked"'  ?>>
+   <label for="radio5"><img class="logoVM" src="images/logosVM/libvirt.png"></label>
+-->
+<input onchange="showForm('VMRC')" type="radio" id="radio6" name="type" value="VMRC" <?php if ($type == "VMRC") echo 'checked="checked"'  ?>>
+   <label for="radio6"><img class="logoVM" src="images/logosVM/VMRC.png"></label>
 
-<input type="radio" id="radio7" name="type" value="InfrastructureManager" <?php if ($type == "InfrastructureManager") echo 'checked="checked"'  ?>>
-   <label for="radio7"><img src="images/logosVM/IM.png"></label> 
+<input onchange="showForm('InfrastructureManager')" type="radio" id="radio7" name="type" value="InfrastructureManager" <?php if ($type == "InfrastructureManager") echo 'checked="checked"'  ?>>
+   <label for="radio7"><img class="logoVM" src="images/logosVM/IM.png"></label> 
    
 
 
 </div>
 
-
-<div id="caja_form_credentials">
+<div id="InfrastructureManager" class="caja_form_credentials">
                 <table>
                         <tbody>
                                 <tr>
@@ -189,7 +208,7 @@
                                         </td>
 
 						 <th align="left">
-                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUser:
+                                            User:
                                         </th>
                                         <td>
                                             <input type="text" name="username" value="<?php echo $username;?>">
@@ -199,21 +218,326 @@
                                </tr>
                                <tr>
                                         <th align="left">
-                                            Host:&nbsp&nbsp&nbsp&nbsp&nbsp
+                                            
+                                        </th>
+                                        <td>
+                                           
+                                         </td>
+										<th align="left">
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>                  
+                                
+                        </tbody>
+                </table>
+    </div>
+    
+<div id="VMRC" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            User:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+
+
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            
+                                        </th>
+                                        <td>
+                                           
+                                         </td>
+										<th align="left">
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>                  
+                                
+                        </tbody>
+                </table>
+    </div>
+
+<div id="Docker" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            Host:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="host" value="<?php echo $host;?>">
+                                        </td>
+
+
+                               </tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>                  
+                                
+                        </tbody>
+                </table>
+    </div>
+
+<div id="OpenNebula" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            User:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+
+
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Host:
                                         </th>
                                         <td>
                                            <input type="text" name="host" value="<?php echo $host;?>">
                                          </td>
 										<th align="left">
-                                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspPassword:
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+                               </tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>                  
+                                
+                        </tbody>
+                </table>
+    </div>
+
+<div id="OpenStack" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            Access Key:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Host:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="host" value="<?php echo $host;?>">
+                                         </td>
+										<th align="left">
+                                            Secret key:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+                               </tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>
+                        </tbody>
+                </table>
+    </div>
+    
+<div id="EC2" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            Access Key:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                        </th>
+                                        <td>
+                                         </td>
+										<th align="left">
+                                            Secret Key:
                                         </th>
                                         <td>
                                             <input type="password" name="password">
                                         </td>
 							</tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>
+
+                        </tbody>
+                </table>
+    </div>
+    
+    
+<div id="Azure" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            Subscription ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+
+
+                               </tr>
                                <tr>
                                         <th align="left">
-                                            Proxy:&nbsp&nbsp&nbsp&nbsp&nbsp
+                                            Private Key:
+                                        </th>
+                                        <td colspan="3">
+                                           <input type="file" name="private_key">
+                                         </td>
+										<th align="left">
+                                        </th>
+                                        <td>
+                                        </td>
+							</tr>
+                               <tr>
+                                        <th align="left">
+                                            Public Key:
+                                        </th>
+                                        <td colspan="3">
+                                           <input type="file" name="public_key">
+                                         </td>
+										<th align="left">
+                                        </th>
+                                        <td>
+                                        </td>
+							</tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>
+        
+                                
+                        </tbody>
+                </table>
+        </form>
+    </div>
+
+<div id="OCCI" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            User:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+
+
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            
+                                        </th>
+                                        <td>
+                                           
+                                         </td>
+										<th align="left">
+                                            Host:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="host" value="<?php echo $host;?>">
+                                        </td>
+								<tr>
+                                        <th align="left">
+                                            Proxy
                                         </th>
                                         <td colspan="3">
                                            <input type="file" name="proxy">
@@ -228,17 +552,127 @@
 						 <input type="submit" value="Save"/>
 						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
 					</td>
+				</tr>                  
+                                
+                        </tbody>
+                </table>
+    </div>
+    
+<div id="GCE" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            Service Email:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+                               </tr>
+                                <tr>
+                                        <th align="left">
+                                            
+                                        </th>
+                                        <td>
+                                            
+                                        </td>
+
+						 <th align="left">
+                                            Project ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="project" value="<?php echo $project;?>">
+                                        </td>
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Server Cert:
+                                        </th>
+                                        <td colspan="3">
+                                           <input type="file" name=""certificate"">
+                                         </td>
+										<th align="left">
+                                        </th>
+                                        <td>
+                                        </td>
+							</tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
 				</tr>
-						
-                                                                                                                                    
-                                           
-                                        
+        
                                 
                         </tbody>
                 </table>
 
-        </form>
     </div>
+    
+<div id="FogBow" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            User:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Host:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="host" value="<?php echo $host;?>">
+                                         </td>
+										<th align="left">
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+                                </tr>
+                               <tr>
+                                        <th align="left">
+                                        </th>
+                                        <td>                                           
+                                         </td>
+										<th align="left">
+                                            Token Type:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="token_type">
+                                        </td>
+                                </tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>                  
+                                
+                        </tbody>
+                </table>
+
+    </div>
+
+    </form>
 
  </div>
 </div>

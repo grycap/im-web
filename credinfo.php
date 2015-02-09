@@ -47,18 +47,33 @@
                     header('Location: error.php?msg=No id');
                 }
             } elseif ($op == "add") {
+            	$imuser = $_SESSION['user'];
                 $id = $_POST['id'];
                 $type = $_POST['type'];
                 $host = $_POST['host'];
                 $username = $_POST['username'];
                 $password = $_POST['password'];
-                $imuser = $_SESSION['user'];
+                $token_type = $_POST['token_type'];
+                $project = $_POST['project'];
                 $proxy = "";
+                $private_key = "";
+                $public_key = "";
+                $certificate = "";
                 
                 if (isset($_FILES['proxy']['tmp_name'])) {
                 	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
                 }
-                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $proxy);
+                if (isset($_FILES['public_key']['tmp_name'])) {
+                	$public_key = file_get_contents($_FILES['public_key']['tmp_name']);
+                }
+                if (isset($_FILES['private_key']['tmp_name'])) {
+                	$private_key = file_get_contents($_FILES['private_key']['tmp_name']);
+                }
+                if (isset($_FILES['certificate']['tmp_name'])) {
+                	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
+                }
+                
+                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate);
                 if (strlen($err) > 0) {
                     header('Location: error.php?msg=' . $err);
                 } else {
@@ -73,13 +88,27 @@
                     $host = $_POST['host'];
                     $username = $_POST['username'];
                     $password = $_POST['password'];
-                    $proxy = "";
-                    
-                    if (isset($_FILES['proxy']['tmp_name'])) {
-                    	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
-                    }
+                    $token_type = $_POST['token_type'];
+	                $project = $_POST['project'];
+	                $proxy = "";
+	                $private_key = "";
+	                $public_key = "";
+	                $certificate = "";
+	                
+	                if (isset($_FILES['proxy']['tmp_name'])) {
+	                	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
+	                }
+	                if (isset($_FILES['public_key']['tmp_name'])) {
+	                	$public_key = file_get_contents($_FILES['public_key']['tmp_name']);
+	                }
+	                if (isset($_FILES['private_key']['tmp_name'])) {
+	                	$private_key = file_get_contents($_FILES['private_key']['tmp_name']);
+	                }
+	                if (isset($_FILES['certificate']['tmp_name'])) {
+	                	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
+	                }									
 
-                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $proxy);
+                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate);
                     if (strlen($err) > 0) {
                         header('Location: error.php?msg=' . $err);
                     } else {
