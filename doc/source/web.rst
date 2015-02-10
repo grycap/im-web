@@ -81,34 +81,14 @@ diferent Cloud providers.
 
    Fig 2. List of credentials.
 
-:ref:`Fig. 3 <figure_cred_add>` shows the form to add or edit the user credentials. The user must
-select the credentials type using the selectors with the corresponding images type. Then he must
-provide the needed data to access each Cloud provider.   
+:ref:`Fig. 3 <figure_cred_add>` shows the form to add or edit the user credentials. Initially the user must
+select the credentials type using the selectors with the corresponding images type. Then the specific form
+for the Cloud provider selected will be shown, where the user must fill the needed fields.   
 
 .. _figure_cred_add:   
 .. figure:: images/creds_add.png
 
    Fig 2. Add new credential.
-
-Fields needed to access each Cloud provider:   
-
-* ``username`` indicates the user name associated to the credential. In EC2 and
-  OpenStack it refers to the *Access Key ID*.
-
-* ``password`` indicates the password associated to the credential. In EC2 and
-  OpenStack it refers to the *Secret Acess Key*.
-
-* ``host`` indicates the address of the access point to the cloud provider.
-  This field is not used in IM, EC2 and GCE credentials.
-  
-* ``proxy`` indicates the proxy file associated to the credential.
-  Currently this field is only used in the OCCI plugin
-  
-* ``project`` indicates the project name associated to the credential.
-  This field is only used in the GCE plugin
-
-* ``id`` associates an identifier to the credential. The identifier should be
-  used as the label in the *deploy* section in the RADL.
 
 RADLs
 ^^^^^
@@ -167,7 +147,8 @@ In this form the user will specify the RADL to add resources to the infrastructu
 In the VM information page (:ref:`Fig. 8 <figure_vm_info>`) the user can see all the information about the VM.
 In the top of the page the state, the cloud provider where it is deployed and the available IPs are shown.
 The rest of RADL fields are shown below. In this section the user can look up for the credentials needed to access the VM
-(username, password or private_key). 
+(username, password or private_key). In case of the private_key a "download" button will appear enabling the user to
+download the key to a file to acccess the node.
 
 .. _figure_vm_info: 
 .. figure:: images/vm_info.png
