@@ -43,15 +43,10 @@
 <title>Infrastructure Manager | GRyCAP | UPV</title>
 <link rel="shortcut icon" href="images/favicon.ico">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/datatable.css" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="css/style_login2.css"> 
     <link rel="stylesheet" href="css/style_intro2.css"> 
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
-    <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
-    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
-
-
 
 
     <script type="text/javascript" charset="utf-8">
@@ -61,6 +56,14 @@
                 window.location.href = url;
             }
         }
+
+        function download(id, filename) {
+          var dataToDownload = document.getElementById(id).value;
+      	  var link = document.createElement("a");
+      	  link.download = filename;
+      	  link.href = 'data:Application/octet-stream,' + encodeURIComponent(dataToDownload);
+      	  link.click();
+      	}
     </script>
 </head>
 
@@ -141,7 +144,7 @@
 
 
 
-<table class="list" style="width:20px;">
+<table style="width:20px;">
             <tbody>
 		<tr>
                 <td style="text-align:center;"><a href="#" onclick="javascript:confirm_delete('operate.php?op=destroyvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>', '<?php echo $vmid;?>')"><img style="border:0px;" src="images/icon_terminateVM.jpg" border="0" alt="Terminate VM" title="Terminate VM"></a></td>

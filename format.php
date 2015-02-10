@@ -51,6 +51,30 @@
         return $res;
     }
     
+    function formatAplication($app) {
+    	$parts = explode("and", trim($app,"()"));    	
+    	$values = array(
+    			"name" => "",
+    			"version" => "",
+    			"path" => ""
+    	);
+
+    	foreach ($parts as $part) {
+    		$tok = explode(" = ", $part);
+    		$values[trim($tok[0])] = trim(trim($tok[1]),"'");
+    	}
+    	
+    	$res = $values['name'];
+    	if (strlen($values['version']) > 0) {
+    		$res = $res . " v. " . $values['version'];
+    	}
+    	if (strlen($values['path']) > 0) {
+    		$res = $res . " (" . $values['path'] . ")";
+    	}
+    	
+    	return $res;
+    }
+    
     function formatRADL($tokens) {
         $res = "<table>";
         
@@ -58,8 +82,18 @@
             if ($key != "state" && strpos($key,"net_interface") === false && strpos($key,"provider.") === false) {
                     $res = $res . "<tr>\n";
                     $res = $res . "<td>" . $key . "</td>\n";
-                    $res = $res . "<td><pre>" . $value . "</pre></td>\n";
-                    $res = $res . "</tr>\n";
+                    $res = $res . "<td>";
+                    
+                    if (strpos($key,"private_key") !== false) {
+                    	$res = $res . "<textarea id='private_key_value' name='private_key_value' style='display:none;'>" . $value . "</textarea>";
+                    	$res = $res . "<a class='download' href='javascript:download(\"private_key_value\", \"key.pem\");'>Download</a>";
+                    } elseif (strpos($key,"applications") !== false) { 
+                    	$res = $res . "<pre>" . formatAplication($value) . "</pre>";
+                    } else {
+                    	$res = $res . "<pre>" . $value . "</pre>";
+                    }
+
+                    $res = $res . "</td>\n</tr>\n";
                 }
         }
         

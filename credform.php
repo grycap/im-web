@@ -64,6 +64,14 @@
             	inputs[i].disabled = false;
             }
         }
+
+        function download(id, filename) {
+              var dataToDownload = document.getElementById(id).value;
+        	  var link = document.createElement("a");
+        	  link.download = filename;
+        	  link.href = 'data:Application/octet-stream,' + encodeURIComponent(dataToDownload);
+        	  link.click();
+        	}
     </script>
 </head>
 
@@ -77,11 +85,20 @@
             $proxy = "";
             
             if (isset($rowid)) {
-                $cred = get_credential($rowid);
-                $id = $cred['id'];
-                $type = $cred['type'];
-                $host = $cred['host'];
-                $username = $cred['username'];
+            	$cred = get_credential($rowid);
+            	if ($cred['imuser'] == $_SESSION['user']) {
+	                $id = $cred['id'];
+	                $type = $cred['type'];
+	                $host = $cred['host'];
+	                $username = $cred['username'];
+	                $project = $cred['project'];
+	                $token_type = $cred['token_type'];
+	                
+	                $proxy = $cred['proxy'];
+	                $public_key = $cred['public_key'];
+	                $private_key = $cred['private_key'];
+	                $certificate = $cred['certificate'];
+                }
             }
     ?>
 
@@ -471,6 +488,12 @@
                                         </th>
                                         <td colspan="3">
                                            <input type="file" name="private_key">
+                                           <?php
+                                           if (strlen(trim($private_key)) > 0) {
+                                           	echo "<textarea id='private_key_value' name='private_key_value' style='display:none;'>" . $private_key . "</textarea>";
+                                           	echo "<a class='download' href='javascript:download(\"private_key_value\", \"key.pem\");'>Download</a>";
+                                           }
+                                           ?>
                                          </td>
 										<th align="left">
                                         </th>
@@ -483,6 +506,12 @@
                                         </th>
                                         <td colspan="3">
                                            <input type="file" name="public_key">
+                                           <?php
+                                           if (strlen(trim($public_key)) > 0) {
+                                           	echo "<textarea id='public_key_value' name='public_key_value' style='display:none;'>" . $public_key . "</textarea>";
+                                           	echo "<a class='download' href='javascript:download(\"public_key_value\", \"cert.pem\");'>Download</a>";
+                                           }
+                                           ?>
                                          </td>
 										<th align="left">
                                         </th>

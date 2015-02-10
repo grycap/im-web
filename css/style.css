@@ -121,6 +121,11 @@ color:#333;
 text-decoration:underline;
 }
 
+#main table.list a.download{
+color:white;
+text-decoration:none;
+}
+
 
 
 #main table.list tbody td td:hover{

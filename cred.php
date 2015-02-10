@@ -17,7 +17,6 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 function get_credentials($user) {
     include('config.php');
 

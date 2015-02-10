@@ -106,7 +106,7 @@
                         ]
                 } );
         } );
-        
+
         function confirm_delete(url, id) {
             var r=confirm("Sure that you want to delete the Credential with id: " + id + "?");
             if (r==true) {
