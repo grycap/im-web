@@ -44,6 +44,7 @@
 
     <script type="text/javascript" charset="utf-8">
         function showForm(form_id) {
+        	if (form_id == "") return;
             // Function to show/hide and enable/disable the correct fields
             // of the credentials form for the type selected
             var x = document.getElementsByClassName("caja_form_credentials");
@@ -82,7 +83,12 @@
             $host = "";
             $username = "";
             $password = "";
+            $token_type = "";
+            $project = "";
             $proxy = "";
+            $certificate = "";
+            $public_key = "";
+            $private_key = "";
             
             if (isset($rowid)) {
             	$cred = get_credential($rowid);
@@ -221,14 +227,14 @@
                                             ID:
                                         </th>
                                         <td>
-                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                            <input type="text" name="id" value="<?php echo $id;?>"/>
                                         </td>
 
 						 <th align="left">
                                             User:
                                         </th>
                                         <td>
-                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                            <input type="text" name="username" value="<?php echo $username;?>"/>
                                         </td>
 
 
@@ -244,7 +250,7 @@
                                             Password:
                                         </th>
                                         <td>
-                                            <input type="password" name="password">
+                                            <input type="password" name="password"/>
                                         </td>
 				<tr>
 					<td colspan="4" align="right">
@@ -528,7 +534,6 @@
                                 
                         </tbody>
                 </table>
-        </form>
     </div>
 
 <div id="OCCI" class="caja_form_credentials">
@@ -539,14 +544,14 @@
                                             ID:
                                         </th>
                                         <td>
-                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                            <input type="text" name="id" value="<?php echo $id;?>"/>
                                         </td>
 
 						 <th align="left">
                                             User:
                                         </th>
                                         <td>
-                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                            <input type="text" name="username" value="<?php echo $username;?>"/>
                                         </td>
 
 
@@ -562,14 +567,14 @@
                                             Host:
                                         </th>
                                         <td>
-                                            <input type="text" name="host" value="<?php echo $host;?>">
+                                            <input type="text" name="host" value="<?php echo $host;?>"/>
                                         </td>
 								<tr>
                                         <th align="left">
                                             Proxy
                                         </th>
                                         <td colspan="3">
-                                           <input type="file" name="proxy">
+                                           <input type="file" name="proxy"/>
                                          </td>
 										<th align="left">
                                         </th>
@@ -579,7 +584,7 @@
 				<tr>
 					<td colspan="4" align="right">
 						 <input type="submit" value="Save"/>
-						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"/></a>
 					</td>
 				</tr>                  
                                 
