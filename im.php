@@ -47,7 +47,7 @@ function get_auth_data() {
                 	$auth_cloud['private_key'] = new xmlrpcval($cred['private_key']);
                 }
                 if (!is_null($cred['certificate']) && strlen(trim($cred['certificate'])) > 0) {
-                	$auth_cloud['certificate'] = new xmlrpcval($cred['certificate']);
+                	$auth_cloud['password'] = new xmlrpcval($cred['certificate']);
                 }
                 $auth[] = new xmlrpcval($auth_cloud, "struct");
             }
