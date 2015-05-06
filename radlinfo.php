@@ -39,7 +39,7 @@
                     $id = $_GET['id'];
                     $err = delete_radl($id);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: radl_list.php');
                     }
@@ -63,7 +63,7 @@
     
                 $err = insert_radl($imuser, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . $err);
+                    header('Location: error.php?msg=' . urlencode($err));
                 } else {
                     header('Location: radl_list.php');
                 }
@@ -86,7 +86,7 @@
                     
                     $err = edit_radl($id, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: radl_list.php');
                     }
@@ -126,7 +126,7 @@
 	                    		if (strpos($res, "Error") === False) {
 	                    			header('Location: list.php');
 	                    		} else {
-	                    			header('Location: error.php?msg=' . $res);
+	                    			header('Location: error.php?msg=' . urlencode($res));
 	                    		}
                     		}
                     	} else { 
@@ -140,7 +140,7 @@
 	                    if (strpos($res, "Error") === False) {
 	                        header('Location: list.php');
 	                    } else {
-	                        header('Location: error.php?msg=' . $res);
+	                        header('Location: error.php?msg=' . urlencode($res));
 	                    }
                 	}
                 } else {

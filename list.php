@@ -157,12 +157,11 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                     if (is_string($vm_list)) {
 						$vm_list = array("N/A");
 					} else {
-                    	$vm_info = GetVMInfo($im_host,$im_port,$inf, $vm_list[count($vm_list)-1]);
-                    	$radl_tokens = parseRADL($vm_info);
-                    	if (is_string($vm_info) && strpos($vm_info, "Error")) {
+                    	$state = GetVMProperty($im_host,$im_port,$inf, $vm_list[count($vm_list)-1], "state");
+                    	if (is_string($state) && strpos($state, "Error")) {
 							$status = "N/A";
 						} else {
-							$status = formatState($radl_tokens['state']);
+							$status = formatState($state);
 						}
                     }
                 ?>
@@ -185,7 +184,7 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                 </td>
                 <td>
 		<?php
-		if ($radl_tokens['state'] == "configured" || $radl_tokens['state'] == "unconfigured")
+		if ($state == "configured" || $state == "unconfigured")
 		{
 		?>
                     <a href="operate.php?op=reconfigure&infid=<?php echo $inf;?>"><img src="images/reload.png" border="0" alt="Reconfigure" title="Reconfigure"></a>

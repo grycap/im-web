@@ -39,7 +39,7 @@
                     $name = $_GET['id'];
                     $err = delete_group($name);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: group_list.php');
                     }
@@ -52,7 +52,7 @@
                 
                 $err = insert_group($name, $desc);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . $err);
+                    header('Location: error.php?msg=' . urlencode($err));
                 } else {
                     header('Location: group_list.php');
                 }
@@ -64,7 +64,7 @@
                     
                     $err = edit_group($name, $new_name, $desc);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: group_list.php');
                     }

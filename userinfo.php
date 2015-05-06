@@ -40,7 +40,7 @@
                     $username = $_GET['id'];
                     $err = delete_user($username);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: user_list.php');
                     }
@@ -108,7 +108,7 @@
 	                $err = insert_user($username, $password, $groups, $permissions);
 		}
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . $err);
+                    header('Location: error.php?msg=' . urlencode($err));
                 } else {
                     header('Location: user_list.php');
                 }
@@ -132,7 +132,7 @@
                          $err = edit_user($username, $new_username, $password, $groups, $permissions);
 		    }
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: user_list.php');
                     }

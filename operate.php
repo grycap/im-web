@@ -41,7 +41,7 @@
                 $res = CreateInfrastructure($im_host,$im_port,$radl);
                 
                 if (strpos($res, "Error") !== false) {
-                    header('Location: error.php?msg=' . $res);
+                    header('Location: error.php?msg=' . urlencode($res));
                 } else {
                     header('Location: list.php');
                 }
@@ -51,7 +51,7 @@
                     $res = DestroyInfrastructure($im_host,$im_port,$id);
                     
                     if (strpos($res, "Error") !== false) {
-                        header('Location: error.php?msg=' . $res);
+                        header('Location: error.php?msg=' . urlencode($res));
                     } else {
                         header('Location: list.php');
                     }
@@ -66,7 +66,7 @@
                     $res = RemoveResource($im_host,$im_port,$infid, $vmid);
                     
                     if (strpos($res, "Error") !== false) {
-                        header('Location: error.php?msg=' . $res);
+                        header('Location: error.php?msg=' . urlencode($res));
                     } else {
                         header('Location: list.php');
                     }
@@ -82,7 +82,7 @@
                     $res = AddResource($im_host,$im_port,$infid, $radl);
                     
                     if (strpos($res, "Error") !== false) {
-                        header('Location: error.php?msg=' . $res);
+                        header('Location: error.php?msg=' . urlencode($res));
                     } else {
                         header('Location: list.php');
                     }
@@ -96,7 +96,7 @@
             		$res = Reconfigure($im_host,$im_port,$infid, "");
             
             		if (strpos($res, "Error") !== false) {
-            			header('Location: error.php?msg=' . $res);
+            			header('Location: error.php?msg=' . urlencode($res));
             		} else {
             			header('Location: list.php');
             		}

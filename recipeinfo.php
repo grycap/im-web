@@ -39,7 +39,7 @@
                     $id = $_GET['id'];
                     $err = delete_recipe($id);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: recipe_list.php');
                     }
@@ -57,7 +57,7 @@
                 
                 $err = insert_recipe($name, $version, $desc, $module, $recipe, $galaxy_module, $requirements);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . $err);
+                    header('Location: error.php?msg=' . urlencode($err));
                 } else {
                     header('Location: recipe_list.php');
                 }
@@ -74,7 +74,7 @@
                     
                     $err = edit_recipe($id, $name, $version, $desc, $module, $recipe, $galaxy_module, $requirements);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: recipe_list.php');
                     }

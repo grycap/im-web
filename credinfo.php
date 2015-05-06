@@ -39,7 +39,7 @@
                     $id = $_GET['id'];
                     $err = delete_credential($id);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: credentials.php');
                     }
@@ -75,7 +75,7 @@
                 
                 $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . $err);
+                    header('Location: error.php?msg=' . urlencode($err));
                 } else {
                     header('Location: credentials.php');
                 }
@@ -110,7 +110,7 @@
 
                     $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: credentials.php');
                     }
@@ -122,7 +122,7 @@
                     $id = $_GET['id'];
                     $err = enable_credential($id, 1);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: credentials.php');
                     }
@@ -134,7 +134,7 @@
                     $id = $_GET['id'];
                     $err = enable_credential($id, 0);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: credentials.php');
                     }
@@ -149,7 +149,7 @@
                     $imuser = $_SESSION['user'];
                     $err = change_order($id, $imuser, $order, $new_order);
                     if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . $err);
+                        header('Location: error.php?msg=' . urlencode($err));
                     } else {
                         header('Location: credentials.php');
                     }

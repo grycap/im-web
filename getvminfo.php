@@ -32,7 +32,7 @@
         $res = GetVMInfo($im_host,$im_port, (int)$id, $vmid);
         
         if (is_string($res) && strpos($res, "Error")) {
-            header('Location: error.php?msg=' + $res);
+            header('Location: error.php?msg=' + urlencode($res));
         } else {
         	$radl_tokens = parseRADL($res);
 ?>
