@@ -35,12 +35,6 @@
 	<?php
 	}
 	
-	if ($ec3) {
-	?>
-			<li><a <?php if ($menu == "EC3") echo 'class="seleccionado"'; ?> href='cluster_list.php'><span><img style="vertical-align: middle;" src="images/icon_infra.png" />&nbsp&nbspEC3</span></a></li>
-	<?php
-	}
-
     	if (check_admin_user()) {
 		$admin = False;
 		$user_style = "";

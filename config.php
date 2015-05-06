@@ -25,7 +25,4 @@ $im_db="/home/www-data/im.db";
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 # If not set ""
 $recipes_db="";
-# To activate the EC3 functionality, currently unavailable
-$ec3=False;
-$ec3_path="/var/www/im/ec3";
 ?>

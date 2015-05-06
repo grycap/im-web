@@ -36,16 +36,6 @@ the following variables:
    Location of the IM service recipes D.B. To use that feature the IM recipes file must accesible to the web server
    The default value is `""`.
 
-.. confval:: ec3
-
-   Flag to activate the EC3 functionality, currently unavailable
-   The default value is `False`.
-   
-.. confval:: ec3_path
-
-   Path to the EC3 tool, currently unavailable
-   The default value is `/var/www/im/ec3`.
-
 Usage
 -----
 The web interface of the IM enables the user to manage all the aspects related with the 
