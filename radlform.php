@@ -239,8 +239,11 @@
                 ?>
 <tr>
 <td colspan=2 align=right>
+					<a href="radlinfo.php?op=launch&id=<?php echo $id;?>"><input type="button" name="Launch" value="Launch"></a>
  					<input type="submit" value="Save"/>
 					<a href="radl_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					
+					
 </td>
 </tr>
 <?php
