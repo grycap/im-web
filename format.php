@@ -76,7 +76,7 @@
     }
     
     function formatRADL($tokens) {
-        $res = "<table>";
+        $res = "";
         
         foreach ($tokens as $key => $value) {
             if ($key != "state" && strpos($key,"net_interface") === false && strpos($key,"provider.") === false) {
@@ -96,8 +96,6 @@
                     $res = $res . "</td>\n</tr>\n";
                 }
         }
-        
-        $res = $res . "</table>";
         
         return $res;
     }

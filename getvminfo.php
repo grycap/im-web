@@ -135,7 +135,19 @@
             <tr>
 		  <td style="width:10px;background:#a27c3b;"><img src="images/icon_info.png"></td>
                 <th style="width:90px;">Information</th>
-                <td style="text-align:left;background:#e9d6b5;"><?php echo formatRADL($radl_tokens);?></td>
+                <td style="text-align:left;background:#e9d6b5;">
+                	<table>
+                	<?php echo formatRADL($radl_tokens);?>
+                	<tr>
+                	<td>
+                	Cont. Message
+                	</td>
+                	<td>
+                	<a href="getcontmsg.php?id=<?php echo $id;?>&ivmd=<?php echo $vmid;?>">Show >></a>
+                	</td>
+                	</tr>
+                	</table>
+                </td>
             </tr>
             
            

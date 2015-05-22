@@ -24,10 +24,15 @@
 	header('Location: index.php?error=Invalid User');
     } else {
         if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-            include('im.php');
-            include('config.php');
-            $cont_msg = GetInfrastructureContMsg($im_host,$im_port,$id);
+        	include('im.php');
+        	include('config.php');
+        	$id = $_GET['id'];
+        	if (isset($_GET['vmid'])) {
+        		$vmid = $_GET['vmid'];
+        		$cont_msg = GetVMContMsg($im_host,$im_port,$id,$vmid);
+        	} else {
+        		$cont_msg = GetInfrastructureContMsg($im_host,$im_port,$id);
+        	}
         }
 
 ?>
