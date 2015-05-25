@@ -547,29 +547,14 @@
                                             <input type="text" name="id" value="<?php echo $id;?>"/>
                                         </td>
 
-						 <th align="left">
-                                            User:
-                                        </th>
-                                        <td>
-                                            <input type="text" name="username" value="<?php echo $username;?>"/>
-                                        </td>
-
-
-                               </tr>
-                               <tr>
-                                        <th align="left">
-                                            
-                                        </th>
-                                        <td>
-                                           
-                                         </td>
-										<th align="left">
+						 				<th align="left">
                                             Host:
                                         </th>
                                         <td>
                                             <input type="text" name="host" value="<?php echo $host;?>"/>
                                         </td>
-								<tr>
+                               </tr>
+                                <tr>
                                         <th align="left">
                                             Proxy
                                         </th>
@@ -664,42 +649,29 @@
                                             ID:
                                         </th>
                                         <td>
-                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                            <input type="text" name="id" value="<?php echo $id;?>"/>
                                         </td>
 
-						 <th align="left">
-                                            User:
-                                        </th>
-                                        <td>
-                                            <input type="text" name="username" value="<?php echo $username;?>">
-                                        </td>
-                               </tr>
-                               <tr>
-                                        <th align="left">
+						 				<th align="left">
                                             Host:
                                         </th>
                                         <td>
-                                           <input type="text" name="host" value="<?php echo $host;?>">
-                                         </td>
-										<th align="left">
-                                            Password:
-                                        </th>
-                                        <td>
-                                            <input type="password" name="password">
+                                            <input type="text" name="host" value="<?php echo $host;?>"/>
                                         </td>
-                                </tr>
-                               <tr>
+                               </tr>
+                                <tr>
                                         <th align="left">
+                                            Proxy
                                         </th>
-                                        <td>                                           
+                                        <td colspan="3">
+                                           <input type="file" name="proxy"/>
+                                           <input type="hidden" name="token_type" value="VOMS"/>
                                          </td>
 										<th align="left">
-                                            Token Type:
                                         </th>
                                         <td>
-                                            <input type="text" name="token_type">
                                         </td>
-                                </tr>
+							</tr>
 				<tr>
 					<td colspan="4" align="right">
 						 <input type="submit" value="Save"/>
