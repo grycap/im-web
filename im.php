@@ -226,6 +226,48 @@ function GetVMContMsg($host, $port, $inf_id, $vm_id) {
 	}
 }
 
+function StartVM($host, $port, $inf_id, $vm_id) {
+	$auth = get_auth_data();
+	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
+	$xmlrpc_msg = new xmlrpcmsg('StartVM', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_id, "string"), $auth));
+
+	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
+
+	if ($xmlrpc_resp->faultCode())
+		return 'Error: ' . $xmlrpc_resp->faultString();
+	else
+		$res = php_xmlrpc_decode($xmlrpc_resp->value());
+	$success = $res[0];
+	$info = $res[1];
+
+	if ($success) {
+		return $info;
+	} else {
+		return 'Error';
+	}
+}
+
+function StopVM($host, $port, $inf_id, $vm_id) {
+	$auth = get_auth_data();
+	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
+	$xmlrpc_msg = new xmlrpcmsg('StopVM', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_id, "string"), $auth));
+
+	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
+
+	if ($xmlrpc_resp->faultCode())
+		return 'Error: ' . $xmlrpc_resp->faultString();
+	else
+		$res = php_xmlrpc_decode($xmlrpc_resp->value());
+	$success = $res[0];
+	$info = $res[1];
+
+	if ($success) {
+		return $info;
+	} else {
+		return 'Error';
+	}
+}
+
 function AddResource($host, $port, $inf_id, $radl) {
     $auth = get_auth_data();
     $xmlrpc_client = new xmlrpc_client('/',$host,$port);

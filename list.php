@@ -157,10 +157,11 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                     if (is_string($vm_list)) {
 						$vm_list = array("N/A");
 					} else {
-                    	$state = GetVMProperty($im_host,$im_port,$inf, $vm_list[count($vm_list)-1], "state");
-                    	if (is_string($state) && strpos($state, "Error")) {
-							$status = "N/A";
-						} else {
+						if (count($vm_list) > 0) {
+                    		$state = GetVMProperty($im_host,$im_port,$inf, $vm_list[count($vm_list)-1], "state");
+						} 
+						$status = "N/A";
+                    	if (!(is_string($state) && strpos($state, "Error"))) {
 							$status = formatState($state);
 						}
                     }

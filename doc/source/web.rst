@@ -138,7 +138,9 @@ In the VM information page (:ref:`Fig. 8 <figure_vm_info>`) the user can see all
 In the top of the page the state, the cloud provider where it is deployed and the available IPs are shown.
 The rest of RADL fields are shown below. In this section the user can look up for the credentials needed to access the VM
 (username, password or private_key). In case of the private_key a "download" button will appear enabling the user to
-download the key to a file to acccess the node.
+download the key to a file to acccess the node. The contextualizacion message of this VM will be show if the user press
+the message "Show >>" of the row "Cont. Message". The user can also stop, start and destroy the VM using the buttons 
+located at the bottom of the page. 
 
 .. _figure_vm_info: 
 .. figure:: images/vm_info.png

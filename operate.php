@@ -73,6 +73,36 @@
                 } else {
                     header('Location: error.php?msg=No id');
                 }
+            } elseif ($op == "stopvm") {
+            	if (isset($_GET['infid']) and isset($_GET['vmid'])) {
+            		$infid = $_GET['infid'];
+            		$vmid = $_GET['vmid'];
+            	
+            		$res = StopVM($im_host,$im_port,$infid, $vmid);
+            	
+            		if (strpos($res, "Error") !== false) {
+            			header('Location: error.php?msg=' . urlencode($res));
+            		} else {
+            			header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
+            		}
+            	} else {
+            		header('Location: error.php?msg=No id');
+            	}
+            } elseif ($op == "startvm") {
+            	if (isset($_GET['infid']) and isset($_GET['vmid'])) {
+            		$infid = $_GET['infid'];
+            		$vmid = $_GET['vmid'];
+            		 
+            		$res = StartVM($im_host,$im_port,$infid, $vmid);
+            		 
+            		if (strpos($res, "Error") !== false) {
+            			header('Location: error.php?msg=' . urlencode($res));
+            		} else {
+            			header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
+            		}
+            	} else {
+            		header('Location: error.php?msg=No id');
+            	}
             } elseif ($op == "addresource") {
                 $radl = $_POST['radl'];
                 
@@ -103,8 +133,9 @@
             	} else {
             		header('Location: error.php?msg=No id');
             	}
+            } else {
+            	header('Location: error.php?msg=Incorrect Operation: ' . urlencode($op));
             }
-            
             
             
         } else {
