@@ -285,10 +285,10 @@
                                </tr>
                                <tr>
                                         <th align="left">
-                                            
+                                            Host:
                                         </th>
                                         <td>
-                                           
+                                           <input type="text" name="host" value="<?php echo $host;?>">
                                          </td>
 										<th align="left">
                                             Password:
