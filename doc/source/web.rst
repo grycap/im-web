@@ -48,15 +48,13 @@ This container is prepaired to work linked with the IM service container `grycap
 
 ```sh
 sudo docker run -d -p 8899:8899 --name im grycap/im
-```````````````````````````````````````````````````
+````
 
 * Then launch the im-web container linking to the im:
 
 ```sh
 sudo docker run -d -p 80:80 --name im-web --link im:im grycap/im-web
-````````````````````````````````````````````````````````````````````
-
-# Supported tags and respective `Dockerfile` links
+```
 
 Usage
 -----
