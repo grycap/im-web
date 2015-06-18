@@ -16,23 +16,13 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-if(!isset($_SESSION)) session_start();
-// Unset all of the session variables.
-$_SESSION = array();
 
-session_write_close();
-
-// If it's desired to kill the session, also delete the session cookie.
-// Note: This will destroy the session, and not just the session data!
-if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(session_name(), '', time() - 42000,
-        $params["path"], $params["domain"],
-        $params["secure"], $params["httponly"]
-    );
-}
-
-// Finally, destroy the session.
-session_destroy();
-header('Location: index.php');
+include_once('db.php');
+$im_host="im";
+$im_port=8899;
+$im_db="/var/www/www-data/im.db";
+# To use that feature the IM recipes file must accesible to the web server
+#$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
+# If not set ""
+$recipes_db="";
 ?>
