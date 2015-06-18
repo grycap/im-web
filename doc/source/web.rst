@@ -36,6 +36,28 @@ the following variables:
    Location of the IM service recipes D.B. To use that feature the IM recipes file must accesible to the web server
    The default value is `""`.
 
+Docker Image
+------------
+
+A Docker image named `grycap/im-web` has been created to make easier the deployment of an IM web GUI using the 
+default configuration. Information about this image can be found here: https://registry.hub.docker.com/u/grycap/im-web/.
+
+This container is prepaired to work linked with the IM service container `grycap/im`, in this way:
+
+* First launch the IM service specifying the name "im":
+
+```sh
+sudo docker run -d -p 8899:8899 --name im grycap/im
+```````````````````````````````````````````````````
+
+* Then launch the im-web container linking to the im:
+
+```sh
+sudo docker run -d -p 80:80 --name im-web --link im:im grycap/im-web
+````````````````````````````````````````````````````````````````````
+
+# Supported tags and respective `Dockerfile` links
+
 Usage
 -----
 The web interface of the IM enables the user to manage all the aspects related with the 
