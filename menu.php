@@ -18,6 +18,10 @@
 */
     include_once('user.php');
     include('config.php');
+    
+    if (!isset($menu)) {
+    	$menu = "";
+    }
 ?>
 <div id="caja_menu_lateral">
 <div id="caja_menu">

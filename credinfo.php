@@ -59,6 +59,7 @@
                 $private_key = "";
                 $public_key = "";
                 $certificate = "";
+                $tenant = $_POST['tenant'];
                 
                 if (isset($_FILES['proxy']['tmp_name'])) {
                 	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
@@ -73,7 +74,7 @@
                 	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
                 }
                 
-                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate);
+                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant);
                 if (strlen($err) > 0) {
                     header('Location: error.php?msg=' . urlencode($err));
                 } else {
@@ -94,6 +95,7 @@
 	                $private_key = "";
 	                $public_key = "";
 	                $certificate = "";
+	                $tenant = $_POST['tenant'];
 	                
 	                if (isset($_FILES['proxy']['tmp_name'])) {
 	                	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
@@ -108,7 +110,7 @@
 	                	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
 	                }									
 
-                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate);
+                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant);
                     if (strlen($err) > 0) {
                         header('Location: error.php?msg=' . urlencode($err));
                     } else {

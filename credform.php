@@ -89,6 +89,7 @@
             $certificate = "";
             $public_key = "";
             $private_key = "";
+            $tenant = "";
             
             if (isset($rowid)) {
             	$cred = get_credential($rowid);
@@ -99,6 +100,7 @@
 	                $username = $cred['username'];
 	                $project = $cred['project'];
 	                $token_type = $cred['token_type'];
+	                $tenant = $cred['tenant'];
 	                
 	                $proxy = $cred['proxy'];
 	                $public_key = $cred['public_key'];
@@ -395,7 +397,7 @@
                                         </td>
 
 						 <th align="left">
-                                            Access Key:
+                                            Username:
                                         </th>
                                         <td>
                                             <input type="text" name="username" value="<?php echo $username;?>">
@@ -410,10 +412,22 @@
                                            <input type="text" name="host" value="<?php echo $host;?>">
                                          </td>
 										<th align="left">
-                                            Secret key:
+                                            Password:
                                         </th>
                                         <td>
                                             <input type="password" name="password">
+                                        </td>
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Tenant:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="tenant" value="<?php echo $tenant;?>">
+                                         </td>
+										<th align="left">
+                                        </th>
+                                        <td>
                                         </td>
                                </tr>
 				<tr>

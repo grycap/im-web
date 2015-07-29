@@ -80,7 +80,7 @@ $msg = $_GET['msg']
 
         
     <div class="texto_error">
-	Error: <?php echo $msg;?> <br>
+	Error: <?php echo str_replace("\n","<br>",$msg);?> <br>
     </div>
 
     <br>
