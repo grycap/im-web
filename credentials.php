@@ -188,6 +188,10 @@
 			<?php if (strcmp($cred['type'],"Azure") == 0){ ?>
 			<img src="images/logosVM/AzureRow.png">
 			<?php } ?>
+			
+			<?php if (strcmp($cred['type'],"Kubernetes") == 0){ ?>
+			<img src="images/logosVM/KubernetesRow.png">
+			<?php } ?>
 
 
 

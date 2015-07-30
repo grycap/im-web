@@ -207,10 +207,9 @@
 <input onchange="showForm('Docker')" type="radio" id="radio10" name="type" value="Docker" <?php if ($type == "Docker") echo 'checked="checked"'  ?>>
    <label for="radio10"><img class="logoVM" src="images/logosVM/Docker.png"></label>
 
-<!--
-<input onchange="showForm('LibVirt')" type="radio" id="radio5" name="type" value="LibVirt" <?php if ($type == "LibVirt") echo 'checked="checked"'  ?>>
-   <label for="radio5"><img class="logoVM" src="images/logosVM/libvirt.png"></label>
--->
+<input onchange="showForm('Kubernetes')" type="radio" id="radio5" name="type" value="Kubernetes" <?php if ($type == "Kubernetes") echo 'checked="checked"'  ?>>
+   <label for="radio5"><img class="logoVM" src="images/logosVM/Kubernetes.png"></label>
+
 <input onchange="showForm('VMRC')" type="radio" id="radio6" name="type" value="VMRC" <?php if ($type == "VMRC") echo 'checked="checked"'  ?>>
    <label for="radio6"><img class="logoVM" src="images/logosVM/VMRC.png"></label>
 
@@ -698,6 +697,51 @@
 
     </div>
 
+<div id="Kubernetes" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            User:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                        </td>
+
+
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Host:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="host" value="<?php echo $host;?>">
+                                         </td>
+										<th align="left">
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+                               </tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>                  
+                                
+                        </tbody>
+                </table>
+    </div>
+    
     </form>
 
  </div>
