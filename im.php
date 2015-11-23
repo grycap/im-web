@@ -103,7 +103,7 @@ function CreateInfrastructure($host, $port, $radl) {
 function DestroyInfrastructure($host, $port, $id) {
     $auth = get_auth_data();
     $xmlrpc_client = new xmlrpc_client('/',$host,$port);
-    $xmlrpc_msg = new xmlrpcmsg('DestroyInfrastructure', array(new xmlrpcval((int)$id, "int"), $auth));
+    $xmlrpc_msg = new xmlrpcmsg('DestroyInfrastructure', array(new xmlrpcval($id, "string"), $auth));
     
     $xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
     
@@ -124,7 +124,7 @@ function DestroyInfrastructure($host, $port, $id) {
 function GetInfrastructureInfo($host, $port, $id) {
     $auth = get_auth_data();
     $xmlrpc_client = new xmlrpc_client('/',$host,$port);
-    $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureInfo', array(new xmlrpcval((int)$id, "int"), $auth));
+    $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureInfo', array(new xmlrpcval($id, "string"), $auth));
     
     $xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
     
@@ -145,7 +145,7 @@ function GetInfrastructureInfo($host, $port, $id) {
 function GetInfrastructureContMsg($host, $port, $id) {
 	$auth = get_auth_data();
 	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
-	$xmlrpc_msg = new xmlrpcmsg('GetInfrastructureContMsg', array(new xmlrpcval((int)$id, "int"), $auth));
+	$xmlrpc_msg = new xmlrpcmsg('GetInfrastructureContMsg', array(new xmlrpcval($id, "string"), $auth));
 
 	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
 
@@ -166,7 +166,7 @@ function GetInfrastructureContMsg($host, $port, $id) {
 function GetVMInfo($host, $port, $inf_id, $vm_id) {
     $auth = get_auth_data();
     $xmlrpc_client = new xmlrpc_client('/',$host,$port);
-    $xmlrpc_msg = new xmlrpcmsg('GetVMInfo', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_id, "string"), $auth));
+    $xmlrpc_msg = new xmlrpcmsg('GetVMInfo', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
     
     $xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
     
@@ -187,7 +187,7 @@ function GetVMInfo($host, $port, $inf_id, $vm_id) {
 function GetVMProperty($host, $port, $inf_id, $vm_id, $property) {
 	$auth = get_auth_data();
 	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
-	$xmlrpc_msg = new xmlrpcmsg('GetVMProperty', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_id, "string"), new xmlrpcval($property, "string"), $auth));
+	$xmlrpc_msg = new xmlrpcmsg('GetVMProperty', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), new xmlrpcval($property, "string"), $auth));
 
 	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
 
@@ -208,7 +208,7 @@ function GetVMProperty($host, $port, $inf_id, $vm_id, $property) {
 function GetVMContMsg($host, $port, $inf_id, $vm_id) {
 	$auth = get_auth_data();
 	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
-	$xmlrpc_msg = new xmlrpcmsg('GetVMContMsg', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_id, "string"), $auth));
+	$xmlrpc_msg = new xmlrpcmsg('GetVMContMsg', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
 	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
 
@@ -229,7 +229,7 @@ function GetVMContMsg($host, $port, $inf_id, $vm_id) {
 function StartVM($host, $port, $inf_id, $vm_id) {
 	$auth = get_auth_data();
 	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
-	$xmlrpc_msg = new xmlrpcmsg('StartVM', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_id, "string"), $auth));
+	$xmlrpc_msg = new xmlrpcmsg('StartVM', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
 	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
 
@@ -250,7 +250,7 @@ function StartVM($host, $port, $inf_id, $vm_id) {
 function StopVM($host, $port, $inf_id, $vm_id) {
 	$auth = get_auth_data();
 	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
-	$xmlrpc_msg = new xmlrpcmsg('StopVM', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_id, "string"), $auth));
+	$xmlrpc_msg = new xmlrpcmsg('StopVM', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
 	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
 
@@ -271,7 +271,7 @@ function StopVM($host, $port, $inf_id, $vm_id) {
 function AddResource($host, $port, $inf_id, $radl) {
     $auth = get_auth_data();
     $xmlrpc_client = new xmlrpc_client('/',$host,$port);
-    $xmlrpc_msg = new xmlrpcmsg('AddResource', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($radl, "string"), $auth));
+    $xmlrpc_msg = new xmlrpcmsg('AddResource', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($radl, "string"), $auth));
     
     $xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
     
@@ -292,7 +292,7 @@ function AddResource($host, $port, $inf_id, $radl) {
 function RemoveResource($host, $port, $inf_id, $vm_list) {
     $auth = get_auth_data();
     $xmlrpc_client = new xmlrpc_client('/',$host,$port);
-    $xmlrpc_msg = new xmlrpcmsg('RemoveResource', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($vm_list, "string"), $auth));
+    $xmlrpc_msg = new xmlrpcmsg('RemoveResource', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_list, "string"), $auth));
     
     $xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
     
@@ -313,7 +313,7 @@ function RemoveResource($host, $port, $inf_id, $vm_list) {
 function Reconfigure($host, $port, $inf_id, $radl) {
 	$auth = get_auth_data();
 	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
-	$xmlrpc_msg = new xmlrpcmsg('Reconfigure', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($radl, "string"), $auth));
+	$xmlrpc_msg = new xmlrpcmsg('Reconfigure', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($radl, "string"), $auth));
 
 	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
 
@@ -334,7 +334,7 @@ function Reconfigure($host, $port, $inf_id, $radl) {
 function ExportInfrastructure($host, $port, $inf_id, $delete) {
 	$auth = get_auth_data();
 	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
-	$xmlrpc_msg = new xmlrpcmsg('ExportInfrastructure', array(new xmlrpcval((int)$inf_id, "int"), new xmlrpcval($delete, "boolean"), $auth));
+	$xmlrpc_msg = new xmlrpcmsg('ExportInfrastructure', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($delete, "boolean"), $auth));
 
 	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
 
@@ -371,5 +371,26 @@ function ImportInfrastructure($host, $port, $inf_str) {
 	} else {
 		return 'Error';
 	}
+}
+
+function GetInfrastructureState($host, $port, $id) {
+	$auth = get_auth_data();
+	$xmlrpc_client = new xmlrpc_client('/',$host,$port);
+	$xmlrpc_msg = new xmlrpcmsg('GetInfrastructureState', array(new xmlrpcval($id, "string"), $auth));
+
+	$xmlrpc_resp = $xmlrpc_client->send($xmlrpc_msg);
+
+	if ($xmlrpc_resp->faultCode())
+		return 'Error: ' . $xmlrpc_resp->faultString();
+		else
+			$res = php_xmlrpc_decode($xmlrpc_resp->value());
+			$success = $res[0];
+			$state = $res[1]['state'];
+
+			if ($success) {
+				return $state;
+			} else {
+				return 'Error';
+			}
 }
 ?>

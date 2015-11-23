@@ -29,7 +29,7 @@
 
         include_once('im.php');
         include_once('config.php');
-        $res = GetVMInfo($im_host,$im_port, (int)$id, $vmid);
+        $res = GetVMInfo($im_host,$im_port, $id, $vmid);
         
         if (is_string($res) && strpos($res, "Error")) {
             header('Location: error.php?msg=' + urlencode($res));
@@ -56,14 +56,6 @@
                 window.location.href = url;
             }
         }
-
-        function download(id, filename) {
-          var dataToDownload = document.getElementById(id).value;
-      	  var link = document.createElement("a");
-      	  link.download = filename;
-      	  link.href = 'data:Application/octet-stream,' + encodeURIComponent(dataToDownload);
-      	  link.click();
-      	}
     </script>
 </head>
 

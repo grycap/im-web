@@ -33,8 +33,9 @@
     
     function formatCloud($tokens) {
         $res = "";
-		if (strcmp($tokens["provider.type"],"EC2") == 0) {
-			return "EC2";
+        $public_clouds = array("EC2", "GCE", "Azure");
+        if (in_array($tokens["provider.type"], $public_clouds)) {
+			return $tokens["provider.type"];
 		} else {
 		        $res = $res . $tokens["provider.type"] . "<br>";
 	        	$res = $res . $tokens["provider.host"] . ":" . $tokens["provider.port"] . "<br>";
@@ -86,7 +87,30 @@
                     
                     if (strpos($key,"private_key") !== false) {
                     	$res = $res . "<textarea id='private_key_value' name='private_key_value' style='display:none;'>" . $value . "</textarea>";
-                    	$res = $res . "<a class='download' href='javascript:download(\"private_key_value\", \"key.pem\");'>Download</a>";
+                    	$res = $res . "<a id='export' class='download' href='#'>Download</a>";
+                    	$res = $res . <<<EOT
+<script>
+    function createDownloadLink(anchorSelector, str, fileName){
+        anchor = document.getElementById(anchorSelector)
+        if(window.navigator.msSaveOrOpenBlob) {
+            var fileData = [str];
+            blobObject = new Blob(fileData);
+            anchor.onclick = function(){
+                window.navigator.msSaveOrOpenBlob(blobObject, fileName);
+            }
+        } else {
+			var url = "data:Application/octet-stream," + encodeURIComponent(str);
+            anchor.download = fileName;
+            anchor.href = url;
+        }
+    }
+                    	
+    var dataToDownload = document.getElementById("private_key_value").value;
+    createDownloadLink("export",dataToDownload,"key.pem");
+                    	
+</script>
+EOT;
+                    	           
                     } elseif (strpos($key,"applications") !== false) { 
                     	$res = $res . "<pre>" . formatAplication($value) . "</pre>";
                     } else {
