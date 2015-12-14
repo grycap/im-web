@@ -45,9 +45,11 @@
     
     function formatIPs($tokens) {
         $res = "";
-        for ($i=0;in_array('net_interface.' . $i . '.ip', array_keys($tokens));$i++) {
-            $res = $res . str_replace("'","",$tokens['net_interface.' . $i . '.ip']) . '<br>';
-        }       
+        for ($i=0;$i<10;$i++) {
+        	if (in_array('net_interface.' . $i . '.ip', array_keys($tokens))) {
+            	$res = $res . $i . " => " . str_replace("'","",$tokens['net_interface.' . $i . '.ip']) . '<br>';
+        	}
+        }
         
         return $res;
     }
