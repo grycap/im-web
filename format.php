@@ -126,6 +126,59 @@ EOT;
         return $res;
     }
     
+    function getOutPorts($radl) {
+    	$pos = 0;
+    	$res = array();
+    	while ($pos !== false) {
+	    	$ini = strpos($radl, "network", $pos);
+	    	$ini = strpos($radl, "(", $ini)+1;
+	    	$fin = strpos($radl, ")", $ini+1);
+	    	
+	    	$parts = explode(" and", substr($radl, $ini, $fin-$ini));
+	    	
+	    	$i = 0;
+	    	$public = false;
+	    	$ports = "";
+	    	foreach ($parts as $comp)
+	        {
+                $tok = explode(" = ", $comp);
+                $key = trim($tok[0]);
+                $value = "";
+
+                if (count($tok) > 1) {
+                	$value = str_replace("'","",trim($tok[1]));
+                }
+                
+                if ($key == 'outbound')
+                	$public = true;
+                else if ($key == 'outports')
+                	$ports = $value;
+	        }
+	    	
+	        if ($public and strlen($ports) > 0) {
+	        	$port_parts = explode(",", $ports);
+	        	foreach ($port_parts as $port_pair) {
+	        		$port_pair_parts = explode("-", $port_pair);
+	        		if (count($port_pair_parts)>1 and $port_pair_parts[0] != $port_pair_parts[1]) {
+	        			$res[$port_pair_parts[0]] = $port_pair_parts[1];
+	        		}
+	        	}
+	        }
+	    	
+	    	$pos = strpos($radl, "network", $pos+1);
+    	}
+    	
+    	return $res;
+    }
+    
+    function formatOutPorts($outports){
+    	$res = "";
+    	foreach ($outports as $src => $dest) {
+    		$res = $res . $src . " => " . $dest . "<br>\n";
+    	}
+    	return $res;
+    }
+    
     function parseRADL($radl) {
         // TODO: esto habria que hacerlo mejor
         $ini = strpos($radl, "system");
@@ -153,11 +206,11 @@ EOT;
                 $res[trim($tok[0])] = trim($tok[1]);
             } else {
                 $tok = explode(" = ", $comp);
-		if (count($tok) > 1) {
-	                $res[trim($tok[0])] = str_replace("'","",trim($tok[1]));
-		} else {
-	                $res[trim($tok[0])] = "";
-		}
+				if (count($tok) > 1) {
+			                $res[trim($tok[0])] = str_replace("'","",trim($tok[1]));
+				} else {
+			                $res[trim($tok[0])] = "";
+				}
             }
 
             $i++;

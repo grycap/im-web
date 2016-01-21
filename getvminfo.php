@@ -35,6 +35,7 @@
             header('Location: error.php?msg=' + urlencode($res));
         } else {
         	$radl_tokens = parseRADL($res);
+        	$outports = getOutPorts($res);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -103,20 +104,35 @@
             <tr>
 		  <td style="width:10px;background:#777;"><img src="images/icon_state.png"></td>
                 <th style="width:90px; background:#777;padding-left:0px;">State</th>  		  
-                <td style="text-align:left; padding-left:20px; font-weight:bold;background:#CCC;"><?php echo formatState($radl_tokens['state']);?></td>
+                <td colspan="3" style="text-align:left; padding-left:20px; font-weight:bold;background:#CCC;"><?php echo formatState($radl_tokens['state']);?></td>
             </tr>
             <tr>
 		  <td style="width:10px;background:#777;"><img src="images/icon_deploy.png"></td>
                 <th style="width:90px; background:#777;padding-left:0px;">Deployment</th>
-                <td style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatCloud($radl_tokens);?>
+                <td colspan="3" style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatCloud($radl_tokens);?>
                 </td>
             </tr>
 
 		<tr>
 		  <td style="width:10px;background:#777;"><img src="images/icon_ip.png"></td>
                 <th style="width:90px; background:#777;padding-left:0px;">IPs</th>
+<?php
+	if (count($outports) > 0) {
+?>
                 <td style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatIPs($radl_tokens);?></td>
+                <th style="width:90px; background:#777;padding-left:0px;">Ports</th>
+                <td style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatOutPorts($outports);?></td>
+<?php
+	} else {
+?>
+                <td colspan="3" style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatIPs($radl_tokens);?></td>          
+<?php
+	}
+?>      
             </tr>
+            
+
+
    </tbody>
         </table>
 
