@@ -1,7 +1,7 @@
 # Dockerfile to create a container with the IM web GUI
 FROM php:apache
 MAINTAINER Miguel Caballer <micafer1@upv.es>
-LABEL version="1.3.0"
+LABEL version="1.4.2"
 LABEL description="Container image to run the IM web GUI. (http://www.grycap.upv.es/im)"
 
 RUN apt-get update && apt-get install -y php5-mcrypt php5-sqlite sqlite git
