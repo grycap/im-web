@@ -31,8 +31,8 @@
         include_once('config.php');
         $res = GetVMInfo($im_host,$im_port, $id, $vmid);
         
-        if (is_string($res) && strpos($res, "Error")) {
-            header('Location: error.php?msg=' + urlencode($res));
+        if (is_string($res) && strpos($res, "Error") !== false) {
+            header('Location: error.php?msg=' . urlencode($res));
         } else {
         	$radl_tokens = parseRADL($res);
         	$outports = getOutPorts($res);

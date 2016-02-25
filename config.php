@@ -18,6 +18,8 @@
 */
 
 include_once('db.php');
+$im_use_rest=false;
+$im_use_rest_ssl=false;
 $im_host="localhost";
 $im_port=8899;
 $im_db="/home/www-data/im.db";
