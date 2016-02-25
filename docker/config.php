@@ -18,8 +18,22 @@
 */
 
 include_once('db.php');
+$im_use_rest=false;
+if (getenv('im_use_rest')) {
+	$im_use_rest = filter_var(getenv('im_use_rest'), FILTER_VALIDATE_BOOLEAN);
+}
+$im_use_rest_ssl=false;
+if (getenv('im_use_rest_ssl')) {
+	$im_use_rest_ssl = filter_var(getenv('im_use_rest_ssl'), FILTER_VALIDATE_BOOLEAN);
+}
 $im_host="im";
+if (getenv('im_host')) {
+	$im_host = getenv('im_host');
+}
 $im_port=8899;
+if (getenv('im_port')) {
+	$im_port = intval(getenv('im_port'));
+}
 $im_db="/var/www/www-data/im.db";
 # To use that feature the IM recipes file must accesible to the web server
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
