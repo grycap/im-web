@@ -32,7 +32,7 @@
         include('config.php');
         $res = GetInfrastructureList($im_host,$im_port);
         
-        if (is_string($res) and !strpos($res, "Error")) {
+        if (is_string($res) and strpos($res, "Error") !== false) {
             header('Location: error.php?msg=' . $res);
         } else {
 ?>
@@ -154,15 +154,15 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
             foreach ($res as $inf) {
                     $vm_list = GetInfrastructureInfo($im_host,$im_port,$inf);
 
-                    if (is_string($vm_list)) {
+                    if (is_string($vm_list) || count($vm_list) == 0) {
 						$vm_list = array("N/A");
-					} else {
-						$state = GetInfrastructureState($im_host,$im_port,$inf);
-						$status = "N/A";
-                    	if (!(is_string($state) && strpos($state, "Error"))) {
-							$status = formatState($state);
-						}
-                    }
+					}
+
+					$state = GetInfrastructureState($im_host,$im_port,$inf);
+					$status = "N/A";
+                   	if (!(is_string($state) && strpos($state, "Error") !== false)) {
+						$status = formatState($state);
+					}
                 ?>
             <tr>
                 <td>
@@ -170,8 +170,12 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                 </td>
                 <td>
 <?php
-                    foreach ($vm_list as $vm) { 
+                    foreach ($vm_list as $vm) {
+                    	if ($vm !== "N/A") {
                             echo "<a href='getvminfo.php?id=" . $inf . "&vmid=" . $vm . "' alt='VM Info' title='VM Info'>" . $vm . "<br>";
+                    	} else {
+                    		echo "N/A";
+                    	}
                     }
 ?>
                 </td>
