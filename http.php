@@ -130,6 +130,9 @@ class Http
                 break;
         }
 
+        curl_setopt($s,CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($s, CURLOPT_SSL_VERIFYHOST, 0);
+        
         curl_setopt($s, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($s, CURLOPT_HTTPHEADER, $headers);
         $out = curl_exec($s);

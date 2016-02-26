@@ -1,6 +1,5 @@
 <?php
 include('http.php');
-include('config.php');
 include_once('cred.php');
 
 function get_auth_data() {
@@ -48,6 +47,7 @@ function GetErrorMessage($output) {
 }
 
 function BasicRESTCall($verb, $host, $port, $path, $params=array(), $extra_headers=array()) {
+	include('config.php');
 	$auth = get_auth_data();
 	$headers = array("Authorization:" . $auth);
 	$headers = array_merge($headers, $extra_headers);
@@ -74,7 +74,7 @@ function BasicRESTCall($verb, $host, $port, $path, $params=array(), $extra_heade
 	if ($status != 200) {
 		$res = 'Error: Code: ' . strval($status) . '. ' . GetErrorMessage($output);
 	}
-	
+
 	return new Http_response($status, $res);
 }
 
