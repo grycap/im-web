@@ -154,8 +154,18 @@ function GetVMContMsg($host, $port, $inf_id, $vm_id) {
 	return $res->getOutput();
 }
 
+function GetContentType($content) {
+	if (strpos($content,"tosca_definitions_version") !== false) {
+		return 'text/yaml';
+	} elseif (substr(trim($content),0,1) == "[") {
+		return 'application/json';
+	} else {
+		return 'text/plain';
+	}
+}
+
 function CreateInfrastructure($host, $port, $radl) {
-	$headers = array('Content-Type: text/plain', 'Content-Length: ' . strlen($radl));
+	$headers = array('Content-Length: ' . strlen($radl), 'Content-Type: ' . GetContentType($radl));
 	$res = BasicRESTCall("POST", $host, $port, '/infrastructures', $radl, $headers);
 	return $res->getOutput();
 }
@@ -171,7 +181,7 @@ function StopVM($host, $port, $inf_id, $vm_id) {
 }
 
 function AddResource($host, $port, $inf_id, $radl) {
-	$headers = array('Content-Type: text/plain', 'Content-Length: ' . strlen($radl));
+	$headers = array('Content-Length: ' . strlen($radl), 'Content-Type: ' . GetContentType($radl));
 	$res = BasicRESTCall("POST", $host, $port, '/infrastructures/' . $inf_id, $radl, $headers);
 	return $res->getOutput();
 }
