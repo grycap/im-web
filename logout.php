@@ -33,6 +33,11 @@ if (ini_get("session.use_cookies")) {
 }
 
 // Finally, destroy the session.
-session_destroy();
+try {
+	// sometimes fails
+	session_destroy();
+} catch (Exception $e) {
+	// ignore it
+}
 header('Location: index.php');
 ?>
