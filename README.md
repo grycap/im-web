@@ -22,6 +22,8 @@ Also the mcrypt PHP module must be installed and enabled.
 
 It is also required to install the PHP module to access SQLite databases.
 
+In case of using the REST API it is also required to install the CURL PHP module.
+
 1.2 INSTALLING
 --------------
 
@@ -39,6 +41,10 @@ $ chown -R www-data /var/www/im
 
 Adjust the configuration settings in the file config.php:
 
+* Flag to set the usage of the REST API instead of the XML-RPC one.
+$im_use_rest=false;
+* Flag to set the usage of the REST API using HTTPS protocol instead of the standard HTTP.
+$im_use_rest_ssl=false;
 * Address of the IM host
 $im_host="im-server.domain.com";
 * Port of the IM service
@@ -76,4 +82,16 @@ sudo docker run -d -p 8899:8899 --name im grycap/im
 
 ```sh
 sudo docker run -d -p 80:80 --name im-web --link im:im grycap/im-web 
+```
+
+It also supports environment variables to set the IM service location:
+
+  * im_use_rest: Uses the REST API instead of the XML-RPC that is the default one. Default value "false".
+  * im_use_rest_ssl: Uses HTTPS to connect with the REST API. Default value "false".
+  * im_host: Hostname of the IM service. Default value "im".
+  * im_port: Port of the IM service. Default value "8899".
+  * im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
+
+```sh
+docker run -p 80:80 -e "im_use_rest=true" -e "im_host=server.domain" -e "im_port=8800" -d grycap/im-web
 ```
