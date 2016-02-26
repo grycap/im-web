@@ -35,6 +35,9 @@ if (getenv('im_port')) {
 	$im_port = intval(getenv('im_port'));
 }
 $im_db="/var/www/www-data/im.db";
+if (getenv('im_db')) {
+	$im_db = getenv('im_db');
+}
 # To use that feature the IM recipes file must accesible to the web server
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 # If not set ""
