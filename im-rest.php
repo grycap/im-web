@@ -10,6 +10,12 @@ function get_auth_data() {
     // esto por si usamos la autorizacion del servidor web
     //$user = $_SERVER['PHP_AUTH_USER']
     //$password = $_SERVER['PHP_AUTH_PW']
+    
+    // Same values as defined in IM REST API
+    // Combination of chars used to separate the lines in the AUTH header
+    $AUTH_LINE_SEPARATOR = '\\n';
+    // Combination of chars used to separate the lines inside the auth data (i.e. in a certificate)
+    $AUTH_NEW_LINE_SEPARATOR = '\\\\n';
 
     $auth = NULL;
     $creds = get_credentials($user, $password);
@@ -19,14 +25,15 @@ function get_auth_data() {
             if ($cred['enabled']) {
                 foreach ($fields as $field) {
                 	if (!is_null($cred[$field]) && strlen(trim($cred[$field])) > 0) {
+                		$value = str_replace("\n",$AUTH_NEW_LINE_SEPARATOR, $cred[$field]);
 	                	if ($field == "certificate") {
-	                		$auth = $auth . "password = " . $cred[$field] . "; ";
+	                		$auth = $auth . "password = " . $value . "; ";
 	                	} else {
-	                		$auth = $auth . $field ." = " . $cred[$field] . "; ";
+	                		$auth = $auth . $field ." = " . $value . "; ";
 	                	}
                 	}
                 }
-                $auth = substr( $auth, 0, strlen($auth)-2 ). "\\n";
+                $auth = substr( $auth, 0, strlen($auth)-2 ) . $AUTH_LINE_SEPARATOR;
             }
         }
     }
