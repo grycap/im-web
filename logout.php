@@ -33,11 +33,9 @@ if (ini_get("session.use_cookies")) {
 }
 
 // Finally, destroy the session.
-try {
-	// sometimes fails
+if(session_status() === PHP_SESSION_ACTIVE) {
 	session_destroy();
-} catch (Exception $e) {
-	// ignore it
 }
+
 header('Location: index.php');
 ?>
