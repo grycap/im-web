@@ -50,16 +50,36 @@
             	$imuser = $_SESSION['user'];
                 $id = $_POST['id'];
                 $type = $_POST['type'];
-                $host = $_POST['host'];
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $token_type = $_POST['token_type'];
-                $project = $_POST['project'];
+
+                $host = "";
+                $username = "";
+                $password = "";
+                $token_type = "";
+                $project = "";
                 $proxy = "";
                 $private_key = "";
                 $public_key = "";
                 $certificate = "";
-                $tenant = $_POST['tenant'];
+                $tenant = "";
+
+                if (isset($_POST['host'])) {
+                	$host = $_POST['host'];
+                }
+                if (isset($_POST['username'])) {
+                	$username = $_POST['username'];
+                }
+                if (isset($_POST['password'])) {
+                	$password = $_POST['password'];
+                }
+                if (isset($_POST['token_type'])) {
+                	$token_type = $_POST['token_type'];
+                }
+                if (isset($_POST['project'])) {
+                	$project = $_POST['project'];
+                }
+                if (isset($_POST['tenant'])) {
+                	$tenant = $_POST['tenant'];
+                }
                 
                 if (isset($_FILES['proxy']['tmp_name'])) {
                 	$proxy = file_get_contents($_FILES['proxy']['tmp_name']);
