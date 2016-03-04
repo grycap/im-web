@@ -27,12 +27,7 @@
         	include('im.php');
         	include('config.php');
         	$id = $_GET['id'];
-        	if (isset($_GET['vmid'])) {
-        		$vmid = $_GET['vmid'];
-        		$cont_msg = GetVMContMsg($im_host,$im_port,$id,$vmid);
-        	} else {
-        		$cont_msg = GetInfrastructureContMsg($im_host,$im_port,$id);
-        	}
+        	$outputs = GetOutputs($im_host,$im_port,$id);
         }
 
 ?>
@@ -97,12 +92,44 @@
     <div id="main">
     
 
-        <div class='h1'>:: Contextualization Log ::</div>
+        <div class='h1'>:: TOSCA outputs::</div>
 		<br>
         <div id='log'>
+
+ <table class="list" style="width:100%;margin-left: 0px;">
+	<tbody>
+		<tr>
+		  <td style="width:10px;background:#a27c3b;"><img src="images/icon_info.png"></td>
+                <th style="width:90px;">Outputs</th>
+                <td style="text-align:left;background:#e9d6b5;">
+                	<table>
+                	
 <?php
-		echo str_replace("\n","<br>",$cont_msg);
+					foreach ($outputs as $key => $value) {
 ?>
+                	<tr>
+                	<td>
+                	<?php echo $key;?>
+                	</td>
+                	<td>
+                	<?php
+                	if (preg_match("@^(?:[^.]://)?([^/]+)@i", $value)) {
+                		echo "<a href='", $value, "' target='_blank'>", $value, "</a>";
+                	} else {
+                		echo $value;
+                	}
+                	?>
+                	</td>
+                	</tr>
+<?php
+					}
+?>
+                	</table>
+                </td>
+		</tr>
+	</tbody>
+ </table>
+
 		</div>
 
 

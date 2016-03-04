@@ -203,4 +203,9 @@ function Reconfigure($host, $port, $inf_id, $radl) {
 	$res = BasicRESTCall("PUT", $host, $port, '/infrastructures/' . $inf_id . '/reconfigure', $radl, $headers);
 	return $res->getOutput();
 }
+
+function GetOutputs($host, $port, $inf_id) {
+	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/' . $inf_id . '/outputs');
+	return json_decode($res->getOutput());
+}
 ?>
