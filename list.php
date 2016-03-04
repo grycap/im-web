@@ -89,7 +89,6 @@
 
 
   <div id="main">
-
     
     <?php
         if (count($res) > 0)
@@ -112,6 +111,14 @@
                             { "bSortable": true },
                             { "bSortable": false },
                             { "bSortable": false },
+                            	<?php
+                                    if ($im_use_rest)
+                                    {
+                                ?>
+                                { "bSortable": false },
+                                <?php
+                                    }
+                                ?>
                             { "bSortable": true },
                             { "bSortable": false },
                             { "bSortable": false },
@@ -136,6 +143,16 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                 <th>
                 VM IDs
                 </th>
+				<?php
+				if ($im_use_rest)
+				{
+				?>
+                <th width="100px">
+                Outputs
+                </th>
+				<?php
+				}
+				?>
                 <th width="100px">
                 Cont. Message
                 </th>
@@ -179,6 +196,16 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                     }
 ?>
                 </td>
+		<?php
+		if ($im_use_rest)
+		{
+		?>
+		<td>
+				<a href="getoutputs.php?id=<?php echo $inf;?>">Show</a>
+		</td>
+		<?php
+		}
+		?>
 		<td>
 				<a href="getcontmsg.php?id=<?php echo $inf;?>">Show</a>
 		</td>
