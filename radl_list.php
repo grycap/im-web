@@ -161,7 +161,9 @@
 						$pos = $pos + 7;
 						$pos_fin = strpos($radl['radl'], "@", $pos);
 						$param_name = substr($radl['radl'], $pos, $pos_fin-$pos);
-						$radl_params[] = $param_name;
+						if (array_search($param_name, $radl_params) === false) {
+							$radl_params[] = $param_name;
+						}
 					}
 				}
             ?>
