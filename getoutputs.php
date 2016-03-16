@@ -113,7 +113,15 @@
                 	</td>
                 	<td>
                 	<?php
-                	if (preg_match("@^(?:[^.]://)?([^/]+)@i", $value)) {
+                	if (is_array($value)) {
+                		$new_value = "";
+                		foreach ($value as $k => $v) {
+                			$new_value = $new_value . $k . " = " . $v . "<br>\n";
+                		}
+                		$value = $new_value;
+                	}
+                	if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $value)) {
+                	
                 		echo "<a href='", $value, "' target='_blank'>", $value, "</a>";
                 	} else {
                 		echo $value;

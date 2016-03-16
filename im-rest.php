@@ -206,6 +206,6 @@ function Reconfigure($host, $port, $inf_id, $radl) {
 
 function GetOutputs($host, $port, $inf_id) {
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/' . $inf_id . '/outputs');
-	return json_decode($res->getOutput());
+	return json_decode($res->getOutput(), true);
 }
 ?>
