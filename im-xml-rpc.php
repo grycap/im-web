@@ -48,6 +48,12 @@ function get_auth_data() {
                 if (!is_null($cred['certificate']) && strlen(trim($cred['certificate'])) > 0) {
                 	$auth_cloud['password'] = new xmlrpcval($cred['certificate']);
                 }
+                if (!is_null($cred['tenant']) && strlen(trim($cred['tenant'])) > 0) {
+                	$auth_cloud['tenant'] = new xmlrpcval($cred['tenant']);
+                }
+                if (!is_null($cred['project']) && strlen(trim($cred['project'])) > 0) {
+                	$auth_cloud['project'] = new xmlrpcval($cred['project']);
+                }
                 $auth[] = new xmlrpcval($auth_cloud, "struct");
             }
         }
