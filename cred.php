@@ -38,7 +38,7 @@ function get_credential($id) {
         return NULL;
 }
 
-function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant) {
+function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id) {
     include('config.php');
 
     $res = "";
@@ -62,6 +62,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     $fields[] = "'" . $db->escapeString($private_key) . "'";
     $fields[] = "'" . $db->escapeString($certificate) . "'";
     $fields[] = "'" . $db->escapeString($tenant) . "'";
+    $fields[] = "'" . $db->escapeString($subscription_id) . "'";
 
     $res = $db->insert_item_into_table("credentials",$fields);
     $db->close();
@@ -69,7 +70,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     return $res;
 }
 
-function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant) {
+function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id) {
     include('config.php');
 
     $res = "";
@@ -98,6 +99,9 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $token
     }
     if (strlen(trim($tenant)) > 0) {
     	$fields["tenant"] = "'" . $db->escapeString($tenant) . "'";
+    }
+    if (strlen(trim($subscription_id)) > 0) {
+    	$fields["subscription_id"] = "'" . $db->escapeString($subscription_id) . "'";
     }
 
     $where = array("rowid" => $rowid);

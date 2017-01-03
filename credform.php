@@ -90,6 +90,7 @@
             $public_key = "";
             $private_key = "";
             $tenant = "";
+            $subscription_id = "";
             
             if (isset($rowid)) {
             	$cred = get_credential($rowid);
@@ -106,6 +107,7 @@
 	                $public_key = $cred['public_key'];
 	                $private_key = $cred['private_key'];
 	                $certificate = $cred['certificate'];
+	                $subscription_id = $cred['subscription_id'];
                 }
             }
     ?>
@@ -185,6 +187,9 @@
    
 <input onchange="showForm('Azure')" type="radio" id="radio11" name="type" value="Azure" <?php if ($type == "Azure") echo 'checked="checked"'  ?>>
    <label for="radio11"><img class="logoVM" src="images/logosVM/Azure.png"></label>
+
+<input onchange="showForm('AzureClassic')" type="radio" id="radio12" name="type" value="AzureClassic" <?php if ($type == "AzureClassic") echo 'checked="checked"'  ?>>
+   <label for="radio11"><img class="logoVM" src="images/logosVM/AzureClassic.png"></label>
    
 <br>
 
@@ -480,8 +485,50 @@
                 </table>
     </div>
     
-    
 <div id="Azure" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>">
+                                        </td>
+
+						 <th align="left">
+                                            Subscription ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="subscription_id" value="<?php echo $subscription_id;?>">
+                                        </td>
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Username:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                         </td>
+										<th align="left">
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+							</tr>
+				<tr>
+					<td colspan="4" align="right">
+						 <input type="submit" value="Save"/>
+						<a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+					</td>
+				</tr>
+
+                        </tbody>
+                </table>
+    </div>
+
+<div id="AzureClassic" class="caja_form_credentials">
                 <table>
                         <tbody>
                                 <tr>
