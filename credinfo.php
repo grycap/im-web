@@ -61,6 +61,7 @@
                 $public_key = "";
                 $certificate = "";
                 $tenant = "";
+                $subscription_id = "";
 
                 if (isset($_POST['host'])) {
                 	$host = $_POST['host'];
@@ -79,6 +80,9 @@
                 }
                 if (isset($_POST['tenant'])) {
                 	$tenant = $_POST['tenant'];
+                }
+                if (isset($_POST['subscription_id'])) {
+                	$subscription_id = $_POST['subscription_id'];
                 }
                 
                 if (isset($_FILES['proxy']['tmp_name'])) {
@@ -116,6 +120,7 @@
 	                $public_key = "";
 	                $certificate = "";
 	                $tenant = "";
+	                $subscription_id = "";
 	                
 	                if (isset($_POST['host'])) {
 	                	$host = $_POST['host'];
@@ -134,6 +139,9 @@
 	                }
 	                if (isset($_POST['tenant'])) {
 	                	$tenant = $_POST['tenant'];
+	                }
+	                if (isset($_POST['subscription_id'])) {
+	                	$subscription_id = $_POST['subscription_id'];
 	                }
 	                
 	                if (isset($_FILES['proxy']['tmp_name'])) {
