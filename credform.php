@@ -180,46 +180,46 @@
 <div class='h1'>Select type:</div>
 
 <input onchange="showForm('EC2')" type="radio" id="radio2" name="type" value="EC2" <?php if ($type == "EC2") echo 'checked="checked"'  ?>>
-   <label for="radio2"><img class="logoVM" src="images/logosVM/ec2.png"></label>
+   <label for="radio2"><img class="logoVM" src="images/logosVM/ec2.png" title="Amazon EC2"></label>
    
 <input onchange="showForm('GCE')" type="radio" id="radio8" name="type" value="GCE" <?php if ($type == "GCE") echo 'checked="checked"'  ?>>
-   <label for="radio8"><img class="logoVM" src="images/logosVM/GCE.png"></label>
+   <label for="radio8"><img class="logoVM" src="images/logosVM/GCE.png" title="Google Cloud"></label>
    
 <input onchange="showForm('Azure')" type="radio" id="radio11" name="type" value="Azure" <?php if ($type == "Azure") echo 'checked="checked"'  ?>>
-   <label for="radio11"><img class="logoVM" src="images/logosVM/Azure.png"></label>
+   <label for="radio11"><img class="logoVM" src="images/logosVM/Azure.png" title="Azure RM"></label>
 
 <input onchange="showForm('AzureClassic')" type="radio" id="radio12" name="type" value="AzureClassic" <?php if ($type == "AzureClassic") echo 'checked="checked"'  ?>>
-   <label for="radio11"><img class="logoVM" src="images/logosVM/AzureClassic.png"></label>
+   <label for="radio11"><img class="logoVM" src="images/logosVM/AzureClassic.png" title="Azure Classic"></label>
    
 <br>
 
 <input onchange="showForm('OpenNebula')" type="radio" id="radio1" name="type" value="OpenNebula" <?php if ($type == "OpenNebula") echo 'checked="checked"'  ?> >
-   <label for="radio1" ><img class="logoVM" src="images/logosVM/OpenNebula.png"></label>
+   <label for="radio1" ><img class="logoVM" src="images/logosVM/OpenNebula.png" title="OpenNebula"></label>
 
 <input onchange="showForm('OpenStack')" type="radio" id="radio3" name="type" value="OpenStack" <?php if ($type == "OpenStack") echo 'checked="checked"'  ?>>
-   <label for="radio3"><img class="logoVM" src="images/logosVM/openstack.png"></label>
+   <label for="radio3"><img class="logoVM" src="images/logosVM/openstack.png" title="OpenStack"></label>
 
 <input onchange="showForm('OCCI')" type="radio" id="radio4" name="type" value="OCCI" <?php if ($type == "OCCI") echo 'checked="checked"'  ?>>
-   <label for="radio4"><img class="logoVM" src="images/logosVM/OCCI.png"></label>
+   <label for="radio4"><img class="logoVM" src="images/logosVM/OCCI.png" title="OCCI"></label>
    
 <input onchange="showForm('FogBow')" type="radio" id="radio9" name="type" value="FogBow" <?php if ($type == "FogBow") echo 'checked="checked"'  ?>>
-   <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png"></label> 
+   <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png" title="FogBow"></label> 
    
 
 
 <br>
 
 <input onchange="showForm('Docker')" type="radio" id="radio10" name="type" value="Docker" <?php if ($type == "Docker") echo 'checked="checked"'  ?>>
-   <label for="radio10"><img class="logoVM" src="images/logosVM/Docker.png"></label>
+   <label for="radio10"><img class="logoVM" src="images/logosVM/Docker.png" title="Docker"></label>
 
 <input onchange="showForm('Kubernetes')" type="radio" id="radio5" name="type" value="Kubernetes" <?php if ($type == "Kubernetes") echo 'checked="checked"'  ?>>
-   <label for="radio5"><img class="logoVM" src="images/logosVM/Kubernetes.png"></label>
+   <label for="radio5"><img class="logoVM" src="images/logosVM/Kubernetes.png" title="Kubernetes"></label>
 
 <input onchange="showForm('VMRC')" type="radio" id="radio6" name="type" value="VMRC" <?php if ($type == "VMRC") echo 'checked="checked"'  ?>>
-   <label for="radio6"><img class="logoVM" src="images/logosVM/VMRC.png"></label>
+   <label for="radio6"><img class="logoVM" src="images/logosVM/VMRC.png" title="VMRC"></label>
 
 <input onchange="showForm('InfrastructureManager')" type="radio" id="radio7" name="type" value="InfrastructureManager" <?php if ($type == "InfrastructureManager") echo 'checked="checked"'  ?>>
-   <label for="radio7"><img class="logoVM" src="images/logosVM/IM.png"></label> 
+   <label for="radio7"><img class="logoVM" src="images/logosVM/IM.png" title="Infrastructure Manager"></label> 
    
 
 
