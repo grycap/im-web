@@ -98,7 +98,7 @@
                 	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
                 }
                 
-                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant);
+                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id);
                 if (strlen($err) > 0) {
                     header('Location: error.php?msg=' . urlencode($err));
                 } else {
@@ -157,7 +157,7 @@
 	                	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
 	                }									
 
-                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant);
+                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id);
                     if (strlen($err) > 0) {
                         header('Location: error.php?msg=' . urlencode($err));
                     } else {
