@@ -54,6 +54,9 @@ function get_auth_data() {
                 if (!is_null($cred['project']) && strlen(trim($cred['project'])) > 0) {
                 	$auth_cloud['project'] = new xmlrpcval($cred['project']);
                 }
+                if (!is_null($cred['subscription_id']) && strlen(trim($cred['subscription_id'])) > 0) {
+                	$auth_cloud['subscription_id'] = new xmlrpcval($cred['subscription_id']);
+                }
                 $auth[] = new xmlrpcval($auth_cloud, "struct");
             }
         }
