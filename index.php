@@ -68,7 +68,7 @@ include('config.php');
 
 	<div id="caja_pie_portada">
 		<div id="caja_texto_pie_portada">
-			&copy GRyCAP&nbsp&nbsp|&nbsp&nbspUniversidad Polit&eacutecnica de Valencia&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
+			&copy GRyCAP&nbsp&nbsp|&nbsp&nbsp<a href="terms.html">Terms of Service</a>&nbsp&nbsp|&nbsp&nbspUniversidad Polit&eacutecnica de Valencia&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
 &nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbspwww.grycap.upv.es
 		</div>
 	</div>	

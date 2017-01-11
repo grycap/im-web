@@ -726,7 +726,7 @@ position:absolute;
 
 #caja_pie_portada {
   position:absolute;
-  z-index:1;
+  z-index:5;
   margin:0;
   margin-bottom:0;
   padding-top:0px;
@@ -745,6 +745,22 @@ position:absolute;
 border: 0px solid black;
 font-size: 8pt;
 font-family: 'Open Sans', sans-serif; 
+color:black;
+}
+
+#caja_texto_pie_portada a {
+color:black;
+}
+
+#caja_texto_pie_portada a:visited {
+color:black;
+}
+
+#caja_texto_pie_portada a:active {
+color:black;
+}
+
+#caja_texto_pie_portada a:hover {
 color:black;
 }
 

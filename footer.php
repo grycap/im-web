@@ -21,7 +21,7 @@
 <div id="caja_logos">
 <br>
 <a href="http://www.grycap.upv.es/" target="_blank"><img src="images/logo_grycap2.png" alt="GRyCAP" border="0"/></a><br><br>
-<a href="http://www.upv.es" target="_blank"><img src="images/logo_upv2.png" alt="Universidad Politécnica de Valencia" border="0"/></a>
+<a href="http://www.upv.es" target="_blank"><img src="images/logo_upv2.png" alt="Universidad Politï¿½cnica de Valencia" border="0"/></a>
 </div>
 
 
@@ -31,7 +31,7 @@
 
 <div id="caja_pie">
 <div id="caja_texto_pie">
-&copy GRyCAP&nbsp&nbsp|&nbsp&nbspwww.grycap.upv.es&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
+&copy GRyCAP&nbsp&nbsp|&nbsp&nbsp<a href="terms.html">Terms of Service</a>&nbsp&nbsp|&nbsp&nbspwww.grycap.upv.es&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
 &nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbspUniversidad Polit&eacutecnica de Valencia&nbsp&nbsp
 </div>
 </div>
