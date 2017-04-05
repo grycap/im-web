@@ -30,8 +30,8 @@
         $op = $_GET['op'];
     }
 
-    if ($op != "register" && (!check_session_user() || !check_admin_user())) {
-	header('Location: index.php?error=Invalid User' . $op);
+    if (($op == "password" && !check_session_user()) || ($op != "register" && $op != "password" && (!check_session_user() || !check_admin_user()))) {
+		header('Location: index.php?error=Invalid User' . $op);
     } else {    
         
         if (strlen($op) > 0) {
