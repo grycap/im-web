@@ -19,11 +19,6 @@
 
     if(!isset($_SESSION)) session_start();
 
-    if (isset($_GET['username'])) {
-	$_SESSION['user'] = $_GET['username'];
-	$_SESSION['password'] = $_GET['password'];
-    }
-
     include('user.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
