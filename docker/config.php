@@ -34,6 +34,10 @@ $im_port=8899;
 if (getenv('im_port')) {
 	$im_port = intval(getenv('im_port'));
 }
+$im_method='http';
+if (getenv('im_method')) {
+	$im_method = intval(getenv('im_method'));
+}
 $im_db="/var/www/www-data/im.db";
 if (getenv('im_db')) {
 	$im_db = getenv('im_db');

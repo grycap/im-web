@@ -51,7 +51,7 @@ function BasicRESTCall($verb, $host, $port, $path, $extra_headers=array(), $para
 	$headers = array("Authorization:" . $auth);
 	$headers = array_merge($headers, $extra_headers);
 
-	if ($im_use_rest_ssl) {
+	if ($im_use_ssl) {
 		$protocol = 'https';
 	} else {
 		$protocol = 'http';
@@ -77,7 +77,7 @@ function BasicRESTCall($verb, $host, $port, $path, $extra_headers=array(), $para
 	return new Http_response($status, $res);
 }
 
-function GetInfrastructureList($host, $port) {
+function GetInfrastructureList($host, $port, $method) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures', $headers);
 
@@ -96,7 +96,7 @@ function GetInfrastructureList($host, $port) {
 	}
 }
 
-function GetInfrastructureInfo($host, $port, $id) {
+function GetInfrastructureInfo($host, $port, $method, $id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/'.$id, $headers);
 
@@ -115,7 +115,7 @@ function GetInfrastructureInfo($host, $port, $id) {
 	}
 }
 
-function GetInfrastructureState($host, $port, $id) {
+function GetInfrastructureState($host, $port, $method, $id) {
 	$headers = array('Accept: application/json');
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/'.$id.'/state', $headers);
 
@@ -126,7 +126,7 @@ function GetInfrastructureState($host, $port, $id) {
 	}
 }
 
-function DestroyInfrastructure($host, $port, $id) {
+function DestroyInfrastructure($host, $port, $method, $id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("DELETE", $host, $port, '/infrastructures/'.$id, $headers);
 	
@@ -137,25 +137,25 @@ function DestroyInfrastructure($host, $port, $id) {
 	}
 }
 
-function GetVMInfo($host, $port, $inf_id, $vm_id) {
+function GetVMInfo($host, $port, $method, $inf_id, $vm_id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/' . $inf_id . '/vms/' . $vm_id, $headers);
 	return $res->getOutput();
 }
 
-function GetInfrastructureContMsg($host, $port, $id) {
+function GetInfrastructureContMsg($host, $port, $method, $id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/'.$id.'/contmsg', $headers);
 	return $res->getOutput();
 }
 
-function GetVMProperty($host, $port, $inf_id, $vm_id, $property) {
+function GetVMProperty($host, $port, $method, $inf_id, $vm_id, $property) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/' . $inf_id . '/vms/' . $vm_id . "/" . $property, $headers);
 	return $res->getOutput();
 }
 
-function GetVMContMsg($host, $port, $inf_id, $vm_id) {
+function GetVMContMsg($host, $port, $method, $inf_id, $vm_id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("GET", $host, $port, '/infrastructures/' . $inf_id . '/vms/' . $vm_id . "/contmsg", $headers);
 	return $res->getOutput();
@@ -171,37 +171,37 @@ function GetContentType($content) {
 	}
 }
 
-function CreateInfrastructure($host, $port, $radl) {
+function CreateInfrastructure($host, $port, $method, $radl) {
 	$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . GetContentType($radl));
 	$res = BasicRESTCall("POST", $host, $port, '/infrastructures', $headers, $radl);
 	return $res->getOutput();
 }
 
-function StartVM($host, $port, $inf_id, $vm_id) {
+function StartVM($host, $port, $method, $inf_id, $vm_id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("PUT", $host, $port, '/infrastructures/' . $inf_id . '/vms/' . $vm_id . "/start", $headers);
 	return $res->getOutput();
 }
 
-function StopVM($host, $port, $inf_id, $vm_id) {
+function StopVM($host, $port, $method, $inf_id, $vm_id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("PUT", $host, $port, '/infrastructures/' . $inf_id . '/vms/' . $vm_id . "/stop", $headers);
 	return $res->getOutput();
 }
 
-function AddResource($host, $port, $inf_id, $radl) {
+function AddResource($host, $port, $method, $inf_id, $radl) {
 	$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . GetContentType($radl));
 	$res = BasicRESTCall("POST", $host, $port, '/infrastructures/' . $inf_id, $headers, $radl);
 	return $res->getOutput();
 }
 
-function RemoveResource($host, $port, $inf_id, $vm_id) {
+function RemoveResource($host, $port, $method, $inf_id, $vm_id) {
 	$headers = array('Accept: text/*');
 	$res = BasicRESTCall("DELETE", $host, $port, '/infrastructures/' . $inf_id . '/vms/' . $vm_id, $headers);
 	return $res->getOutput();
 }
 
-function Reconfigure($host, $port, $inf_id, $radl) {
+function Reconfigure($host, $port, $method, $inf_id, $radl) {
 	$headers = array('Accept: text/*', 'Content-Type: text/plain', 'Content-Length: ' . strlen($radl));
 	$res = BasicRESTCall("PUT", $host, $port, '/infrastructures/' . $inf_id . '/reconfigure', $headers, $radl);
 	return $res->getOutput();
