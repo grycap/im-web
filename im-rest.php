@@ -84,7 +84,7 @@ function GetInfrastructureList($host, $port, $method) {
 	if ($res->getStatus() != 200) {
 		return $res->getOutput();
 	} else {
-		$inf_urls = split("\n", $res->getOutput());
+		$inf_urls = explode("\n", $res->getOutput());
 		$inf_ids = array();
 		foreach ($inf_urls as $inf_url) {
 			$inf_id = trim(basename(parse_url($inf_url, PHP_URL_PATH)));
@@ -103,7 +103,7 @@ function GetInfrastructureInfo($host, $port, $method, $id) {
 	if ($res->getStatus() != 200) {
 		return 'Error: Code: ' . strval($res->getStatus()) . '. ' . GetErrorMessage($output);
 	} else {
-		$vm_urls = split("\n", $res->getOutput());
+		$vm_urls = explode("\n", $res->getOutput());
 		$vm_ids = array();
 		foreach ($vm_urls as $vm_url) {
 			$vm_id = trim(basename(parse_url($vm_url, PHP_URL_PATH)));
