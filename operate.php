@@ -38,7 +38,7 @@
             if ($op == "create") {
                 $radl = $_POST['radl'];
                 
-                $res = CreateInfrastructure($im_host,$im_port,$radl);
+                $res = CreateInfrastructure($im_host,$im_port,$im_method,$radl);
                 
                 if (strpos($res, "Error") !== false) {
                     header('Location: error.php?msg=' . urlencode($res));
@@ -48,7 +48,7 @@
             } elseif ($op == "destroy") {
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $res = DestroyInfrastructure($im_host,$im_port,$id);
+                    $res = DestroyInfrastructure($im_host,$im_port,$im_method,$id);
                     
                     if (strpos($res, "Error") !== false) {
                         header('Location: error.php?msg=' . urlencode($res));
@@ -63,7 +63,7 @@
                     $infid = $_GET['infid'];
                     $vmid = $_GET['vmid'];
                     
-                    $res = RemoveResource($im_host,$im_port,$infid, $vmid);
+                    $res = RemoveResource($im_host,$im_port,$im_method,$infid, $vmid);
                     
                     if (strpos($res, "Error") !== false) {
                         header('Location: error.php?msg=' . urlencode($res));
@@ -78,7 +78,7 @@
             		$infid = $_GET['infid'];
             		$vmid = $_GET['vmid'];
             	
-            		$res = StopVM($im_host,$im_port,$infid, $vmid);
+            		$res = StopVM($im_host,$im_port,$im_method,$infid, $vmid);
             	
             		if (strpos($res, "Error") !== false) {
             			header('Location: error.php?msg=' . urlencode($res));
@@ -93,7 +93,7 @@
             		$infid = $_GET['infid'];
             		$vmid = $_GET['vmid'];
             		 
-            		$res = StartVM($im_host,$im_port,$infid, $vmid);
+            		$res = StartVM($im_host,$im_port,$im_method,$infid, $vmid);
             		 
             		if (strpos($res, "Error") !== false) {
             			header('Location: error.php?msg=' . urlencode($res));
@@ -109,7 +109,7 @@
                 if (isset($_POST['infid'])) {
                     $infid = $_POST['infid'];
     
-                    $res = AddResource($im_host,$im_port,$infid, $radl);
+                    $res = AddResource($im_host,$im_port,$im_method,$infid, $radl);
                     
                     if (strpos($res, "Error") !== false) {
                         header('Location: error.php?msg=' . urlencode($res));
@@ -123,7 +123,7 @@
             	if (isset($_GET['infid'])) {
             		$infid = $_GET['infid'];
             
-            		$res = Reconfigure($im_host,$im_port,$infid, "");
+            		$res = Reconfigure($im_host,$im_port,$im_method,$infid, "");
             
             		if (strpos($res, "Error") !== false) {
             			header('Location: error.php?msg=' . urlencode($res));

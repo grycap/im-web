@@ -43,8 +43,8 @@ Adjust the configuration settings in the file config.php:
 
 * Flag to set the usage of the REST API instead of the XML-RPC one.
 $im_use_rest=false;
-* Flag to set the usage of the REST API using HTTPS protocol instead of the standard HTTP.
-$im_use_rest_ssl=false;
+* Flag to set the usage of the APIs using HTTPS protocol instead of the standard HTTP.
+$im_use_ssl=false;
 * Address of the IM host
 $im_host="im-server.domain.com";
 * Port of the IM service
@@ -87,7 +87,7 @@ sudo docker run -d -p 80:80 --name im-web --link im:im grycap/im-web
 It also supports environment variables to set the IM service location:
 
   * im_use_rest: Uses the REST API instead of the XML-RPC that is the default one. Default value "false".
-  * im_use_rest_ssl: Uses HTTPS to connect with the REST API. Default value "false".
+  * im_use_ssl: Uses HTTPS to connect with the APIs. Default value "false".
   * im_host: Hostname of the IM service. Default value "im".
   * im_port: Port of the IM service. Default value "8899".
   * im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
