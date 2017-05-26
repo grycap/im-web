@@ -22,9 +22,9 @@ $im_use_rest=false;
 if (getenv('im_use_rest')) {
 	$im_use_rest = filter_var(getenv('im_use_rest'), FILTER_VALIDATE_BOOLEAN);
 }
-$im_use_rest_ssl=false;
-if (getenv('im_use_rest_ssl')) {
-	$im_use_rest_ssl = filter_var(getenv('im_use_rest_ssl'), FILTER_VALIDATE_BOOLEAN);
+$im_use_ssl=false;
+if (getenv('im_use_ssl')) {
+	$im_use_ssl = filter_var(getenv('im_use_ssl'), FILTER_VALIDATE_BOOLEAN);
 }
 $im_host="im";
 if (getenv('im_host')) {
