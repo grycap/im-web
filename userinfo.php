@@ -82,8 +82,8 @@
                 
 		if ($err == "") {
 	                $err = insert_user($username, $password, array('users'), 0);
-			$err = insert_credential($username, "", "InfrastructureManager", "", $username, $password, '', '', '', '', '', '', '');
-			$err = insert_credential($username, "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '');
+			$err = insert_credential($username, "", "InfrastructureManager", "", $username, $password, '', '', '', '', '', '', '', '');
+			$err = insert_credential($username, "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '');
 		}
                 if (strlen($err) > 0) {
                     header('Location: index.php?error=' . $err);
