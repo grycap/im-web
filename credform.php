@@ -679,7 +679,7 @@
                                            <?php
                                            if (strlen(trim($certificate)) > 0) {
                                            	echo "<textarea id='certificate_value' name='certificate_value' style='display:none;'>" . $certificate . "</textarea>";
-                                           	echo "<a class='download' href='javascript:download(\certificate_value\", \"cert.pem\");'>Download</a>";
+                                           	echo "<a class='download' href='javascript:download(\"certificate_value\", \"cert.pem\");'>Download</a>";
                                            }
                                            ?>
                                          </td>
