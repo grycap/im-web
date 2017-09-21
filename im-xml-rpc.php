@@ -65,6 +65,15 @@ function get_auth_data() {
                 if (!is_null($cred['subscription_id']) && strlen(trim($cred['subscription_id'])) > 0) {
                 	$auth_cloud['subscription_id'] = new xmlrpcval($cred['subscription_id']);
                 }
+                if (!is_null($cred['auth_version']) && strlen(trim($cred['auth_version'])) > 0) {
+                	$auth_cloud['auth_version'] = new xmlrpcval($cred['auth_version']);
+                }
+                if (!is_null($cred['domain']) && strlen(trim($cred['domain'])) > 0) {
+                	$auth_cloud['domain'] = new xmlrpcval($cred['domain']);
+                }
+                if (!is_null($cred['service_region']) && strlen(trim($cred['service_region'])) > 0) {
+                	$auth_cloud['service_region'] = new xmlrpcval($cred['service_region']);
+                }
                 $auth[] = new xmlrpcval($auth_cloud, "struct");
             }
         }

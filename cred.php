@@ -38,7 +38,7 @@ function get_credential($id) {
         return NULL;
 }
 
-function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id) {
+function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region) {
     include('config.php');
 
     $res = "";
@@ -63,6 +63,9 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     $fields[] = "'" . $db->escapeString($certificate) . "'";
     $fields[] = "'" . $db->escapeString($tenant) . "'";
     $fields[] = "'" . $db->escapeString($subscription_id) . "'";
+    $fields[] = "'" . $db->escapeString($auth_version) . "'";
+    $fields[] = "'" . $db->escapeString($domain) . "'";
+    $fields[] = "'" . $db->escapeString($service_region) . "'";
 
     $res = $db->insert_item_into_table("credentials",$fields);
     $db->close();
@@ -70,7 +73,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     return $res;
 }
 
-function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id) {
+function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region) {
     include('config.php');
 
     $res = "";
@@ -102,6 +105,15 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $token
     }
     if (strlen(trim($subscription_id)) > 0) {
     	$fields["subscription_id"] = "'" . $db->escapeString($subscription_id) . "'";
+    }
+    if (strlen(trim($auth_version)) > 0) {
+    	$fields["auth_version"] = "'" . $db->escapeString($auth_version) . "'";
+    }
+    if (strlen(trim($domain)) > 0) {
+    	$fields["domain"] = "'" . $db->escapeString($domain) . "'";
+    }
+    if (strlen(trim($service_region)) > 0) {
+    	$fields["service_region"] = "'" . $db->escapeString($service_region) . "'";
     }
 
     $where = array("rowid" => $rowid);
