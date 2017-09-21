@@ -91,6 +91,9 @@
             $private_key = "";
             $tenant = "";
             $subscription_id = "";
+            $auth_version = "";
+            $domain = "";
+            $service_region = "";
             
             if (isset($rowid)) {
             	$cred = get_credential($rowid);
@@ -102,6 +105,9 @@
 	                $project = $cred['project'];
 	                $token_type = $cred['token_type'];
 	                $tenant = $cred['tenant'];
+	                $auth_version = $cred['auth_version'];
+	                $domain = $cred['domain'];
+	                $service_region = $cred['service_region'];
 	                
 	                $proxy = $cred['proxy'];
 	                $public_key = $cred['public_key'];
@@ -430,8 +436,24 @@
                                            <input type="text" name="tenant" value="<?php echo $tenant;?>">
                                          </td>
 										<th align="left">
+										    Domain:
                                         </th>
                                         <td>
+                                            <input type="text" name="domain" value="<?php echo $domain;?>">
+                                        </td>
+                               </tr>
+                               <tr>
+                                        <th align="left">
+                                            Auth Version:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="auth_version" value="<?php echo $auth_version;?>">
+                                         </td>
+										<th align="left">
+										    Region:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="service_region" value="<?php echo $service_region;?>">
                                         </td>
                                </tr>
 				<tr>

@@ -81,6 +81,15 @@
                 if (isset($_POST['tenant'])) {
                 	$tenant = $_POST['tenant'];
                 }
+                if (isset($_POST['auth_version'])) {
+                	$auth_version = $_POST['auth_version'];
+                }
+                if (isset($_POST['domain'])) {
+                	$domain = $_POST['domain'];
+                }
+                if (isset($_POST['service_region'])) {
+                	$service_region = $_POST['service_region'];
+                }
                 if (isset($_POST['subscription_id'])) {
                 	$subscription_id = $_POST['subscription_id'];
                 }
@@ -98,7 +107,7 @@
                 	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
                 }
                 
-                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id);
+                $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region);
                 if (strlen($err) > 0) {
                     header('Location: error.php?msg=' . urlencode($err));
                 } else {
@@ -121,6 +130,9 @@
 	                $certificate = "";
 	                $tenant = "";
 	                $subscription_id = "";
+	                $auth_version = "";
+	                $domain = "";
+	                $service_region = "";
 	                
 	                if (isset($_POST['host'])) {
 	                	$host = $_POST['host'];
@@ -140,6 +152,15 @@
 	                if (isset($_POST['tenant'])) {
 	                	$tenant = $_POST['tenant'];
 	                }
+	                if (isset($_POST['auth_version'])) {
+	                	$auth_version = $_POST['auth_version'];
+	                }
+	                if (isset($_POST['domain'])) {
+	                	$domain = $_POST['domain'];
+	                }
+	                if (isset($_POST['service_region'])) {
+	                	$service_region = $_POST['service_region'];
+	                }
 	                if (isset($_POST['subscription_id'])) {
 	                	$subscription_id = $_POST['subscription_id'];
 	                }
@@ -157,7 +178,7 @@
 	                	$certificate = file_get_contents($_FILES['certificate']['tmp_name']);
 	                }									
 
-                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id);
+                    $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region);
                     if (strlen($err) > 0) {
                         header('Location: error.php?msg=' . urlencode($err));
                     } else {
