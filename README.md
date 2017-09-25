@@ -64,7 +64,7 @@ $recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 
 The default administrator user is admin with password admin.
 
-2. DOCKER IMAGE
+2 DOCKER IMAGE
 ===============
 
 A Docker image named `grycap/im-web` has been created to make easier the deployment of an IM web GUI using the 
