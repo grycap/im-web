@@ -94,6 +94,7 @@
             $auth_version = "";
             $domain = "";
             $service_region = "";
+            $base_url
             
             if (isset($rowid)) {
             	$cred = get_credential($rowid);
@@ -108,6 +109,7 @@
 	                $auth_version = $cred['auth_version'];
 	                $domain = $cred['domain'];
 	                $service_region = $cred['service_region'];
+	                $base_url = $cred['base_url'];
 	                
 	                $proxy = $cred['proxy'];
 	                $public_key = $cred['public_key'];
@@ -456,6 +458,19 @@
                                             <input type="text" name="service_region" value="<?php echo $service_region;?>">
                                         </td>
                                </tr>
+                               <tr>
+                                        <th align="left">
+                                            Base URL:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="base_url" value="<?php echo $base_url;?>">
+                                         </td>
+										<th align="left">
+                                        </th>
+                                        <td>
+                                        </td>
+                               </tr>
+
 				<tr>
 					<td colspan="4" align="right">
 						 <input type="submit" value="Save"/>

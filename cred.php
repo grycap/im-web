@@ -38,7 +38,7 @@ function get_credential($id) {
         return NULL;
 }
 
-function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region) {
+function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url) {
     include('config.php');
 
     $res = "";
@@ -66,6 +66,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     $fields[] = "'" . $db->escapeString($auth_version) . "'";
     $fields[] = "'" . $db->escapeString($domain) . "'";
     $fields[] = "'" . $db->escapeString($service_region) . "'";
+    $fields[] = "'" . $db->escapeString($base_url) . "'";
 
     $res = $db->insert_item_into_table("credentials",$fields);
     $db->close();
@@ -73,7 +74,7 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     return $res;
 }
 
-function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region) {
+function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url) {
     include('config.php');
 
     $res = "";
@@ -114,6 +115,9 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $token
     }
     if (strlen(trim($service_region)) > 0) {
     	$fields["service_region"] = "'" . $db->escapeString($service_region) . "'";
+    }
+    if (strlen(trim($base_url)) > 0) {
+    	$fields["base_url"] = "'" . $db->escapeString($base_url) . "'";
     }
 
     $where = array("rowid" => $rowid);
