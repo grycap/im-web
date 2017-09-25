@@ -10,7 +10,7 @@ configuration of all the user required applications providing the user with a
 fully functional infrastructure.
 
 
-1. INSTALLATION
+1 INSTALLATION
 ===============
 
 1.1 REQUISITES
