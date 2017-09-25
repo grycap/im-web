@@ -94,7 +94,7 @@
             $auth_version = "";
             $domain = "";
             $service_region = "";
-            $base_url
+            $base_url = "";
             
             if (isset($rowid)) {
             	$cred = get_credential($rowid);
