@@ -4,7 +4,9 @@ include_once('cred.php');
 
 function get_auth_data() {
 
-	$fields = array("id","type","host","username","password","proxy","token_type","project","public_key","private_key", "certificate");
+    $fields = array("id","type","host","username","password","proxy","token_type","project","public_key",
+            "private_key", "certificate", "tenant", "project", "subscription_id", "auth_version", "domain", 
+            "service_region", "base_url");
     $user = $_SESSION['user'];
     $password = $_SESSION['password'];
     // esto por si usamos la autorizacion del servidor web
