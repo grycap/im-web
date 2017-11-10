@@ -234,21 +234,20 @@
                                             <?php if ($other_x == "1") echo 'checked';?>></td>
 
 </tr>
-<?php
-                if (!isset($id) || radl_user_can($id, $user, "w")) {
-                ?>
 <tr>
 <td colspan=2 align=right>
+<?php
+                if (!isset($id) || radl_user_can($id, $user, "w")) {
+?>
 					<a href="radlinfo.php?op=launch&id=<?php echo $id;?>"><input type="button" name="Launch" value="Launch"></a>
  					<input type="submit" value="Save"/>
-					<a href="radl_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
-					
-					
+                     <?php
+                }
+?>
+                    <a href="radl_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
 </td>
 </tr>
-<?php
-                }
-                ?>
+
 </tbody>  
                 
                        
