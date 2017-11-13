@@ -237,9 +237,13 @@
 <tr>
 <td colspan=2 align=right>
 <?php
+                if (!isset($id) || radl_user_can($id, $user, "x")) {
+?>
+<a href="radlinfo.php?op=launch&id=<?php echo $id;?>"><input type="button" name="Launch" value="Launch"></a>
+<?php
+                }
                 if (!isset($id) || radl_user_can($id, $user, "w")) {
 ?>
-					<a href="radlinfo.php?op=launch&id=<?php echo $id;?>"><input type="button" name="Launch" value="Launch"></a>
  					<input type="submit" value="Save"/>
                      <?php
                 }
