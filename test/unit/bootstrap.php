@@ -5,4 +5,5 @@ include_once('../../crypt.php');
 include_once('../../db.php');
 include_once('../../cred.php');
 include_once('../../group.php');
+include_once('../../format.php');
 ?>
