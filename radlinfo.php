@@ -121,7 +121,7 @@
                     		
                     		// tenemos todos los parametros, asi que lanzamos el RADL substituido
                     		if ($params_ok) {
-	                    		$res = CreateInfrastructure($im_host,$im_port,$im_method,$radl['radl']);
+	                    		$res = GetIM()->CreateInfrastructure($radl['radl']);
 	                    		 
 	                    		if (strpos($res, "Error") === False) {
 	                    			header('Location: list.php');
@@ -135,7 +135,7 @@
                     	}
                     } else {
                     	// no tenemos parametros
-	                    $res = CreateInfrastructure($im_host,$im_port,$im_method,$radl['radl']);
+	                    $res = GetIM()->CreateInfrastructure($radl['radl']);
 	                    
 	                    if (strpos($res, "Error") === False) {
 	                        header('Location: list.php');

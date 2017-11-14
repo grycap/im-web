@@ -27,7 +27,7 @@
         	include('im.php');
         	include('config.php');
         	$id = $_GET['id'];
-        	$outputs = GetOutputs($im_host,$im_port,$id);
+        	$outputs = GetIM()->GetOutputs($id);
         }
 
 ?>

@@ -29,7 +29,7 @@
 
         include_once('im.php');
         include_once('config.php');
-        $res = GetVMInfo($im_host,$im_port,$im_method, $id, $vmid);
+        $res = GetIM()->GetVMInfo($id, $vmid);
         
         if (is_string($res) && strpos($res, "Error") !== false) {
             header('Location: error.php?msg=' . urlencode($res));

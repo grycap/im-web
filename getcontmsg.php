@@ -29,9 +29,9 @@
         	$id = $_GET['id'];
         	if (isset($_GET['vmid'])) {
         		$vmid = $_GET['vmid'];
-        		$cont_msg = GetVMContMsg($im_host,$im_port,$im_method,$id,$vmid);
+        		$cont_msg = GetIM()->GetVMContMsg($id,$vmid);
         	} else {
-        		$cont_msg = GetInfrastructureContMsg($im_host,$im_port,$im_method,$id);
+        		$cont_msg = GetIM()->GetInfrastructureContMsg($id);
         	}
         }
 

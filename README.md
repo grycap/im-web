@@ -18,7 +18,7 @@ fully functional infrastructure.
 
 IM web interface is based on PHP, so a web server with PHP support must be installed.
 
-Also the mcrypt PHP module must be installed and enabled.
+Also the mcrypt PHP modules must be installed and enabled.
 
 It is also required to install the PHP module to access SQLite databases.
 
