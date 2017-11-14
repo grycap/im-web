@@ -169,13 +169,13 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
     <?php
         
             foreach ($res as $inf) {
-                    $vm_list = GetIM()->GetInfrastructureInfo($im_method,$inf);
+                    $vm_list = GetIM()->GetInfrastructureInfo($inf);
 
                     if (is_string($vm_list) || count($vm_list) == 0) {
 						$vm_list = array("N/A");
 					}
 
-					$state = GetIM()->GetInfrastructureState($im_method,$inf);
+					$state = GetIM()->GetInfrastructureState($inf);
 					$status = "N/A";
                    	if (!(is_string($state) && strpos($state, "Error") !== false)) {
 						$status = formatState($state);
