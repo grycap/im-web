@@ -95,13 +95,13 @@ class IMXML {
 
     // helper function to make easier mocking
     public function send_xmlrpc_call($xmlrpc_msg) {
+        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
         return $xmlrpc_client->send($xmlrpc_msg);
     }
 
     public function GetInfrastructureList() {
         $auth = $this->get_auth_data();
 
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureList', array($auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -122,7 +122,7 @@ class IMXML {
 
     public function CreateInfrastructure($radl) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('CreateInfrastructure', array(new xmlrpcval($radl, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -143,7 +143,7 @@ class IMXML {
 
     public function DestroyInfrastructure($id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('DestroyInfrastructure', array(new xmlrpcval($id, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -164,7 +164,7 @@ class IMXML {
 
     public function GetInfrastructureInfo($id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureInfo', array(new xmlrpcval($id, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -185,7 +185,7 @@ class IMXML {
 
     public function GetInfrastructureContMsg($id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureContMsg', array(new xmlrpcval($id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -206,7 +206,7 @@ class IMXML {
 
     public function GetVMInfo($inf_id, $vm_id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('GetVMInfo', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -227,7 +227,7 @@ class IMXML {
 
     public function GetVMProperty($inf_id, $vm_id, $property) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('GetVMProperty', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), new xmlrpcval($property, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -248,7 +248,7 @@ class IMXML {
 
     public function GetVMContMsg($inf_id, $vm_id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('GetVMContMsg', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -269,7 +269,7 @@ class IMXML {
 
     public function StartVM($inf_id, $vm_id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('StartVM', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -290,7 +290,7 @@ class IMXML {
 
     public function StopVM($inf_id, $vm_id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('StopVM', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -311,7 +311,7 @@ class IMXML {
 
     public function AddResource($inf_id, $radl) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('AddResource', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($radl, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -332,7 +332,7 @@ class IMXML {
 
     public function RemoveResource($inf_id, $vm_list) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('RemoveResource', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_list, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -353,7 +353,7 @@ class IMXML {
 
     public function Reconfigure($inf_id, $radl) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('Reconfigure', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($radl, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -374,7 +374,7 @@ class IMXML {
 
     public function ExportInfrastructure($inf_id, $delete) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('ExportInfrastructure', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($delete, "boolean"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -395,7 +395,7 @@ class IMXML {
 
     public function ImportInfrastructure($inf_str) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('ImportInfrastructure', array(new xmlrpcval($inf_str, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
@@ -416,7 +416,7 @@ class IMXML {
 
     public function GetInfrastructureState($id) {
         $auth = $this->get_auth_data();
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+        
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureState', array(new xmlrpcval($id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
