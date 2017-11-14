@@ -187,7 +187,7 @@ class IMRest
 	}
 
 	public function CreateInfrastructure($radl) {
-		$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . GetContentType($radl));
+		$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . $this->GetContentType($radl));
 		$res = $this->BasicRESTCall("POST", '/infrastructures', $headers, $radl);
 		return $res->getOutput();
 	}
@@ -205,7 +205,7 @@ class IMRest
 	}
 
 	public function AddResource($inf_id, $radl) {
-		$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . GetContentType($radl));
+		$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . $this->GetContentType($radl));
 		$res = $this->BasicRESTCall("POST", '/infrastructures/' . $inf_id, $headers, $radl);
 		return $res->getOutput();
 	}
