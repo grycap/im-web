@@ -17,12 +17,12 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    include('im.php');
-    include('config.php');
+    include_once('im.php');
+    include_once('config.php');
  
     if(!isset($_SESSION)) session_start();   
     
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
@@ -32,8 +32,7 @@
         } elseif (isset($_GET['op'])) {
             $op = $_GET['op'];
         }
-        
-        
+
         if (strlen($op) > 0) {
             if ($op == "create") {
                 $radl = $_POST['radl'];
