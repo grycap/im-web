@@ -81,3 +81,4 @@ final class UserTest extends TestCase
         $this->assertEquals("", $res);
     }
 }
+?>

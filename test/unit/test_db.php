@@ -39,3 +39,4 @@ final class DBTest extends TestCase
     }
 
 }
+?>

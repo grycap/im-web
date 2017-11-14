@@ -30,3 +30,4 @@ final class GroupTest extends TestCase
         $this->assertEquals(NULL, $res);
     }
 }
+?>

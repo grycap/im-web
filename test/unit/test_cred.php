@@ -50,3 +50,4 @@ final class CredTest extends TestCase
         $this->assertEquals(NULL, $res);
     }
 }
+?>
