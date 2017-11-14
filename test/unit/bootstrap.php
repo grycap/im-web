@@ -8,4 +8,5 @@ include_once('../../group.php');
 include_once('../../format.php');
 include_once('../../im-rest.php');
 include_once('../../im-xml-rpc.php');
+include_once('../../radl.php');
 ?>
