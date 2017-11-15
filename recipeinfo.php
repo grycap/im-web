@@ -32,7 +32,7 @@
         } elseif (isset($_GET['op'])) {
             $op = $_GET['op'];
         }
-        
+
         if (strlen($op) > 0) {
             if ($op == "delete") {
                 if (isset($_GET['id'])) {
