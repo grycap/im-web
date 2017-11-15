@@ -84,8 +84,17 @@ final class RADLinfoTest extends TestCase
 
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         $_GET = array("op"=>"launch", "id"=>$rowid, "parameters"=>"1", "wn"=>"2");
+
+        $im = $this->getMockBuilder(IMRest::class)
+            ->setMethods(['CreateInfrastructure'])
+            ->getMock();
+        $im->method('CreateInfrastructure')
+            ->willReturn("infid");
+
+        $GLOBALS['mock_im'] = $im;
         include('../../radlinfo.php');
-        $this->assertEquals(array('Location: error.php?msg=Error%3A+Connect+error%3A+Connection+refused+%28111%29'),xdebug_get_headers());
+        unset($GLOBALS['mock_im']);
+        $this->assertEquals(array('Location: list.php'),xdebug_get_headers());
     }
 
     /**
