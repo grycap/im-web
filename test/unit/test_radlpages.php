@@ -24,6 +24,20 @@ final class RADLPagesTest extends TestCase
     /**
      * @runInSeparateProcess
      */
+    public function testAddForm()
+    {
+        $res = get_radls("admin");
+        $rowid = $res[0]["rowid"];
+
+        $this->expectOutputRegex('/.*input type="hidden" name="infid" value="' . $rowid . '".*/');
+        $_SESSION = array("user"=>"admin", "password"=>"admin");
+        $_GET = array("id"=>$rowid);
+        include('../../form.php');
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
     public function testRADLList()
     {
         $res = get_radls("admin");
