@@ -1,6 +1,8 @@
 IM - Infrastructure Manager web GUI
 ===================================
 
+* Build Status [![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/)
+
 IM is a tool that ease the access and the usability of IaaS clouds by automating
 the VMI selection, deployment, configuration, software installation, monitoring
 and update of Virtual Appliances. It supports APIs from a large number of
