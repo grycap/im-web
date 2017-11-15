@@ -48,20 +48,20 @@
                     header('Location: error.php?msg=No id');
                 }
             } elseif ($op == "password") {
-		$username = $_SESSION["user"];
+		        $username = $_SESSION["user"];
                 $password = $_POST['password'];
                 $password2 = $_POST['password2'];
 
-		$err = "";
-		if (strlen(trim($password)) > 0) {
-			if (trim($password) != trim($password2)) {
-				$err = "The passwords are not equal.";
-			}
-		}
-                
-		if ($err == "") {
-			$err = change_password($username, $password);
-		}
+                $err = "";
+                if (strlen(trim($password)) > 0) {
+                    if (trim($password) != trim($password2)) {
+                        $err = "The passwords are not equal.";
+                    }
+                }
+                        
+                if ($err == "") {
+                    $err = change_password($username, $password);
+                }
                 if (strlen($err) > 0) {
                     header('Location: index.php?error=' . $err);
                 } else {
@@ -73,18 +73,18 @@
                 $password = $_POST['password'];
                 $password2 = $_POST['password2'];
 
-		$err = "";
-		if (strlen(trim($password)) > 0) {
-			if (trim($password) != trim($password2)) {
-				$err = "The passwords are not equal.";
-			}
-		}
-                
-		if ($err == "") {
-	                $err = insert_user($username, $password, array('users'), 0);
-			$err = insert_credential($username, "", "InfrastructureManager", "", $username, $password, '', '', '', '', '', '', '', '');
-			$err = insert_credential($username, "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '');
-		}
+                $err = "";
+                if (strlen(trim($password)) > 0) {
+                    if (trim($password) != trim($password2)) {
+                        $err = "The passwords are not equal.";
+                    }
+                }
+                        
+                if ($err == "") {
+                    $err = insert_user($username, $password, array('users'), 0);
+                    $err = insert_credential($username, "", "InfrastructureManager", "", $username, $password, '', '', '', '', '', '', '', '', '', '', '', '');
+                    $err = insert_credential($username, "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
+                }
                 if (strlen($err) > 0) {
                     header('Location: index.php?error=' . $err);
                 } else {
@@ -94,19 +94,19 @@
                 $username = $_POST['username'];
                 $password = $_POST['password'];
                 $password2 = $_POST['password2'];
-                $groups = $_POST['user_groups'];
+                $groups = explode(",", $_POST['user_groups']);
                 $permissions = $_POST['permissions'];
 
-		$err = "";
-		if (strlen(trim($password)) > 0) {
-			if (trim($password) != trim($password2)) {
-				$err = "The passwords are not equal.";
-			}
-		}
-                
-		if ($err == "") {
-	                $err = insert_user($username, $password, $groups, $permissions);
-		}
+                $err = "";
+                if (strlen(trim($password)) > 0) {
+                    if (trim($password) != trim($password2)) {
+                        $err = "The passwords are not equal.";
+                    }
+                }
+                        
+                if ($err == "") {
+                            $err = insert_user($username, $password, $groups, $permissions);
+                }
                 if (strlen($err) > 0) {
                     header('Location: error.php?msg=' . urlencode($err));
                 } else {
@@ -118,19 +118,19 @@
                     $new_username = $_POST['username'];
                     $password = $_POST['password'];
                     $password2 = $_POST['password2'];
-                    $groups = $_POST['user_groups'];
+                    $groups = explode(",", $_POST['user_groups']);
                     $permissions = $_POST['permissions'];
 
-		    $err = "";
+                    $err = "";
                     if (strlen(trim($password)) > 0) {
-			if (trim($password) != trim($password2)) {
-				$err = "The passwords are not equal.";
-			}
+                        if (trim($password) != trim($password2)) {
+                            $err = "The passwords are not equal.";
+                        }
                     }
                     
-		    if ($err == "") {
-                         $err = edit_user($username, $new_username, $password, $groups, $permissions);
-		    }
+                    if ($err == "") {
+                                $err = edit_user($username, $new_username, $password, $groups, $permissions);
+                    }
                     if (strlen($err) > 0) {
                         header('Location: error.php?msg=' . urlencode($err));
                     } else {

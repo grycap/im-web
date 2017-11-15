@@ -60,7 +60,9 @@ function check_admin_user() {
 	    
 	    if (count($res) > 0) {
 	   		$res = check_password($password, $res[0]["password"]);
-	    }
+	    } else {
+            $res = false;
+        }
 	
 	    return $res;
     }

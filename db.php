@@ -21,7 +21,7 @@ class IMDB extends SQLite3
 {
     function __construct()
     {
-	include('config.php');
+	    include('config.php');
         $this->open($im_db);
     }
 

@@ -17,12 +17,12 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    include('im.php');
-    include('config.php');
+    include_once('im.php');
+    include_once('config.php');
  
     if(!isset($_SESSION)) session_start();   
     
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
@@ -32,13 +32,12 @@
         } elseif (isset($_GET['op'])) {
             $op = $_GET['op'];
         }
-        
-        
+
         if (strlen($op) > 0) {
             if ($op == "create") {
                 $radl = $_POST['radl'];
                 
-                $res = CreateInfrastructure($im_host,$im_port,$im_method,$radl);
+                $res = GetIM()->CreateInfrastructure($radl);
                 
                 if (strpos($res, "Error") !== false) {
                     header('Location: error.php?msg=' . urlencode($res));
@@ -48,7 +47,7 @@
             } elseif ($op == "destroy") {
                 if (isset($_GET['id'])) {
                     $id = $_GET['id'];
-                    $res = DestroyInfrastructure($im_host,$im_port,$im_method,$id);
+                    $res = GetIM()->DestroyInfrastructure($id);
                     
                     if (strpos($res, "Error") !== false) {
                         header('Location: error.php?msg=' . urlencode($res));
@@ -63,7 +62,7 @@
                     $infid = $_GET['infid'];
                     $vmid = $_GET['vmid'];
                     
-                    $res = RemoveResource($im_host,$im_port,$im_method,$infid, $vmid);
+                    $res = GetIM()->RemoveResource($infid, $vmid);
                     
                     if (strpos($res, "Error") !== false) {
                         header('Location: error.php?msg=' . urlencode($res));
@@ -78,7 +77,7 @@
             		$infid = $_GET['infid'];
             		$vmid = $_GET['vmid'];
             	
-            		$res = StopVM($im_host,$im_port,$im_method,$infid, $vmid);
+            		$res = GetIM()->StopVM($infid, $vmid);
             	
             		if (strpos($res, "Error") !== false) {
             			header('Location: error.php?msg=' . urlencode($res));
@@ -93,7 +92,7 @@
             		$infid = $_GET['infid'];
             		$vmid = $_GET['vmid'];
             		 
-            		$res = StartVM($im_host,$im_port,$im_method,$infid, $vmid);
+            		$res = GetIM()->StartVM($infid, $vmid);
             		 
             		if (strpos($res, "Error") !== false) {
             			header('Location: error.php?msg=' . urlencode($res));
@@ -109,7 +108,7 @@
                 if (isset($_POST['infid'])) {
                     $infid = $_POST['infid'];
     
-                    $res = AddResource($im_host,$im_port,$im_method,$infid, $radl);
+                    $res = GetIM()->AddResource($infid, $radl);
                     
                     if (strpos($res, "Error") !== false) {
                         header('Location: error.php?msg=' . urlencode($res));
@@ -123,7 +122,7 @@
             	if (isset($_GET['infid'])) {
             		$infid = $_GET['infid'];
             
-            		$res = Reconfigure($im_host,$im_port,$im_method,$infid, "");
+            		$res = GetIM()->Reconfigure($infid, "");
             
             		if (strpos($res, "Error") !== false) {
             			header('Location: error.php?msg=' . urlencode($res));

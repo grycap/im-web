@@ -26,7 +26,7 @@
 	if ($state == "failed") $res = "<span style='color:red'>failed</span>";
 	if ($state == "unknown") $res = "<span style='color:orange'>unknown</span>";
 	if ($state == "running") $res = "<span style='color:green'>configuring</span>";
-	if ($state == "configured") $res = "<span style='color:green'>" . $state . "</span>";
+	if ($state == "configured") $res = "<span style='color:green'>configured</span>";
 
         return $res;
     }
@@ -154,13 +154,13 @@ EOT;
                 else if ($key == 'outports')
                 	$ports = $value;
 	        }
-	    	
+
 	        if ($public and strlen($ports) > 0) {
 	        	$port_parts = explode(",", $ports);
 	        	foreach ($port_parts as $port_pair) {
-	        		$port_pair_parts = explode("-", $port_pair);
-	        		if (count($port_pair_parts)>1 and $port_pair_parts[0] != $port_pair_parts[1]) {
-	        			$res[$port_pair_parts[0]] = $port_pair_parts[1];
+                    $port_pair_parts = explode("-", $port_pair);
+	        		if (count($port_pair_parts)>1) {
+                        $res[$port_pair_parts[0]] = $port_pair_parts[1];
 	        		}
 	        	}
 	        }

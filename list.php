@@ -24,13 +24,13 @@
         $_SESSION['user'] = $_POST['username'];
     
     include_once('format.php');
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
         header('Location: index.php?error=Invalid User');
     } else {
         include('im.php');
         include('config.php');
-        $res = GetInfrastructureList($im_host,$im_port,$im_method);
+        $res = GetIM()->GetInfrastructureList();
         
         if (is_string($res) and strpos($res, "Error") !== false) {
             header('Location: error.php?msg=' . $res);
@@ -169,13 +169,13 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
     <?php
         
             foreach ($res as $inf) {
-                    $vm_list = GetInfrastructureInfo($im_host,$im_port,$im_method,$inf);
+                    $vm_list = GetIM()->GetInfrastructureInfo($inf);
 
                     if (is_string($vm_list) || count($vm_list) == 0) {
 						$vm_list = array("N/A");
 					}
 
-					$state = GetInfrastructureState($im_host,$im_port,$im_method,$inf);
+					$state = GetIM()->GetInfrastructureState($inf);
 					$status = "N/A";
                    	if (!(is_string($state) && strpos($state, "Error") !== false)) {
 						$status = formatState($state);

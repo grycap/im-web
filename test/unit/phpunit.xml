@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit>
+    <testsuites>
+    <testsuite name="My Test Suite">
+        <directory suffix=".php">.</directory>
+    </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../../</directory>
+        </whitelist>
+    </filter>
+</phpunit>

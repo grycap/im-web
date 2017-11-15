@@ -19,7 +19,7 @@
 
     if(!isset($_SESSION)) session_start();
     
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user() || !check_admin_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="css/style_menutab.css">
 </head>
 <body>
-        <?php include('group.php')?>
+        <?php include_once('group.php')?>
 
 
 <div id="caja_total_blanca">

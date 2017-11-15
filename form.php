@@ -20,7 +20,7 @@
 
     if(!isset($_SESSION)) session_start();
     
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
@@ -50,7 +50,7 @@
 </head>
 <body>
     
-    <?php include('radl.php')?>
+    <?php include_once('radl.php')?>
 
    
 <div id="caja_total_blanca">
@@ -105,7 +105,7 @@
 					<tbody>
 						<tr>
 					          <td>
-                                               <textarea type="ADDR" align="bottom" name="radl"><?php echo $radl_data;?></textarea>
+                                               <textarea type="ADDR" align="bottom" name="radl"></textarea>
                                              </td>
 				 		</tr>
 						<tr>

@@ -19,19 +19,19 @@
 
     if(!isset($_SESSION)) session_start();
     
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
         if (isset($_GET['id'])) {
-        	include('im.php');
+        	include_once('im.php');
         	include('config.php');
         	$id = $_GET['id'];
         	if (isset($_GET['vmid'])) {
         		$vmid = $_GET['vmid'];
-        		$cont_msg = GetVMContMsg($im_host,$im_port,$im_method,$id,$vmid);
+        		$cont_msg = GetIM()->GetVMContMsg($id,$vmid);
         	} else {
-        		$cont_msg = GetInfrastructureContMsg($im_host,$im_port,$im_method,$id);
+        		$cont_msg = GetIM()->GetInfrastructureContMsg($id);
         	}
         }
 
@@ -53,7 +53,7 @@
 </head>
 <body>
     
-    <?php include('radl.php')?>
+    <?php include_once('radl.php')?>
 
 
    
