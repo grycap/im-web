@@ -19,12 +19,12 @@
 
     if(!isset($_SESSION)) session_start();
     
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
         if (isset($_GET['id'])) {
-        	include('im.php');
+        	include_once('im.php');
         	include('config.php');
         	$id = $_GET['id'];
         	$outputs = GetIM()->GetOutputs($id);
@@ -48,7 +48,7 @@
 </head>
 <body>
     
-    <?php include('radl.php')?>
+    <?php include_once('radl.php')?>
 
 
    

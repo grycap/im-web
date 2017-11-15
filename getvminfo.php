@@ -34,7 +34,7 @@
         if (is_string($res) && strpos($res, "Error") !== false) {
             header('Location: error.php?msg=' . urlencode($res));
         } else {
-        	$radl_tokens = parseRADL($res);
+            $radl_tokens = parseRADL($res);
         	$outports = getOutPorts($res);
 ?>
 <!DOCTYPE HTML>

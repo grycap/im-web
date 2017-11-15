@@ -5,6 +5,11 @@ include_once('im-xml-rpc.php');
 function GetIM() {
 	include('config.php');
 
+	// for the unit tests
+	if (isset($GLOBALS['mock_im'])) {
+		return $GLOBALS['mock_im'];
+	}
+
 	if ($im_use_rest) {
 		return IMRest::connect($im_host,$im_port);
 	} else {

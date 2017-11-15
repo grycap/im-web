@@ -24,7 +24,7 @@
         $_SESSION['user'] = $_POST['username'];
     
     include_once('format.php');
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
         header('Location: index.php?error=Invalid User');
     } else {
