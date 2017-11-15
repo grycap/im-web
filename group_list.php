@@ -19,11 +19,11 @@
 
     if(!isset($_SESSION)) session_start();
 
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user() || !check_admin_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
-	include('group.php');
+        include_once('group.php');
         $groups = get_groups();
 
 ?>

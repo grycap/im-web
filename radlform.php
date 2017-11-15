@@ -19,7 +19,7 @@
 
     if(!isset($_SESSION)) session_start();
     
-    include('user.php');
+    include_once('user.php');
     if (!check_session_user()) {
 	header('Location: index.php?error=Invalid User');
     } else {
@@ -48,7 +48,7 @@
 </head>
 <body>
     
-    <?php include('radl.php')?>
+    <?php include_once('radl.php')?>
 
 
    
