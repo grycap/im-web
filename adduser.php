@@ -62,7 +62,7 @@
                                             Username:
                                         </th>
                                         <td>
-                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                            <input type="text" name="username">
                                         </td>
                                </tr>
                                 <tr>
