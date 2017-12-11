@@ -151,7 +151,7 @@
                 	Cont. Message
                 	</td>
                 	<td>
-                	<a href="getcontmsg.php?id=<?php echo $id;?>&ivmd=<?php echo $vmid;?>">Show >></a>
+                	<a href="getcontmsg.php?id=<?php echo $id;?>&vmid=<?php echo $vmid;?>">Show >></a>
                 	</td>
                 	</tr>
                 	</table>
