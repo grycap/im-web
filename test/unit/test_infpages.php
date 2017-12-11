@@ -39,7 +39,7 @@ final class InfPagesTest extends TestCase
     {
         $this->expectOutputRegex("/.*style='color:green'>configured.*/");
         $this->expectOutputRegex("/.*0 => 10.0.0.2<br>1 => 10.0.0.1.*/");
-        $this->expectOutputRegex("/.*getcontmsg.php\?id=infid&ivmd=vmid.*/");
+        $this->expectOutputRegex("/.*getcontmsg.php\?id=infid&vmid=vmid.*/");
         $_SESSION = array("user"=>"admin", "password"=>"admin");
 
         $radl = "" .
