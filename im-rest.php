@@ -137,7 +137,7 @@ class IMRest
 		if ($res->getStatus() != 200) {
 			return $res->getOutput();
 		} else {
-			return json_decode($res->getOutput())->state->state;
+			return json_decode($res->getOutput(), true)["state"];
 		}
 	}
 

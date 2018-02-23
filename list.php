@@ -168,15 +168,10 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
     <?php
         
             foreach ($res as $inf) {
-                    $vm_list = GetIM()->GetInfrastructureInfo($inf);
-
-                    if (is_string($vm_list) || count($vm_list) == 0) {
-						$vm_list = array("N/A");
-					}
-
-					$state = GetIM()->GetInfrastructureState($inf);
+                    $full_state = GetIM()->GetInfrastructureState($inf);
 					$status = "N/A";
-                   	if (!(is_string($state) && strpos($state, "Error") !== false)) {
+                   	if (!(is_string($full_state) && strpos($full_state, "Error") !== false)) {
+                        $state = $full_state["state"];
 						$status = formatState($state);
 					}
                 ?>
@@ -186,12 +181,14 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
                 </td>
                 <td>
 <?php
-                    foreach ($vm_list as $vm) {
-                    	if ($vm !== "N/A") {
+                    if ($status == "N/A") {
+                        echo "N/A";
+                    } else {
+                        $vmids = array_keys($full_state["vm_states"]);
+                        sort($vmids);
+                        foreach ($vmids as $vm) {
                             echo "<a href='getvminfo.php?id=" . $inf . "&vmid=" . $vm . "' alt='VM Info' title='VM Info'>" . $vm . "<br>";
-                    	} else {
-                    		echo "N/A";
-                    	}
+                        }
                     }
 ?>
                 </td>
