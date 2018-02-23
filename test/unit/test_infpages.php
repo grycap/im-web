@@ -21,10 +21,9 @@ final class InfPagesTest extends TestCase
             ->getMock();
         $im->method('GetInfrastructureList')
             ->willReturn(array("infid1"));
-        $im->method('GetInfrastructureInfo')
-            ->willReturn(array("vmid1","vmid2"));
+        $res = array("state"=>"running", "vm_states"=>array("vmid1"=>"running","vmid2"=>"running"));
         $im->method('GetInfrastructureState')
-            ->willReturn("running");
+            ->willReturn($res);
 
         $GLOBALS['mock_im'] = $im;
 

@@ -54,7 +54,7 @@ final class RESTTest extends TestCase
     {
         $im = $this->getIM('{"state":{"state": "running", "vm_states" : {"vmid1": "running", "vmid2": "running"}}}');
         $res = $im->GetInfrastructureState("infid1");
-        $this->assertEquals("running", $res);
+        $this->assertEquals("running", $res["state"]);
     }
 
     public function testDestroyInfrastructure()
