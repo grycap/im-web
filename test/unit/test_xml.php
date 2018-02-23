@@ -152,7 +152,7 @@ final class XMLTest extends TestCase
         $value = new xmlrpcval(array("state"=>$run),"struct");
         $im = $this->getIM($value);
         $res = $im->GetInfrastructureState("infid");
-        $this->assertEquals("running", $res);
+        $this->assertEquals("running", $res["state"]);
     }
 }
 ?>

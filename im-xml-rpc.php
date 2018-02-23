@@ -426,7 +426,7 @@ class IMXML {
             else
                 $res = php_xmlrpc_decode($xmlrpc_resp->value());
                 $success = $res[0];
-                $state = $res[1]['state'];
+                $state = $res[1];
 
                 if ($success) {
                     return $state;
