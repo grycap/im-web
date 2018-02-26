@@ -18,7 +18,7 @@ fully functional infrastructure.
 1.1 REQUISITES
 --------------
 
-IM web interface is based on PHP, so a web server with PHP support must be installed.
+IM web interface is based on PHP 5, so a web server with PHP 5 support must be installed.
 
 Also the mcrypt PHP modules must be installed and enabled.
 
