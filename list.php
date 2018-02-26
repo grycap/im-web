@@ -106,6 +106,8 @@
                         //"oLanguage": {
                         //        "sUrl": "dataTables.spanish.txt"
                         //},
+                        // initially do not sort
+                        "bSort": false,
                         "aoColumns": [
                             { "bSortable": true },
                             { "bSortable": false },
