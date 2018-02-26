@@ -1,5 +1,5 @@
 # Dockerfile to create a container with the IM web GUI
-FROM php:5-apache
+FROM php:apache
 MAINTAINER Miguel Caballer <micafer1@upv.es>
 LABEL version="1.5.4"
 LABEL description="Container image to run the IM web GUI. (http://www.grycap.upv.es/im)"
