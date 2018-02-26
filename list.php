@@ -124,7 +124,7 @@
                             { "bSortable": false },
                             { "bSortable": false },
                             { "bSortable": false }
-                        ] ,
+                        ]
                 } );
         } );
     </script>
