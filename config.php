@@ -22,10 +22,10 @@ $im_use_rest=false;
 $im_use_ssl=false;
 $im_host="localhost";
 $im_port=8899;
-$im_method='http';
-$im_db="/home/www-data/im.db";
+#$im_db="/home/www-data/im.db";
+$im_db="/tmp/im.db";
 # To use that feature the IM recipes file must accesible to the web server
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 # If not set ""
-$recipes_db="";
+$recipes_db="/tmp/recipes.db";
 ?>
