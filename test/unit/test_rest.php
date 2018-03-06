@@ -34,6 +34,12 @@ final class RESTTest extends TestCase
         $headers = array('Accept: text/*');
         $res = $im->BasicRESTCall("GET", '/infrastructures', $headers);
         $this->assertEquals(0, $res->getStatus());
+
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "user_token"=>"token");
+        $im = IMRest::connect("localhost","8899");
+        $headers = array('Accept: text/*');
+        $res = $im->BasicRESTCall("GET", '/infrastructures', $headers);
+        $this->assertEquals(0, $res->getStatus());
     }
 
     public function testGetInfrastructureList()

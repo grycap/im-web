@@ -32,6 +32,12 @@ class IMXML {
                     $auth_cloud['type'] = new xmlrpcval($cred['type']);
                     if (isset($_SESSION['user_token']) and $cred['type'] == "InfrastructureManager") {
                         $auth_cloud['token'] = new xmlrpcval($_SESSION['user_token']);
+                    } elseif (isset($_SESSION['user_token']) and $cred['type'] == "OpenNebula") {
+                        $auth_cloud['token'] = new xmlrpcval($_SESSION['user_token']);
+                    } elseif (isset($_SESSION['user_token']) and $cred['type'] == "OpenStack") {
+                        if (is_null($cred['password']) || strlen(trim($cred['password'])) == 0) {
+                            $auth_cloud['password'] = new xmlrpcval($_SESSION['user_token']);
+                        }
                     } else {
                         if (!is_null($cred['id']) && strlen(trim($cred['id'])) > 0) {
                             $auth_cloud['id'] = new xmlrpcval($cred['id']);

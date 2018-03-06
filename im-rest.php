@@ -54,6 +54,13 @@ class IMRest
 								}
 							}
 						}
+						if (isset($_SESSION['user_token']) and $cred['type'] == "OpenNebula") {
+							$auth = $auth . "token = " . $_SESSION['user_token'] . "; ";
+						} elseif (isset($_SESSION['user_token']) and $cred['type'] == "OpenStack") {
+							if (is_null($cred['password']) || strlen(trim($cred['password'])) == 0) {
+								$auth = $auth . "password = " . $_SESSION['user_token'] . "; ";
+							}
+						}
 					}
 					$auth = substr( $auth, 0, strlen($auth)-2 ) . $AUTH_LINE_SEPARATOR;
 				}

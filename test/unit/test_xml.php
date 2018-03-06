@@ -32,6 +32,10 @@ final class XMLTest extends TestCase
         $im = $this->getIM($value);
         $res = $im->GetInfrastructureList();
         $this->assertEquals(array("infid1","infid2"), $res);
+
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "user_token"=>"token");
+        $res = $im->GetInfrastructureList();
+        $this->assertEquals(array("infid1","infid2"), $res);
     }
 
     public function testCreateInfrastructure()
