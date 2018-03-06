@@ -116,7 +116,7 @@ class IMXML {
             if ($success) {
                 return $list;
             } else {
-                return 'Error: ' . $inf_id;
+                return 'Error: ' . $list;
             }
     }
 
