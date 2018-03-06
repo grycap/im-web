@@ -44,22 +44,47 @@ $ chown -R www-data /var/www/im
 Adjust the configuration settings in the file config.php:
 
 * Flag to set the usage of the REST API instead of the XML-RPC one.
+```
 $im_use_rest=false;
+```
 * Flag to set the usage of the APIs using HTTPS protocol instead of the standard HTTP.
+```
 $im_use_ssl=false;
+```
 * Address of the IM host
+```
 $im_host="im-server.domain.com";
+```
 * Port of the IM service
+```
 $im_port=8899;
+```
 * Path of the IM web interface DB. The original path will be /var/www/im/im.db
   but is more secure to move it to a path not in the path of the web server.
   The file and the directory must have write permissions to the web server user.
+```
 $im_db="/home/www-data/im.db";
+```
 * In case that the IM service and web interface are in the same host, the Recipes
   feature can be activated. Specify the path of the recipes_ansible.db file of the
   IM and take care that the file and the directory must have write permissions to
   the web server user. In other case set "".
+```
 $recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
+```
+* OpenID Issuer supported use "" to disable OpenID support.
+```
+$openid_issuer="https://iam-test.indigo-datacloud.eu/";
+```
+* OpenID Issuer name.
+```
+$openid_name="INDIGO IAM";
+```
+* OpenID Client data.
+```
+$CLIENT_ID = 'client_id';
+$CLIENT_SECRET = 'client_secret';
+```
 
 1.3 DEFAULT USER
 ----------------
@@ -93,6 +118,10 @@ It also supports environment variables to set the IM service location:
   * im_host: Hostname of the IM service. Default value "im".
   * im_port: Port of the IM service. Default value "8899".
   * im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
+  * openid_issuer: URL of the OpenID Issuer. Default value "".
+  * openid_name: OpenID Issuer name. Default value "".
+  * client_id: OpenID Client ID. Default value "client_id".
+  * client_secret: OpenID Client Secret. Default value "client_secret".
 
 ```sh
 docker run -p 80:80 -e "im_use_rest=true" -e "im_host=server.domain" -e "im_port=8800" -d grycap/im-web
