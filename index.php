@@ -50,7 +50,7 @@ include('config.php');
 <?php
 			if (!empty($openid_issuer)) {
 ?>
-		&nbsp<a href="openid_auth.php"><input type="button" name="OpenID" value="OpenID"></a>
+		&nbsp<a href="openid_auth.php"><input type="button" name="OpenID" value="OpenID" title="<?php echo $openid_name;?>"></a>
 <?php
     }
 ?>
