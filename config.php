@@ -28,4 +28,9 @@ $im_db="/home/www-data/im.db";
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 # If not set ""
 $recipes_db="";
+# OpenID Issuer supported
+$openid_issuer="https://iam-test.indigo-datacloud.eu/";
+# OpenID Client data
+$CLIENT_ID = 'client_id';
+$CLIENT_SECRET = 'client_secret';
 ?>

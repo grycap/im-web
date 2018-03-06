@@ -22,10 +22,6 @@ class IMXML {
 
         $user = $_SESSION['user'];
         $password = $_SESSION['password'];
-        // esto por si usamos la autorizacion del servidor web
-        //$user = $_SERVER['PHP_AUTH_USER']
-        //$password = $_SERVER['PHP_AUTH_PW']
-
         $auth = NULL;
         $creds = get_credentials($user, $password);
         if (!is_null($creds)) {
@@ -34,56 +30,60 @@ class IMXML {
                 if ($cred['enabled']) {
                     $auth_cloud = array();
                     $auth_cloud['type'] = new xmlrpcval($cred['type']);
-                    if (!is_null($cred['id']) && strlen(trim($cred['id'])) > 0) {
-                        $auth_cloud['id'] = new xmlrpcval($cred['id']);
-                    }
-                    if (!is_null($cred['host']) && strlen(trim($cred['host'])) > 0) {
-                        $auth_cloud['host'] = new xmlrpcval($cred['host']);
-                    }
-                    if (!is_null($cred['username']) && strlen(trim($cred['username'])) > 0) {
-                        $auth_cloud['username'] = new xmlrpcval($cred['username']);
-                    }
-                    if (!is_null($cred['password']) && strlen(trim($cred['password'])) > 0) {
-                        $auth_cloud['password'] = new xmlrpcval($cred['password']);
-                    }
-                    if (!is_null($cred['proxy']) && strlen(trim($cred['proxy'])) > 0) {
-                        $auth_cloud['proxy'] = new xmlrpcval($cred['proxy']);
-                    }
-                    if (!is_null($cred['token_type']) && strlen(trim($cred['token_type'])) > 0) {
-                        $auth_cloud['token_type'] = new xmlrpcval($cred['token_type']);
-                    }
-                    if (!is_null($cred['project']) && strlen(trim($cred['project'])) > 0) {
-                        $auth_cloud['project'] = new xmlrpcval($cred['project']);
-                    }
-                    if (!is_null($cred['public_key']) && strlen(trim($cred['public_key'])) > 0) {
-                        $auth_cloud['public_key'] = new xmlrpcval($cred['public_key']);
-                    }
-                    if (!is_null($cred['private_key']) && strlen(trim($cred['private_key'])) > 0) {
-                        $auth_cloud['private_key'] = new xmlrpcval($cred['private_key']);
-                    }
-                    if (!is_null($cred['certificate']) && strlen(trim($cred['certificate'])) > 0) {
-                        $auth_cloud['password'] = new xmlrpcval($cred['certificate']);
-                    }
-                    if (!is_null($cred['tenant']) && strlen(trim($cred['tenant'])) > 0) {
-                        $auth_cloud['tenant'] = new xmlrpcval($cred['tenant']);
-                    }
-                    if (!is_null($cred['project']) && strlen(trim($cred['project'])) > 0) {
-                        $auth_cloud['project'] = new xmlrpcval($cred['project']);
-                    }
-                    if (!is_null($cred['subscription_id']) && strlen(trim($cred['subscription_id'])) > 0) {
-                        $auth_cloud['subscription_id'] = new xmlrpcval($cred['subscription_id']);
-                    }
-                    if (!is_null($cred['auth_version']) && strlen(trim($cred['auth_version'])) > 0) {
-                        $auth_cloud['auth_version'] = new xmlrpcval($cred['auth_version']);
-                    }
-                    if (!is_null($cred['domain']) && strlen(trim($cred['domain'])) > 0) {
-                        $auth_cloud['domain'] = new xmlrpcval($cred['domain']);
-                    }
-                    if (!is_null($cred['service_region']) && strlen(trim($cred['service_region'])) > 0) {
-                        $auth_cloud['service_region'] = new xmlrpcval($cred['service_region']);
-                    }
-                    if (!is_null($cred['base_url']) && strlen(trim($cred['base_url'])) > 0) {
-                        $auth_cloud['base_url'] = new xmlrpcval($cred['base_url']);
+                    if (isset($_SESSION['user_token']) and $cred['type'] == "InfrastructureManager") {
+                        $auth_cloud['token'] = new xmlrpcval($_SESSION['user_token']);
+                    } else {
+                        if (!is_null($cred['id']) && strlen(trim($cred['id'])) > 0) {
+                            $auth_cloud['id'] = new xmlrpcval($cred['id']);
+                        }
+                        if (!is_null($cred['host']) && strlen(trim($cred['host'])) > 0) {
+                            $auth_cloud['host'] = new xmlrpcval($cred['host']);
+                        }
+                        if (!is_null($cred['username']) && strlen(trim($cred['username'])) > 0) {
+                            $auth_cloud['username'] = new xmlrpcval($cred['username']);
+                        }
+                        if (!is_null($cred['password']) && strlen(trim($cred['password'])) > 0) {
+                            $auth_cloud['password'] = new xmlrpcval($cred['password']);
+                        }
+                        if (!is_null($cred['proxy']) && strlen(trim($cred['proxy'])) > 0) {
+                            $auth_cloud['proxy'] = new xmlrpcval($cred['proxy']);
+                        }
+                        if (!is_null($cred['token_type']) && strlen(trim($cred['token_type'])) > 0) {
+                            $auth_cloud['token_type'] = new xmlrpcval($cred['token_type']);
+                        }
+                        if (!is_null($cred['project']) && strlen(trim($cred['project'])) > 0) {
+                            $auth_cloud['project'] = new xmlrpcval($cred['project']);
+                        }
+                        if (!is_null($cred['public_key']) && strlen(trim($cred['public_key'])) > 0) {
+                            $auth_cloud['public_key'] = new xmlrpcval($cred['public_key']);
+                        }
+                        if (!is_null($cred['private_key']) && strlen(trim($cred['private_key'])) > 0) {
+                            $auth_cloud['private_key'] = new xmlrpcval($cred['private_key']);
+                        }
+                        if (!is_null($cred['certificate']) && strlen(trim($cred['certificate'])) > 0) {
+                            $auth_cloud['password'] = new xmlrpcval($cred['certificate']);
+                        }
+                        if (!is_null($cred['tenant']) && strlen(trim($cred['tenant'])) > 0) {
+                            $auth_cloud['tenant'] = new xmlrpcval($cred['tenant']);
+                        }
+                        if (!is_null($cred['project']) && strlen(trim($cred['project'])) > 0) {
+                            $auth_cloud['project'] = new xmlrpcval($cred['project']);
+                        }
+                        if (!is_null($cred['subscription_id']) && strlen(trim($cred['subscription_id'])) > 0) {
+                            $auth_cloud['subscription_id'] = new xmlrpcval($cred['subscription_id']);
+                        }
+                        if (!is_null($cred['auth_version']) && strlen(trim($cred['auth_version'])) > 0) {
+                            $auth_cloud['auth_version'] = new xmlrpcval($cred['auth_version']);
+                        }
+                        if (!is_null($cred['domain']) && strlen(trim($cred['domain'])) > 0) {
+                            $auth_cloud['domain'] = new xmlrpcval($cred['domain']);
+                        }
+                        if (!is_null($cred['service_region']) && strlen(trim($cred['service_region'])) > 0) {
+                            $auth_cloud['service_region'] = new xmlrpcval($cred['service_region']);
+                        }
+                        if (!is_null($cred['base_url']) && strlen(trim($cred['base_url'])) > 0) {
+                            $auth_cloud['base_url'] = new xmlrpcval($cred['base_url']);
+                        }
                     }
                     $auth[] = new xmlrpcval($auth_cloud, "struct");
                 }
@@ -116,7 +116,7 @@ class IMXML {
             if ($success) {
                 return $list;
             } else {
-                return 'Error: ' . $inf_id;
+                return 'Error: ' . $list;
             }
     }
 
