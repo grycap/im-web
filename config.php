@@ -30,6 +30,7 @@ $im_db="/home/www-data/im.db";
 $recipes_db="";
 # OpenID Issuer supported
 $openid_issuer="https://iam-test.indigo-datacloud.eu/";
+$openid_name="INDIGO IAM";
 # OpenID Client data
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
