@@ -46,4 +46,25 @@ if (getenv('im_db')) {
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 # If not set ""
 $recipes_db="";
+
+# OpenID Issuer supported use "" to disable OpenID support
+#$openid_issuer="https://iam-test.indigo-datacloud.eu/";
+$openid_issuer="";
+if (getenv('openid_issuer')) {
+	$openid_issuer = getenv('openid_issuer');
+}
+# OpenID Issuer name
+$openid_name="";
+if (getenv('openid_name')) {
+	$openid_name = getenv('openid_name');
+}
+# OpenID Client data
+$CLIENT_ID = '';
+if (getenv('client_id')) {
+	$CLIENT_ID = getenv('client_id');
+}
+$CLIENT_SECRET = '';
+if (getenv('client_secret')) {
+	$CLIENT_SECRET = getenv('client_secret');
+}
 ?>
