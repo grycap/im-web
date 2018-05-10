@@ -38,13 +38,27 @@ class IMRest
 			$auth = "";
 			foreach ($creds as $cred) {
 				if ($cred['enabled']) {
-					foreach ($fields as $field) {
-						if (!is_null($cred[$field]) && strlen(trim($cred[$field])) > 0) {
-							$value = str_replace("\n",$AUTH_NEW_LINE_SEPARATOR, $cred[$field]);
-							if ($field == "certificate") {
-								$auth = $auth . "password = " . $value . "; ";
-							} else {
-								$auth = $auth . $field ." = " . $value . "; ";
+					if (isset($_SESSION['user_token']) and $cred['type'] == "InfrastructureManager") {
+						if (!is_null($cred['id'])) {
+							$auth = "id = " . $cred['id'] . "; ";
+						}
+						$auth = $auth . "type = InfrastructureManager; token = " . $_SESSION['user_token'] . " ;";
+					} else {
+						foreach ($fields as $field) {
+							if (!is_null($cred[$field]) && strlen(trim($cred[$field])) > 0) {
+								$value = str_replace("\n",$AUTH_NEW_LINE_SEPARATOR, $cred[$field]);
+								if ($field == "certificate") {
+									$auth = $auth . "password = " . $value . "; ";
+								} else {
+									$auth = $auth . $field ." = " . $value . "; ";
+								}
+							}
+						}
+						if (isset($_SESSION['user_token']) and $cred['type'] == "OpenNebula") {
+							$auth = $auth . "token = " . $_SESSION['user_token'] . "; ";
+						} elseif (isset($_SESSION['user_token']) and $cred['type'] == "OpenStack") {
+							if (is_null($cred['password']) || strlen(trim($cred['password'])) == 0) {
+								$auth = $auth . "password = " . $_SESSION['user_token'] . "; ";
 							}
 						}
 					}
@@ -186,9 +200,13 @@ class IMRest
 		}
 	}
 
-	public function CreateInfrastructure($radl) {
+	public function CreateInfrastructure($radl, $async) {
 		$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . $this->GetContentType($radl));
-		$res = $this->BasicRESTCall("POST", '/infrastructures', $headers, $radl);
+		if ($async) {
+			$res = $this->BasicRESTCall("POST", '/infrastructures', $headers, $radl);
+		} else {
+			$res = $this->BasicRESTCall("POST", '/infrastructures?async=yes', $headers, $radl);
+		}
 		return $res->getOutput();
 	}
 

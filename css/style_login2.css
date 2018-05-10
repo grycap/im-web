@@ -236,7 +236,6 @@ input[type=submit], input[type=button] {
   border-radius: 0px;
   font-family: 'Open Sans', sans-serif;
   border-radius:10px;
-  width:80px;
   margin-left:3px;
 }
 input[type=submit]:active, [type=button]:active {

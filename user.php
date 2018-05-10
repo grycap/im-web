@@ -19,12 +19,30 @@
 
 include_once('crypt.php');
 
+function check_user_token() {
+    include('config.php');
+
+    require_once('OAuth2/Client.php');
+    require_once('OAuth2/GrantType/IGrantType.php');
+    require_once('OAuth2/GrantType/AuthorizationCode.php');
+
+    $client = new OAuth2\Client($CLIENT_ID, $CLIENT_SECRET, OAuth2\Client::AUTH_TYPE_AUTHORIZATION_BASIC);
+    $client->setAccessToken($_SESSION['user_token']);
+    $client->setAccessTokenType(OAuth2\Client::ACCESS_TOKEN_BEARER);
+    $params = array('schema' => 'openid', 'access_token' => $_SESSION['user_token']);
+    $USER_INFO_ENDPOINT = $openid_issuer . 'userinfo';
+    $response = $client->fetch($USER_INFO_ENDPOINT, $params);
+    if ($response['code'] == 200) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function check_session_user() {
     include('config.php');
 
-    if (!isset($_SESSION['user']) || !isset($_SESSION['password'])) {
-    	return false;
-    } else {
+    if (isset($_SESSION['user']) && isset($_SESSION['password'])) {
 	    $password = $_SESSION['password'];
 	    $username = $_SESSION['user'];
 	
@@ -37,7 +55,11 @@ function check_session_user() {
 	   		$res = check_password($password, $res[0]["password"]);
 	    }
 	
-	    return $res;
+        return $res;
+    } elseif (isset($_SESSION['user']) && isset($_SESSION['user_token'])) {
+        return check_user_token();
+    } else {
+        return false;
     }
 }
 
@@ -46,7 +68,7 @@ function check_admin_user() {
     
 	if (!isset($_SESSION['user']) || !isset($_SESSION['password'])) {
     	return false;
-    } else {    
+    } else {
 	    $password = $_SESSION['password'];
 	    $user = $_SESSION['user'];
 	

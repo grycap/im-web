@@ -1,5 +1,3 @@
-
-
 <?php
 if(!isset($_SESSION)) session_start();
 
@@ -43,22 +41,25 @@ include('config.php');
 <?php
     }
 ?>
-
-       		<input type="text" name="username" value="" placeholder="Username">
-	
-        		 <input type="password" name="password" value="" placeholder="Password">
-	
+			<input type="text" name="username" value="" placeholder="Username">
+			<input type="password" name="password" value="" placeholder="Password">
 			<input type="submit" value="Login">
-
 			<a href="adduser.php"><input type="button" name="Register" value="Register"></a>
-      		</form>
+<?php
+			if (!empty($openid_issuer)) {
+?>
+		&nbsp<a href="openid_auth.php"><input type="button" name="OpenID" value="<?php echo $openid_name;?>" title="OpenID"></a>
+<?php
+    }
+?>
+			</form>
 		</div>			
 	</div>	
 
 
 
 	<div id="caja_portada_logo_centro">
-		<img src="images/logo_portada.png">			
+		<img src="images/logo_portada.png">
 	</div>	
 
        
