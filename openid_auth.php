@@ -8,7 +8,7 @@ require_once('OAuth2/GrantType/IGrantType.php');
 require_once('OAuth2/GrantType/AuthorizationCode.php');
 
 
-const REDIRECT_URI           = 'https://servproject.i3m.upv.es/im/openid_auth.php';
+const REDIRECT_URI           = 'https://server.com/im-web/openid_auth.php';
 
 $AUTHORIZATION_ENDPOINT = $openid_issuer . 'authorize';
 $TOKEN_ENDPOINT         = $openid_issuer . 'token';
@@ -59,7 +59,7 @@ else
             $err = insert_credential($_SESSION["user"], "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
         }
 
-        header('Location: https://servproject.i3m.upv.es/im/list.php');
+        header('Location: list.php');
     } else {
         header("HTTP/1.1 401 Unauthorized");
         echo "Non Authorized. Error returned by IdP: " . $response["result"]["error_description"];
