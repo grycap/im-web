@@ -41,7 +41,7 @@ final class UserinfoTest extends TestCase
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         $_GET = array("op"=>"add");
         $_POST = array("username"=>"userinfotest", "password"=>"passwordtest",
-                    "password2"=>"passwordtest", "user_groups"=>"users", "permissions"=>"0");
+                    "password2"=>"passwordtest", "user_groups"=>array("users"), "permissions"=>"0");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: user_list.php'),xdebug_get_headers());
 
