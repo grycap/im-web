@@ -197,14 +197,16 @@ function edit_user($username, $new_username, $password, $groups, $permissions) {
 
     $all_ok = true;
     $error_msg = "";
-    foreach ($groups as $group) {
-        $fields = array();
-        $fields[] = "'" . $db->escapeString($group) . "'";
-        $fields[] = "'" . $db->escapeString($username) . "'";
-        $grp_res = $db->insert_item_into_table("users_grp",$fields);
-        if ($grp_res != "") {
-            $all_ok = false;
-            $error_msg = $grp_res;
+    if (!is_null($groups)) {
+        foreach ($groups as $group) {
+            $fields = array();
+            $fields[] = "'" . $db->escapeString($group) . "'";
+            $fields[] = "'" . $db->escapeString($username) . "'";
+            $grp_res = $db->insert_item_into_table("users_grp",$fields);
+            if ($grp_res != "") {
+                $all_ok = false;
+                $error_msg = $grp_res;
+            }
         }
     }
     if (!$all_ok) {

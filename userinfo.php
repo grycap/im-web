@@ -94,7 +94,7 @@
                 $username = $_POST['username'];
                 $password = $_POST['password'];
                 $password2 = $_POST['password2'];
-                $groups = explode(",", $_POST['user_groups']);
+                $groups = $_POST['user_groups'];
                 $permissions = $_POST['permissions'];
 
                 $err = "";
@@ -118,7 +118,7 @@
                     $new_username = $_POST['username'];
                     $password = $_POST['password'];
                     $password2 = $_POST['password2'];
-                    $groups = explode(",", $_POST['user_groups']);
+                    $groups = $_POST['user_groups'];
                     $permissions = $_POST['permissions'];
 
                     $err = "";
