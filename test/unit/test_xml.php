@@ -42,7 +42,7 @@ final class XMLTest extends TestCase
     {
         $value = new xmlrpcval("infid1");
         $im = $this->getIM($value);
-        $res = $im->CreateInfrastructure("radl");
+        $res = $im->CreateInfrastructure("radl", true);
         $this->assertEquals("infid1", $res);
     }
 

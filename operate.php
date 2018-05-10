@@ -36,9 +36,13 @@
         if (strlen($op) > 0) {
             if ($op == "create") {
                 $radl = $_POST['radl'];
-                
-                $res = GetIM()->CreateInfrastructure($radl);
-                
+            	$async = false;
+            	if (isset($_POST['async'])) {
+            	    $async = $_POST['async'];
+            	}
+
+            	$res = GetIM()->CreateInfrastructure($radl, $async);
+
                 if (strpos($res, "Error") !== false) {
                     header('Location: error.php?msg=' . urlencode($res));
                 } else {

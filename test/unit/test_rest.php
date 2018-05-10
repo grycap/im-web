@@ -101,7 +101,7 @@ final class RESTTest extends TestCase
     public function testCreateInfrastructure()
     {
         $im = $this->getIM("infid");
-        $res = $im->CreateInfrastructure("radl");
+        $res = $im->CreateInfrastructure("radl", true);
         $this->assertEquals("infid", $res);
     }
 
