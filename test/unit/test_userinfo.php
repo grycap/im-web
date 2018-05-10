@@ -24,7 +24,7 @@ final class UserinfoTest extends TestCase
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         $_GET = array("op"=>"add");
         $_POST = array("username"=>"userinfotest", "password"=>"passwordtest",
-                    "password2"=>"password", "user_groups"=>"users", "permissions"=>"0");
+                    "password2"=>"password", "user_groups"=>array("users"), "permissions"=>"0");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: error.php?msg=The+passwords+are+not+equal.'),xdebug_get_headers());
 
@@ -60,7 +60,7 @@ final class UserinfoTest extends TestCase
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         $_GET = array("op"=>"edit");
         $_POST = array("id"=>"userinfotest", "username"=>"newuserinfotest", "password"=>"passwordtest",
-                    "password2"=>"passwordtest", "user_groups"=>"users", "permissions"=>"0");
+                    "password2"=>"passwordtest", "user_groups"=>array("users"), "permissions"=>"0");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: user_list.php'),xdebug_get_headers());
 
