@@ -10,6 +10,9 @@ include('config.php');
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <link rel="stylesheet" href="css/style_login2.css"> 
 <link rel="stylesheet" href="css/style_intro2.css"> 
+<?php
+include_once("analyticstracking.php");
+?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
 </head>
 <body>

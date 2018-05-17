@@ -17,6 +17,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+include_once("analyticstracking.php");
 ?>
 <div id="caja_login_superior_contenido">
 	<?php include('user_connected.php')?>		
