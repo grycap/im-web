@@ -126,3 +126,9 @@ It also supports environment variables to set the IM service location:
 ```sh
 docker run -p 80:80 -e "im_use_rest=true" -e "im_host=server.domain" -e "im_port=8800" -d grycap/im-web
 ```
+
+There is also a version SSL enabled. In this case the docker image have a selfsigned certificate for testing purposes. Add your own in the docker command:
+
+```sh
+docker run -p 80:80 -p 443:443 -v server.crt:/etc/ssl/certs/server.crt -v server.key:/etc/ssl/certs/server.key -d grycap/im-web
+```
