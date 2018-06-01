@@ -84,6 +84,7 @@ $openid_name="INDIGO IAM";
 ```
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
+$REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
 ```
 
 1.3 DEFAULT USER
@@ -122,6 +123,7 @@ It also supports environment variables to set the IM service location:
   * openid_name: OpenID Issuer name. Default value "".
   * client_id: OpenID Client ID. Default value "client_id".
   * client_secret: OpenID Client Secret. Default value "client_secret".
+  * redirect_uri: OpenID redirect URI . Default value "https://server.com/im-web/opend_auth.php". 
 
 ```sh
 docker run -p 80:80 -e "im_use_rest=true" -e "im_host=server.domain" -e "im_port=8800" -d grycap/im-web
