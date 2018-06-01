@@ -232,7 +232,7 @@ class Client
                 $parameters['client_secret'] = $this->client_secret;
                 break;
             case self::AUTH_TYPE_AUTHORIZATION_BASIC:
-                $parameters['client_id'] = $this->client_id;
+                //$parameters['client_id'] = $this->client_id;
                 $http_headers['Authorization'] = 'Basic ' . base64_encode($this->client_id .  ':' . $this->client_secret);
                 break;
             default:
