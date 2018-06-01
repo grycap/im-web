@@ -36,4 +36,5 @@ $openid_name="";
 # OpenID Client data
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
+$REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
 ?>

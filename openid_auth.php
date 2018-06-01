@@ -7,9 +7,6 @@ require_once('OAuth2/Client.php');
 require_once('OAuth2/GrantType/IGrantType.php');
 require_once('OAuth2/GrantType/AuthorizationCode.php');
 
-
-const REDIRECT_URI           = 'https://server.com/im-web/openid_auth.php';
-
 $AUTHORIZATION_ENDPOINT = $openid_issuer . 'authorize';
 $TOKEN_ENDPOINT         = $openid_issuer . 'token';
 $USER_INFO_ENDPOINT     = $openid_issuer . 'userinfo';
@@ -23,12 +20,12 @@ if (isset($_GET['error']))
 }
 elseif (!isset($_GET['code']))
 {
-    $auth_url = $client->getAuthenticationUrl($AUTHORIZATION_ENDPOINT, REDIRECT_URI, array('scope' => 'profile openid email'));
+    $auth_url = $client->getAuthenticationUrl($AUTHORIZATION_ENDPOINT, $REDIRECT_URI, array('scope' => 'profile openid email'));
     header('Location: ' . $auth_url);
 }
 else
 {
-    $params = array('code' => $_GET['code'], 'redirect_uri' => REDIRECT_URI);
+    $params = array('code' => $_GET['code'], 'redirect_uri' => $REDIRECT_URI);
     $response = $client->getAccessToken($TOKEN_ENDPOINT, 'authorization_code', $params);
 
     if ($response['code'] != 200) {

@@ -67,4 +67,8 @@ $CLIENT_SECRET = '';
 if (getenv('client_secret')) {
 	$CLIENT_SECRET = getenv('client_secret');
 }
+$REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
+if (getenv('redirect_uri')) {
+	$REDIRECT_URI = getenv('redirect_uri');
+}
 ?>
