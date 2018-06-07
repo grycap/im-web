@@ -154,7 +154,7 @@ font-family: 'Open Sans', sans-serif;
   border: 0px solid;
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=search] {
 font-family: 'Open Sans', sans-serif;
   font-size: 13px;
   margin-top: 10px;
@@ -287,9 +287,6 @@ input[type=submitApp]:hover, [type=buttonApp]:hover {
 .lt-ie9 input[type=text], .lt-ie9 input[type=password] {
   line-height: 34px;
 }
-
-
-
 
 
 select {

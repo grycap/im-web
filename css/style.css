@@ -85,16 +85,12 @@ border-bottom: white 15px solid;
        vertical-align:middle;
 }
 
+#main table.list thead a {
+	color:#fff;
+	text-decoration:none;
+}
 
-
-
-
-
-
-
-
-
-#main table.list th {
+#main table.list thead th {
 	color:#fff;
 	background-color: #a27c3b;	
 	padding: 4px 4px;

@@ -28,13 +28,6 @@
     if (!check_session_user()) {
         header('Location: index.php?error=Invalid User');
     } else {
-        include('im.php');
-        include('config.php');
-        $res = GetIM()->GetInfrastructureList();
-        
-        if (is_string($res) and strpos($res, "Error") !== false) {
-            header('Location: error.php?msg=' . $res);
-        } else {
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -43,7 +36,7 @@
 <title>Infrastructure Manager | GRyCAP | UPV</title>
 <link rel="shortcut icon" href="images/favicon.ico">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/datatable.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/jquery.dynatable.css" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/style_login2.css"> 
     <link rel="stylesheet" href="css/style_intro2.css"> 
@@ -51,7 +44,7 @@
     <link rel="stylesheet" href="css/style_menutab.css">
     <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dynatable.js"></script>
 </head>
 <body>
 
@@ -88,11 +81,7 @@
 
 
   <div id="main">
-    
-    <?php
-        if (count($res) > 0)
-        {
-    ?>
+
     <script type="text/javascript" charset="utf-8">
         function confirm_delete(url, id) {
             var r=confirm("Sure that you want to delete the Infrastructure with id: " + id + "?");
@@ -102,30 +91,16 @@
         }
 
         $(document).ready(function() {
-                $('#example').dataTable( {
-                        //"oLanguage": {
-                        //        "sUrl": "dataTables.spanish.txt"
-                        //},
-                        // initially do not sort
-                        "aaSorting": [],
-                        "aoColumns": [
-                            { "bSortable": true },
-                            { "bSortable": false },
-                            { "bSortable": false },
-                            	<?php
-                                    if ($im_use_rest)
-                                    {
-                                ?>
-                                { "bSortable": false },
-                                <?php
-                                    }
-                                ?>
-                            { "bSortable": true },
-                            { "bSortable": false },
-                            { "bSortable": false },
-                            { "bSortable": false }
-                        ]
-                } );
+        	$('#example').dynatable({
+        		  dataset: {
+        			    ajax: true,
+        			    ajaxUrl: 'list_json.php',
+        			    ajaxOnLoad: true,
+        			    records: [],
+        				queryRecordCount: 0,
+        				totalRecordCount: 0
+        			  }
+        	});
         } );
     </script>
     
@@ -138,129 +113,38 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
     <table class="list" id="example">
         <thead>
             <tr>
-                <th>
-                ID
-                </th>
-                <th>
-                VM IDs
-                </th>
+                <th>ID</th>
+                <th data-dynatable-column="vms">VM IDs</th>
 				<?php
 				if ($im_use_rest)
 				{
 				?>
-                <th width="100px">
-                Outputs
-                </th>
+                <th>Outputs</th>
 				<?php
 				}
 				?>
-                <th width="100px">
-                Cont. Message
-                </th>
-                <th>
-                Status
-                </th>
-                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspReconfigure</th>
-                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspDelete</th>
-                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspAdd Resources</th>
-
+                <th>Cont. Message</th>
+                <th>Status</th>
+                <th style="font-style:italic;">Reconfigure</th>
+                <th style="font-style:italic;">Delete</th>
+                <th style="font-style:italic;">Add Resources</th>
             </tr>
         </thead>
         <tbody>
-    <?php
-        
-            foreach ($res as $inf) {
-                    $full_state = GetIM()->GetInfrastructureState($inf);
-					$status = "N/A";
-                   	if (!(is_string($full_state) && strpos($full_state, "Error") !== false)) {
-                        $state = $full_state["state"];
-						$status = formatState($state);
-					}
-                ?>
-            <tr>
-                <td>
-                    <?php echo $inf;?>
-                </td>
-                <td>
-<?php
-                    if ($status == "N/A") {
-                        echo "N/A";
-                    } else {
-                        $vmids = array_keys($full_state["vm_states"]);
-                        sort($vmids);
-                        foreach ($vmids as $vm) {
-                            echo "<a href='getvminfo.php?id=" . $inf . "&vmid=" . $vm . "' alt='VM Info' title='VM Info'>" . $vm . "<br>";
-                        }
-                    }
-?>
-                </td>
-		<?php
-		if ($im_use_rest)
-		{
-		?>
-		<td>
-				<a href="getoutputs.php?id=<?php echo $inf;?>">Show</a>
-		</td>
-		<?php
-		}
-		?>
-		<td>
-				<a href="getcontmsg.php?id=<?php echo $inf;?>">Show</a>
-		</td>
-                <td>
-                    <?php echo $status;?>
-                </td>
-                <td>
-		<?php
-		if ($state == "configured" || $state == "unconfigured")
-		{
-		?>
-                    <a href="operate.php?op=reconfigure&infid=<?php echo $inf;?>"><img src="images/reload.png" border="0" alt="Reconfigure" title="Reconfigure"></a>
-		<?php
-		} else {
-			echo "N/A";
-		}
-		?>
-                </td>
-                <td>
-                    <a onclick="javascript:confirm_delete('operate.php?op=destroy&id=<?php echo $inf;?>', '<?php echo $inf;?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
-                </td>
-                <td>
-                    <a href="form.php?id=<?php echo $inf;?>"><img src="images/add_resources_icon.png" border="0" alt="Add Resources" title="Add Resources"></a>
-                </td>
-            </tr>
-            <?php
-            }
-        
-    ?>
         </tbody>
     </table>
     </td>
     </tr>
     </table>
-<?php
-        } else {
-              ?>
-            
 
-        <div class='h1'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:: No infrastructures available ::</div>
-
-<?php
-        }
-?>
     <br>
     </div>
 </div>
-
-
-
-
-   
+ 
 
 </div>
 </body>
 </html>
 <?php
-        }
     }
 ?>
