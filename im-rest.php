@@ -203,9 +203,9 @@ class IMRest
 	public function CreateInfrastructure($radl, $async) {
 		$headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . $this->GetContentType($radl));
 		if ($async) {
-			$res = $this->BasicRESTCall("POST", '/infrastructures', $headers, $radl);
-		} else {
 			$res = $this->BasicRESTCall("POST", '/infrastructures?async=yes', $headers, $radl);
+		} else {
+			$res = $this->BasicRESTCall("POST", '/infrastructures', $headers, $radl);
 		}
 		return $res->getOutput();
 	}
