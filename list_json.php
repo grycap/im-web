@@ -80,7 +80,7 @@ if (isset($_GET['offset'])) {
         } else {
         if (count($res) > 0)
         {
-        	$text = $text . '{ "records": [';
+        	$text = '{ "records": [';
         	
         	$numElem = 0;
         	$cont = 0;
