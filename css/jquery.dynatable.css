@@ -57,6 +57,11 @@ span.dynatable-per-page  {
   color: #a27c3b;
 }
 
+.dynatable-page-link:hover {
+  cursor: pointer;
+  color: #cfb486;
+}
+
 .dynatable-active-page,
 .dynatable-disabled-page {
   cursor: text;
@@ -74,6 +79,10 @@ span.dynatable-per-page  {
 .dynatable-active-page:hover {
   color: #fff;
 }
+.dynatable-disabled-page:hover {
+  color: #a27c3b;
+}
+
 .dynatable-disabled-page,
 .dynatable-disabled-page:hover {
   background: none;
@@ -81,4 +90,8 @@ span.dynatable-per-page  {
 
 .dynatable-page-next {
   background: #cfb486;
+}
+
+.dynatable-page-next:hover {
+  color: #fff;
 }
