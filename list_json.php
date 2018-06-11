@@ -39,10 +39,10 @@ if (isset($_GET['offset'])) {
         {
         	"records": [
         	{
-        		"id": "Invalid user",
+        		"id": "Error",
         		"vms": "",
         		"outputs": "",
-        		"cont.Message": "",
+        		"cont.Message": "Invalid user",
         		"status": "",
         		"reconfigure": "",
         		"delete": "",
@@ -63,10 +63,10 @@ if (isset($_GET['offset'])) {
         {
         	"records": [
         	{
-        		"id": "Invalid user",
+        		"id": "Error",
         		"vms": "",
         		"outputs": "",
-        		"cont.Message": "",
+        		"cont.Message": "<?php echo $res;?>",
         		"status": "",
         		"reconfigure": "",
         		"delete": "",
