@@ -90,8 +90,6 @@ if (isset($_GET['queries'])) {
         	$numElem = 0;
         	$cont = 0;
             foreach ($res as $inf) {
-            	echo $filter;
-            	echo strpos($inf, $filter);
             	if ($filter == "" || strpos($inf, $filter) !== false) {
             		$queryCont++;
 
