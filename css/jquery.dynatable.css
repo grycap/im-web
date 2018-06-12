@@ -28,6 +28,11 @@ span.dynatable-per-page  {
 	padding-top: 40px;
 	font-weight: bold;
 }
+
+.dynatable-processing span img {
+  vertical-align: middle;
+}
+
 .dynatable-search {
 	margin-bottom:20px; 
 }
@@ -94,4 +99,8 @@ span.dynatable-per-page  {
 
 .dynatable-page-next:hover {
   color: #fff;
+}
+
+.dynatable-record-count {
+	padding-top: 10px;
 }
