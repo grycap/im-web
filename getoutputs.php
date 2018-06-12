@@ -105,6 +105,9 @@
                 	<table>
                 	
 <?php
+				if (is_null($outputs)) {
+					echo "No Outputs";
+				} else {
 					foreach ($outputs as $key => $value) {
 ?>
                 	<tr>
@@ -131,6 +134,7 @@
                 	</tr>
 <?php
 					}
+				}
 ?>
                 	</table>
                 </td>
