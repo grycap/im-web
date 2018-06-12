@@ -32,7 +32,7 @@ if (isset($_GET['offset'])) {
 	$offset = $_GET['offset'];
 }
 if (isset($_GET['queries'])) {
-	$filter = $_GET['queries'][0];
+	$filter = $_GET['queries']['search'];
 }
 
 	if(!isset($_SESSION)) session_start();
