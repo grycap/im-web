@@ -92,6 +92,9 @@
 
         $(document).ready(function() {
         	$('#example').dynatable({
+        		  inputs: {
+        			    processingText: 'Listing Infrastructures ... <img src="/images/Loading_info.gif" width="20px"/>'
+        			  },
         		  dataset: {
         			    ajax: true,
         			    ajaxUrl: 'list_json.php',
