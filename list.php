@@ -83,10 +83,10 @@
   <div id="main">
 
     <script type="text/javascript" charset="utf-8">
-        function confirm_delete(url, id) {
+        function confirm_delete(id) {
             var r=confirm("Sure that you want to delete the Infrastructure with id: " + id + "?");
             if (r==true) {
-                window.location.href = url;
+                window.location.href = 'operate.php?op=destroy&id=' + id;
             }
         }
 
