@@ -134,7 +134,7 @@ if (isset($_GET['queries'])) {
 		                	$text = $text . '"reconfigure":"N/A",';
 		                }
 		                
-		                $text = $text . '"delete": "<a onclick=\"javascript:confirm_delete(\'operate.php?op=destroy&id=' . $inf . '\', \'' . $inf . '\')\" href=\"#\"><img src=\"images/borrar.gif\" border=\"0\" alt=\"Delete\" title=\"Delete\"></a>",';
+		                $text = $text . '"delete": "<a onclick=\"javascript:confirm_delete(\'' . $inf . '\')\" href=\"#\"><img src=\"images/borrar.gif\" border=\"0\" alt=\"Delete\" title=\"Delete\"></a>",';
 		                $text = $text . '"addResources":"<a href=\"form.php?id=' . $inf . '?>\"><img src=\"images/add_resources_icon.png\" border=\"0\" alt=\"Add Resources\" title=\"Add Resources\"></a>"';
 		                
 							
