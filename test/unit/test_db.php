@@ -41,7 +41,7 @@ final class DBTest extends TestCase
     private function expectQueries($queries)
     {
     	$mysqli = $this->getMockBuilder('mysqli')
-    	->setMethods(array('query','real_escape_string', 'commit', 'select_db'))
+    	->setMethods(array('query','real_escape_string', 'commit', 'select_db', 'close'))
     	->getMock();
     	
     	$mysqli->expects($this->any())
