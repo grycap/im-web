@@ -17,7 +17,7 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class IMDB extends SQLite3
+class IMDBSQLite3 extends SQLite3
 {
     function __construct()
     {
@@ -98,15 +98,6 @@ class IMDB extends SQLite3
        return $res;
     }
 
-}
-
-class RecipesDB extends IMDB
-{
-	function __construct()
-	{
-		include('config.php');
-		$this->open($recipes_db);
-	}
 }
 
 ?>

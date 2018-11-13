@@ -17,9 +17,9 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-class IMDB
+class IMDBMySQL
 {
-    function __construct()
+    function __construct($link = NULL)
     {
     	$this->type = "MySQL";
     	$this->db_schema = array(
@@ -88,7 +88,11 @@ class IMDB
 	    include('config.php');
 	    # format: mysql://username:password@server/db_name
 	    $url = parse_url($im_db);
-	    $this->link =  new mysqli($url['host'], $url['user'], $url['pass']);
+	    if ($link) {
+	    	$this->link = $link;
+	    } else {
+	    	$this->link = new mysqli($url['host'], $url['user'], $url['pass']);
+	    }
 	    $this->db_name = ltrim($url['path'], "/");
 	    $success = $this->link->select_db($this->db_name);
 	    if (!$success) {
@@ -192,19 +196,9 @@ class IMDB
        }
        $sql = $sql . join(",", $set_array);
        $sql = $sql . $this->gen_where_sentence($where);
-
        return $this->direct_exec($sql);
     }
 
-}
-
-class RecipesDB extends IMDB
-{
-	function __construct()
-	{
-		include('config.php');
-		$this->open($recipes_db);
-	}
 }
 
 ?>

@@ -19,16 +19,30 @@
 
 include('config.php');
 
+include_once('db_sqlite.php');
+include_once('db_mysql.php');
+
 $url = parse_url($im_db);
 
 if (array_key_exists('scheme', $url)) {
 	if ($url['scheme'] == "mysql") {
-		include_once('db_mysql.php');
+		class IMDB extends IMDBMySQL
+		{}
 	} else {
-		include_once('db_sqlite.php');
+		class IMDB extends IMDBSQLite3
+		{}
 	}
 } else {
-	include_once('db_sqlite.php');
+	class IMDB extends IMDBSQLite3
+	{}
 }
 
+class RecipesDB extends IMDB
+{
+	function __construct()
+	{
+		include('config.php');
+		$this->open($recipes_db);
+	}
+}
 ?>
