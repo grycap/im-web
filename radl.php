@@ -60,9 +60,13 @@ function get_radls($user) {
     
     $user_groups = get_user_groups($user);
 
-    $sql = "select rowid,* from radls where imuser = '" . $user . "'";
+    $db = new IMDB();
+    $sql = "select * from radls where imuser = '" . $user . "'";
+    if ($db->type == "SQLite") {
+    	$sql = "select rowid,* from radls where imuser = '" . $user . "'";
+    }
     $sql = $sql . " or other_r = '1'";
-            
+
     if (count($user_groups) > 0) {
         $sql = $sql . " or (group_r = '1' and (";
                 
@@ -75,7 +79,7 @@ function get_radls($user) {
         $sql = $sql . "))";
     }
 
-    $db = new IMDB();
+
     $res = $db->direct_query($sql);
     $db->close();
 

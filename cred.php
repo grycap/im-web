@@ -21,7 +21,7 @@ function get_credentials($user) {
     include('config.php');
 
     $db = new IMDB();
-    $res = $db->direct_query("select rowid,* from credentials where imuser = '" . $user . "' order by ord");
+    $res = $db->get_items_from_table("credentials", array("imuser" => "'" . $db->escapeString($user) . "'"), "ord");
     $db->close();
     return $res;
 }
