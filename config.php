@@ -17,13 +17,16 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once('db.php');
+
 $im_use_rest=false;
 $im_use_ssl=false;
 $im_host="localhost";
 $im_port=8899;
 $im_method='http';
 $im_db="/home/www-data/im.db";
+# In case of using a MySQL backend:
+# $im_db="mysql://username:password@mysqlhost/db_name";
+
 # To use that feature the IM recipes file must accesible to the web server
 #$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 # If not set ""
@@ -37,4 +40,6 @@ $openid_name="";
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
 $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
+
+include_once('db.php');
 ?>
