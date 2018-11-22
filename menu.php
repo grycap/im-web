@@ -29,7 +29,7 @@
 		<ul>
 			<li><a <?php if ($menu == "Infrastructures") echo 'class="seleccionado"'; ?> href='list.php'><span><img style="vertical-align: middle;" src="images/icon_infra.png" />&nbsp&nbspInfrastructures</span></a></li>
 			<li><a <?php if ($menu == "Credentials") echo 'class="seleccionado"'; ?> href='credentials.php'><span><img style="vertical-align: middle;" src="images/icon_creden.png" />&nbsp&nbspCredentials</span></a></li>
-			<li><a <?php if ($menu == "RADL") echo 'class="seleccionado"'; ?> href='radl_list.php'><span><img style="vertical-align: middle;" src="images/icon_radl.png" />&nbsp&nbspTopogies</span></a></li>
+			<li><a <?php if ($menu == "RADL") echo 'class="seleccionado"'; ?> href='radl_list.php'><span><img style="vertical-align: middle;" src="images/icon_radl.png" />&nbsp&nbspTopologies</span></a></li>
 	<?php
 	if ($recipes_db != "") {
 	?>			
