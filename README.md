@@ -1,6 +1,6 @@
 # IM - Infrastructure Manager web GUI
 
-*  Build Status [![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/)
+* Build Status [![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/)
 
 IM is a tool that ease the access and the usability of IaaS clouds by automating
 the VMI selection, deployment, configuration, software installation, monitoring
@@ -28,17 +28,17 @@ Select a proper path in the document root of the web server to install the IM we
 (i.e. /var/www/im).
 
 ```sh
-$ tar xvzf IM-web-X.XX.tar.gz
-$ mv IM-X.XX /var/www/im
-$ chown -R www-data /var/www/im
+tar xvzf IM-web-X.XX.tar.gz
+mv IM-X.XX /var/www/im
+chown -R www-data /var/www/im
 ```
 
 ### 1.2 CONFIGURATION
 
 Adjust the configuration settings in the file config.php:
 
-* Flag to set the usage of the REST API instead of the XML-RPC one.
-```
+  * Flag to set the usage of the REST API instead of the XML-RPC one.
+```php
 $im_use_rest=false;
 ```
 * Flag to set the usage of the APIs using HTTPS protocol instead of the standard HTTP.
