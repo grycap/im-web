@@ -1,5 +1,4 @@
-IM - Infrastructure Manager web GUI
-===================================
+# IM - Infrastructure Manager web GUI
 
 * Build Status [![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/)
 
@@ -11,12 +10,9 @@ integrates a contextualization system to enable the installation and
 configuration of all the user required applications providing the user with a
 fully functional infrastructure.
 
+## 1 INSTALLATION
 
-1 INSTALLATION
-===============
-
-1.1 REQUISITES
---------------
+### 1.1 REQUISITES
 
 IM web interface is based on PHP, so a web server with PHP support must be installed.
 
@@ -26,74 +22,70 @@ It is also required to install the PHP module to access SQLite databases.
 
 In case of using the REST API it is also required to install the CURL PHP module.
 
-1.2 INSTALLING
---------------
+### 1.2 INSTALLING
 
 Select a proper path in the document root of the web server to install the IM web interface
 (i.e. /var/www/im).
 
-```
-$ tar xvzf IM-web-X.XX.tar.gz
-$ mv IM-X.XX /var/www/im
-$ chown -R www-data /var/www/im
+```sh
+tar xvzf IM-web-X.XX.tar.gz
+mv IM-X.XX /var/www/im
+chown -R www-data /var/www/im
 ```
 
-1.2 CONFIGURATION
---------------
+### 1.2 CONFIGURATION
 
 Adjust the configuration settings in the file config.php:
 
-* Flag to set the usage of the REST API instead of the XML-RPC one.
-```
+  * Flag to set the usage of the REST API instead of the XML-RPC one.
+```php
 $im_use_rest=false;
 ```
 * Flag to set the usage of the APIs using HTTPS protocol instead of the standard HTTP.
-```
+```php
 $im_use_ssl=false;
 ```
 * Address of the IM host
-```
+```php
 $im_host="im-server.domain.com";
 ```
 * Port of the IM service
-```
+```php
 $im_port=8899;
 ```
 * Path of the IM web interface DB. The original path will be /var/www/im/im.db
   but is more secure to move it to a path not in the path of the web server.
   The file and the directory must have write permissions to the web server user.
-```
+```php
 $im_db="/home/www-data/im.db";
 ```
 * In case that the IM service and web interface are in the same host, the Recipes
   feature can be activated. Specify the path of the recipes_ansible.db file of the
   IM and take care that the file and the directory must have write permissions to
   the web server user. In other case set "".
-```
+```php
 $recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 ```
 * OpenID Issuer supported use "" to disable OpenID support.
-```
+```php
 $openid_issuer="https://iam-test.indigo-datacloud.eu/";
 ```
 * OpenID Issuer name.
-```
+```php
 $openid_name="INDIGO IAM";
 ```
 * OpenID Client data.
-```
+```php
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
 $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
 ```
 
-1.3 DEFAULT USER
-----------------
+### 1.3 DEFAULT USER
 
 The default administrator user is admin with password admin.
 
-2 DOCKER IMAGE
-===============
+## 2 DOCKER IMAGE
 
 A Docker image named `grycap/im-web` has been created to make easier the deployment of an IM web GUI using the 
 default configuration. Information about this image can be found here: https://registry.hub.docker.com/u/grycap/im-web/.
