@@ -17,29 +17,28 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-
 $im_use_rest=false;
 $im_use_ssl=false;
 $im_host="localhost";
 $im_port=8899;
 $im_method='http';
-$im_db="/home/www-data/im.db";
-# In case of using a MySQL backend:
-# $im_db="mysql://username:password@mysqlhost/db_name";
-
-# To use that feature the IM recipes file must accesible to the web server
-#$recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
-# If not set ""
+// $im_db="/home/www-data/im.db";
+$im_db="/tmp/im.db";
+// To use that feature the IM recipes file must accesible to the web server
+// $recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
+$recipes_db="/tmp/recipes.db";
+// If not set ""
 $recipes_db="";
-# OpenID Issuer supported use "" to disable OpenID support
-#$openid_issuer="https://iam-test.indigo-datacloud.eu/";
+// OpenID Issuer supported use "" to disable OpenID support
+// $openid_issuer="https://iam-test.indigo-datacloud.eu/";
 $openid_issuer="";
-# OpenID Issuer name
+// OpenID Issuer name
 $openid_name="";
-# OpenID Client data
+// OpenID Client data
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
 $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
 
-include_once('db.php');
+// Include db Class
+require_once 'db.php';
 ?>

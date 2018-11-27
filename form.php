@@ -18,19 +18,21 @@
 */
 
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
     
-    include_once('user.php');
-    if (!check_session_user()) {
-	header('Location: index.php?error=Invalid User');
+require_once 'user.php';
+if (!check_session_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
     } else {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-        } else {
-		header('Location: error.php?msg=No Inf. ID');
-	}
+        header('Location: error.php?msg=No Inf. ID');
+    }
         
-        $user = $_SESSION['user'];
+    $user = $_SESSION['user'];
 
 ?>
 <!DOCTYPE HTML>
@@ -45,29 +47,29 @@
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
 
-	
+    
 
 </head>
 <body>
     
-    <?php include_once('radl.php')?>
+    <?php include_once 'radl.php'?>
 
    
 <div id="caja_total_blanca">
 
-		<?php include('header.php')?>		
-		<?php $menu="RADL";include('menu.php');?>
-		<?php include('footer.php')?>	
+    <?php include 'header.php'?>        
+    <?php $menu="RADL";include 'menu.php';?>
+    <?php include 'footer.php'?>    
 
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Add Resource&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Add Resource&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
+    </div>
 </div>
 
 
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -77,9 +79,7 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
+<div id="caja_contenido_tab">    
 
     <div id="main">
     
@@ -91,36 +91,33 @@
 
         <form action="operate.php" method="post">
             <input type="hidden" name="op" value="addresource"/>
-            <input type="hidden" name="infid" value="<?=$id?>"/>
+            <input type="hidden" name="infid" value="<?php echo $id?>"/>
 
 
-				<table>
-					<thead>
-						<tr align="left">
-					          <th>
-						RADL
+                <table>
+                    <thead>
+                        <tr align="left">
+                              <th>
+                        RADL
                                              </th>
-				 		</tr>
-					</thead>
-					<tbody>
-						<tr>
-					          <td>
+                         </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                              <td>
                                                <textarea type="ADDR" align="bottom" name="radl"></textarea>
                                              </td>
-				 		</tr>
-						<tr>
-					          <td align="right">
- 					<input type="submit" value="Save"/>
-					<a href="list.php"><input type="button" name="Cancelar" value="Cancel"></a>
+                         </tr>
+                        <tr>
+                              <td align="right">
+                     <input type="submit" value="Save"/>
+                    <a href="list.php"><input type="button" name="Cancelar" value="Cancel"></a>
                                              </td>
-				 		</tr>
-					</tbody>
-			        </table> 
-
-
+                         </tr>
+                    </tbody>
+                    </table> 
 
         </form>
-
 
 </div>
  </div>
@@ -129,7 +126,6 @@
 
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>
-

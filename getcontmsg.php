@@ -17,25 +17,27 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
     
-    include_once('user.php');
-    if (!check_session_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        if (isset($_GET['id'])) {
-        	include_once('im.php');
-        	include('config.php');
-        	$id = $_GET['id'];
-        	if (isset($_GET['vmid'])) {
-        		$vmid = $_GET['vmid'];
-        		$cont_msg = GetIM()->GetVMContMsg($id,$vmid);
-        	} else {
-        		$cont_msg = GetIM()->GetInfrastructureContMsg($id);
-        	}
+require_once 'user.php';
+if (!check_session_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    if (isset($_GET['id'])) {
+        include_once 'im.php';
+        include 'config.php';
+        $id = $_GET['id'];
+        if (isset($_GET['vmid'])) {
+             $vmid = $_GET['vmid'];
+             $cont_msg = GetIM()->GetVMContMsg($id, $vmid);
+        } else {
+            $cont_msg = GetIM()->GetInfrastructureContMsg($id);
         }
+    }
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -48,39 +50,24 @@
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
 
-	
-
 </head>
 <body>
-    
-    <?php include_once('radl.php')?>
 
-
+    <?php include_once 'radl.php'?>
    
 <div id="caja_total_blanca">
 
-
-		
-
-
-		<?php include('header.php')?>		
-		<?php $menu="Infrastructures";include('menu.php');?>
-		<?php include('footer.php')?>	
-
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Infrastructures";include 'menu.php';?>
+    <?php include 'footer.php'?>    
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Infrastructures&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_infra_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Infrastructures&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_infra_gran.png">
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -90,35 +77,25 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
+<div id="caja_contenido_tab">    
 
     <div id="main">
     
-
         <div class='h1'>:: Contextualization Log ::</div>
-		<br>
+        <br>
         <div id='log'>
-<?php
-		echo str_replace("\n","<br>",$cont_msg);
-?>
-		</div>
-
+    <?php
+    echo str_replace("\n", "<br>", $cont_msg);
+    ?>
+        </div>
 
 </div>
-
         </form>
-
 
  </div>
 
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>
-
-
-
-

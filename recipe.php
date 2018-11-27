@@ -18,8 +18,9 @@
 */
 
 
-function get_recipes() {
-    include('config.php');
+function get_recipes()
+{
+    include 'config.php';
 
     $db = new RecipesDB();
     $res = $db->get_items_from_table("recipes");
@@ -27,20 +28,23 @@ function get_recipes() {
     return $res;
 }
 
-function get_recipe($id) {
-    include('config.php');
+function get_recipe($id)
+{
+    include 'config.php';
 
     $db = new RecipesDB();
     $res = $db->get_items_from_table("recipes", array("rowid" => $id));
     $db->close();
-    if (count($res) > 0)
+    if (count($res) > 0) {
         return $res[0];
-    else
-        return NULL;
+    } else {
+        return null;
+    }
 }
 
-function insert_recipe($name, $version, $desc, $module, $recipe, $galaxy_module, $requirements) {
-    include('config.php');
+function insert_recipe($name, $version, $desc, $module, $recipe, $galaxy_module, $requirements)
+{
+    include 'config.php';
 
     $res = "";
     $db = new RecipesDB();
@@ -49,18 +53,19 @@ function insert_recipe($name, $version, $desc, $module, $recipe, $galaxy_module,
     $fields[] = "'" . $db->escapeString($version) . "'";
     $fields[] = "'" . $db->escapeString($module) . "'";
     $fields[] = "'" . $db->escapeString($recipe) . "'";
-    $fields[] = "1"; # IsApp set to true
+    $fields[] = "1"; // IsApp set to true
     $fields[] = "'" . $db->escapeString($galaxy_module) . "'";
     $fields[] = "'" . $db->escapeString($desc) . "'";
     $fields[] = "'" . $db->escapeString($requirements) . "'";
-    $res = $db->insert_item_into_table("recipes",$fields);
+    $res = $db->insert_item_into_table("recipes", $fields);
     $db->close();
 
     return $res;
 }
 
-function edit_recipe($id, $name, $version, $desc, $module, $recipe, $galaxy_module, $requirements) {
-    include('config.php');
+function edit_recipe($id, $name, $version, $desc, $module, $recipe, $galaxy_module, $requirements)
+{
+    include 'config.php';
 
     $res = "";
     $db = new RecipesDB();
@@ -73,14 +78,15 @@ function edit_recipe($id, $name, $version, $desc, $module, $recipe, $galaxy_modu
     $fields["description"] = "'" . $db->escapeString($desc) . "'";
     $fields["requirements"] = "'" . $db->escapeString($requirements) . "'";
     $where = array("rowid" => $id);
-    $res = $db->edit_item_from_table("recipes",$fields,$where);
+    $res = $db->edit_item_from_table("recipes", $fields, $where);
     $db->close();
 
     return $res;
 }
 
-function delete_recipe($id) {
-    include('config.php');
+function delete_recipe($id)
+{
+    include 'config.php';
 
     $db = new RecipesDB();
     $res = $db->delete_item_from_table("recipes", array("rowid" => $id));

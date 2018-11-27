@@ -17,20 +17,22 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
     
-    include_once('user.php');
-    if (!check_session_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        if (isset($_GET['id'])) {
-        	include_once('im.php');
-        	include('config.php');
-        	$id = $_GET['id'];
-        	$outputs = GetIM()->GetOutputs($id);
-        }
+require_once 'user.php';
+if (!check_session_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    if (isset($_GET['id'])) {
+        include_once 'im.php';
+        include 'config.php';
+        $id = $_GET['id'];
+        $outputs = GetIM()->GetOutputs($id);
+    }
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -43,39 +45,24 @@
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
 
-	
-
 </head>
 <body>
     
-    <?php include_once('radl.php')?>
+    <?php include_once 'radl.php'?>
 
-
-   
 <div id="caja_total_blanca">
 
-
-		
-
-
-		<?php include('header.php')?>		
-		<?php $menu="Infrastructures";include('menu.php');?>
-		<?php include('footer.php')?>	
-
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Infrastructures";include 'menu.php';?>
+    <?php include 'footer.php'?>    
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Infrastructures&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_infra_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Infrastructures&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_infra_gran.png">
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -85,79 +72,70 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
+<div id="caja_contenido_tab">    
 
     <div id="main">
-    
 
         <div class='h1'>:: TOSCA outputs::</div>
-		<br>
+        <br>
         <div id='log'>
 
  <table class="list" style="width:100%;margin-left: 0px;">
-	<tbody>
-		<tr>
-		  <td style="width:10px;background:#a27c3b;"><img src="images/icon_info.png"></td>
+    <tbody>
+        <tr>
+          <td style="width:10px;background:#a27c3b;"><img src="images/icon_info.png"></td>
                 <th style="width:90px;">Outputs</th>
                 <td style="text-align:left;background:#e9d6b5;">
-                	<table>
-                	
-<?php
-				if (is_null($outputs)) {
-					echo "No Outputs";
-				} else {
-					foreach ($outputs as $key => $value) {
-?>
-                	<tr>
-                	<td>
-                	<?php echo $key;?>
-                	</td>
-                	<td>
-                	<?php
-                	if (is_array($value)) {
-                		$new_value = "";
-                		foreach ($value as $k => $v) {
-                			$new_value = $new_value . $k . " = " . $v . "<br>\n";
-                		}
-                		$value = $new_value;
-                	}
-                	if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $value)) {
-                	
-                		echo "<a href='", $value, "' target='_blank'>", $value, "</a>";
-                	} else {
-                		echo $value;
-                	}
-                	?>
-                	</td>
-                	</tr>
-<?php
-					}
-				}
-?>
-                	</table>
+                    <table>
+
+    <?php
+    if (is_null($outputs)) {
+        echo "No Outputs";
+    } else {
+        foreach ($outputs as $key => $value) {
+            ?>
+                    <tr>
+                    <td>
+                    <?php echo $key;?>
+                    </td>
+                    <td>
+                    <?php
+                    if (is_array($value)) {
+                        $new_value = "";
+                        foreach ($value as $k => $v) {
+                            $new_value = $new_value . $k . " = " . $v . "<br>\n";
+                        }
+                        $value = $new_value;
+                    }
+                    if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $value)) {
+                    
+                        echo "<a href='", $value, "' target='_blank'>", $value, "</a>";
+                    } else {
+                        echo $value;
+                    }
+                    ?>
+                    </td>
+                    </tr>
+            <?php
+        }
+    }
+    ?>
+                    </table>
                 </td>
-		</tr>
-	</tbody>
+        </tr>
+    </tbody>
  </table>
 
-		</div>
-
+        </div>
 
 </div>
 
         </form>
 
-
  </div>
 
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>
-
-
-
-

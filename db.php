@@ -17,32 +17,38 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include('config.php');
+require 'config.php';
 
-include_once('db_sqlite.php');
-include_once('db_mysql.php');
+require_once 'db_sqlite.php';
+require_once 'db_mysql.php';
 
 $url = parse_url($im_db);
 
 if (array_key_exists('scheme', $url)) {
-	if ($url['scheme'] == "mysql") {
-		class IMDB extends IMDBMySQL
-		{}
-	} else {
-		class IMDB extends IMDBSQLite3
-		{}
-	}
+    if ($url['scheme'] == "mysql") {
+        class IMDB extends IMDBMySQL
+        {
+
+        }
+    } else {
+        class IMDB extends IMDBSQLite3
+        {
+
+        }
+    }
 } else {
-	class IMDB extends IMDBSQLite3
-	{}
+    class IMDB extends IMDBSQLite3
+    {
+
+    }
 }
 
 class RecipesDB extends IMDB
 {
-	function __construct()
-	{
-		include('config.php');
-		$this->open($recipes_db);
-	}
+    function __construct()
+    {
+        include 'config.php';
+        $this->open($recipes_db);
+    }
 }
 ?>

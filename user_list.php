@@ -17,15 +17,17 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-    include_once('user.php');
-    if (!check_session_user() || !check_admin_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        $users = get_users();
+require_once 'user.php';
+if (!check_session_user() || !check_admin_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    $users = get_users();
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -42,29 +44,19 @@
     <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    
-
 
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-		<?php $menu="Users";include('menu.php');?>
-
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Users";include 'menu.php';?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Users&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_users_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Users&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_users_gran.png">
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -74,19 +66,13 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
-
-
+<div id="caja_contenido_tab">    
 
     <div id="main">
-    
 
     <?php
-        if (count($users) > 0)
-        {
-    ?>
+    if (count($users) > 0) {
+        ?>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
                 $('#example').dataTable( {
@@ -96,7 +82,7 @@
                         "aoColumns": [
                             { "bSortable": true },
                             { "bSortable": true },
-			    { "bSortable": true },
+                { "bSortable": true },
                             { "bSortable": false },
                             { "bSortable": false }
                         ]
@@ -110,7 +96,6 @@
             }
         }
     </script>
-    
 
     <table>
     <tr>
@@ -132,30 +117,30 @@
             </tr>
         </thead>
         <tbody>
-    <?php
+        <?php
     
-            foreach ($users as $user) {
-    ?>
+        foreach ($users as $user) {
+            ?>
             <tr>
                 <td>
-                    <?php echo $user['username']?>
+                <?php echo $user['username']?>
                 </td>
                 <td>
-                    <?php
-		    $groups = get_user_groups($user['username']);
-		    foreach ($groups as $group) {
-			echo $group['grpname'] . "<br>";
-		    }
-		    ?>
+                <?php
+                $groups = get_user_groups($user['username']);
+                foreach ($groups as $group) {
+                    echo $group['grpname'] . "<br>";
+                }
+                ?>
                 </td>
                 <td>
-                    <?php
-			if ($user['permissions']) {
-				echo "Administrator";
-			} else {
-				echo "Standard";
-			}
-			?>
+                <?php
+                if ($user['permissions']) {
+                    echo "Administrator";
+                } else {
+                    echo "Standard";
+                }
+                ?>
                 </td>
                 <td>
                     <a href="userform.php?id=<?php echo $user['username'];?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
@@ -164,25 +149,25 @@
                     <a onclick="javascript:confirm_delete('userinfo.php?op=delete&id=<?php echo $user['username'];?>', '<?php echo $user['username']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
             </tr>
-            <?php
-            }
+                <?php
+        }
     
-    ?>
+        ?>
         </tbody>
     </table>
     </td>
     </tr>
     </table>
-<?php
-        }
-?>
+        <?php
+    }
+    ?>
     <br>
     </div>
 </div>
-    <?php include('footer.php')?>
+    <?php include 'footer.php'?>
 </div>
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>

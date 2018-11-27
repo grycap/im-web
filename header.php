@@ -17,20 +17,18 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once("analyticstracking.php");
+require_once "analyticstracking.php";
 ?>
 <div id="caja_login_superior_contenido">
-	<?php include('user_connected.php')?>		
+    <?php require 'user_connected.php'?>        
 </div>
 <div id="imagen-transpa-logo">
-				<img src="images/logo_im2.png" alt="Infrastructure Manager Logo" />
-			</div>
+                <img src="images/logo_im2.png" alt="Infrastructure Manager Logo" />
+            </div>
 
 <div id="imagen-transpa-logo-derecha">
-				<img src="images/imagen_cabecera.png" />
-			</div>
-
-
+                <img src="images/imagen_cabecera.png" />
+            </div>
 
 <div id="linea_cabecera_logo">
 </div>

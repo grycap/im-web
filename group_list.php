@@ -17,16 +17,18 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-    include_once('user.php');
-    if (!check_session_user() || !check_admin_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        include_once('group.php');
-        $groups = get_groups();
+require_once 'user.php';
+if (!check_session_user() || !check_admin_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    include_once 'group.php';
+    $groups = get_groups();
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -46,25 +48,17 @@
 
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-		<?php $menu="Groups";include('menu.php');?>
-
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Groups";include 'menu.php';?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Groups&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_groups_gran.png">
+    <div id="texto_titulo">
+    Infrastructure Manager > Groups&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_groups_gran.png">
 
-	</div>
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -74,20 +68,14 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
-
-
+<div id="caja_contenido_tab">    
 
     
     <div id="main">
- 
 
     <?php
-        if (count($groups) > 0)
-        {
-    ?>
+    if (count($groups) > 0) {
+        ?>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
                 $('#example').dataTable( {
@@ -110,7 +98,6 @@
             }
         }
     </script>
-    
 
     <table>
     <tr>
@@ -130,16 +117,16 @@
             </tr>
         </thead>
         <tbody>
-    <?php
+        <?php
     
-            foreach ($groups as $group) {
-    ?>
+        foreach ($groups as $group) {
+            ?>
             <tr>
                 <td>
-                    <?php echo $group['name']?>
+                <?php echo $group['name']?>
                 </td>
                 <td>
-		    <?php echo $group['description']?>
+                <?php echo $group['description']?>
                 </td>
                 <td>
                     <a href="groupform.php?id=<?php echo $group['name'];?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
@@ -148,25 +135,25 @@
                     <a onclick="javascript:confirm_delete('groupinfo.php?op=delete&id=<?php echo $group['name'];?>', '<?php echo $group['name']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
             </tr>
-            <?php
-            }
+                <?php
+        }
     
-    ?>
+        ?>
         </tbody>
     </table>
     </td>
     </tr>
     </table>
-<?php
-        }
-?>
+        <?php
+    }
+    ?>
     <br>
     </div>
 </div>
-    <?php include('footer.php')?>
+    <?php include 'footer.php'?>
 </div>
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>

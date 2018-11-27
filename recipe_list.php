@@ -17,16 +17,18 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
-    include_once('user.php');
-    if (!check_session_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        include_once('recipe.php');
-        $recipes = get_recipes();
+require_once 'user.php';
+if (!check_session_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    include_once 'recipe.php';
+    $recipes = get_recipes();
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -46,25 +48,17 @@
 
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-		<?php $menu="Recipes";include('menu.php');?>
-
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Recipes";include 'menu.php';?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Recipes&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_recipes_gran.png">
+    <div id="texto_titulo">
+    Infrastructure Manager > Recipes&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_recipes_gran.png">
 
-	</div>
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -74,20 +68,14 @@
 </div>
 </div>
 
+<div id="caja_contenido_tab">    
 
-<div id="caja_contenido_tab">	
-
-
-
-
-    
     <div id="main">
  
 
     <?php
-        if (count($recipes) > 0)
-        {
-    ?>
+    if (count($recipes) > 0) {
+        ?>
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
                 $('#example').dataTable( {
@@ -97,13 +85,13 @@
                         "aoColumns": [
                             { "bSortable": true },
                             { "bSortable": true },
-                            <?php
-       				if (check_admin_user()) {
-                    ?>
-		                    { "bSortable": false },
                         <?php
-                    }
-                    ?>
+                        if (check_admin_user()) {
+                            ?>
+                            { "bSortable": false },
+                                <?php
+                        }
+                        ?>
                             { "bSortable": false }
                         ]
                 } );
@@ -117,7 +105,6 @@
         }
     </script>
     
-
     <table>
     <tr>
     <td>
@@ -130,75 +117,75 @@
                 <th>
                 Version
                 </th>
-    <?php
-				if (check_admin_user()) {
-?>
-				<th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspEdit</th>
-				<th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspDelete</th>
-    <?php
-           		} else {
-?>
-				<th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspView</th>
-    <?php
-           		}
-?>
+            <?php
+            if (check_admin_user()) {
+                ?>
+                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspEdit</th>
+                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspDelete</th>
+                <?php
+            } else {
+                ?>
+                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspView</th>
+                <?php
+            }
+            ?>
 
             </tr>
         </thead>
         <tbody>
-    <?php
+            <?php
     
             foreach ($recipes as $recipe) {
-    ?>
+                ?>
             <tr>
                 <td>
                     <?php echo $recipe['name']?>
                 </td>
                 <td>
-		    		<?php echo $recipe['version']?>
+                <?php echo $recipe['version']?>
                 </td>
                 <td>
-    <?php
-				if (check_admin_user()) {
-?>
-						<a href="recipeform.php?id=<?php echo $recipe['rowid'];?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
-    <?php
-           		} else {
-?>
-						<a href="recipeform.php?id=<?php echo $recipe['rowid'];?>"><img src="images/ver.gif" border="0" alt="Ver" title="Ver"></a>
-    <?php
-           		}
-?>
+                <?php
+                if (check_admin_user()) {
+                    ?>
+                        <a href="recipeform.php?id=<?php echo $recipe['rowid'];?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
+                    <?php
+                } else {
+                    ?>
+                        <a href="recipeform.php?id=<?php echo $recipe['rowid'];?>"><img src="images/ver.gif" border="0" alt="Ver" title="Ver"></a>
+                    <?php
+                }
+                ?>
                 </td>
-    <?php
-				if (check_admin_user()) {
-?>
+                <?php
+                if (check_admin_user()) {
+                    ?>
                 <td>
-						<a onclick="javascript:confirm_delete('recipeinfo.php?op=delete&id=<?php echo $recipe['rowid'];?>', '<?php echo $recipe['name']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                        <a onclick="javascript:confirm_delete('recipeinfo.php?op=delete&id=<?php echo $recipe['rowid'];?>', '<?php echo $recipe['name']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
-    <?php
-           		}
-?>
+                    <?php
+                }
+                ?>
             </tr>
-            <?php
+                <?php
             }
     
-    ?>
+            ?>
         </tbody>
     </table>
     </td>
     </tr>
     </table>
-<?php
-        }
-?>
+            <?php
+    }
+    ?>
     <br>
     </div>
 </div>
-    <?php include('footer.php')?>
+    <?php include 'footer.php'?>
 </div>
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>

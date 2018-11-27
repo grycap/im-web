@@ -1,15 +1,16 @@
 <?php
-include_once('xmlrpc.inc');
-include_once('xmlrpcs.inc');
-include_once('xmlrpc_wrappers.inc');
-include_once('cred.php');
+require_once 'xmlrpc.inc';
+require_once 'xmlrpcs.inc';
+require_once 'xmlrpc_wrappers.inc';
+require_once 'cred.php';
 
-class IMXML {
+class IMXML
+{
 
     static public function connect($host, $port, $method)
     {
         return new self($host, $port, $method);
-	}
+    }
 
     public function __construct($host = "localhost", $port = 8800, $method = "http")
     {
@@ -18,11 +19,12 @@ class IMXML {
         $this->_method     = $method;
     }
 
-    public function get_auth_data() {
+    public function get_auth_data()
+    {
 
         $user = $_SESSION['user'];
         $password = $_SESSION['password'];
-        $auth = NULL;
+        $auth = null;
         $creds = get_credentials($user, $password);
         if (!is_null($creds)) {
             $auth = array();
@@ -100,106 +102,117 @@ class IMXML {
     }
 
     // helper function to make easier mocking
-    public function send_xmlrpc_call($xmlrpc_msg) {
-        $xmlrpc_client = new xmlrpc_client('/',$this->_host,$this->_port,$this->_method);
+    public function send_xmlrpc_call($xmlrpc_msg)
+    {
+        $xmlrpc_client = new xmlrpc_client('/', $this->_host, $this->_port, $this->_method);
         return $xmlrpc_client->send($xmlrpc_msg);
     }
 
-    public function GetInfrastructureList() {
+    public function GetInfrastructureList()
+    {
         $auth = $this->get_auth_data();
 
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureList', array($auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
             $success = $res[0];
             $list = $res[1];
             
-            if ($success) {
-                return $list;
-            } else {
-                return 'Error: ' . $list;
-            }
+        if ($success) {
+            return $list;
+        } else {
+            return 'Error: ' . $list;
+        }
     }
 
-    public function CreateInfrastructure($radl, $async) {
+    public function CreateInfrastructure($radl, $async)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('CreateInfrastructure', array(new xmlrpcval($radl, "string"), new xmlrpcval($async, "boolean"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
             $success = $res[0];
             $inf_id = $res[1];
             
-            if ($success) {
-                return $inf_id;
-            } else {
-                return 'Error: ' . $inf_id;
-            }
+        if ($success) {
+            return $inf_id;
+        } else {
+            return 'Error: ' . $inf_id;
+        }
     }
 
-    public function DestroyInfrastructure($id) {
+    public function DestroyInfrastructure($id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('DestroyInfrastructure', array(new xmlrpcval($id, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
             $success = $res[0];
             $inf_id = $res[1];
             
-            if ($success) {
-                return "";
-            } else {
-                return 'Error: ' . $inf_id;
-            }
+        if ($success) {
+            return "";
+        } else {
+            return 'Error: ' . $inf_id;
+        }
     }
 
-    public function GetInfrastructureInfo($id) {
+    public function GetInfrastructureInfo($id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureInfo', array(new xmlrpcval($id, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
             $success = $res[0];
             $inf_info = $res[1];
             
-            if ($success) {
-                return $inf_info;
-            } else {
-                return 'Error';
-            }
+        if ($success) {
+            return $inf_info;
+        } else {
+            return 'Error';
+        }
     }
 
-    public function GetInfrastructureContMsg($id) {
+    public function GetInfrastructureContMsg($id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureContMsg', array(new xmlrpcval($id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $cont_msg = $res[1];
 
@@ -210,38 +223,42 @@ class IMXML {
         }
     }
 
-    public function GetVMInfo($inf_id, $vm_id) {
+    public function GetVMInfo($inf_id, $vm_id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('GetVMInfo', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
             $success = $res[0];
             $info = $res[1];
             
-            if ($success) {
-                return $info;
-            } else {
-                return 'Error';
-            }
+        if ($success) {
+            return $info;
+        } else {
+            return 'Error';
+        }
     }
 
-    public function GetVMProperty($inf_id, $vm_id, $property) {
+    public function GetVMProperty($inf_id, $vm_id, $property)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('GetVMProperty', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), new xmlrpcval($property, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $info = $res[1];
 
@@ -252,17 +269,19 @@ class IMXML {
         }
     }
 
-    public function GetVMContMsg($inf_id, $vm_id) {
+    public function GetVMContMsg($inf_id, $vm_id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('GetVMContMsg', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $info = $res[1];
 
@@ -273,17 +292,19 @@ class IMXML {
         }
     }
 
-    public function StartVM($inf_id, $vm_id) {
+    public function StartVM($inf_id, $vm_id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('StartVM', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $info = $res[1];
 
@@ -294,17 +315,19 @@ class IMXML {
         }
     }
 
-    public function StopVM($inf_id, $vm_id) {
+    public function StopVM($inf_id, $vm_id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('StopVM', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $info = $res[1];
 
@@ -315,59 +338,65 @@ class IMXML {
         }
     }
 
-    public function AddResource($inf_id, $radl) {
+    public function AddResource($inf_id, $radl)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('AddResource', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($radl, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
             $success = $res[0];
             $info = $res[1];
             
-            if ($success) {
-                return "OK";
-            } else {
-                return 'Error';
-            }
+        if ($success) {
+            return "OK";
+        } else {
+            return 'Error';
+        }
     }
 
-    public function RemoveResource($inf_id, $vm_list) {
+    public function RemoveResource($inf_id, $vm_list)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('RemoveResource', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_list, "string"), $auth));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
             $success = $res[0];
             $info = $res[1];
             
-            if ($success) {
-                return $info;
-            } else {
-                return 'Error';
-            }
+        if ($success) {
+            return $info;
+        } else {
+            return 'Error';
+        }
     }
 
-    public function Reconfigure($inf_id, $radl) {
+    public function Reconfigure($inf_id, $radl)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('Reconfigure', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($radl, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $info = $res[1];
 
@@ -378,17 +407,19 @@ class IMXML {
         }
     }
 
-    public function ExportInfrastructure($inf_id, $delete) {
+    public function ExportInfrastructure($inf_id, $delete)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('ExportInfrastructure', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($delete, "boolean"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $info = $res[1];
 
@@ -399,17 +430,19 @@ class IMXML {
         }
     }
 
-    public function ImportInfrastructure($inf_str) {
+    public function ImportInfrastructure($inf_str)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('ImportInfrastructure', array(new xmlrpcval($inf_str, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-        else
+        } else {
             $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
         $success = $res[0];
         $info = $res[1];
 
@@ -420,25 +453,27 @@ class IMXML {
         }
     }
 
-    public function GetInfrastructureState($id) {
+    public function GetInfrastructureState($id)
+    {
         $auth = $this->get_auth_data();
         
         $xmlrpc_msg = new xmlrpcmsg('GetInfrastructureState', array(new xmlrpcval($id, "string"), $auth));
 
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
 
-        if ($xmlrpc_resp->faultCode())
+        if ($xmlrpc_resp->faultCode()) {
             return 'Error: ' . $xmlrpc_resp->faultString();
-            else
+        } else {
                 $res = php_xmlrpc_decode($xmlrpc_resp->value());
+        }
                 $success = $res[0];
                 $state = $res[1];
 
-                if ($success) {
-                    return $state;
-                } else {
-                    return 'Error';
-                }
+        if ($success) {
+            return $state;
+        } else {
+            return 'Error';
+        }
     }
 }
 ?>

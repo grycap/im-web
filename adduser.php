@@ -11,23 +11,18 @@
     <link rel="stylesheet" href="css/style_menutab.css">
 </head>
 <body>
-    
-
 
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-
+        <?php require 'header.php'?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Add User&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_users_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Add User&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_users_gran.png">
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -36,12 +31,7 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
-
-
-
+<div id="caja_contenido_tab">    
 
     <div id="main">
     
@@ -49,8 +39,7 @@
         <div class='h1'>:: Add new User ::</div>
 
 
-
-	<div id="caja_form_add_users">
+    <div id="caja_form_add_users">
 
         <form action="userinfo.php" method="post">
             <input type="hidden" name="op" value="register"/>
@@ -86,10 +75,10 @@
                                 <tr>
                                 </tr>
                                 <tr>
-					<td align="right" colspan="5">
- 					<input type="submit" value="Save"/>
-					<a href="user_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
-					</td>
+                    <td align="right" colspan="5">
+                     <input type="submit" value="Save"/>
+                    <a href="user_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
+                    </td>
                                  </tr>
                         </tbody>
                 </table>
@@ -98,6 +87,6 @@
  </div>
 </div>
 </div>
-    <?php include('footer.php')?>
+    <?php require 'footer.php'?>
 </body>
 </html>

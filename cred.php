@@ -17,8 +17,15 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-function get_credentials($user) {
-    include('config.php');
+/**
+ * Get the credentials stored for the user specified 
+ * 
+ * @param  string $user IM user ID
+ * @return array    db rows with the user credentials
+ */
+function get_credentials($user)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("credentials", array("imuser" => "'" . $db->escapeString($user) . "'"), "ord");
@@ -26,20 +33,29 @@ function get_credentials($user) {
     return $res;
 }
 
-function get_credential($id) {
-    include('config.php');
+/**
+ * Get the credential with the specified id
+ *
+ * @param  string $id Credential ID
+ * @return array    db row with the credential specified
+ */
+function get_credential($id)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("credentials", array("rowid" => $id));
     $db->close();
-    if (count($res) > 0)
+    if (count($res) > 0) {
         return $res[0];
-    else
-        return NULL;
+    } else {
+        return null;
+    }
 }
 
-function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url) {
-    include('config.php');
+function insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
@@ -68,14 +84,15 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     $fields[] = "'" . $db->escapeString($service_region) . "'";
     $fields[] = "'" . $db->escapeString($base_url) . "'";
 
-    $res = $db->insert_item_into_table("credentials",$fields);
+    $res = $db->insert_item_into_table("credentials", $fields);
     $db->close();
 
     return $res;
 }
 
-function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url) {
-    include('config.php');
+function edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
@@ -87,48 +104,49 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $token
     $fields["token_type"] = "'" . $db->escapeString($token_type) . "'";
     $fields["project"] = "'" . $db->escapeString($project) . "'";
     if (strlen(trim($password)) > 0) {
-    	$fields["password"] = "'" . $db->escapeString($password) . "'";
+        $fields["password"] = "'" . $db->escapeString($password) . "'";
     }
     if (strlen(trim($proxy)) > 0) {
-    	$fields["proxy"] = "'" . $db->escapeString($proxy) . "'";
+        $fields["proxy"] = "'" . $db->escapeString($proxy) . "'";
     }
     if (strlen(trim($public_key)) > 0) {
-    	$fields["public_key"] = "'" . $db->escapeString($public_key) . "'";
+        $fields["public_key"] = "'" . $db->escapeString($public_key) . "'";
     }
     if (strlen(trim($private_key)) > 0) {
-    	$fields["private_key"] = "'" . $db->escapeString($private_key) . "'";
+        $fields["private_key"] = "'" . $db->escapeString($private_key) . "'";
     }
     if (strlen(trim($certificate)) > 0) {
-    	$fields["certificate"] = "'" . $db->escapeString($certificate) . "'";
+        $fields["certificate"] = "'" . $db->escapeString($certificate) . "'";
     }
     if (strlen(trim($tenant)) > 0) {
-    	$fields["tenant"] = "'" . $db->escapeString($tenant) . "'";
+        $fields["tenant"] = "'" . $db->escapeString($tenant) . "'";
     }
     if (strlen(trim($subscription_id)) > 0) {
-    	$fields["subscription_id"] = "'" . $db->escapeString($subscription_id) . "'";
+        $fields["subscription_id"] = "'" . $db->escapeString($subscription_id) . "'";
     }
     if (strlen(trim($auth_version)) > 0) {
-    	$fields["auth_version"] = "'" . $db->escapeString($auth_version) . "'";
+        $fields["auth_version"] = "'" . $db->escapeString($auth_version) . "'";
     }
     if (strlen(trim($domain)) > 0) {
-    	$fields["domain"] = "'" . $db->escapeString($domain) . "'";
+        $fields["domain"] = "'" . $db->escapeString($domain) . "'";
     }
     if (strlen(trim($service_region)) > 0) {
-    	$fields["service_region"] = "'" . $db->escapeString($service_region) . "'";
+        $fields["service_region"] = "'" . $db->escapeString($service_region) . "'";
     }
     if (strlen(trim($base_url)) > 0) {
-    	$fields["base_url"] = "'" . $db->escapeString($base_url) . "'";
+        $fields["base_url"] = "'" . $db->escapeString($base_url) . "'";
     }
 
     $where = array("rowid" => $rowid);
-    $res = $db->edit_item_from_table("credentials",$fields,$where);
+    $res = $db->edit_item_from_table("credentials", $fields, $where);
     $db->close();
 
     return $res;
 }
 
-function delete_credential($id) {
-    include('config.php');
+function delete_credential($id)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->delete_item_from_table("credentials", array("rowid" => $id));
@@ -136,32 +154,34 @@ function delete_credential($id) {
     return $res;
 }
 
-function enable_credential($id, $enable) {
-    include('config.php');
+function enable_credential($id, $enable)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
     $fields = array("enabled" => $enable);
     $where = array("rowid" => $id);
-    $res = $db->edit_item_from_table("credentials",$fields,$where);
+    $res = $db->edit_item_from_table("credentials", $fields, $where);
     $db->close();
 
     return $res;
 }
 
-function change_order($id, $user, $order, $new_order) {
-    include('config.php');
+function change_order($id, $user, $order, $new_order)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
     $fields = array("ord" => $order);
     $where = array("ord" => $new_order, "imuser" => "'" . $user . "'");
-    $res = $db->edit_item_from_table("credentials",$fields,$where);
+    $res = $db->edit_item_from_table("credentials", $fields, $where);
 
     if (strlen($res) == 0) {
         $fields = array("ord" => $new_order);
         $where = array("rowid" => $id);
-        $res = $db->edit_item_from_table("credentials",$fields,$where);
+        $res = $db->edit_item_from_table("credentials", $fields, $where);
     }
 
     $db->close();
