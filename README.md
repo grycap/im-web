@@ -42,40 +42,40 @@ Adjust the configuration settings in the file config.php:
 $im_use_rest=false;
 ```
 * Flag to set the usage of the APIs using HTTPS protocol instead of the standard HTTP.
-```
+```php
 $im_use_ssl=false;
 ```
 * Address of the IM host
-```
+```php
 $im_host="im-server.domain.com";
 ```
 * Port of the IM service
-```
+```php
 $im_port=8899;
 ```
 * Path of the IM web interface DB. The original path will be /var/www/im/im.db
   but is more secure to move it to a path not in the path of the web server.
   The file and the directory must have write permissions to the web server user.
-```
+```php
 $im_db="/home/www-data/im.db";
 ```
 * In case that the IM service and web interface are in the same host, the Recipes
   feature can be activated. Specify the path of the recipes_ansible.db file of the
   IM and take care that the file and the directory must have write permissions to
   the web server user. In other case set "".
-```
+```php
 $recipes_db="/usr/local/im/contextualization/recipes_ansible.db";
 ```
 * OpenID Issuer supported use "" to disable OpenID support.
-```
+```php
 $openid_issuer="https://iam-test.indigo-datacloud.eu/";
 ```
 * OpenID Issuer name.
-```
+```php
 $openid_name="INDIGO IAM";
 ```
 * OpenID Client data.
-```
+```php
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
 $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
