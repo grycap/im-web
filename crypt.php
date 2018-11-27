@@ -17,26 +17,48 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// mainly for internal use
-function unique_salt() {
-    return substr(sha1(mt_rand()),0,22);
+/**
+ * For intenal use
+ * 
+ * @return string salt
+ */
+function unique_salt()
+{
+    return substr(sha1(mt_rand()), 0, 22);
 }
  
-// this will be used to generate a hash
-function crypt_password($password) {
-	// blowfish
-	$algo = '$2a';
-	// cost parameter
-	$cost = '$10';
-	
-    return crypt($password,
-                $algo .
+/**
+ * Generate a hash
+ *
+ * @param string $password password to be hashed
+ *
+ * @return string    hash of the password
+ */
+function crypt_password($password)
+{
+    // blowfish
+    $algo = '$2a';
+    // cost parameter
+    $cost = '$10';
+    
+    return crypt(
+        $password,
+        $algo .
                 $cost .
-                '$' . unique_salt());
+        '$' . unique_salt()
+    );
 }
  
-// this will be used to compare a password against a hash
-function check_password($password, $hash) {
+/**
+ * Compare a password against a hash
+ *
+ * @param string $password password to be compared
+ * @param string $hash     hash to compare to
+ *
+ * @return bool   true if the password and hash are equivalent
+ */
+function check_password($password, $hash)
+{
     $full_salt = substr($hash, 0, 29);
     $new_hash = crypt($password, $full_salt);
     return ($hash == $new_hash);

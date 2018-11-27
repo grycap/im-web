@@ -17,17 +17,19 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
     
-    include_once('user.php');
-    if (!check_session_user() || !check_admin_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        if (isset($_GET['id'])) {
-            $name = $_GET['id'];
-        }
+require_once 'user.php';
+if (!check_session_user() || !check_admin_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    if (isset($_GET['id'])) {
+        $name = $_GET['id'];
+    }
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -41,27 +43,21 @@
     <link rel="stylesheet" href="css/style_menutab.css">
 </head>
 <body>
-        <?php include_once('group.php')?>
-
+    <?php include_once 'group.php'?>
 
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-		<?php $menu="Groups";include('menu.php');?>
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Groups";include 'menu.php';?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Add / Edit Group&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_groups_gran.png">
+    <div id="texto_titulo">
+    Infrastructure Manager > Add / Edit Group&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_groups_gran.png">
 
-	</div>
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -71,44 +67,38 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
-
-
+<div id="caja_contenido_tab">
 
     <div id="main">
     
     <?php
-            $desc = "";
+        $desc = "";
             
-            if (isset($name)) {
-                $group = get_group($name);
-                $desc = $group['description'];
-    ?>
+    if (isset($name)) {
+        $group = get_group($name);
+        $desc = $group['description'];
+        ?>
         <br> 
         <div class='h1'>:: Edit Group ::</div>
 
-	 <div id="caja_form_groups">
-
+     <div id="caja_form_groups">
 
         <form action="groupinfo.php" method="post">
             <input type="hidden" name="op" value="edit"/>
             <input type="hidden" name="id" value="<?php echo $name;?>"/>
-    <?php
-            } else {
-    ?>
+            <?php
+    } else {
+        ?>
         <br> 
         <div class='h1'>:: Add new Group ::</div>
-	<br>
-	<div id="caja_form_groups">
+    <br>
+    <div id="caja_form_groups">
 
         <form action="groupinfo.php" method="post">
             <input type="hidden" name="op" value="add"/>
-    <?php
-            }
+        <?php
+    }
     ?>
-
                 <table>
                         <tbody>
                                 <tr>
@@ -130,15 +120,10 @@
                                 <tr>
                                 </tr>
                                 <tr>
-					<th></th>
-					<td align="right"><input type="submit" value="Save"/> <a href="group_list.php"><input type="button" name="Cancelar" value="Cancel"></a></td>
+                    <th></th>
+                    <td align="right"><input type="submit" value="Save"/> <a href="group_list.php"><input type="button" name="Cancelar" value="Cancel"></a></td>
                                 </tr>
-                                
-				    
 
-
-
-                                
                         </tbody>
                 </table>
                 </form>
@@ -146,9 +131,9 @@
  </div>
 </div>
 </div>
-    <?php include('footer.php')?>
+    <?php include 'footer.php'?>
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>

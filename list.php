@@ -17,18 +17,22 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
-    if (isset($_POST['password']))
-        $_SESSION['password'] = $_POST['password'];
-    if (isset($_POST['username']))
-        $_SESSION['user'] = $_POST['username'];
+if (!isset($_SESSION)) {
+    session_start();
+}
+if (isset($_POST['password'])) {
+    $_SESSION['password'] = $_POST['password'];
+}
+if (isset($_POST['username'])) {
+    $_SESSION['user'] = $_POST['username'];
+}
     
-    include_once('format.php');
-    include_once('user.php');
-    if (!check_session_user()) {
-        header('Location: index.php?error=Invalid User');
-    } else {
-?>
+require_once 'format.php';
+require_once 'user.php';
+if (!check_session_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -50,24 +54,18 @@
 
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-		<?php $menu="Infrastructures";include('menu.php');?>		
-              <?php include('footer.php')?>
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Infrastructures";include 'menu.php';?>        
+    <?php include 'footer.php'?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Infrastructures&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_infra_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Infrastructures&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_infra_gran.png">
+    </div>
 </div>
 
 
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -76,8 +74,7 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
+<div id="caja_contenido_tab">    
 
 
   <div id="main">
@@ -91,19 +88,19 @@
         }
 
         $(document).ready(function() {
-        	$('#example').dynatable({
-        		  inputs: {
-        			    processingText: 'Listing Infrastructures ... <img src="images/loading.gif" width="20px"/>'
-        			  },
-        		  dataset: {
-        			    ajax: true,
-        			    ajaxUrl: 'list_json.php',
-        			    ajaxOnLoad: true,
-        			    records: [],
-        				queryRecordCount: 0,
-        				totalRecordCount: 0
-        			  }
-        	});
+            $('#example').dynatable({
+                  inputs: {
+                        processingText: 'Listing Infrastructures ... <img src="images/loading.gif" width="20px"/>'
+                      },
+                  dataset: {
+                        ajax: true,
+                        ajaxUrl: 'list_json.php',
+                        ajaxOnLoad: true,
+                        records: [],
+                        queryRecordCount: 0,
+                        totalRecordCount: 0
+                      }
+            });
         } );
     </script>
     
@@ -118,14 +115,13 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
             <tr>
                 <th>ID</th>
                 <th data-dynatable-column="vms">VM IDs</th>
-				<?php
-				if ($im_use_rest)
-				{
-				?>
+    <?php
+    if ($im_use_rest) {
+        ?>
                 <th>Outputs</th>
-				<?php
-				}
-				?>
+        <?php
+    }
+    ?>
                 <th>Cont. Message</th>
                 <th>Status</th>
                 <th style="font-style:italic;">Reconfigure</th>
@@ -148,6 +144,6 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
 </div>
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>

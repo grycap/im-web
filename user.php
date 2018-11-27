@@ -17,14 +17,15 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-include_once('crypt.php');
+require_once 'crypt.php';
 
-function check_user_token() {
-    include('config.php');
+function check_user_token()
+{
+    include 'config.php';
 
-    require_once('OAuth2/Client.php');
-    require_once('OAuth2/GrantType/IGrantType.php');
-    require_once('OAuth2/GrantType/AuthorizationCode.php');
+    include_once 'OAuth2/Client.php';
+    include_once 'OAuth2/GrantType/IGrantType.php';
+    include_once 'OAuth2/GrantType/AuthorizationCode.php';
 
     $client = new OAuth2\Client($CLIENT_ID, $CLIENT_SECRET, OAuth2\Client::AUTH_TYPE_AUTHORIZATION_BASIC);
     $client->setAccessToken($_SESSION['user_token']);
@@ -39,22 +40,23 @@ function check_user_token() {
     }
 }
 
-function check_session_user() {
-    include('config.php');
+function check_session_user()
+{
+    include 'config.php';
 
     if (isset($_SESSION['user']) && isset($_SESSION['password'])) {
-	    $password = $_SESSION['password'];
-	    $username = $_SESSION['user'];
-	
-	    $res = false;
-    	$db = new IMDB();
-    	$res = $db->get_items_from_table("user", array("username" => "'" . $db->escapeString($username) . "'"));
-	    $db->close();
-	    
-	    if (count($res) > 0) {
-	   		$res = check_password($password, $res[0]["password"]);
-	    }
-	
+        $password = $_SESSION['password'];
+        $username = $_SESSION['user'];
+    
+        $res = false;
+        $db = new IMDB();
+        $res = $db->get_items_from_table("user", array("username" => "'" . $db->escapeString($username) . "'"));
+        $db->close();
+        
+        if (count($res) > 0) {
+            $res = check_password($password, $res[0]["password"]);
+        }
+    
         return $res;
     } elseif (isset($_SESSION['user']) && isset($_SESSION['user_token'])) {
         return check_user_token();
@@ -63,35 +65,37 @@ function check_session_user() {
     }
 }
 
-function check_admin_user() {
-    include('config.php');
+function check_admin_user()
+{
+    include 'config.php';
     
-	if (!isset($_SESSION['user']) || !isset($_SESSION['password'])) {
-    	return false;
+    if (!isset($_SESSION['user']) || !isset($_SESSION['password'])) {
+        return false;
     } else {
-	    $password = $_SESSION['password'];
-	    $user = $_SESSION['user'];
-	
-	    $res = false;
-	    $db = new IMDB();
-	    $fields = array();
-	    $fields["username"] = "'" . $db->escapeString($user) . "'";
-	    $fields["permissions"] = "1";
-	    $res = $db->get_items_from_table("user", $fields);
-	    $db->close();
-	    
-	    if (count($res) > 0) {
-	   		$res = check_password($password, $res[0]["password"]);
-	    } else {
+        $password = $_SESSION['password'];
+        $user = $_SESSION['user'];
+    
+        $res = false;
+        $db = new IMDB();
+        $fields = array();
+        $fields["username"] = "'" . $db->escapeString($user) . "'";
+        $fields["permissions"] = "1";
+        $res = $db->get_items_from_table("user", $fields);
+        $db->close();
+        
+        if (count($res) > 0) {
+            $res = check_password($password, $res[0]["password"]);
+        } else {
             $res = false;
         }
-	
-	    return $res;
+    
+        return $res;
     }
 }
 
-function get_users() {
-    include('config.php');
+function get_users()
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("user");
@@ -99,20 +103,23 @@ function get_users() {
     return $res;
 }
 
-function get_user($username) {
-    include('config.php');
+function get_user($username)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("user", array("username" => "'" . $db->escapeString($username) . "'"));
     $db->close();
-    if (count($res) > 0)
+    if (count($res) > 0) {
         return $res[0];
-    else
-        return NULL;
+    } else {
+        return null;
+    }
 }
 
-function get_user_groups($username) {
-    include('config.php');
+function get_user_groups($username)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("users_grp", array("username" => "'" . $db->escapeString($username) . "'"));
@@ -120,8 +127,9 @@ function get_user_groups($username) {
     return $res;
 }
 
-function insert_user($username, $password, $groups, $permissions) {
-    include('config.php');
+function insert_user($username, $password, $groups, $permissions)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
@@ -129,7 +137,7 @@ function insert_user($username, $password, $groups, $permissions) {
     $fields[] = "'" . $db->escapeString($username) . "'";
     $fields[] = "'" . $db->escapeString(crypt_password($password)) . "'";
     $fields[] = "'" . strval($permissions) . "'";
-    $res = $db->insert_item_into_table("user",$fields);
+    $res = $db->insert_item_into_table("user", $fields);
 
     if ($res != "") {
         return $res;
@@ -139,10 +147,10 @@ function insert_user($username, $password, $groups, $permissions) {
     $error_msg = "";
     if (!is_null($groups)) {
         foreach ($groups as $group) {
-        $fields = array();
-        $fields[] = "'" . $db->escapeString($group) . "'";
-        $fields[] = "'" . $db->escapeString($username) . "'";
-        $res = $db->insert_item_into_table("users_grp",$fields);
+            $fields = array();
+            $fields[] = "'" . $db->escapeString($group) . "'";
+            $fields[] = "'" . $db->escapeString($username) . "'";
+            $res = $db->insert_item_into_table("users_grp", $fields);
             if ($res != "") {
                 $all_ok = false;
                 $error_msg = $res;
@@ -159,22 +167,24 @@ function insert_user($username, $password, $groups, $permissions) {
     return $res;
 }
 
-function change_password($username, $password) {
-    include('config.php');
+function change_password($username, $password)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
     $fields = array();
     $fields["password"] = "'" . $db->escapeString(crypt_password($password)) . "'";
     $where = array("username" => "'" . $username . "'");
-    $res = $db->edit_item_from_table("user",$fields,$where);
+    $res = $db->edit_item_from_table("user", $fields, $where);
     $db->close();
 
     return $res;
 }
 
-function edit_user($username, $new_username, $password, $groups, $permissions) {
-    include('config.php');
+function edit_user($username, $new_username, $password, $groups, $permissions)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
@@ -185,7 +195,7 @@ function edit_user($username, $new_username, $password, $groups, $permissions) {
         $fields["password"] = "'" . $db->escapeString(crypt_password($password)) . "'";
     }
     $where = array("username" => "'" . $username . "'");
-    $res = $db->edit_item_from_table("user",$fields,$where);
+    $res = $db->edit_item_from_table("user", $fields, $where);
 
     if ($res != "") {
             $res = $db->lastErrorMsg() . $sql;
@@ -204,7 +214,7 @@ function edit_user($username, $new_username, $password, $groups, $permissions) {
             $fields = array();
             $fields[] = "'" . $db->escapeString($group) . "'";
             $fields[] = "'" . $db->escapeString($username) . "'";
-            $grp_res = $db->insert_item_into_table("users_grp",$fields);
+            $grp_res = $db->insert_item_into_table("users_grp", $fields);
             if ($grp_res != "") {
                 $all_ok = false;
                 $error_msg = $grp_res;
@@ -220,8 +230,9 @@ function edit_user($username, $new_username, $password, $groups, $permissions) {
     return $res;
 }
 
-function delete_user($username) {
-    include('config.php');
+function delete_user($username)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();

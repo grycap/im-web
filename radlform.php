@@ -17,20 +17,22 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
     
-    include_once('user.php');
-    if (!check_session_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-        }
+require_once 'user.php';
+if (!check_session_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+    }
         
-        $user = $_SESSION['user'];
-        $user_groups = get_user_groups($user);
+    $user = $_SESSION['user'];
+    $user_groups = get_user_groups($user);
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -43,39 +45,25 @@
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
 
-	
-
 </head>
 <body>
     
-    <?php include_once('radl.php')?>
+    <?php include_once 'radl.php'?>
 
-
-   
 <div id="caja_total_blanca">
 
-
-		
-
-
-		<?php include('header.php')?>		
-		<?php $menu="RADL";include('menu.php');?>
-		<?php include('footer.php')?>	
-
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="RADL";include 'menu.php';?>
+    <?php include 'footer.php'?>    
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Add / Edit RADL&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Add / Edit RADL&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
+    </div>
 </div>
 
 
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -85,104 +73,87 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
+<div id="caja_contenido_tab">    
 
     <div id="main">
     
     <?php
-            $name = "";
-            $desc = "";
-            $radl_data = "Type here...";
-            $group = "";
-            $group_r = "";
-            $group_w = "";
-            $group_x = "";
-            $other_r = "";
-            $other_w = "";
-            $other_x = "";
+        $name = "";
+        $desc = "";
+        $radl_data = "Type here...";
+        $group = "";
+        $group_r = "";
+        $group_w = "";
+        $group_x = "";
+        $other_r = "";
+        $other_w = "";
+        $other_x = "";
             
-            if (isset($id)) {
-                $radl = get_radl($id);
-                $name = $radl['name'];
-                $desc = $radl['description'];
-                $radl_data = $radl['radl'];
-                $group = $radl['grpname'];
-                $group_r = $radl['group_r'];
-                $group_w = $radl['group_w'];
-                $group_x = $radl['group_x'];
-                $other_r = $radl['other_r'];
-                $other_w = $radl['other_w'];
-                $other_x = $radl['other_x'];
-    ?>
-
+    if (isset($id)) {
+        $radl = get_radl($id);
+        $name = $radl['name'];
+        $desc = $radl['description'];
+        $radl_data = $radl['radl'];
+        $group = $radl['grpname'];
+        $group_r = $radl['group_r'];
+        $group_w = $radl['group_w'];
+        $group_x = $radl['group_x'];
+        $other_r = $radl['other_r'];
+        $other_w = $radl['other_w'];
+        $other_x = $radl['other_x'];
+        ?>
 
         <div class='h1'>:: Edit RADL ::</div>
 
         <div id="caja_form_radls">
 
-
-                <?php
-                if (radl_user_can($id, $user, "w")) {
-                ?>
+        <?php
+        if (radl_user_can($id, $user, "w")) {
+            ?>
         <form action="radlinfo.php" method="post">
-                <?php
-                } else {
-                ?>
+            <?php
+        } else {
+            ?>
         <form action="error.php?msg=No modifications allowed" method="post">
-                <?php
-                }
-                ?>
-
-
+            <?php
+        }
+        ?>
 
             <input type="hidden" name="op" value="edit"/>
             <input type="hidden" name="id" value="<?php echo $id;?>"/>
 
 
-    <?php
-            } else {
-    ?>
-
-
+            <?php
+    } else {
+        ?>
 
        <br>
         <div class='h1'>:: Add new RADL ::</div>
 
-
-					 
-
        <div id="caja_form_radls">
-
 
         <form action="radlinfo.php" method="post">
 
-				     
-
-
             <input type="hidden" name="op" value="add"/>
-    <?php
-            }
+        <?php
+    }
     ?>
-
                 <table >
                         <tbody>
-				<tr>
-					<td colspan=2>
-					RADL
-					</td>
-				</tr>
-				<tr>
-					<td colspan=2>
+                <tr>
+                    <td colspan=2>
+                    RADL
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=2>
 <textarea type="RADL" align="bottom" name="radl"><?php echo $radl_data;?></textarea>
-					</td>
-				</tr>
+                    </td>
+                </tr>
                                <tr>
 <th align="left" class="th_form_radl">Name:</th>
 <td width="30"><input type="text" name="name" value="<?php echo $name;?>"></td>
 </tr>
-
 
 
 <tr>
@@ -191,27 +162,23 @@
 </tr>
 
 
-
-
 <tr>
 <th align="left" class="th_form_radl">Group:</th>
 <td><select name="group">
-                                                <?php
-                                                foreach ($user_groups as $user_group) {
+                                            <?php
+                                            foreach ($user_groups as $user_group) {
                                                 ?>
                                                     <option value="<?php echo $user_group['grpname'];?>"
-                                                    <?php if ($group == $user_group['grpname']) echo 'selected="selected"';?>
+                                                <?php if ($group == $user_group['grpname']) echo 'selected="selected"';?>
                                                                          
                                                     ><?php echo $user_group['grpname'];?></option>
                                                 <?php
-                                                }
-                                                ?>
+                                            }
+                                            ?>
                                             </select>
 </td>
 
 </tr>
-
-
 
 <tr>
 <th align="left"><br>Permission_Group:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
@@ -236,41 +203,35 @@
 </tr>
 <tr>
 <td colspan=2 align=right>
-<?php
-                if (!isset($id) || radl_user_can($id, $user, "x")) {
-?>
+    <?php
+    if (!isset($id) || radl_user_can($id, $user, "x")) {
+        ?>
 <a href="radlinfo.php?op=launch&id=<?php echo $id;?>"><input type="button" name="Launch" value="Launch"></a>
-<?php
-                }
-                if (!isset($id) || radl_user_can($id, $user, "w")) {
-?>
- 					<input type="submit" value="Save"/>
-                     <?php
-                }
-?>
+        <?php
+    }
+    if (!isset($id) || radl_user_can($id, $user, "w")) {
+        ?>
+                     <input type="submit" value="Save"/>
+         <?php
+    }
+    ?>
                     <a href="radl_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
 </td>
 </tr>
 
 </tbody>  
-                
-                       
-                </table>
 
+                </table>
 
 </div>
 
         </form>
 
-
  </div>
 
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>
-
-
-
 

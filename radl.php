@@ -18,9 +18,10 @@
 */
 
 // op tiene que ser r,w o x
-function radl_user_can($id, $user, $op) {
-    include('config.php');
-    include_once('user.php');
+function radl_user_can($id, $user, $op)
+{
+    include 'config.php';
+    include_once 'user.php';
     
     $user_groups = get_user_groups($user);
 
@@ -32,9 +33,11 @@ function radl_user_can($id, $user, $op) {
     if (count($user_groups) > 0) {
         $sql = $sql . " or (group_" . $op . " = '1' and (";
                 
-        for($i=0;$i<count($user_groups);$i++) {
+        for ($i=0;$i<count($user_groups);$i++) {
             $group = $user_groups[$i];
-            if ($i > 0) $sql = $sql . " or ";
+            if ($i > 0) {
+                $sql = $sql . " or ";
+            }
             $sql = $sql . "grpname = '" . $group['grpname'] . "'";
         }
                 
@@ -54,27 +57,30 @@ function radl_user_can($id, $user, $op) {
 }
 
 
-function get_radls($user) {
-    include('config.php');
-    include_once('user.php');
+function get_radls($user)
+{
+    include 'config.php';
+    include_once 'user.php';
     
     $user_groups = get_user_groups($user);
 
     $db = new IMDB();
     $sql = "select * from radls where imuser = '" . $user . "'";
     if ($db->type == "SQLite") {
-    	$sql = "select rowid,* from radls where imuser = '" . $user . "'";
+        $sql = "select rowid,* from radls where imuser = '" . $user . "'";
     }
     $sql = $sql . " or other_r = '1'";
 
     if (count($user_groups) > 0) {
         $sql = $sql . " or (group_r = '1' and (";
                 
-        for($i=0;$i<count($user_groups);$i++) {
+        for ($i=0;$i<count($user_groups);$i++) {
             $group = $user_groups[$i];
-            if ($i > 0) $sql = $sql . " or ";
+            if ($i > 0) {
+                $sql = $sql . " or ";
+            }
             $sql = $sql . "grpname = '" . $group['grpname'] . "'";
-         }
+        }
                 
         $sql = $sql . "))";
     }
@@ -86,22 +92,25 @@ function get_radls($user) {
     return $res;
 }
 
-function get_radl($id) {
-    include('config.php');
+function get_radl($id)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("radls", array("rowid" => "'" . $id . "'"));
     $db->close();
-    if (count($res) > 0)
+    if (count($res) > 0) {
         return $res[0];
-    else
-        return NULL;
+    } else {
+        return null;
+    }
 }
 
 
 
-function insert_radl($imuser, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x) {
-    include('config.php');
+function insert_radl($imuser, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
@@ -117,14 +126,15 @@ function insert_radl($imuser, $name, $desc, $radl, $group, $group_r, $group_w, $
     $fields[] = $other_r;
     $fields[] = $other_w;
     $fields[] = $other_x;
-    $res = $db->insert_item_into_table("radls",$fields);
+    $res = $db->insert_item_into_table("radls", $fields);
     $db->close();
 
     return $res;
 }
 
-function edit_radl($id, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x) {
-    include('config.php');
+function edit_radl($id, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
@@ -140,14 +150,15 @@ function edit_radl($id, $name, $desc, $radl, $group, $group_r, $group_w, $group_
     $fields["other_w"] =  $other_w;
     $fields["other_x"] =  $other_x;
     $where = array("rowid" => "'" . $id . "'");
-    $res = $db->edit_item_from_table("radls",$fields,$where);
+    $res = $db->edit_item_from_table("radls", $fields, $where);
     $db->close();
 
     return $res;
 }
 
-function delete_radl($id) {
-    include('config.php');
+function delete_radl($id)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->delete_item_from_table("radls", array("rowid" => "'" . $id . "'"));

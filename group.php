@@ -18,8 +18,9 @@
 */
 
 
-function get_groups() {
-    include('config.php');
+function get_groups()
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("grp");
@@ -27,34 +28,38 @@ function get_groups() {
     return $res;
 }
 
-function get_group($name) {
-    include('config.php');
+function get_group($name)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->get_items_from_table("grp", array("name" => "'" . $db->escapeString($name) . "'"));
     $db->close();
-    if (count($res) > 0)
+    if (count($res) > 0) {
         return $res[0];
-    else
-        return NULL;
+    } else {
+        return null;
+    }
 }
 
-function insert_group($name, $desc) {
-    include('config.php');
+function insert_group($name, $desc)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
     $fields = array();
     $fields[] = "'" . $db->escapeString($name) . "'";
     $fields[] = "'" . $db->escapeString($desc) . "'";
-    $res = $db->insert_item_into_table("grp",$fields);
+    $res = $db->insert_item_into_table("grp", $fields);
     $db->close();
 
     return $res;
 }
 
-function edit_group($name, $new_name, $desc) {
-    include('config.php');
+function edit_group($name, $new_name, $desc)
+{
+    include 'config.php';
 
     $res = "";
     $db = new IMDB();
@@ -62,14 +67,15 @@ function edit_group($name, $new_name, $desc) {
     $fields["name"] = "'" . $db->escapeString($new_name) . "'";
     $fields["description"] = "'" . $db->escapeString($desc) . "'";
     $where = array("name" => "'" . $name . "'");
-    $res = $db->edit_item_from_table("grp",$fields,$where);
+    $res = $db->edit_item_from_table("grp", $fields, $where);
     $db->close();
 
     return $res;
 }
 
-function delete_group($name) {
-    include('config.php');
+function delete_group($name)
+{
+    include 'config.php';
 
     $db = new IMDB();
     $res = $db->delete_item_from_table("grp", array("name" => "'" . $name . "'"));

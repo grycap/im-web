@@ -17,17 +17,19 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
     
-    include_once('user.php');
-    if (!check_session_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        if (isset($_GET['id'])) {
-            $id = $_GET['id'];
-        }
+require_once 'user.php';
+if (!check_session_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+    }
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -41,27 +43,21 @@
     <link rel="stylesheet" href="css/style_menutab.css">
 </head>
 <body>
-        <?php include_once('recipe.php')?>
-
+    <?php include_once 'recipe.php'?>
 
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-		<?php $menu="Recipes";include('menu.php');?>
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Recipes";include 'menu.php';?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Add / Edit Recipe&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_recipes_gran.png">
+    <div id="texto_titulo">
+    Infrastructure Manager > Add / Edit Recipe&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_recipes_gran.png">
 
-	</div>
+    </div>
 </div>
 
-
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -71,57 +67,54 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
-
+<div id="caja_contenido_tab">    
 
 
     <div id="main">
     
     <?php
-            $desc = "";
+        $desc = "";
             
-            if (isset($id)) {
-                $recipe = get_recipe($id);
-                $name = $recipe['name'];
-                $version = $recipe['version'];
-                $module = $recipe['module'];
-                $recipe_text = $recipe['recipe'];
-                $galaxy_module = $recipe['galaxy_module'];
-                $requirements = $recipe['requirements'];
-                $desc = $recipe['description'];
-    ?>
+    if (isset($id)) {
+        $recipe = get_recipe($id);
+        $name = $recipe['name'];
+        $version = $recipe['version'];
+        $module = $recipe['module'];
+        $recipe_text = $recipe['recipe'];
+        $galaxy_module = $recipe['galaxy_module'];
+        $requirements = $recipe['requirements'];
+        $desc = $recipe['description'];
+        ?>
         <br> 
         <div class='h1'>:: Edit Recipe ::</div>
 
-	 <div id="caja_form_groups">
+     <div id="caja_form_groups">
 
-    <?php
-				if (check_admin_user()) {
-?>
+        <?php
+        if (check_admin_user()) {
+            ?>
         <form action="recipeinfo.php" method="post">
-    <?php
-           		} else {
-?>
+            <?php
+        } else {
+            ?>
         <form>
-    <?php
-            	}
-?>
+            <?php
+        }
+        ?>
             <input type="hidden" name="op" value="edit"/>
             <input type="hidden" name="id" value="<?php echo $id;?>"/>
-    <?php
-            } else {
-?>
+        <?php
+    } else {
+        ?>
         <br> 
         <div class='h1'>:: Add new Recipe ::</div>
-	<br>
-	<div id="caja_form_groups">
+    <br>
+    <div id="caja_form_groups">
 
         <form action="recipeinfo.php" method="post">
             <input type="hidden" name="op" value="add"/>
-    <?php
-            }
+        <?php
+    }
     ?>
 
                 <table>
@@ -171,7 +164,7 @@
                                             Recipe:&nbsp&nbsp
                                         </th>
                                         <td align="left">
-                                        	<textarea type="RECIPE" align="bottom" name="recipe"><?php echo $recipe_text;?></textarea>
+                                            <textarea type="RECIPE" align="bottom" name="recipe"><?php echo $recipe_text;?></textarea>
                                         </td>
                                </tr>
                                 <tr>
@@ -179,30 +172,30 @@
                                             Requirements:&nbsp&nbsp
                                         </th>
                                         <td align="left">
-                                        	<textarea type="RECIPE" align="bottom" name="requirements"><?php echo $requirements;?></textarea>
+                                            <textarea type="RECIPE" align="bottom" name="requirements"><?php echo $requirements;?></textarea>
                                         </td>
                                </tr>
                                 <tr>
                                 </tr>
                                 <tr>
-					<th></th>
-					<td align="right">
+                    <th></th>
+                    <td align="right">
     <?php
-				if (check_admin_user()) {
-?>
-						<input type="submit" value="Save"/>
-						<a href="recipe_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
-    <?php
-           		} else {
-?>
-						<a href="recipe_list.php"><input type="button" name="Back" value="Back"></a>
-    <?php
-           		}
-?>
-					</td>
+    if (check_admin_user()) {
+        ?>
+                        <input type="submit" value="Save"/>
+                        <a href="recipe_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
+        <?php
+    } else {
+        ?>
+                        <a href="recipe_list.php"><input type="button" name="Back" value="Back"></a>
+        <?php
+    }
+    ?>
+                    </td>
                                 </tr>
                                 
-				    
+                    
 
 
 
@@ -214,9 +207,9 @@
  </div>
 </div>
 </div>
-    <?php include('footer.php')?>
+    <?php include 'footer.php'?>
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>

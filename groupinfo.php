@@ -17,65 +17,67 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    include_once('user.php');
-    include_once('group.php');
-    include_once('config.php');
+require_once 'user.php';
+require_once 'group.php';
+require_once 'config.php';
  
-    if(!isset($_SESSION)) session_start();   
+if (!isset($_SESSION)) {
+    session_start();
+}   
 
-    if (!check_session_user() || !check_admin_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {    
-        $op = "";
-        if (isset($_POST['op'])) {
-            $op = $_POST['op'];
-        } elseif (isset($_GET['op'])) {
-            $op = $_GET['op'];
-        }
+if (!check_session_user() || !check_admin_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {    
+    $op = "";
+    if (isset($_POST['op'])) {
+        $op = $_POST['op'];
+    } elseif (isset($_GET['op'])) {
+        $op = $_GET['op'];
+    }
         
-        if (strlen($op) > 0) {
-            if ($op == "delete") {
-                if (isset($_GET['id'])) {
-                    $name = $_GET['id'];
-                    $err = delete_group($name);
-                    if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . urlencode($err));
-                    } else {
-                        header('Location: group_list.php');
-                    }
-                } else {
-                    header('Location: error.php?msg=No id');
-                }
-            } elseif ($op == "add") {
-                $name = $_POST['name'];
-                $desc = $_POST['description'];
-                
-                $err = insert_group($name, $desc);
+    if (strlen($op) > 0) {
+        if ($op == "delete") {
+            if (isset($_GET['id'])) {
+                $name = $_GET['id'];
+                $err = delete_group($name);
                 if (strlen($err) > 0) {
                     header('Location: error.php?msg=' . urlencode($err));
                 } else {
                     header('Location: group_list.php');
                 }
-            } elseif ($op == "edit") {
-                if (isset($_POST['id'])) {
-                    $name = $_POST['id'];
-                    $new_name = $_POST['name'];
-                    $desc = $_POST['description'];
+            } else {
+                header('Location: error.php?msg=No id');
+            }
+        } elseif ($op == "add") {
+            $name = $_POST['name'];
+            $desc = $_POST['description'];
+                
+            $err = insert_group($name, $desc);
+            if (strlen($err) > 0) {
+                header('Location: error.php?msg=' . urlencode($err));
+            } else {
+                header('Location: group_list.php');
+            }
+        } elseif ($op == "edit") {
+            if (isset($_POST['id'])) {
+                $name = $_POST['id'];
+                $new_name = $_POST['name'];
+                $desc = $_POST['description'];
                     
-                    $err = edit_group($name, $new_name, $desc);
-                    if (strlen($err) > 0) {
-                        header('Location: error.php?msg=' . urlencode($err));
-                    } else {
-                        header('Location: group_list.php');
-                    }
+                $err = edit_group($name, $new_name, $desc);
+                if (strlen($err) > 0) {
+                    header('Location: error.php?msg=' . urlencode($err));
                 } else {
-                    header('Location: error.php?msg=No id');
+                    header('Location: group_list.php');
                 }
             } else {
-                header('Location: error.php?msg=Incorrect op: ' . $op);
+                header('Location: error.php?msg=No id');
             }
         } else {
-            header('Location: error.php?msg=No op');
+            header('Location: error.php?msg=Incorrect op: ' . $op);
         }
+    } else {
+        header('Location: error.php?msg=No op');
     }
+}
 ?>

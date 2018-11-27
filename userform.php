@@ -17,19 +17,21 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-    if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
     
-    include_once('user.php');
-    if (!check_session_user() || !check_admin_user()) {
-	header('Location: index.php?error=Invalid User');
-    } else {
-        if (isset($_GET['id'])) {
-            $username = $_GET['id'];
-        }
-        include_once('group.php');
-        $groups = get_groups();
+require_once 'user.php';
+if (!check_session_user() || !check_admin_user()) {
+    header('Location: index.php?error=Invalid User');
+} else {
+    if (isset($_GET['id'])) {
+        $username = $_GET['id'];
+    }
+    include_once 'group.php';
+    $groups = get_groups();
 
-?>
+    ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -89,29 +91,21 @@
     </script>
 </head>
 <body>
-    
-
 
 <div id="caja_total_blanca">
 
 
-		<?php include('header.php')?>		
-		<?php $menu="Users";include('menu.php');?>
-
-
-
-
-
-
+    <?php include 'header.php'?>        
+    <?php $menu="Users";include 'menu.php';?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Infrastructure Manager > Add / Edit User&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_users_gran.png">
-	</div>
+    <div id="texto_titulo">
+    Infrastructure Manager > Add / Edit User&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_users_gran.png">
+    </div>
 </div>
 
 
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -121,48 +115,42 @@
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
-
-
-
+<div id="caja_contenido_tab">    
 
 
     <div id="main">
     
     <?php
-            $password = "";
-            $permissions = 0;
-            $user_groups = array(array('grpname' => 'users'));
+        $password = "";
+        $permissions = 0;
+        $user_groups = array(array('grpname' => 'users'));
             
-            if (isset($username)) {
-                $user = get_user($username);
-                $password = $user['password'];
-                $permissions = $user['permissions'];
-                $user_groups = get_user_groups($username);
-    ?>
+    if (isset($username)) {
+        $user = get_user($username);
+        $password = $user['password'];
+        $permissions = $user['permissions'];
+        $user_groups = get_user_groups($username);
+        ?>
         <br> 
         <div class='h1'>:: Edit User ::</div>
 
-	<div id="caja_form_users">
+    <div id="caja_form_users">
 
         <form action="userinfo.php" method="post" onsubmit="javascript:set_users()">
             <input type="hidden" name="op" value="edit"/>
             <input type="hidden" name="id" value="<?php echo $username;?>"/>
-    <?php
-            } else {
-    ?>
+            <?php
+    } else {
+        ?>
         <br> 
         <div class='h1'>:: Add new User ::</div>
 
-
-
-	<div id="caja_form_users">
+    <div id="caja_form_users">
 
         <form action="userinfo.php" method="post" onsubmit="javascript:set_users()">
             <input type="hidden" name="op" value="add"/>
-    <?php
-            }
+        <?php
+    }
     ?>
 
                 <table>
@@ -175,26 +163,25 @@
                                             <input type="text" name="username" value="<?php echo $username;?>">
                                         </td>
 
-					<th align="left">
+                    <th align="left">
                                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspGroups:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                         </th>
                                         <td rowspan="3">
-						<select id="user_groups" name="user_groups[]" size=5 multiple type="grupos">
-                                                <?php
-                                                foreach ($user_groups as $group) {
+                        <select id="user_groups" name="user_groups[]" size=5 multiple type="grupos">
+                                            <?php
+                                            foreach ($user_groups as $group) {
                                                 ?>
                                                     <option value="<?php echo $group['grpname'];?>"><?php echo $group['grpname'];?></option>
                                                 <?php
-                                                }
-                                                ?>
+                                            }
+                                            ?>
                                             </select>
-					  <td rowspan="3">
-							<a href="#" onclick="javascript:delete_group()"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
-                                            	
+                      <td rowspan="3">
+                            <a href="#" onclick="javascript:delete_group()"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                                                
                                             </td>
                                             
                                         </td>
-
 
                                </tr>
                                 <tr>
@@ -216,8 +203,7 @@
                                         </td>
                                </tr>
 
-
-				   <tr>
+                   <tr>
                                         <th align="left">
                                             Permissions:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
 
@@ -225,39 +211,41 @@
                                         <td>
                                             <select name="permissions">
                                                     <option value="0"
-                                                            <?php if (!$permissions) echo 'selected="selected"';?>
+                                                        <?php if (!$permissions) { echo 'selected="selected"';
+}?>
                                                             >Standard</option>
                                                     <option value="1"
-                                                            <?php if ($permissions) echo 'selected="selected"';?>
+                                                        <?php if ($permissions) { echo 'selected="selected"';
+}?>
                                                             >Administrator</option>
                                             </select>
                                         </td>
                                         <th align="left">
-					</th>
+                    </th>
                                         <td>
                                             
                                             <select id="groups" name="groups">
                                                 <?php
                                                 foreach ($groups as $group) {
-                                                ?>
+                                                    ?>
                                                     <option value="<?php echo $group['name'];?>"><?php echo $group['name'];?></option>
-                                                <?php
+                                                    <?php
                                                 }
                                                 ?>
                                             </select>
-					 </td>
-						
-					<td>
+                     </td>
+                        
+                    <td>
                                             <a href="#" onclick="javascript:add_group()"><img src="images/add.gif" border="0" alt="Add" title="Add"></a>
                                         </td>
                                 </tr>
                                 <tr>
                                 </tr>
                                 <tr>
-					<td align="right" colspan="5">
- 					<input type="submit" value="Save"/>
-					<a href="user_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
-					</td>
+                    <td align="right" colspan="5">
+                     <input type="submit" value="Save"/>
+                    <a href="user_list.php"><input type="button" name="Cancelar" value="Cancel"></a>
+                    </td>
                                  </tr>
                         </tbody>
                 </table>
@@ -266,9 +254,9 @@
  </div>
 </div>
 </div>
-    <?php include('footer.php')?>
+    <?php include 'footer.php'?>
 </body>
 </html>
-<?php
-    }
+    <?php
+}
 ?>

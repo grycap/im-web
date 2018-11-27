@@ -16,7 +16,9 @@
  You should have received a copy of the GNU General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-if(!isset($_SESSION)) session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 $msg = $_GET['msg']
 
 ?>
@@ -37,30 +39,19 @@ $msg = $_GET['msg']
 </head>
 <body>
 
-
-
-
-
 <div id="caja_total_blanca">
 
-
-		<?php include('header.php')?>		
-		<?php include('menu.php')?>
-
-
-
-
-
-
+    <?php require 'header.php'?>        
+    <?php require 'menu.php'?>
 
 <div id="caja_titulo">
-	<div id="texto_titulo">
-	Error&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/error.png">
-	</div>
+    <div id="texto_titulo">
+    Error&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/error.png">
+    </div>
 </div>
 
 
-<div id="caja_contenido_menutab">	
+<div id="caja_contenido_menutab">    
 
 <div id='cssmenutab'>
 <ul>
@@ -70,29 +61,21 @@ $msg = $_GET['msg']
 </div>
 </div>
 
-
-<div id="caja_contenido_tab">	
+<div id="caja_contenido_tab">    
     <div id="main">
-
  
     <br><br>
-   
 
-        
     <div class="texto_error">
-	Error: <?php echo str_replace("\n","<br>",$msg);?> <br>
+    Error: <?php echo str_replace("\n", "<br>", $msg);?> <br>
     </div>
-
     <br>
     </div>
 
-
-
-
 </div>
 </div>
 
-<?php include('footer.php')?>
+<?php require 'footer.php'?>
 
 </body>
 </html>
