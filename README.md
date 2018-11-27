@@ -1,7 +1,6 @@
-IM - Infrastructure Manager web GUI
-===================================
+# IM - Infrastructure Manager web GUI
 
-* Build Status [![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/)
+*  Build Status [![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/)
 
 IM is a tool that ease the access and the usability of IaaS clouds by automating
 the VMI selection, deployment, configuration, software installation, monitoring
@@ -11,12 +10,9 @@ integrates a contextualization system to enable the installation and
 configuration of all the user required applications providing the user with a
 fully functional infrastructure.
 
+## 1 INSTALLATION
 
-1 INSTALLATION
-===============
-
-1.1 REQUISITES
---------------
+### 1.1 REQUISITES
 
 IM web interface is based on PHP, so a web server with PHP support must be installed.
 
@@ -26,20 +22,18 @@ It is also required to install the PHP module to access SQLite databases.
 
 In case of using the REST API it is also required to install the CURL PHP module.
 
-1.2 INSTALLING
---------------
+### 1.2 INSTALLING
 
 Select a proper path in the document root of the web server to install the IM web interface
 (i.e. /var/www/im).
 
-```
+```sh
 $ tar xvzf IM-web-X.XX.tar.gz
 $ mv IM-X.XX /var/www/im
 $ chown -R www-data /var/www/im
 ```
 
-1.2 CONFIGURATION
---------------
+### 1.2 CONFIGURATION
 
 Adjust the configuration settings in the file config.php:
 
@@ -87,13 +81,11 @@ $CLIENT_SECRET = 'client_secret';
 $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
 ```
 
-1.3 DEFAULT USER
-----------------
+### 1.3 DEFAULT USER
 
 The default administrator user is admin with password admin.
 
-2 DOCKER IMAGE
-===============
+## 2 DOCKER IMAGE
 
 A Docker image named `grycap/im-web` has been created to make easier the deployment of an IM web GUI using the 
 default configuration. Information about this image can be found here: https://registry.hub.docker.com/u/grycap/im-web/.
