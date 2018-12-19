@@ -43,8 +43,8 @@ if (!check_session_user()) {
     <link rel="stylesheet" href="css/style_intro2.css"> 
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
-    <script type="text/javascript" language="javascript" src="js/jquery.js"/>
-    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"/>
+    <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"/></script>
 </head>
 <body>
 

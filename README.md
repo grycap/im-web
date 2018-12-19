@@ -88,7 +88,7 @@ The default administrator user is admin with password admin.
 ## 2 DOCKER IMAGE
 
 A Docker image named `grycap/im-web` has been created to make easier the deployment of an IM web GUI using the 
-default configuration. Information about this image can be found here: https://registry.hub.docker.com/u/grycap/im-web/.
+default configuration. Information about this image can be found here: <https://registry.hub.docker.com/u/grycap/im-web/>.
 
 This container is prepaired to work linked with the IM service container `grycap/im`, in this way:
 
