@@ -74,12 +74,12 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
             $username = $_POST['username'];
             $password = $_POST['password'];
             $password2 = $_POST['password2'];
+            $err = "";
 
             if (!filter_var($username, FILTER_VALIDATE_EMAIL)) {
             	$err = "Username is not a valid email.";
             }
 
-            $err = "";
             if (strlen(trim($password)) > 0) {
                 if (trim($password) != trim($password2)) {
                     $err = "The passwords are not equal.";
