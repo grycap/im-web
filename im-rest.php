@@ -237,6 +237,13 @@ class IMRest
         return $res->getOutput();
     }
 
+    public function RebootVM($inf_id, $vm_id)
+    {
+    	$headers = array('Accept: text/*');
+    	$res = $this->BasicRESTCall("PUT", '/infrastructures/' . $inf_id . '/vms/' . $vm_id . "/reboot", $headers);
+    	return $res->getOutput();
+    }
+
     public function AddResource($inf_id, $radl)
     {
         $headers = array('Accept: text/*', 'Content-Length: ' . strlen($radl), 'Content-Type: ' . $this->GetContentType($radl));

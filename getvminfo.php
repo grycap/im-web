@@ -159,6 +159,7 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
         <tr>
             <td style="text-align:center;"><a href="operate.php?op=stopvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>"><img style="border:0px;" src="images/icon_stopVM.jpg" border="0" alt="Stop VM" title="Stop VM"></a></td>
             <td style="text-align:center;"><a href="operate.php?op=startvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>"><img style="border:0px;" src="images/icon_startVM.jpg" border="0" alt="Start VM" title="Start VM"></a></td>
+            <td style="text-align:center;"><a href="operate.php?op=rebootvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>"><img style="border:0px;" src="images/icon_rebootVM.jpg" border="0" alt="Reboot VM" title="Reboot VM"></a></td>
             <td style="text-align:center;"><a href="#" onclick="javascript:confirm_delete('operate.php?op=destroyvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>', '<?php echo $vmid;?>')"><img style="border:0px;" src="images/icon_terminateVM.jpg" border="0" alt="Terminate VM" title="Terminate VM"></a></td>
         </tr>
     </tbody>

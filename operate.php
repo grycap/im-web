@@ -108,6 +108,21 @@ if (!check_session_user()) {
             } else {
                 header('Location: error.php?msg=No id');
             }
+        }  elseif ($op == "rebootvm") {
+        	if (isset($_GET['infid']) and isset($_GET['vmid'])) {
+        		$infid = $_GET['infid'];
+        		$vmid = $_GET['vmid'];
+        		
+        		$res = GetIM()->RebootVM($infid, $vmid);
+        		
+        		if (strpos($res, "Error") !== false) {
+        			header('Location: error.php?msg=' . urlencode($res));
+        		} else {
+        			header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
+        		}
+        	} else {
+        		header('Location: error.php?msg=No id');
+        	}
         } elseif ($op == "addresource") {
             $radl = $_POST['radl'];
                 

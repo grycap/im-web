@@ -124,6 +124,27 @@ final class OperateTest extends TestCase
     /**
      * @runInSeparateProcess
      */
+    public function testRebootVM()
+    {
+    	$this->expectOutputString('');
+    	$_SESSION = array("user"=>"admin", "password"=>"admin");
+    	$_GET = array("op"=>"rebootvm", "infid"=>"id", "vmid"=>"vid");
+    	
+    	$im = $this->getMockBuilder(IMRest::class)
+    	->setMethods(['RebootVM'])
+    	->getMock();
+    	$im->method('RebootVM')
+    	->willReturn("");
+    	
+    	$GLOBALS['mock_im'] = $im;
+    	include('../../operate.php');
+    	unset($GLOBALS['mock_im']);
+    	$this->assertEquals(array('Location: getvminfo.php?id=id&vmid=vid'),xdebug_get_headers());
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
     public function testAddResource()
     {
         $this->expectOutputString('');

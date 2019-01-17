@@ -119,6 +119,13 @@ final class RESTTest extends TestCase
         $this->assertEquals("", $res);
     }
 
+    public function testRebootVM()
+    {
+    	$im = $this->getIM("");
+    	$res = $im->RebootVM("infid", "vmid");
+    	$this->assertEquals("", $res);
+    }
+
     public function testAddResource()
     {
         $im = $this->getIM("vmid1\nvmid2");
