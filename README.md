@@ -1,6 +1,6 @@
 # IM - Infrastructure Manager web GUI
 
-*   Build Status [![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/)
+[![Build Status](http://jenkins.i3m.upv.es/buildStatus/icon?job=grycap/im-web-unit)](http://jenkins.i3m.upv.es:8080/job/grycap/job/im-web-unit/) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/67e793926c87475da58d9bf16838eaff)](https://www.codacy.com/app/micafer/im-web?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=grycap/im-web&amp;utm_campaign=Badge_Grade) [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/67e793926c87475da58d9bf16838eaff)](https://www.codacy.com/app/micafer/im-web?utm_source=github.com&utm_medium=referral&utm_content=grycap/im-web&utm_campaign=Badge_Coverage) [![License](https://img.shields.io/badge/license-GPL%20v3.0-brightgreen.svg)](LICENSE) [![Docs](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://imdocs.readthedocs.io/en/latest/web.html
 
 IM is a tool that ease the access and the usability of IaaS clouds by automating
 the VMI selection, deployment, configuration, software installation, monitoring
