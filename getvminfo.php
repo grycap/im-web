@@ -98,12 +98,12 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
             <tbody>
             <tr>
           <td style="width:10px;background:#777;"><img src="images/icon_state.png"></td>
-                <th style="width:90px; background:#777;padding-left:0px;">State</th>            
+                <td style="width:90px; background:#777;padding-left:0px;">State</td>
                 <td colspan="3" style="text-align:left; padding-left:20px; font-weight:bold;background:#CCC;"><?php echo formatState($radl_tokens['state']);?></td>
             </tr>
             <tr>
           <td style="width:10px;background:#777;"><img src="images/icon_deploy.png"></td>
-                <th style="width:90px; background:#777;padding-left:0px;">Deployment</th>
+                <td style="width:90px; background:#777;padding-left:0px;">Deployment</td>
                 <td colspan="3" style="text-align:left; padding-left:20px;font-weight:bold;background:#CCC;"><?php echo formatCloud($radl_tokens);?>
                 </td>
             </tr>
@@ -135,7 +135,7 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
 
             <tr>
           <td style="width:10px;background:#a27c3b;"><img src="images/icon_info.png"></td>
-                <th style="width:90px;">Information</th>
+                <th style="width:90px;background:#a27c3b;">Information</th>
                 <td style="text-align:left;background:#e9d6b5;">
                     <table>
              <?php echo formatRADL($radl_tokens);?>
