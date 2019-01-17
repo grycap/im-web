@@ -1,7 +1,7 @@
 # Dockerfile to create a container with the IM web GUI
 FROM php:apache
 MAINTAINER Miguel Caballer <micafer1@upv.es>
-LABEL version="1.5.8"
+LABEL version="1.5.9"
 LABEL description="Container image to run the IM web GUI. (http://www.grycap.upv.es/im)"
 
 RUN apt-get update && apt-get install --no-install-recommends -y wget unzip && rm -rf /var/lib/apt/lists/* && \

@@ -338,6 +338,29 @@ class IMXML
         }
     }
 
+    public function RebootVM($inf_id, $vm_id)
+    {
+    	$auth = $this->get_auth_data();
+
+    	$xmlrpc_msg = new xmlrpcmsg('RebootVM', array(new xmlrpcval($inf_id, "string"), new xmlrpcval($vm_id, "string"), $auth));
+
+    	$xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
+
+    	if ($xmlrpc_resp->faultCode()) {
+    		return 'Error: ' . $xmlrpc_resp->faultString();
+    	} else {
+    		$res = php_xmlrpc_decode($xmlrpc_resp->value());
+    	}
+    	$success = $res[0];
+    	$info = $res[1];
+
+    	if ($success) {
+    		return $info;
+    	} else {
+    		return 'Error';
+    	}
+    }
+
     public function AddResource($inf_id, $radl)
     {
         $auth = $this->get_auth_data();
