@@ -48,7 +48,7 @@
                         <tbody>
                                 <tr>
                                         <th align="left">
-                                            Username:
+                                            Username(e-mail):
                                         </th>
                                         <td>
                                             <input type="text" name="username">
