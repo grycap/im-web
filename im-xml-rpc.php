@@ -135,7 +135,7 @@ class IMXML
     {
         $auth = $this->get_auth_data();
         
-        $xmlrpc_msg = new xmlrpcmsg('CreateInfrastructure', array(new xmlrpcval($radl, "string"), new xmlrpcval($async, "boolean"), $auth));
+        $xmlrpc_msg = new xmlrpcmsg('CreateInfrastructure', array(new xmlrpcval($radl, "string"), $auth, new xmlrpcval($async, "boolean")));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         
