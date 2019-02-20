@@ -730,15 +730,14 @@ if (!check_session_user()) {
                                </tr>
                                 <tr>
                                         <th align="left">
-                                            Proxy
-                                        </th>
-                                        <td colspan="3">
-                                           <input type="file" name="proxy"/>
-                                           <input type="hidden" name="token_type" value="VOMS"/>
-                                         </td>
-                                        <th align="left">
                                         </th>
                                         <td>
+                                         </td>
+                                        <th align="left">
+                                            Token:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="token_type" value="<?php echo token_type;?>"/>
                                         </td>
                             </tr>
                 <tr>
