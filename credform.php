@@ -737,7 +737,7 @@ if (!check_session_user()) {
                                             Token:
                                         </th>
                                         <td>
-                                            <input type="text" name="token_type" value="<?php echo token_type;?>"/>
+                                            <input type="text" name="token_type" value="<?php echo $token_type;?>"/>
                                         </td>
                             </tr>
                 <tr>
