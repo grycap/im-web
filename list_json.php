@@ -133,7 +133,7 @@ if (!check_session_user()) {
                         $text = $text . '"status":"' . $status . '",';
                         
                         if ($state == "configured" || $state == "unconfigured") {
-                            $text = $text . '"reconfigure":"<a href=\"operate.php?op=reconfigure&infid=' . $inf . '?>\"><img src=\"images/reload.png\" border=\"0\" alt=\"Reconfigure\" title=\"Reconfigure\"></a>",';
+                            $text = $text . '"reconfigure":"<a href=\"operate.php?op=reconfigure&infid=' . $inf . '\"><img src=\"images/reload.png\" border=\"0\" alt=\"Reconfigure\" title=\"Reconfigure\"></a>",';
                         } else {
                             $text = $text . '"reconfigure":"N/A",';
                         }

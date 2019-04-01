@@ -84,7 +84,7 @@ if (!check_session_user()) {
     <tbody>
         <tr>
           <td style="width:10px;background:#a27c3b;"><img src="images/icon_info.png"></td>
-                <th style="width:90px;">Outputs</th>
+                <td style="width:90px;">Outputs</td>
                 <td style="text-align:left;background:#e9d6b5;">
                     <table>
 
