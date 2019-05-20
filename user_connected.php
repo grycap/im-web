@@ -12,8 +12,14 @@ if (isset($_SESSION['user_name'])) {
                     ?>
                 &nbsp&nbsp&nbsp&nbsp<img style="vertical-align: middle;" src="images/verde.png" />
                     <?php 
+                               if (isset($_SESSION['user_token'])) {
+                               	echo '<a href="oidc_user_info.php">';
+                               }
                                echo $user_name;
-                               echo ' is connected'; 
+                               echo ' is connected';
+                               if (isset($_SESSION['user_token'])) {
+                               	echo '</a>';
+                               }
                     ?> 
 &nbsp&nbsp|&nbsp&nbsp <a href = "logout.php">Sign out</a>
 &nbsp&nbsp|&nbsp&nbsp
