@@ -98,7 +98,7 @@ class JWT
         if (null === static::jsonDecode(static::urlsafeB64Decode($headb64))) {
         	throw new Exception('Invalid header encoding');
         }
-        if (null === static::jsonDecode(static::urlsafeB64Decode($bodyb64))) {
+        if (null === $payload = static::jsonDecode(static::urlsafeB64Decode($bodyb64))) {
         	throw new Exception('Invalid claims encoding');
         }
         if (false === static::urlsafeB64Decode($cryptob64)) {
