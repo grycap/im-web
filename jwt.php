@@ -90,19 +90,18 @@ class JWT
      */
     public static function decode($jwt)
     {
-        $timestamp = time();
         $tks = explode('.', $jwt);
         if (count($tks) != 3) {
         	throw new Exception('Wrong number of segments');
         }
         list($headb64, $bodyb64, $cryptob64) = $tks;
-        if (null === ($header = static::jsonDecode(static::urlsafeB64Decode($headb64)))) {
+        if (null === static::jsonDecode(static::urlsafeB64Decode($headb64))) {
         	throw new Exception('Invalid header encoding');
         }
-        if (null === $payload = static::jsonDecode(static::urlsafeB64Decode($bodyb64))) {
+        if (null === static::jsonDecode(static::urlsafeB64Decode($bodyb64))) {
         	throw new Exception('Invalid claims encoding');
         }
-        if (false === ($sig = static::urlsafeB64Decode($cryptob64))) {
+        if (false === static::urlsafeB64Decode($cryptob64)) {
         	throw new Exception('Invalid signature encoding');
         }
 
