@@ -82,6 +82,10 @@ class IMDBMySQL
         other_w int,
         other_x int,
         PRIMARY KEY (rowid)
+        );",
+        "admin" => "INSERT INTO user VALUES (
+        1, 'admin',
+        '$2a$10$72a6bff21deee8d849ca7eg/71ykRhftGf0limAHq3j0x3gK76CVe',1
         );"
         );
 
@@ -125,6 +129,7 @@ class IMDBMySQL
                 return "Error creating tables in the DB: " . $this->link->error;
             }
         }
+        $success = $this->link->commit();
 
         return "";
     }
