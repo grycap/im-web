@@ -99,13 +99,17 @@ final class UserinfoTest extends TestCase
         $_GET = array("op"=>"register");
         $_POST = array("username"=>"userinfotest2", "password"=>"npasswordtest", "password2"=>"npasswordtest");
         include('../../userinfo.php');
+        $this->assertEquals(array('Location: index.php?error=Username is not a valid email.'),xdebug_get_headers());
+        		
+        $_POST = array("username"=>"user@server.com", "password"=>"npasswordtest", "password2"=>"npasswordtest");
+        include('../../userinfo.php');
         $this->assertEquals(array('Location: index.php?info=User added successfully'),xdebug_get_headers());
 
-        $res = get_user("userinfotest2");
+        $res = get_user("user@server.com");
         $res = check_password("npasswordtest", $res["password"]);
         $this->assertEquals(true, $res);
 
-        $err = delete_user("userinfotest2");
+        $err = delete_user("user@server.com");
         $this->assertEquals("", $err);
     }
 
