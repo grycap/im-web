@@ -214,6 +214,16 @@ class IMDBMySQL
         return $this->direct_exec($sql);
     }
 
+    function table_exists($table_name)
+    {
+        $sql = "SELECT * FROM information_schema.tables WHERE table_name = " . $table_name . " and table_schema = " . $this->db_name;
+        $res = $this->direct_exec($sql);
+        if (count($res) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
