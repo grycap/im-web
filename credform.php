@@ -24,7 +24,7 @@ if (!isset($_SESSION)) {
     require_once 'user.php';
     require_once 'cred.php';
 if (!check_session_user()) {
-    header('Location: index.php?error=Invalid User');
+    invalid_user_error();
 } else {
     if (isset($_GET['id'])) {
         $rowid = $_GET['id'];
@@ -82,7 +82,6 @@ if (!check_session_user()) {
         $host = "";
         $username = "";
         $password = "";
-        $token_type = "";
         $project = "";
         $proxy = "";
         $certificate = "";
@@ -103,7 +102,6 @@ if (!check_session_user()) {
                 $host = $cred['host'];
                 $username = $cred['username'];
                 $project = $cred['project'];
-                $token_type = $cred['token_type'];
                 $tenant = $cred['tenant'];
                 $auth_version = $cred['auth_version'];
                 $domain = $cred['domain'];
@@ -737,7 +735,7 @@ if (!check_session_user()) {
                                             Token:
                                         </th>
                                         <td>
-                                            <input type="text" name="token_type" value="<?php echo $token_type;?>"/>
+                                            <input type="text" name="proxy" value="<?php echo $proxy;?>"/>
                                         </td>
                             </tr>
                 <tr>

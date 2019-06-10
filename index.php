@@ -24,21 +24,21 @@ require_once "analyticstracking.php";
         <div id="caja_login_superior_componentes">
             <form action="list.php" method="post">
 <?php
-if (isset($_GET['info'])) {
+if (isset($_SESSION['info'])) {
     ?>
         <div id="texto_info">
         <div id="texto_open_sans">
-                    <?php echo $_GET['info'];?>
+                    <?php echo $_SESSION['info'];unset($_SESSION['info']); ?>
                 </div>
         </div>
     <?php
 }
 
-if (isset($_GET['error'])) {
+if (isset($_SESSION['error'])) {
     ?>
         <div id="texto_error">
         <div id="texto_open_sans">
-                    <?php echo $_GET['error'];?>
+                    <?php echo $_SESSION['error'];unset($_SESSION['error']); ?>
                 </div>
         </div>
     <?php

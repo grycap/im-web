@@ -19,7 +19,6 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-$msg = $_GET['msg']
 
 ?>
 <!DOCTYPE HTML>
@@ -67,7 +66,8 @@ $msg = $_GET['msg']
     <br><br>
 
     <div class="texto_error">
-    Error: <?php echo str_replace("\n", "<br>", $msg);?> <br>
+    Error: <?php echo str_replace("\n", "<br>", $_SESSION['error']);unset($_SESSION['error']);?> <br>
+
     </div>
     <br>
     </div>

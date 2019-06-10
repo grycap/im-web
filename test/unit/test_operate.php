@@ -12,7 +12,8 @@ final class OperateTest extends TestCase
         $this->expectOutputString('');
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         include('../../operate.php');
-        $this->assertEquals(array('Location: error.php?msg=No op'),xdebug_get_headers());
+        $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
+        $this->assertEquals($_SESSION['error'], 'No op');
     }
 
     /**

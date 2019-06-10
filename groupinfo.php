@@ -26,7 +26,7 @@ if (!isset($_SESSION)) {
 }   
 
 if (!check_session_user() || !check_admin_user()) {
-    header('Location: index.php?error=Invalid User');
+	invalid_user_error();
 } else {    
     $op = "";
     if (isset($_POST['op'])) {
@@ -41,12 +41,12 @@ if (!check_session_user() || !check_admin_user()) {
                 $name = $_GET['id'];
                 $err = delete_group($name);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . urlencode($err));
+                	error(urlencode($err));
                 } else {
                     header('Location: group_list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "add") {
             $name = $_POST['name'];
@@ -54,7 +54,7 @@ if (!check_session_user() || !check_admin_user()) {
                 
             $err = insert_group($name, $desc);
             if (strlen($err) > 0) {
-                header('Location: error.php?msg=' . urlencode($err));
+            	error(urlencode($err));
             } else {
                 header('Location: group_list.php');
             }
@@ -66,18 +66,18 @@ if (!check_session_user() || !check_admin_user()) {
                     
                 $err = edit_group($name, $new_name, $desc);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . urlencode($err));
+                	error(urlencode($err));
                 } else {
                     header('Location: group_list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } else {
-            header('Location: error.php?msg=Incorrect op: ' . $op);
+        	error('Incorrect op: ' . $op);
         }
     } else {
-        header('Location: error.php?msg=No op');
+    	error('No op');
     }
 }
 ?>

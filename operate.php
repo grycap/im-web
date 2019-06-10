@@ -26,7 +26,7 @@ if (!isset($_SESSION)) {
     
 require_once 'user.php';
 if (!check_session_user()) {
-    header('Location: index.php?error=Invalid User');
+	invalid_user_error();
 } else {
     $op = "";
     if (isset($_POST['op'])) {
@@ -46,7 +46,7 @@ if (!check_session_user()) {
             $res = GetIM()->CreateInfrastructure($radl, $async);
 
             if (strpos($res, "Error") !== false) {
-                header('Location: error.php?msg=' . urlencode($res));
+            	error(urlencode($res));
             } else {
                 header('Location: list.php');
             }
@@ -56,12 +56,12 @@ if (!check_session_user()) {
                 $res = GetIM()->DestroyInfrastructure($id);
                     
                 if (strpos($res, "Error") !== false) {
-                    header('Location: error.php?msg=' . urlencode($res));
+                	error(urlencode($res));
                 } else {
                     header('Location: list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "destroyvm") {
             if (isset($_GET['infid']) and isset($_GET['vmid'])) {
@@ -71,12 +71,12 @@ if (!check_session_user()) {
                 $res = GetIM()->RemoveResource($infid, $vmid);
                     
                 if (strpos($res, "Error") !== false) {
-                    header('Location: error.php?msg=' . urlencode($res));
+                	error(urlencode($res));
                 } else {
                     header('Location: list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "stopvm") {
             if (isset($_GET['infid']) and isset($_GET['vmid'])) {
@@ -86,12 +86,12 @@ if (!check_session_user()) {
                  $res = GetIM()->StopVM($infid, $vmid);
                 
                 if (strpos($res, "Error") !== false) {
-                    header('Location: error.php?msg=' . urlencode($res));
+                	error(urlencode($res));
                 } else {
                     header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "startvm") {
             if (isset($_GET['infid']) and isset($_GET['vmid'])) {
@@ -101,12 +101,12 @@ if (!check_session_user()) {
                  $res = GetIM()->StartVM($infid, $vmid);
                      
                 if (strpos($res, "Error") !== false) {
-                    header('Location: error.php?msg=' . urlencode($res));
+                	error(urlencode($res));
                 } else {
                     header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         }  elseif ($op == "rebootvm") {
         	if (isset($_GET['infid']) and isset($_GET['vmid'])) {
@@ -116,12 +116,12 @@ if (!check_session_user()) {
         		$res = GetIM()->RebootVM($infid, $vmid);
         		
         		if (strpos($res, "Error") !== false) {
-        			header('Location: error.php?msg=' . urlencode($res));
+        			error(urlencode($res));
         		} else {
         			header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
         		}
         	} else {
-        		header('Location: error.php?msg=No id');
+        		error('No ID');
         	}
         } elseif ($op == "addresource") {
             $radl = $_POST['radl'];
@@ -132,12 +132,12 @@ if (!check_session_user()) {
                 $res = GetIM()->AddResource($infid, $radl);
                     
                 if (strpos($res, "Error") !== false) {
-                    header('Location: error.php?msg=' . urlencode($res));
+                	error(urlencode($res));
                 } else {
                     header('Location: list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "reconfigure") {
             if (isset($_GET['infid'])) {
@@ -146,20 +146,20 @@ if (!check_session_user()) {
                  $res = GetIM()->Reconfigure($infid, "");
             
                 if (strpos($res, "Error") !== false) {
-                    header('Location: error.php?msg=' . urlencode($res));
+                	error(urlencode($res));
                 } else {
                     header('Location: list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } else {
-            header('Location: error.php?msg=Incorrect Operation: ' . urlencode($op));
+        	error('Incorrect Operation: ' . urlencode($op));
         }
             
             
     } else {
-        header('Location: error.php?msg=No op');
+    	error('No op');
     }
 }
 ?>

@@ -24,7 +24,7 @@ if (!isset($_SESSION)) {
 require_once 'format.php';
 
 if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
-    header('Location: error.php?msg=No Id or vmid');
+	error('No Id or vmid');
 } else {
     $id = $_GET['id'];
     $vmid = $_GET['vmid'];
@@ -34,7 +34,7 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
     $res = GetIM()->GetVMInfo($id, $vmid);
         
     if (is_string($res) && strpos($res, "Error") !== false) {
-        header('Location: error.php?msg=' . urlencode($res));
+        error(urlencode($res));
     } else {
         $radl_tokens = parseRADL($res);
         $outports = getOutPorts($res);

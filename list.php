@@ -30,7 +30,7 @@ if (isset($_POST['username'])) {
 require_once 'format.php';
 require_once 'user.php';
 if (!check_session_user()) {
-    header('Location: index.php?error=Invalid User');
+	invalid_user_error();
 } else {
     ?>
 <!DOCTYPE HTML>
