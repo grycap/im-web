@@ -23,7 +23,7 @@ if (!isset($_SESSION)) {
 
     require_once 'user.php';
 if (!check_session_user()) {
-    header('Location: index.php?error=Invalid User');
+	invalid_user_error();
 } else {
     $user = $_SESSION['user'];
             

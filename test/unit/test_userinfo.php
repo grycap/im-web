@@ -12,7 +12,8 @@ final class UserinfoTest extends TestCase
         $this->expectOutputString('');
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         include('../../userinfo.php');
-        $this->assertEquals(array('Location: error.php?msg=No op'),xdebug_get_headers());
+        $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
+        $this->assertEquals($_SESSION['error'], 'No op');
     }
 
     /**
@@ -26,7 +27,8 @@ final class UserinfoTest extends TestCase
         $_POST = array("username"=>"userinfotest", "password"=>"passwordtest",
                     "password2"=>"password", "user_groups"=>array("users"), "permissions"=>"0");
         include('../../userinfo.php');
-        $this->assertEquals(array('Location: error.php?msg=The+passwords+are+not+equal.'),xdebug_get_headers());
+        $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
+        $this->assertEquals($_SESSION['error'], 'The+passwords+are+not+equal.');
 
         $res = get_user("userinfotest");
         $this->assertEquals(NULL, $res);
@@ -99,11 +101,13 @@ final class UserinfoTest extends TestCase
         $_GET = array("op"=>"register");
         $_POST = array("username"=>"userinfotest2", "password"=>"npasswordtest", "password2"=>"npasswordtest");
         include('../../userinfo.php');
-        $this->assertEquals(array('Location: index.php?error=Username is not a valid email.'),xdebug_get_headers());
+        $this->assertEquals(array('Location: index.php'),xdebug_get_headers());
+        $this->assertEquals($_SESSION['error'], 'Username is not a valid email.');
         		
         $_POST = array("username"=>"user@server.com", "password"=>"npasswordtest", "password2"=>"npasswordtest");
         include('../../userinfo.php');
-        $this->assertEquals(array('Location: index.php?info=User added successfully'),xdebug_get_headers());
+        $this->assertEquals(array('Location: index.php'),xdebug_get_headers());
+        $this->assertEquals($_SESSION['info'], 'User added successfully');
 
         $res = get_user("user@server.com");
         $res = check_password("npasswordtest", $res["password"]);

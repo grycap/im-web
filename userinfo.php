@@ -33,7 +33,7 @@ if (isset($_POST['op'])) {
 }
 
 if (($op == "password" && !check_session_user()) || ($op != "register" && $op != "password" && (!check_session_user() || !check_admin_user()))) {
-    header('Location: index.php?error=Invalid User' . $op);
+    invalid_user_error();
 } else {    
         
     if (strlen($op) > 0) {
@@ -42,12 +42,12 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                 $username = $_GET['id'];
                 $err = delete_user($username);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . urlencode($err));
+                	error(urlencode($err));
                 } else {
                     header('Location: user_list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "password") {
             $username = $_SESSION["user"];
@@ -65,7 +65,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                 $err = change_password($username, $password);
             }
             if (strlen($err) > 0) {
-                header('Location: index.php?error=' . $err);
+            	invalid_user_error($err);
             } else {
                 $_SESSION['password'] = $password;
                 header('Location: list.php');
@@ -92,9 +92,10 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                 $err = insert_credential($username, "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
             }
             if (strlen($err) > 0) {
-                header('Location: index.php?error=' . $err);
+            	invalid_user_error($err);
             } else {
-                header('Location: index.php?info=User added successfully');
+            	$_SESSION['info'] = "User added successfully";
+            	header('Location: index.php');
             }
         } elseif ($op == "add") {
             $username = $_POST['username'];
@@ -114,7 +115,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                         $err = insert_user($username, $password, $groups, $permissions);
             }
             if (strlen($err) > 0) {
-                header('Location: error.php?msg=' . urlencode($err));
+            	error(urlencode($err));
             } else {
                 header('Location: user_list.php');
             }
@@ -138,18 +139,18 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                             $err = edit_user($username, $new_username, $password, $groups, $permissions);
                 }
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . urlencode($err));
+                	error(urlencode($err));
                 } else {
                     header('Location: user_list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } else {
-            header('Location: error.php?msg=Incorrect op: ' . $op);
+        	error('Incorrect op: ' . $op);
         }
     } else {
-        header('Location: error.php?msg=No op');
+    	error('No op');
     }
 }
 ?>

@@ -26,7 +26,7 @@ if (!isset($_SESSION)) {
     
 require_once 'user.php';
 if (!check_session_user()) {
-    header('Location: index.php?error=Invalid User');
+	invalid_user_error();
 } else {
     $op = "";
     if (isset($_POST['op'])) {
@@ -41,12 +41,12 @@ if (!check_session_user()) {
                 $id = $_GET['id'];
                 $err = delete_radl($id);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . urlencode($err));
+                	error(urlencode($err));
                 } else {
                     header('Location: radl_list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "add") {
             $name = $_POST['name'];
@@ -65,7 +65,7 @@ if (!check_session_user()) {
     
             $err = insert_radl($imuser, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x);
             if (strlen($err) > 0) {
-                header('Location: error.php?msg=' . urlencode($err));
+            	error(urlencode($err));
             } else {
                 header('Location: radl_list.php');
             }
@@ -88,12 +88,12 @@ if (!check_session_user()) {
                     
                 $err = edit_radl($id, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x);
                 if (strlen($err) > 0) {
-                    header('Location: error.php?msg=' . urlencode($err));
+                	error(urlencode($err));
                 } else {
                     header('Location: radl_list.php');
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } elseif ($op == "launch") {
             if (isset($_GET['id'])) {
@@ -117,7 +117,7 @@ if (!check_session_user()) {
                                 $radl['radl'] = str_replace($param_replace, $_GET[$param_name], $radl['radl']);
                             } else {
                                 $params_ok = false;
-                                header('Location: error.php?msg=RADL parameter ' . $param_name . ' undefined.');
+                                error('RADL parameter ' . $param_name . ' undefined.');
                             }            
                         }
                             
@@ -129,7 +129,7 @@ if (!check_session_user()) {
                             if (strpos($res, "Error") === false) {
                                 header('Location: list.php');
                             } else {
-                                header('Location: error.php?msg=' . urlencode($res));
+                            	error(urlencode($res));
                             }
                         }
                     } else { 
@@ -144,17 +144,17 @@ if (!check_session_user()) {
                     if (strpos($res, "Error") === false) {
                             header('Location: list.php');
                     } else {
-                        header('Location: error.php?msg=' . urlencode($res));
+                    	error(urlencode($res));
                     }
                 }
             } else {
-                header('Location: error.php?msg=No id');
+            	error('No ID');
             }
         } else {
-            header('Location: error.php?msg=Incorrect op: ' . $op);
+        	error('Incorrect op: ' . $op);
         }
     } else {
-        header('Location: error.php?msg=No op');
+    	error('No op');
     }
 }
 ?>

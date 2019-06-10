@@ -24,7 +24,7 @@ require_once 'user.php';
 require_once 'jwt.php';
 
 if (!isset($_SESSION['user_token'])) {
-	header('Location: index.php?error=No OIDC User');
+	invalid_user_error("No OIDC User");
 } else {
 
 ?>

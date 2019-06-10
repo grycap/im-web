@@ -19,6 +19,19 @@
 
 require_once 'crypt.php';
 
+
+function error($msg = "Error")
+{
+	$_SESSION['error'] = $msg;
+	header('Location: error.php');
+}
+
+function invalid_user_error($msg = "Invalid User")
+{
+	$_SESSION['error'] = $msg;
+	header('Location: index.php');
+}
+
 function check_user_token()
 {
     include 'config.php';
