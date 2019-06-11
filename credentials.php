@@ -21,7 +21,8 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-    require_once 'user.php';
+require_once 'user.php';
+
 if (!check_session_user()) {
 	invalid_user_error();
 } else {
@@ -133,7 +134,7 @@ if (!check_session_user()) {
             ?>
             <tr>
                 <td>
-                <?php echo $cred['id']?>
+                <?php echo htmlspecialchars($cred['id'])?>
                 </td>
                 <td>
                 <?php if (strcmp($cred['type'], "OpenNebula") == 0) { ?>
@@ -190,13 +191,13 @@ if (!check_session_user()) {
 
                 </td>
                 <td>
-                <?php echo $cred['host']?>
+                <?php echo htmlspecialchars($cred['host'])?>
                 </td>
                 <td>
                     <a href="credform.php?id=<?php echo $cred['rowid'];?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
                 </td>
                 <td>
-                    <a onclick="javascript:confirm_delete('credinfo.php?op=delete&id=<?php echo $cred['rowid'];?>', '<?php echo $cred['id']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                    <a onclick="javascript:confirm_delete('credinfo.php?op=delete&id=<?php echo $cred['rowid'];?>', '<?php echo htmlspecialchars($cred['id'])?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
         <td>
                 <?php

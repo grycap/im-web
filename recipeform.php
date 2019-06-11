@@ -77,13 +77,13 @@ if (!check_session_user()) {
             
     if (isset($id)) {
         $recipe = get_recipe($id);
-        $name = $recipe['name'];
-        $version = $recipe['version'];
-        $module = $recipe['module'];
-        $recipe_text = $recipe['recipe'];
-        $galaxy_module = $recipe['galaxy_module'];
-        $requirements = $recipe['requirements'];
-        $desc = $recipe['description'];
+        $name = htmlspecialchars($recipe['name']);
+        $version = htmlspecialchars($recipe['version']);
+        $module = htmlspecialchars($recipe['module']);
+        $recipe_text = htmlspecialchars($recipe['recipe']);
+        $galaxy_module = htmlspecialchars($recipe['galaxy_module']);
+        $requirements = htmlspecialchars($recipe['requirements']);
+        $desc = htmlspecialchars($recipe['description']);
         ?>
         <br> 
         <div class='h1'>:: Edit Recipe ::</div>
@@ -102,7 +102,7 @@ if (!check_session_user()) {
         }
         ?>
             <input type="hidden" name="op" value="edit"/>
-            <input type="hidden" name="id" value="<?php echo $id;?>"/>
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($id);?>"/>
         <?php
     } else {
         ?>

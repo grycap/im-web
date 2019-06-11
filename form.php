@@ -91,7 +91,7 @@ if (!check_session_user()) {
 
         <form action="operate.php" method="post">
             <input type="hidden" name="op" value="addresource"/>
-            <input type="hidden" name="infid" value="<?php echo $id?>"/>
+            <input type="hidden" name="infid" value="<?php echo htmlspecialchars($id)?>"/>
 
 
                 <table>

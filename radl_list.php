@@ -147,10 +147,10 @@ if (!check_session_user()) {
             ?>
             <tr>
                 <td>
-                <?php echo $radl['name']?>
+                <?php echo htmlspecialchars($radl['name'])?>
                 </td>
                 <td>
-                <?php echo $radl['description']?>
+                <?php echo htmlspecialchars($radl['description'])?>
                 </td>
                 <td>
                 <?php
@@ -168,7 +168,7 @@ if (!check_session_user()) {
                 <?php
                 if (radl_user_can($radl['rowid'], $user, "w")) {
                     ?>
-                    <a onclick="javascript:confirm_delete('radlinfo.php?op=delete&id=<?php echo $radl['rowid'];?>', '<?php echo $radl['name']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                    <a onclick="javascript:confirm_delete('radlinfo.php?op=delete&id=<?php echo $radl['rowid'];?>', '<?php echo htmlspecialchars($radl['name'])?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                     <?php
                 }
                 ?>
@@ -197,11 +197,11 @@ if (!check_session_user()) {
              modal: true,
              buttons: {
                  Launch: function() {
-                     var url = 'radlinfo.php?op=launch&id=<?php echo $parameters;?>&parameters=1';
+                     var url = 'radlinfo.php?op=launch&id=<?php echo htmlspecialchars($parameters);?>&parameters=1';
             <?php
             foreach ($radl_params as $param_name) {
-                echo "					 var " . $param_name . " = $( '#" . $param_name . "' );\n";
-                echo "					 url = url + '&" . $param_name . "=' + String(" . $param_name . ".val());\n";
+            	echo "					 var " . htmlspecialchars($param_name) . " = $( '#" . htmlspecialchars($param_name) . "' );\n";
+            	echo "					 url = url + '&" . htmlspecialchars($param_name) . "=' + String(" . htmlspecialchars($param_name) . ".val());\n";
             } 
             ?>
                      $( this ).dialog( "close" );
@@ -220,8 +220,8 @@ if (!check_session_user()) {
             <?php
             foreach ($radl_params as $param_name) {
                 ?>
-    <label for="<?php echo $param_name;?>"><?php echo $param_name;?></label>
-    <input type="text" name="<?php echo $param_name;?>" id="<?php echo $param_name;?>" style="border: 1px solid #000;"><br>
+    <label for="<?php echo htmlspecialchars($param_name);?>"><?php echo htmlspecialchars($param_name);?></label>
+    <input type="text" name="<?php echo htmlspecialchars($param_name);?>" id="<?php echo htmlspecialchars($param_name);?>" style="border: 1px solid #000;"><br>
                 <?php
             }
             ?>

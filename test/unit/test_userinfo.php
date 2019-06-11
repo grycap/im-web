@@ -28,7 +28,7 @@ final class UserinfoTest extends TestCase
                     "password2"=>"password", "user_groups"=>array("users"), "permissions"=>"0");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
-        $this->assertEquals($_SESSION['error'], 'The+passwords+are+not+equal.');
+        $this->assertEquals($_SESSION['error'], 'The passwords are not equal.');
 
         $res = get_user("userinfotest");
         $this->assertEquals(NULL, $res);

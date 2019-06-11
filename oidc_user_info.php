@@ -84,7 +84,7 @@ if (!isset($_SESSION['user_token'])) {
                                             Sub:
                                         </th>
                                         <td>
-                                            <input type="text" style="width:512px;" disabled value="<?php echo $decoded->sub;?>">
+                                            <input type="text" style="width:512px;" disabled value="<?php echo htmlspecialchars($decoded->sub);?>">
                                         </td>
                                </tr>
                                 <tr>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['user_token'])) {
                                             Iss:
                                         </th>
                                         <td>
-                                            <input type="text" style="width:512px;" disabled value="<?php echo $decoded->iss;?>">
+                                            <input type="text" style="width:512px;" disabled value="<?php echo htmlspecialchars($decoded->iss);?>">
                                         </td>
                                </tr>
                                 <tr>
@@ -100,7 +100,7 @@ if (!isset($_SESSION['user_token'])) {
                                             Access Token:
                                         </th>
                                         <td>
-                                        <textarea disabled type="RECIPE"><?php echo $_SESSION['user_token'];?></textarea>
+                                        <textarea disabled type="RECIPE"><?php echo htmlspecialchars($_SESSION['user_token']);?></textarea>
                                         </td>
                                </tr>
                         </tbody>

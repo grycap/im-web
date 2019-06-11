@@ -120,7 +120,7 @@ if (!check_session_user()) {
         ?>
 
             <input type="hidden" name="op" value="edit"/>
-            <input type="hidden" name="id" value="<?php echo $id;?>"/>
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($id);?>"/>
 
 
             <?php
@@ -147,18 +147,18 @@ if (!check_session_user()) {
                 </tr>
                 <tr>
                     <td colspan=2>
-<textarea type="RADL" align="bottom" name="radl"><?php echo $radl_data;?></textarea>
+<textarea type="RADL" align="bottom" name="radl"><?php echo htmlspecialchars($radl_data);?></textarea>
                     </td>
                 </tr>
                                <tr>
 <th align="left" class="th_form_radl">Name:</th>
-<td width="30"><input type="text" name="name" value="<?php echo $name;?>"></td>
+<td width="30"><input type="text" name="name" value="<?php echo htmlspecialchars($name);?>"></td>
 </tr>
 
 
 <tr>
 <th align="left" class="th_form_radl">Description:</th>
-<td><input maxlength="256" size="200" type="descr_radl" name="description" value="<?php echo $desc;?>"></td>
+<td><input maxlength="256" size="200" type="descr_radl" name="description" value="<?php echo htmlspecialchars($desc);?>"></td>
 </tr>
 
 
@@ -168,10 +168,10 @@ if (!check_session_user()) {
                                             <?php
                                             foreach ($user_groups as $user_group) {
                                                 ?>
-                                                    <option value="<?php echo $user_group['grpname'];?>"
+                                                    <option value="<?php echo htmlspecialchars($user_group['grpname']);?>"
                                                 <?php if ($group == $user_group['grpname']) echo 'selected="selected"';?>
                                                                          
-                                                    ><?php echo $user_group['grpname'];?></option>
+                                                    ><?php echo htmlspecialchars($user_group['grpname']);?></option>
                                                 <?php
                                             }
                                             ?>
@@ -206,7 +206,7 @@ if (!check_session_user()) {
     <?php
     if (!isset($id) || radl_user_can($id, $user, "x")) {
         ?>
-<a href="radlinfo.php?op=launch&id=<?php echo $id;?>"><input type="button" name="Launch" value="Launch"></a>
+<a href="radlinfo.php?op=launch&id=<?php echo htmlspecialchars($id);?>"><input type="button" name="Launch" value="Launch"></a>
         <?php
     }
     if (!isset($id) || radl_user_can($id, $user, "w")) {

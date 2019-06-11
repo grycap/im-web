@@ -123,13 +123,13 @@ if (!check_session_user() || !check_admin_user()) {
             ?>
             <tr>
                 <td>
-                <?php echo $user['username']?>
+                <?php echo htmlspecialchars($user['username'])?>
                 </td>
                 <td>
                 <?php
                 $groups = get_user_groups($user['username']);
                 foreach ($groups as $group) {
-                    echo $group['grpname'] . "<br>";
+                	echo htmlspecialchars($group['grpname']) . "<br>";
                 }
                 ?>
                 </td>
@@ -143,10 +143,10 @@ if (!check_session_user() || !check_admin_user()) {
                 ?>
                 </td>
                 <td>
-                    <a href="userform.php?id=<?php echo $user['username'];?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
+                    <a href="userform.php?id=<?php echo htmlspecialchars($user['username']);?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
                 </td>
                 <td>
-                    <a onclick="javascript:confirm_delete('userinfo.php?op=delete&id=<?php echo $user['username'];?>', '<?php echo $user['username']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                    <a onclick="javascript:confirm_delete('userinfo.php?op=delete&id=<?php echo htmlspecialchars($user['username']);?>', '<?php echo htmlspecialchars($user['username'])?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
             </tr>
                 <?php

@@ -17,7 +17,8 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-include_once('db.php');
+require_once 'db.php';
+
 $im_use_rest=false;
 if (getenv('im_use_rest')) {
 	$im_use_rest = filter_var(getenv('im_use_rest'), FILTER_VALIDATE_BOOLEAN);

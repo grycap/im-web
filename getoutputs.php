@@ -67,7 +67,7 @@ if (!check_session_user()) {
 <div id='cssmenutab'>
 <ul>
    <li><a href='list.php'><span>List</span></a></li>
-   <li class='active'><a><span>Inf id: <?php echo $id;?></span></a></li>
+   <li class='active'><a><span>Inf id: <?php echo htmlspecialchars($id);?></span></a></li>
 </ul>
 </div>
 </div>
@@ -96,7 +96,7 @@ if (!check_session_user()) {
             ?>
                     <tr>
                     <td>
-                    <?php echo $key;?>
+                    <?php echo htmlspecialchars($key);?>
                     </td>
                     <td>
                     <?php
@@ -109,9 +109,9 @@ if (!check_session_user()) {
                     }
                     if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $value)) {
                     
-                        echo "<a href='", $value, "' target='_blank'>", $value, "</a>";
+                    	echo '<a href="', htmlspecialchars($value), '" target="_blank">', htmlspecialchars($value), '</a>';
                     } else {
-                        echo $value;
+                    	echo htmlspecialchars($value);
                     }
                     ?>
                     </td>

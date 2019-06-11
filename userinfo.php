@@ -42,7 +42,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                 $username = $_GET['id'];
                 $err = delete_user($username);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: user_list.php');
                 }
@@ -115,7 +115,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                         $err = insert_user($username, $password, $groups, $permissions);
             }
             if (strlen($err) > 0) {
-            	error(urlencode($err));
+            	error($err);
             } else {
                 header('Location: user_list.php');
             }
@@ -139,7 +139,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
                             $err = edit_user($username, $new_username, $password, $groups, $permissions);
                 }
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: user_list.php');
                 }

@@ -41,7 +41,7 @@ if (!check_session_user()) {
                 $id = $_GET['id'];
                 $err = delete_radl($id);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: radl_list.php');
                 }
@@ -65,7 +65,7 @@ if (!check_session_user()) {
     
             $err = insert_radl($imuser, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x);
             if (strlen($err) > 0) {
-            	error(urlencode($err));
+            	error($err);
             } else {
                 header('Location: radl_list.php');
             }
@@ -88,7 +88,7 @@ if (!check_session_user()) {
                     
                 $err = edit_radl($id, $name, $desc, $radl, $group, $group_r, $group_w, $group_x, $other_r, $other_w, $other_x);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: radl_list.php');
                 }
@@ -129,7 +129,7 @@ if (!check_session_user()) {
                             if (strpos($res, "Error") === false) {
                                 header('Location: list.php');
                             } else {
-                            	error(urlencode($res));
+                            	error($res);
                             }
                         }
                     } else { 
@@ -144,7 +144,7 @@ if (!check_session_user()) {
                     if (strpos($res, "Error") === false) {
                             header('Location: list.php');
                     } else {
-                    	error(urlencode($res));
+                    	error($res);
                     }
                 }
             } else {

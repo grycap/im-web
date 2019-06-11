@@ -41,7 +41,7 @@ if (!check_session_user()) {
                 $id = $_GET['id'];
                 $err = delete_credential($id);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: credentials.php');
                 }
@@ -118,7 +118,7 @@ if (!check_session_user()) {
                 
             $err = insert_credential($imuser, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url);
             if (strlen($err) > 0) {
-            	error(urlencode($err));
+            	error($err);
             } else {
                 header('Location: credentials.php');
             }
@@ -193,7 +193,7 @@ if (!check_session_user()) {
 
                     $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: credentials.php');
                 }
@@ -205,7 +205,7 @@ if (!check_session_user()) {
                 $id = $_GET['id'];
                 $err = enable_credential($id, 1);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: credentials.php');
                 }
@@ -217,7 +217,7 @@ if (!check_session_user()) {
                 $id = $_GET['id'];
                 $err = enable_credential($id, 0);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: credentials.php');
                 }
@@ -232,7 +232,7 @@ if (!check_session_user()) {
                 $imuser = $_SESSION['user'];
                 $err = change_order($id, $imuser, $order, $new_order);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: credentials.php');
                 }

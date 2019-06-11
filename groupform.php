@@ -85,7 +85,7 @@ if (!check_session_user() || !check_admin_user()) {
 
         <form action="groupinfo.php" method="post">
             <input type="hidden" name="op" value="edit"/>
-            <input type="hidden" name="id" value="<?php echo $name;?>"/>
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($name);?>"/>
             <?php
     } else {
         ?>
@@ -106,7 +106,7 @@ if (!check_session_user() || !check_admin_user()) {
                                             Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                         </th>
                                         <td align="left">
-                                            <input type="text" name="name" value="<?php echo $name;?>">
+                                            <input type="text" name="name" value="<?php echo htmlspecialchars($name);?>">
                                         </td>
                                </tr>
                                 <tr>
@@ -114,7 +114,7 @@ if (!check_session_user() || !check_admin_user()) {
                                             Description:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                         </th>
                                         <td align="left">
-                                            <input maxlength="256" size="200" type="descr" name="description" value="<?php echo $desc;?>">
+                                            <input maxlength="256" size="200" type="descr" name="description" value="<?php echo htmlspecialchars($desc);?>">
                                         </td>
                                </tr>
                                 <tr>
