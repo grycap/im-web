@@ -138,7 +138,7 @@ if (!check_session_user() || !check_admin_user()) {
 
         <form action="userinfo.php" method="post" onsubmit="javascript:set_users()">
             <input type="hidden" name="op" value="edit"/>
-            <input type="hidden" name="id" value="<?php echo $username;?>"/>
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($username);?>"/>
             <?php
     } else {
         ?>
@@ -160,7 +160,7 @@ if (!check_session_user() || !check_admin_user()) {
                                             Username:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                                         </th>
                                         <td>
-                                            <input type="text" name="username" value="<?php echo $username;?>">
+                                            <input type="text" name="username" value="<?php echo htmlspecialchars($username);?>">
                                         </td>
 
                     <th align="left">
@@ -171,7 +171,7 @@ if (!check_session_user() || !check_admin_user()) {
                                             <?php
                                             foreach ($user_groups as $group) {
                                                 ?>
-                                                    <option value="<?php echo $group['grpname'];?>"><?php echo $group['grpname'];?></option>
+                                                    <option value="<?php echo htmlspecialchars($group['grpname']);?>"><?php echo htmlspecialchars($group['grpname']);?></option>
                                                 <?php
                                             }
                                             ?>
@@ -228,7 +228,7 @@ if (!check_session_user() || !check_admin_user()) {
                                                 <?php
                                                 foreach ($groups as $group) {
                                                     ?>
-                                                    <option value="<?php echo $group['name'];?>"><?php echo $group['name'];?></option>
+                                                    <option value="<?php echo htmlspecialchars($group['name']);?>"><?php echo htmlspecialchars($group['name']);?></option>
                                                     <?php
                                                 }
                                                 ?>

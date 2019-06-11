@@ -46,7 +46,7 @@ if (!check_session_user()) {
             $res = GetIM()->CreateInfrastructure($radl, $async);
 
             if (strpos($res, "Error") !== false) {
-            	error(urlencode($res));
+            	error($res);
             } else {
                 header('Location: list.php');
             }
@@ -56,7 +56,7 @@ if (!check_session_user()) {
                 $res = GetIM()->DestroyInfrastructure($id);
                     
                 if (strpos($res, "Error") !== false) {
-                	error(urlencode($res));
+                	error($res);
                 } else {
                     header('Location: list.php');
                 }
@@ -71,7 +71,7 @@ if (!check_session_user()) {
                 $res = GetIM()->RemoveResource($infid, $vmid);
                     
                 if (strpos($res, "Error") !== false) {
-                	error(urlencode($res));
+                	error($res);
                 } else {
                     header('Location: list.php');
                 }
@@ -86,7 +86,7 @@ if (!check_session_user()) {
                  $res = GetIM()->StopVM($infid, $vmid);
                 
                 if (strpos($res, "Error") !== false) {
-                	error(urlencode($res));
+                	error($res);
                 } else {
                     header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
                 }
@@ -101,7 +101,7 @@ if (!check_session_user()) {
                  $res = GetIM()->StartVM($infid, $vmid);
                      
                 if (strpos($res, "Error") !== false) {
-                	error(urlencode($res));
+                	error($res);
                 } else {
                     header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
                 }
@@ -116,7 +116,7 @@ if (!check_session_user()) {
         		$res = GetIM()->RebootVM($infid, $vmid);
         		
         		if (strpos($res, "Error") !== false) {
-        			error(urlencode($res));
+        			error($res);
         		} else {
         			header('Location: getvminfo.php?id=' . $infid . '&vmid=' . $vmid);
         		}
@@ -132,7 +132,7 @@ if (!check_session_user()) {
                 $res = GetIM()->AddResource($infid, $radl);
                     
                 if (strpos($res, "Error") !== false) {
-                	error(urlencode($res));
+                	error($res);
                 } else {
                     header('Location: list.php');
                 }
@@ -146,7 +146,7 @@ if (!check_session_user()) {
                  $res = GetIM()->Reconfigure($infid, "");
             
                 if (strpos($res, "Error") !== false) {
-                	error(urlencode($res));
+                	error($res);
                 } else {
                     header('Location: list.php');
                 }

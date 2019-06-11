@@ -15,7 +15,7 @@ if (isset($_SESSION['user_name'])) {
                                if (isset($_SESSION['user_token'])) {
                                	echo '<a href="oidc_user_info.php">';
                                }
-                               echo $user_name;
+                               echo htmlspecialchars($user_name);
                                echo ' is connected';
                                if (isset($_SESSION['user_token'])) {
                                	echo '</a>';

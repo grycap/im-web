@@ -34,7 +34,7 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
     $res = GetIM()->GetVMInfo($id, $vmid);
         
     if (is_string($res) && strpos($res, "Error") !== false) {
-        error(urlencode($res));
+        error($res);
     } else {
         $radl_tokens = parseRADL($res);
         $outports = getOutPorts($res);
@@ -81,7 +81,7 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
 <div id='cssmenutab'>
 <ul>
    <li><a href='list.php'><span>List</span></a></li>
-   <li class='active'><a><span>VM id: <?php echo $vmid;?></span></a></li>
+   <li class='active'><a><span>VM id: <?php echo htmlspecialchars($vmid);?></span></a></li>
 </ul>
 </div>
 </div>
@@ -91,7 +91,7 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
     <div id="main">
 
     <br> 
-        <div class='h1'>:: Informacion de la VM id: <?php echo $vmid;?>&nbsp::</div>
+        <div class='h1'>:: Informacion de la VM id: <?php echo htmlspecialchars($vmid);?>&nbsp::</div>
       <br><br>
 
         <table class="list" style="width:100%;margin-left: 0px;">
@@ -144,7 +144,7 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
                     Cont. Message
                     </td>
                     <td>
-                    <a href="getcontmsg.php?id=<?php echo $id;?>&vmid=<?php echo $vmid;?>">Show >></a>
+                    <a href="getcontmsg.php?id=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>">Show >></a>
                     </td>
                     </tr>
                     </table>
@@ -157,10 +157,10 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
 <table style="width:165px;">
     <tbody>
         <tr>
-            <td style="text-align:center;"><a href="operate.php?op=stopvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>"><img style="border:0px;" src="images/icon_stopVM.jpg" border="0" alt="Stop VM" title="Stop VM"></a></td>
-            <td style="text-align:center;"><a href="operate.php?op=startvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>"><img style="border:0px;" src="images/icon_startVM.jpg" border="0" alt="Start VM" title="Start VM"></a></td>
-            <td style="text-align:center;"><a href="operate.php?op=rebootvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>"><img style="border:0px;" src="images/icon_rebootVM.jpg" border="0" alt="Reboot VM" title="Reboot VM"></a></td>
-            <td style="text-align:center;"><a href="#" onclick="javascript:confirm_delete('operate.php?op=destroyvm&infid=<?php echo $id;?>&vmid=<?php echo $vmid;?>', '<?php echo $vmid;?>')"><img style="border:0px;" src="images/icon_terminateVM.jpg" border="0" alt="Terminate VM" title="Terminate VM"></a></td>
+            <td style="text-align:center;"><a href="operate.php?op=stopvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>"><img style="border:0px;" src="images/icon_stopVM.jpg" border="0" alt="Stop VM" title="Stop VM"></a></td>
+            <td style="text-align:center;"><a href="operate.php?op=startvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>"><img style="border:0px;" src="images/icon_startVM.jpg" border="0" alt="Start VM" title="Start VM"></a></td>
+            <td style="text-align:center;"><a href="operate.php?op=rebootvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>"><img style="border:0px;" src="images/icon_rebootVM.jpg" border="0" alt="Reboot VM" title="Reboot VM"></a></td>
+            <td style="text-align:center;"><a href="#" onclick="javascript:confirm_delete('operate.php?op=destroyvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>', '<?php echo htmlspecialchars($vmid);?>')"><img style="border:0px;" src="images/icon_terminateVM.jpg" border="0" alt="Terminate VM" title="Terminate VM"></a></td>
         </tr>
     </tbody>
 </table>

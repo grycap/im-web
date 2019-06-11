@@ -101,6 +101,11 @@ class IMDBMySQL
         $success = $this->link->select_db($this->db_name);
         if (!$success) {
             $res = $this->create_db();
+        } else {
+            $success = $this->table_exists('user');
+            if (!$success) {
+                $res = $this->create_tables();
+            }
         }
     }
 
@@ -115,6 +120,11 @@ class IMDBMySQL
         if (!$success) {
             return "Error creating DB: " . $this->link->error;
         }
+        return $this->create_tables();
+    }
+
+    function create_tables()
+    {
         $success = $this->link->select_db($this->db_name);
         if (!$success) {
             return "Error selecting DB: " . $this->link->error;
@@ -133,7 +143,7 @@ class IMDBMySQL
 
         return "";
     }
-    
+
     function gen_where_sentence($where)
     {
         if ($where) {
@@ -214,6 +224,16 @@ class IMDBMySQL
         return $this->direct_exec($sql);
     }
 
+    function table_exists($table_name)
+    {
+        $sql = "SELECT TABLE_NAME FROM information_schema.tables WHERE table_name = '" . $table_name . "' and table_schema = '" . $this->db_name . "'";
+        $res = $this->direct_query($sql);
+        if (count($res) == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
 
 ?>

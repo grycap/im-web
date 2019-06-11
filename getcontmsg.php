@@ -72,7 +72,7 @@ if (!check_session_user()) {
 <div id='cssmenutab'>
 <ul>
    <li><a href='list.php'><span>List</span></a></li>
-   <li class='active'><a><span>Inf id: <?php echo $id;?></span></a></li>
+   <li class='active'><a><span>Inf id: <?php echo htmlspecialchars($id);?></span></a></li>
 </ul>
 </div>
 </div>
@@ -85,7 +85,7 @@ if (!check_session_user()) {
         <br>
         <div id='log'>
     <?php
-    echo str_replace("\n", "<br>", $cont_msg);
+    echo htmlspecialchars(str_replace("\n", "<br>", $cont_msg));
     ?>
         </div>
 

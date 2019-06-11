@@ -41,7 +41,7 @@ if (!check_session_user() || !check_admin_user()) {
                 $id = $_GET['id'];
                 $err = delete_recipe($id);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: recipe_list.php');
                 }
@@ -59,7 +59,7 @@ if (!check_session_user() || !check_admin_user()) {
                 
             $err = insert_recipe($name, $version, $desc, $module, $recipe, $galaxy_module, $requirements);
             if (strlen($err) > 0) {
-            	error(urlencode($err));
+            	error($err);
             } else {
                 header('Location: recipe_list.php');
             }
@@ -76,7 +76,7 @@ if (!check_session_user() || !check_admin_user()) {
                     
                 $err = edit_recipe($id, $name, $version, $desc, $module, $recipe, $galaxy_module, $requirements);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: recipe_list.php');
                 }

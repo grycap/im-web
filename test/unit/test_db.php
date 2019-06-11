@@ -81,6 +81,7 @@ final class DBTest extends TestCase
     {
     	$username = uniqid();
     	$mysqli = $this->expectQueries(array(
+    			"SELECT TABLE_NAME FROM information_schema.tables WHERE table_name = 'user' and table_schema = 'tmp/im.db'" => array(array('TABLE_NAME' => 'user')),
     			"select * from user" => array(array('username' => 'admin')),
     			"select * from user" => array(array('username' => 'admin')),
     			"insert into user values(NULL, '" . $username . "','passwd','0')" => True,

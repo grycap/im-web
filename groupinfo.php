@@ -41,7 +41,7 @@ if (!check_session_user() || !check_admin_user()) {
                 $name = $_GET['id'];
                 $err = delete_group($name);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: group_list.php');
                 }
@@ -54,7 +54,7 @@ if (!check_session_user() || !check_admin_user()) {
                 
             $err = insert_group($name, $desc);
             if (strlen($err) > 0) {
-            	error(urlencode($err));
+            	error($err);
             } else {
                 header('Location: group_list.php');
             }
@@ -66,7 +66,7 @@ if (!check_session_user() || !check_admin_user()) {
                     
                 $err = edit_group($name, $new_name, $desc);
                 if (strlen($err) > 0) {
-                	error(urlencode($err));
+                	error($err);
                 } else {
                     header('Location: group_list.php');
                 }

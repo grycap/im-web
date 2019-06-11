@@ -67,7 +67,7 @@ if (!check_session_user()) {
 <div id='cssmenutab'>
 <ul>
    <li><a href='list.php'><span>List</span></a></li>
-   <li class='active'><a><span>Inf id: <?php echo $id;?></span></a></li>
+   <li class='active'><a><span>Inf id: <?php echo htmlspecialchars($id);?></span></a></li>
 </ul>
 </div>
 </div>
@@ -96,22 +96,24 @@ if (!check_session_user()) {
             ?>
                     <tr>
                     <td>
-                    <?php echo $key;?>
+                    <?php echo htmlspecialchars($key);?>
                     </td>
                     <td>
                     <?php
                     if (is_array($value)) {
                         $new_value = "";
                         foreach ($value as $k => $v) {
-                            $new_value = $new_value . $k . " = " . $v . "<br>\n";
+                        	$new_value = $new_value . "<strong>" . htmlspecialchars($k) . "</strong>" . " = " . htmlspecialchars($v) . "<br><br>\n";
                         }
                         $value = $new_value;
+                    } else {
+                    	$value = htmlspecialchars($value);
                     }
                     if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $value)) {
                     
-                        echo "<a href='", $value, "' target='_blank'>", $value, "</a>";
+                    	echo '<a href="', $value, '" target="_blank">', $value, '</a>';
                     } else {
-                        echo $value;
+                    	echo $value;
                     }
                     ?>
                     </td>

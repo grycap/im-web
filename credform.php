@@ -97,22 +97,22 @@ if (!check_session_user()) {
     if (isset($rowid)) {
         $cred = get_credential($rowid);
         if ($cred['imuser'] == $_SESSION['user']) {
-                $id = $cred['id'];
-                $type = $cred['type'];
-                $host = $cred['host'];
-                $username = $cred['username'];
-                $project = $cred['project'];
-                $tenant = $cred['tenant'];
-                $auth_version = $cred['auth_version'];
-                $domain = $cred['domain'];
-                $service_region = $cred['service_region'];
-                $base_url = $cred['base_url'];
-                    
-                $proxy = $cred['proxy'];
-                $public_key = $cred['public_key'];
-                $private_key = $cred['private_key'];
-                $certificate = $cred['certificate'];
-                $subscription_id = $cred['subscription_id'];
+        	    $id = htmlspecialchars($cred['id']);
+                $type = htmlspecialchars($cred['type'], ENT_QUOTES | ENT_HTML401);
+                $host = htmlspecialchars($cred['host']);
+                $username = htmlspecialchars($cred['username']);
+                $project = htmlspecialchars($cred['project']);
+                $tenant = htmlspecialchars($cred['tenant']);
+                $auth_version = htmlspecialchars($cred['auth_version']);
+                $domain = htmlspecialchars($cred['domain']);
+                $service_region = htmlspecialchars($cred['service_region']);
+                $base_url = htmlspecialchars($cred['base_url']);
+
+                $proxy = htmlspecialchars($cred['proxy']);
+                $public_key = htmlspecialchars($cred['public_key']);
+                $private_key = htmlspecialchars($cred['private_key']);
+                $certificate = htmlspecialchars($cred['certificate']);
+                $subscription_id = htmlspecialchars($cred['subscription_id']);
         }
     }
     ?>
