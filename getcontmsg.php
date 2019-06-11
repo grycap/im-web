@@ -85,7 +85,7 @@ if (!check_session_user()) {
         <br>
         <div id='log'>
     <?php
-    echo htmlspecialchars(str_replace("\n", "<br>", $cont_msg));
+    echo str_replace("\n", "<br>", htmlspecialchars($cont_msg));
     ?>
         </div>
 
