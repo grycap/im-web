@@ -103,15 +103,17 @@ if (!check_session_user()) {
                     if (is_array($value)) {
                         $new_value = "";
                         foreach ($value as $k => $v) {
-                            $new_value = $new_value . $k . " = " . $v . "<br>\n";
+                        	$new_value = $new_value . htmlspecialchars($k) . " = " . htmlspecialchars($v) . "<br>\n";
                         }
                         $value = $new_value;
+                    } else {
+                    	$value = htmlspecialchars($value);
                     }
                     if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $value)) {
                     
-                    	echo '<a href="', htmlspecialchars($value), '" target="_blank">', htmlspecialchars($value), '</a>';
+                    	echo '<a href="', $value, '" target="_blank">', $value, '</a>';
                     } else {
-                    	echo htmlspecialchars($value);
+                    	echo $value;
                     }
                     ?>
                     </td>
