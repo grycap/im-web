@@ -97,7 +97,7 @@ if (!check_session_user()) {
     if (isset($rowid)) {
         $cred = get_credential($rowid);
         if ($cred['imuser'] == $_SESSION['user']) {
-                $id = $cred['id'];
+        	    $id = htmlspecialchars($cred['id']);
                 $type = htmlspecialchars($cred['type'], ENT_QUOTES | ENT_HTML401);
                 $host = htmlspecialchars($cred['host']);
                 $username = htmlspecialchars($cred['username']);
