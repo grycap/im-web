@@ -103,7 +103,7 @@ if (!check_session_user()) {
                     if (is_array($value)) {
                         $new_value = "";
                         foreach ($value as $k => $v) {
-                        	$new_value = $new_value . htmlspecialchars($k) . " = " . htmlspecialchars($v) . "<br>\n";
+                        	$new_value = $new_value . htmlspecialchars($k) . " = " . htmlspecialchars($v) . "<br><br>\n";
                         }
                         $value = $new_value;
                     } else {
