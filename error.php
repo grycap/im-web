@@ -66,7 +66,7 @@ if (!isset($_SESSION)) {
     <br><br>
 
     <div class="texto_error">
-    Error: <?php echo htmlspecialchars(str_replace("\n", "<br>", $_SESSION['error']));unset($_SESSION['error']);?> <br>
+    Error: <?php echo str_replace("\n", "<br>", htmlspecialchars($_SESSION['error']));unset($_SESSION['error']);?> <br>
 
     </div>
     <br>
