@@ -72,4 +72,14 @@ $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
 if (getenv('redirect_uri')) {
 	$REDIRECT_URI = getenv('redirect_uri');
 }
+// Key to crypt the credentials data it must be 32 chars
+$cred_crypt_key = "n04ykjinrswda5sdfnb5680yu21+qgh3";
+if (getenv('cred_crypt_key')) {
+	$cred_crypt_key = getenv('cred_crypt_key');
+}
+// Start substring
+$cred_cryp_start = "#Crypt@d";
+if (getenv('$cred_cryp_start')) {
+	$cred_cryp_start = getenv('$cred_cryp_start');
+}
 ?>
