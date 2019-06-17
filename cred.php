@@ -17,6 +17,28 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+require_once 'crypt.php';
+
+/**
+ * Decrypt sensitive data if crypted
+ *
+ * @param  array	row with the credentials data
+ * @return array    row with the credentials data decrypted
+ */
+function decrypt_credentials($row)
+{
+	include 'config.php';
+
+	$fields = array("username", "password", "private_key", "certificate");
+	foreach ($fields as $field) {
+		if ((substr( $row[$field], 0, strlen($cred_cryp_start)) ) === $cred_cryp_start) {
+			$row[$field] = decrypt(substr($row[$field], strlen($cred_cryp_start)), $cred_crypt_key);
+		}
+	}
+	
+	return $row;
+}
+
 /**
  * Get the credentials stored for the user specified 
  * 
@@ -30,7 +52,15 @@ function get_credentials($user)
     $db = new IMDB();
     $res = $db->get_items_from_table("credentials", array("imuser" => "'" . $db->escapeString($user) . "'"), "ord");
     $db->close();
-    return $res;
+    if (!is_null($res)) {
+    	$newres = array();
+    	foreach ($res as $row) {
+    		$newres[] = decrypt_credentials($row);
+    	}
+    	return $newres;
+    } else {
+    	return $res;
+    }
 }
 
 /**
@@ -47,7 +77,7 @@ function get_credential($id)
     $res = $db->get_items_from_table("credentials", array("rowid" => $id));
     $db->close();
     if (count($res) > 0) {
-        return $res[0];
+    	return decrypt_credentials($res[0]);
     } else {
         return null;
     }
@@ -64,8 +94,16 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     $fields[] = "'" . $imuser . "'";
     $fields[] = "'" . $type . "'";
     $fields[] = "'" . $db->escapeString($host) . "'";
-    $fields[] = "'" . $db->escapeString($username) . "'";
-    $fields[] = "'" . $db->escapeString($password) . "'";
+    if (strlen(trim($username)) > 0) {
+    	$fields[] = "'" . $cred_cryp_start . encrypt($username, $cred_crypt_key) . "'";
+    } else {
+    	$fields[] = "''";
+    }
+    if (strlen(trim($password)) > 0) {
+    	$fields[] = "'" . $cred_cryp_start . encrypt($password, $cred_crypt_key) . "'";
+    } else {
+    	$fields[] = "''";
+    }
     $fields[] = 1;
 
     $res = $db->direct_query("select max(ord) as max_ord from credentials where imuser = '" . $imuser . "'");
@@ -75,8 +113,16 @@ function insert_credential($imuser, $id, $type, $host, $username, $password, $to
     $fields[] = "'" . $db->escapeString($token_type) . "'";
     $fields[] = "'" . $db->escapeString($project) . "'";
     $fields[] = "'" . $db->escapeString($public_key) . "'";
-    $fields[] = "'" . $db->escapeString($private_key) . "'";
-    $fields[] = "'" . $db->escapeString($certificate) . "'";
+    if (strlen(trim($private_key)) > 0) {
+    	$fields[] = "'" . $cred_cryp_start . encrypt($private_key, $cred_crypt_key) . "'";
+    } else {
+    	$fields[] = "''";
+    }
+    if (strlen(trim($certificate)) > 0) {
+    	$fields[] = "'" . $cred_cryp_start . encrypt($certificate, $cred_crypt_key) . "'";
+    } else {
+    	$fields[] = "''";
+    }
     $fields[] = "'" . $db->escapeString($tenant) . "'";
     $fields[] = "'" . $db->escapeString($subscription_id) . "'";
     $fields[] = "'" . $db->escapeString($auth_version) . "'";
@@ -100,11 +146,11 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $token
     $fields["id"] = "'" . $db->escapeString($id) . "'";
     $fields["type"] = "'" . $type . "'";
     $fields["host"] = "'" . $db->escapeString($host) . "'";
-    $fields["username"] = "'" . $db->escapeString($username) . "'";
+    $fields["username"] = "'" . $cred_cryp_start . encrypt($username, $cred_crypt_key) . "'";
     $fields["token_type"] = "'" . $db->escapeString($token_type) . "'";
     $fields["project"] = "'" . $db->escapeString($project) . "'";
     if (strlen(trim($password)) > 0) {
-        $fields["password"] = "'" . $db->escapeString($password) . "'";
+    	$fields["password"] = "'" . $cred_cryp_start . encrypt($password, $cred_crypt_key) . "'";
     }
     if (strlen(trim($proxy)) > 0) {
         $fields["proxy"] = "'" . $db->escapeString($proxy) . "'";
@@ -113,10 +159,10 @@ function edit_credential($rowid, $id, $type, $host, $username, $password, $token
         $fields["public_key"] = "'" . $db->escapeString($public_key) . "'";
     }
     if (strlen(trim($private_key)) > 0) {
-        $fields["private_key"] = "'" . $db->escapeString($private_key) . "'";
+    	$fields["private_key"] = "'" . $cred_cryp_start . encrypt($private_key, $cred_crypt_key) . "'";
     }
     if (strlen(trim($certificate)) > 0) {
-        $fields["certificate"] = "'" . $db->escapeString($certificate) . "'";
+    	$fields["certificate"] = "'" . $cred_cryp_start . encrypt($certificate, $cred_crypt_key) . "'";
     }
     if (strlen(trim($tenant)) > 0) {
         $fields["tenant"] = "'" . $db->escapeString($tenant) . "'";

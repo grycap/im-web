@@ -38,6 +38,10 @@ $openid_name="";
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
 $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
+// Key to crypt the credentials data it must be 32 chars
+$cred_crypt_key = "n04ykjinrswda5sdfnb5680yu21+qgh3";
+// Start substring
+$cred_cryp_start = "#Crypt@d";
 
 // Include db Class
 require_once 'db.php';
