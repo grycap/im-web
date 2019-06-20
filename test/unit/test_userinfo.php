@@ -80,7 +80,7 @@ final class UserinfoTest extends TestCase
 
         $_SESSION = array("user"=>"newuserinfotest", "password"=>"passwordtest");
         $_GET = array("op"=>"password");
-        $_POST = array("password"=>"npasswordtest", "password2"=>"npasswordtest");
+        $_POST = array("oldpassword" => "passwordtest", "password"=>"npasswordtest", "password2"=>"npasswordtest");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: list.php'),xdebug_get_headers());
 
