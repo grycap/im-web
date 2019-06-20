@@ -101,7 +101,7 @@ if (!check_session_user()) {
                     <thead>
                         <tr align="left">
                               <th>
-                        RADL
+                        Topology
                                              </th>
                          </tr>
                     </thead>

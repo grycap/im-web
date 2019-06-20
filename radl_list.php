@@ -64,7 +64,7 @@ if (!check_session_user()) {
 
 <div id="caja_titulo">
     <div id="texto_titulo">
-    Infrastructure Manager > RADLs&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
+    Infrastructure Manager > Topologies&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
 
     </div>
 </div>
@@ -103,7 +103,7 @@ if (!check_session_user()) {
         } );
 
         function confirm_delete(url, name) {
-            var r=confirm("Sure that you want to delete the RADL named: " + name + "?");
+            var r=confirm("Sure that you want to delete the Topology named: " + name + "?");
             if (r==true) {
                 window.location.href = url;
             }
