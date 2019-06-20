@@ -23,7 +23,7 @@ require_once 'config.php';
 if (!isset($_SESSION)) {
     session_start();
 }   
-    
+
 require_once 'user.php';
 if (!check_session_user()) {
 	invalid_user_error();
@@ -31,10 +31,18 @@ if (!check_session_user()) {
     $op = "";
     if (isset($_POST['op'])) {
         $op = $_POST['op'];
-    } elseif (isset($_GET['op'])) {
-        $op = $_GET['op'];
     }
 
+    $rand = "";
+    if (isset($_POST['rand'])) {
+    	$rand = $_POST['rand'];
+    }
+    
+    if ($rand != $_SESSION["rand"]) {
+    	error("Invalid rand parameter.");
+    	exit();
+    }
+    
     if (strlen($op) > 0) {
         if ($op == "create") {
             $radl = $_POST['radl'];
@@ -51,8 +59,8 @@ if (!check_session_user()) {
                 header('Location: list.php');
             }
         } elseif ($op == "destroy") {
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
+        	if (isset($_POST['id'])) {
+        		$id = $_POST['id'];
                 $res = GetIM()->DestroyInfrastructure($id);
                     
                 if (strpos($res, "Error") !== false) {
@@ -64,9 +72,9 @@ if (!check_session_user()) {
             	error('No ID');
             }
         } elseif ($op == "destroyvm") {
-            if (isset($_GET['infid']) and isset($_GET['vmid'])) {
-                $infid = $_GET['infid'];
-                $vmid = $_GET['vmid'];
+        	if (isset($_POST['infid']) and isset($_POST['vmid'])) {
+        		$infid = $_POST['infid'];
+        		$vmid = $_POST['vmid'];
                     
                 $res = GetIM()->RemoveResource($infid, $vmid);
                     
@@ -79,9 +87,9 @@ if (!check_session_user()) {
             	error('No ID');
             }
         } elseif ($op == "stopvm") {
-            if (isset($_GET['infid']) and isset($_GET['vmid'])) {
-                 $infid = $_GET['infid'];
-                 $vmid = $_GET['vmid'];
+        	if (isset($_POST['infid']) and isset($_POST['vmid'])) {
+        		$infid = $_POST['infid'];
+        		$vmid = $_POST['vmid'];
                 
                  $res = GetIM()->StopVM($infid, $vmid);
                 
@@ -94,9 +102,9 @@ if (!check_session_user()) {
             	error('No ID');
             }
         } elseif ($op == "startvm") {
-            if (isset($_GET['infid']) and isset($_GET['vmid'])) {
-                 $infid = $_GET['infid'];
-                 $vmid = $_GET['vmid'];
+        	if (isset($_POST['infid']) and isset($_POST['vmid'])) {
+        		$infid = $_POST['infid'];
+        		$vmid = $_POST['vmid'];
                      
                  $res = GetIM()->StartVM($infid, $vmid);
                      
@@ -109,9 +117,9 @@ if (!check_session_user()) {
             	error('No ID');
             }
         }  elseif ($op == "rebootvm") {
-        	if (isset($_GET['infid']) and isset($_GET['vmid'])) {
-        		$infid = $_GET['infid'];
-        		$vmid = $_GET['vmid'];
+        	if (isset($_POST['infid']) and isset($_POST['vmid'])) {
+        		$infid = $_POST['infid'];
+        		$vmid = $_POST['vmid'];
         		
         		$res = GetIM()->RebootVM($infid, $vmid);
         		
@@ -140,8 +148,8 @@ if (!check_session_user()) {
             	error('No ID');
             }
         } elseif ($op == "reconfigure") {
-            if (isset($_GET['infid'])) {
-                 $infid = $_GET['infid'];
+        	if (isset($_POST['infid'])) {
+        		$infid = $_POST['infid'];
             
                  $res = GetIM()->Reconfigure($infid, "");
             

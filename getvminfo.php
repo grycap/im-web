@@ -29,6 +29,9 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
     $id = $_GET['id'];
     $vmid = $_GET['vmid'];
 
+    $rand = sha1(rand());
+    $_SESSION['rand'] = $rand;
+    
     include_once 'im.php';
     include_once 'config.php';
     $res = GetIM()->GetVMInfo($id, $vmid);
@@ -53,10 +56,14 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
 
 
     <script type="text/javascript" charset="utf-8">
-        function confirm_delete(url, id) {
-            var r=confirm("Sure that you want to delete the VM with id: " + id + "?");
+        function operatevm(op) {
+        	document.getElementById('opfield').value = op;
+        	var r = true;
+        	if (op == "destroyvm") {
+            	r=confirm("Sure that you want to delete the VM?");
+        	}
             if (r==true) {
-                window.location.href = url;
+            	document.getElementById('operateform').submit();
             }
         }
     </script>
@@ -157,10 +164,24 @@ if (!isset($_GET['id']) or !isset($_GET['vmid'])) {
 <table style="width:165px;">
     <tbody>
         <tr>
-            <td style="text-align:center;"><a href="operate.php?op=stopvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>"><img style="border:0px;" src="images/icon_stopVM.jpg" border="0" alt="Stop VM" title="Stop VM"></a></td>
-            <td style="text-align:center;"><a href="operate.php?op=startvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>"><img style="border:0px;" src="images/icon_startVM.jpg" border="0" alt="Start VM" title="Start VM"></a></td>
-            <td style="text-align:center;"><a href="operate.php?op=rebootvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>"><img style="border:0px;" src="images/icon_rebootVM.jpg" border="0" alt="Reboot VM" title="Reboot VM"></a></td>
-            <td style="text-align:center;"><a href="#" onclick="javascript:confirm_delete('operate.php?op=destroyvm&infid=<?php echo htmlspecialchars($id);?>&vmid=<?php echo htmlspecialchars($vmid);?>', '<?php echo htmlspecialchars($vmid);?>')"><img style="border:0px;" src="images/icon_terminateVM.jpg" border="0" alt="Terminate VM" title="Terminate VM"></a></td>
+               	<form action="operate.php" method="post" id="operateform">
+               	<input type="hidden" name="op" value="" id="opfield"/>
+               	<input type="hidden" name="infid" value="<?php echo htmlspecialchars($id);?>"/>
+               	<input type="hidden" name="vmid" value="<?php echo htmlspecialchars($vmid);?>"/>
+               	<input type="hidden" name="rand" value="<?php echo $rand;?>"/>
+               	</form>
+            <td style="text-align:center;">
+            <a href="#" onclick="javascript:operatevm('stopvm')"><img style="border:0px;" src="images/icon_stopVM.jpg" border="0" alt="Stop VM" title="Stop VM"></a>
+            </td>
+            <td style="text-align:center;">
+            <a href="#" onclick="javascript:operatevm('startvm')"><img style="border:0px;" src="images/icon_startVM.jpg" border="0" alt="Start VM" title="Start VM"></a>
+            </td>
+            <td style="text-align:center;">
+            <a href="#" onclick="javascript:operatevm('rebootvm')"><img style="border:0px;" src="images/icon_rebootVM.jpg" border="0" alt="Reboot VM" title="Reboot VM"></a>
+            </td>
+            <td style="text-align:center;">
+            <a href="#" onclick="javascript:operatevm('destroyvm')"><img style="border:0px;" src="images/icon_terminateVM.jpg" border="0" alt="Terminate VM" title="Terminate VM"></a>
+            </td>
         </tr>
     </tbody>
 </table>
