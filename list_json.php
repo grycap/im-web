@@ -133,12 +133,13 @@ if (!check_session_user()) {
                         $text = $text . '"status":"' . $status . '",';
                         
                         if ($state == "configured" || $state == "unconfigured") {
-                            $text = $text . '"reconfigure":"<a href=\"operate.php?op=reconfigure&infid=' . $inf . '\"><img src=\"images/reload.png\" border=\"0\" alt=\"Reconfigure\" title=\"Reconfigure\"></a>",';
+                        	$text = $text . '"reconfigure":"<a onclick=\"javascript:operateinf(\'reconfigure\', \'' . $inf . '\')\" href=\"#\"><img src=\"images/reload.png\" border=\"0\" alt=\"Reconfigure\" title=\"Reconfigure\"></a>",';
                         } else {
                             $text = $text . '"reconfigure":"N/A",';
                         }
-                        
-                        $text = $text . '"delete": "<a onclick=\"javascript:confirm_delete(\'' . $inf . '\')\" href=\"#\"><img src=\"images/borrar.gif\" border=\"0\" alt=\"Delete\" title=\"Delete\"></a>",';
+
+                        $form = '<form action=\"operate.php\" method=\"post\" id=\"delete_' . $inf . '\">';
+                        $text = $text . '"delete": "<a onclick=\"javascript:operateinf(\'destroy\', \'' . $inf . '\')\" href=\"#\"><img src=\"images/borrar.gif\" border=\"0\" alt=\"Delete\" title=\"Delete\"></a>",';
                         $text = $text . '"addResources":"<a href=\"form.php?id=' . $inf . '?>\"><img src=\"images/add_resources_icon.png\" border=\"0\" alt=\"Add Resources\" title=\"Add Resources\"></a>"';
                         
                             

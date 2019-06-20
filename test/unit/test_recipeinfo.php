@@ -7,13 +7,26 @@ final class RedipeInfoTest extends TestCase
     /**
      * @runInSeparateProcess
      */
-    public function testNoOp()
+    public function testNoRand()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
         include('../../recipeinfo.php');
         $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
-        $this->assertEquals($_SESSION['error'], 'No op');
+        $this->assertEquals($_SESSION['error'], 'Invalid rand parameter.');
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
+    public function testNoOp()
+    {
+    	$this->expectOutputString('');
+    	$_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+    	$_POST = array("rand"=>"123");
+    	include('../../recipeinfo.php');
+    	$this->assertEquals(array('Location: error.php'),xdebug_get_headers());
+    	$this->assertEquals($_SESSION['error'], 'No op');
     }
 
     /**
@@ -35,9 +48,8 @@ final class RedipeInfoTest extends TestCase
         $db->close();
 
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"add");
-        $_POST = array("name"=>"radltest", "version"=>"version",
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"add", "name"=>"radltest", "version"=>"version", "rand"=>"123",
                     "module"=>"module", "recipe"=>"recipe", "galaxy_module"=>"galaxy_module",
                     "description"=>"description", "requirements"=>"requirements");
         include('../../recipeinfo.php');
@@ -59,11 +71,10 @@ final class RedipeInfoTest extends TestCase
         $res = get_recipes();
         $rowid = end($res)['rowid'];
 
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"edit");
-        $_POST = array("id"=>$rowid, "name"=>"radltest", "version"=>"version",
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"edit", "id"=>$rowid, "name"=>"radltest", "version"=>"version",
                     "module"=>"newmodule", "recipe"=>"recipe", "galaxy_module"=>"galaxy_module",
-                    "description"=>"description", "requirements"=>"requirements");
+        		    "description"=>"description", "requirements"=>"requirements", "rand"=>"123");
         include('../../recipeinfo.php');
         $this->assertEquals(array('Location: recipe_list.php'),xdebug_get_headers());
 
@@ -82,8 +93,8 @@ final class RedipeInfoTest extends TestCase
         $res = get_recipes();
         $rowid = end($res)['rowid'];
 
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"delete", "id"=>$rowid);
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"delete", "id"=>$rowid, "rand"=>"123");
         include('../../recipeinfo.php');
         $this->assertEquals(array('Location: recipe_list.php'),xdebug_get_headers());
 

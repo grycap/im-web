@@ -20,7 +20,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
-    
+
 require_once 'user.php';
 if (!check_session_user() || !check_admin_user()) {
 	invalid_user_error();
@@ -31,6 +31,9 @@ if (!check_session_user() || !check_admin_user()) {
     include_once 'group.php';
     $groups = get_groups();
 
+    $rand = sha1(rand());
+    $_SESSION['rand'] = $rand;
+    
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -149,6 +152,7 @@ if (!check_session_user() || !check_admin_user()) {
 
         <form action="userinfo.php" method="post" onsubmit="javascript:set_users()">
             <input type="hidden" name="op" value="add"/>
+            <input type="hidden" name="rand" value="<?php echo $rand;?>"/>
         <?php
     }
     ?>

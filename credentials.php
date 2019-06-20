@@ -31,6 +31,8 @@ if (!check_session_user()) {
     include_once 'cred.php';
     $creds = get_credentials($user);
 
+    $rand = sha1(rand());
+    $_SESSION['rand'] = $rand;
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -98,15 +100,30 @@ if (!check_session_user()) {
                         ]
                 } );
         } );
-
-        function confirm_delete(url, id) {
-            var r=confirm("Sure that you want to delete the Credential with id: " + id + "?");
-            if (r==true) {
-                window.location.href = url;
-            }
-        }
+        
+	    function operatecred(op, id, order, neworder) {
+	    	document.getElementById('opfield').value = op;
+	    	document.getElementById('credidfeld').value = id;
+	    	document.getElementById('orderfeld').value = order;
+	    	document.getElementById('neworderfeld').value = neworder;
+	    	var r = true;
+	    	if (op == "delete") {
+	    		r=confirm("Sure that you want to delete the Credential with id: " + id + "?");
+	    	}
+	        if (r==true) {
+	        	document.getElementById('operatecred').submit();
+	        }
+	    }
     </script>
-    
+
+	<form action="credinfo.php" id="operatecred" method="post">
+	<input type="hidden" name="op" value="" id="opfield"/>
+	<input type="hidden" name="id" value="" id="credidfeld"/>
+	<input type="hidden" name="order" value="" id="orderfeld"/>
+	<input type="hidden" name="new_order" value="" id="neworderfeld"/>
+	<input type="hidden" name="rand" value="<?php echo $rand;?>"/>
+	</form>
+
     <table class="list" id="example">
         <thead>
             <tr>
@@ -197,14 +214,14 @@ if (!check_session_user()) {
                     <a href="credform.php?id=<?php echo $cred['rowid'];?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
                 </td>
                 <td>
-                    <a onclick="javascript:confirm_delete('credinfo.php?op=delete&id=<?php echo $cred['rowid'];?>', '<?php echo htmlspecialchars($cred['id'])?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                    <a onclick="javascript:operatecred('delete', '<?php echo htmlspecialchars($cred['rowid'])?>', '', '')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
         <td>
                 <?php
                 if ($cred['enabled']) {
-                    echo "<a href='credinfo.php?op=disable&id=" . $cred['rowid'] . "'><img src='images/enable.gif' border='0' alt='Enabled click to Disable' title='Enabled click to Disable'></a>";
+                    echo "<a href='#' onclick=\"javascript:operatecred('disable', '" . htmlspecialchars($cred['rowid']) . "', '', '')\"><img src='images/enable.gif' border='0' alt='Enabled click to Disable' title='Enabled click to Disable'></a>";
                 } else {
-                    echo "<a href='credinfo.php?op=enable&id=" . $cred['rowid'] . "'><img src='images/disable.gif' border='0' alt='Disabled click to Enable' title='Disabled click to Enable'></a>";
+                    echo "<a href='#' onclick=\"javascript:operatecred('enable', '" . htmlspecialchars($cred['rowid']) . "', '', '')\"><img src='images/disable.gif' border='0' alt='Disabled click to Enable' title='Disabled click to Enable'></a>";
                 }
                 ?>
         </td>
@@ -212,12 +229,12 @@ if (!check_session_user()) {
                 <?php
                 if ($cont > 0) {
                     ?>
-                    <a href="credinfo.php?op=order&id=<?php echo $cred['rowid'];?>&order=<?php echo $cred['ord'];?>&new_order=<?php echo $cred['ord']-1;?>"><img src="images/up.gif" border="0" alt="Up" title="Up"></a>
+                    <a href="#" onclick="javascript:operatecred('order', '<?php echo htmlspecialchars($cred['rowid'])?>', '<?php echo $cred['ord'];?>', '<?php echo $cred['ord']-1;?>')"><img src="images/up.gif" border="0" alt="Up" title="Up"></a>
                         <?php
                 }
                 if ($cont<count($creds)-1) {
                     ?>
-                    <a href="credinfo.php?op=order&id=<?php echo $cred['rowid'];?>&order=<?php echo $cred['ord'];?>&new_order=<?php echo $cred['ord']+1;?>"><img src="images/down.gif" border="0" alt="Down" title="Down"></a>
+                    <a href="#" onclick="javascript:operatecred('order', '<?php echo htmlspecialchars($cred['rowid'])?>', '<?php echo $cred['ord'];?>', '<?php echo $cred['ord']+1;?>')"><img src="images/down.gif" border="0" alt="Down" title="Down"></a>
                         <?php
                 }
                 ?>

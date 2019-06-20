@@ -26,12 +26,14 @@ if (isset($_POST['password'])) {
 if (isset($_POST['username'])) {
     $_SESSION['user'] = $_POST['username'];
 }
-    
+
 require_once 'format.php';
 require_once 'user.php';
 if (!check_session_user()) {
 	invalid_user_error();
 } else {
+	$rand = sha1(rand());
+	$_SESSION['rand'] = $rand;
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -80,12 +82,17 @@ if (!check_session_user()) {
   <div id="main">
 
     <script type="text/javascript" charset="utf-8">
-        function confirm_delete(id) {
-            var r=confirm("Sure that you want to delete the Infrastructure with id: " + id + "?");
-            if (r==true) {
-                window.location.href = 'operate.php?op=destroy&id=' + id;
-            }
-        }
+	    function operateinf(op, id) {
+	    	document.getElementById('opfield').value = op;
+	    	document.getElementById('infidfeld').value = id;
+	    	var r = true;
+	    	if (op == "destroy") {
+	    		r=confirm("Sure that you want to delete the Infrastructure with id: " + id + "?");
+	    	}
+	        if (r==true) {
+	        	document.getElementById('operateinf').submit();
+	        }
+	    }
 
         $(document).ready(function() {
             $('#example').dynatable({
@@ -130,6 +137,11 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
             </tr>
         </thead>
         <tbody>
+			<form action="operate.php" method="post" id="operateinf">
+			<input type="hidden" name="op" value="" id="opfield"/>
+			<input type="hidden" name="id" value="" id="infidfeld"/>
+			<input type="hidden" name="rand" value="<?php echo htmlspecialchars($rand);?>"/>
+			</form>
         </tbody>
     </table>
     </td>

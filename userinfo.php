@@ -28,18 +28,26 @@ if (!isset($_SESSION)) {
 $op = "";
 if (isset($_POST['op'])) {
     $op = $_POST['op'];
-} elseif (isset($_GET['op'])) {
-    $op = $_GET['op'];
+}
+
+$rand = "";
+if (isset($_POST['rand'])) {
+	$rand = $_POST['rand'];
+}
+
+if ($rand != $_SESSION["rand"]) {
+	error("Invalid rand parameter.");
+	exit();
 }
 
 if (($op == "password" && !check_session_user()) || ($op != "register" && $op != "password" && (!check_session_user() || !check_admin_user()))) {
     invalid_user_error();
 } else {    
-        
+
     if (strlen($op) > 0) {
         if ($op == "delete") {
-            if (isset($_GET['id'])) {
-                $username = $_GET['id'];
+        	if (isset($_POST['id'])) {
+        		$username = $_POST['id'];
                 $err = delete_user($username);
                 if (strlen($err) > 0) {
                 	error($err);
@@ -51,6 +59,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
             }
         } elseif ($op == "password") {
             $username = $_SESSION["user"];
+            $oldpassword = $_POST['oldpassword'];
             $password = $_POST['password'];
             $password2 = $_POST['password2'];
 
@@ -62,10 +71,10 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
             }
                         
             if ($err == "") {
-                $err = change_password($username, $password);
+            	$err = change_password($username, $oldpassword, $password);
             }
             if (strlen($err) > 0) {
-            	invalid_user_error($err);
+            	error($err);
             } else {
                 $_SESSION['password'] = $password;
                 header('Location: list.php');

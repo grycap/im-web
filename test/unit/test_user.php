@@ -44,7 +44,7 @@ final class UserTest extends TestCase
 
     public function testManageUsers()
     {
-        $res = change_password("admin", "test");
+        $res = change_password("admin", "admin", "test");
         $this->assertEquals('', $res);
 
         $_SESSION = array("user"=>"admin", "password"=>"admin");
@@ -59,7 +59,12 @@ final class UserTest extends TestCase
             check_session_user()
         );
 
-        $res = change_password("admin", "admin");
+        $res = change_password("admin", "test", "admin");
+        $_SESSION = array("user"=>"admin", "password"=>"admin");
+        $this->assertEquals(
+        		true,
+        		check_session_user()
+        );
 
         $username = uniqid();
         $res = insert_user($username, "pass", array('users'), '');

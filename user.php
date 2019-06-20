@@ -180,9 +180,18 @@ function insert_user($username, $password, $groups, $permissions)
     return $res;
 }
 
-function change_password($username, $password)
+function change_password($username, $oldpassword, $password)
 {
     include 'config.php';
+
+    $user = get_user($username);
+    if (is_null($user)) {
+    	return "Error changing password: Invalid user.";
+    } else {
+    	if (!check_password($oldpassword, $user["password"])) {
+    		return "Error changing password: Incorrect old password.";
+    	}
+    }
 
     $res = "";
     $db = new IMDB();

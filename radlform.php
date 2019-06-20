@@ -58,7 +58,7 @@ if (!check_session_user()) {
 
 <div id="caja_titulo">
     <div id="texto_titulo">
-    Infrastructure Manager > Add / Edit RADL&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
+    Infrastructure Manager > Add / Edit Topology&nbsp&nbsp&nbsp<img class="imagentitulo" src="images/icon_radl_gran.png">
     </div>
 </div>
 
@@ -103,7 +103,7 @@ if (!check_session_user()) {
         $other_x = $radl['other_x'];
         ?>
 
-        <div class='h1'>:: Edit RADL ::</div>
+        <div class='h1'>:: Edit Topology ::</div>
 
         <div id="caja_form_radls">
 
@@ -128,7 +128,7 @@ if (!check_session_user()) {
         ?>
 
        <br>
-        <div class='h1'>:: Add new RADL ::</div>
+        <div class='h1'>:: Add new Topology ::</div>
 
        <div id="caja_form_radls">
 
@@ -142,7 +142,7 @@ if (!check_session_user()) {
                         <tbody>
                 <tr>
                     <td colspan=2>
-                    RADL
+                    RADL / TOSCA
                     </td>
                 </tr>
                 <tr>

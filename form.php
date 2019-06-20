@@ -33,6 +33,8 @@ if (!check_session_user()) {
     }
         
     $user = $_SESSION['user'];
+    $rand = sha1(rand());
+    $_SESSION['rand'] = $rand;
 
 ?>
 <!DOCTYPE HTML>
@@ -91,6 +93,7 @@ if (!check_session_user()) {
 
         <form action="operate.php" method="post">
             <input type="hidden" name="op" value="addresource"/>
+            <input type="hidden" name="rand" value="<?php echo htmlspecialchars($rand);?>"/>
             <input type="hidden" name="infid" value="<?php echo htmlspecialchars($id)?>"/>
 
 
@@ -98,7 +101,7 @@ if (!check_session_user()) {
                     <thead>
                         <tr align="left">
                               <th>
-                        RADL
+                        Topology
                                              </th>
                          </tr>
                     </thead>

@@ -10,7 +10,7 @@ final class UserinfoTest extends TestCase
     public function testNoOp()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
         $this->assertEquals($_SESSION['error'], 'No op');
@@ -22,10 +22,10 @@ final class UserinfoTest extends TestCase
     public function testCreateIncorrectPass()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"add");
-        $_POST = array("username"=>"userinfotest", "password"=>"passwordtest",
-                    "password2"=>"password", "user_groups"=>array("users"), "permissions"=>"0");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"add", "username"=>"userinfotest", "password"=>"passwordtest",
+                       "password2"=>"password", "user_groups"=>array("users"), "permissions"=>"0",
+                       "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
         $this->assertEquals($_SESSION['error'], 'The passwords are not equal.');
@@ -40,10 +40,10 @@ final class UserinfoTest extends TestCase
     public function testCreate()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"add");
-        $_POST = array("username"=>"userinfotest", "password"=>"passwordtest",
-                    "password2"=>"passwordtest", "user_groups"=>array("users"), "permissions"=>"0");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"add", "username"=>"userinfotest", "password"=>"passwordtest",
+                       "password2"=>"passwordtest", "user_groups"=>array("users"), "permissions"=>"0",
+        		       "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: user_list.php'),xdebug_get_headers());
 
@@ -59,10 +59,9 @@ final class UserinfoTest extends TestCase
     {
         $this->expectOutputString('');
 
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"edit");
-        $_POST = array("id"=>"userinfotest", "username"=>"newuserinfotest", "password"=>"passwordtest",
-                    "password2"=>"passwordtest", "user_groups"=>array("users"), "permissions"=>"0");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"edit", "id"=>"userinfotest", "username"=>"newuserinfotest", "password"=>"passwordtest",
+        		       "password2"=>"passwordtest", "user_groups"=>array("users"), "permissions"=>"0", "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: user_list.php'),xdebug_get_headers());
 
@@ -78,9 +77,9 @@ final class UserinfoTest extends TestCase
     {
         $this->expectOutputString('');
 
-        $_SESSION = array("user"=>"newuserinfotest", "password"=>"passwordtest");
-        $_GET = array("op"=>"password");
-        $_POST = array("password"=>"npasswordtest", "password2"=>"npasswordtest");
+        $_SESSION = array("user"=>"newuserinfotest", "password"=>"passwordtest", "rand"=>"123");
+        $_POST = array("op"=>"password", "oldpassword" => "passwordtest", "password"=>"npasswordtest",
+        		       "password2"=>"npasswordtest", "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: list.php'),xdebug_get_headers());
 
@@ -97,14 +96,15 @@ final class UserinfoTest extends TestCase
     {
         $this->expectOutputString('');
 
-        $_SESSION = array("user"=>"newuserinfotest", "password"=>"passwordtest");
-        $_GET = array("op"=>"register");
-        $_POST = array("username"=>"userinfotest2", "password"=>"npasswordtest", "password2"=>"npasswordtest");
+        $_SESSION = array("user"=>"newuserinfotest", "password"=>"passwordtest", "rand"=>"123");
+        $_POST = array("op"=>"register", "username"=>"userinfotest2", "password"=>"npasswordtest",
+        		       "password2"=>"npasswordtest", "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: index.php'),xdebug_get_headers());
         $this->assertEquals($_SESSION['error'], 'Username is not a valid email.');
         		
-        $_POST = array("username"=>"user@server.com", "password"=>"npasswordtest", "password2"=>"npasswordtest");
+        $_POST = array("op"=>"register", "username"=>"user@server.com", "password"=>"npasswordtest",
+        		       "password2"=>"npasswordtest", "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: index.php'),xdebug_get_headers());
         $this->assertEquals($_SESSION['info'], 'User added successfully');
@@ -125,8 +125,8 @@ final class UserinfoTest extends TestCase
     {
         $this->expectOutputString('');
 
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"delete", "id"=>"newuserinfotest");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"delete", "id"=>"newuserinfotest", "rand"=>"123");
         include('../../userinfo.php');
         $this->assertEquals(array('Location: user_list.php'),xdebug_get_headers());
     }

@@ -4,13 +4,26 @@ use PHPUnit\Framework\TestCase;
 
 final class OperateTest extends TestCase
 {
+	/**
+	 * @runInSeparateProcess
+	 */
+	public function testOperateRand()
+	{
+		$this->expectOutputString('');
+		$_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+		include('../../operate.php');
+		$this->assertEquals(array('Location: error.php'),xdebug_get_headers());
+		$this->assertEquals($_SESSION['error'], 'Invalid rand parameter.');
+	}
+
     /**
      * @runInSeparateProcess
      */
     public function testOperate()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("rand"=>"123");
         include('../../operate.php');
         $this->assertEquals(array('Location: error.php'),xdebug_get_headers());
         $this->assertEquals($_SESSION['error'], 'No op');
@@ -22,9 +35,8 @@ final class OperateTest extends TestCase
     public function testCreate()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"create");
-        $_POST = array("radl"=>"radl");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"create", "radl"=>"radl", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['CreateInfrastructure'])
@@ -44,8 +56,8 @@ final class OperateTest extends TestCase
     public function testDestroy()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"destroy", "id"=>"id");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"destroy", "id"=>"id", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['DestroyInfrastructure'])
@@ -65,8 +77,8 @@ final class OperateTest extends TestCase
     public function testDestroyVM()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"destroyvm", "infid"=>"id", "vmid"=>"vid");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"destroyvm", "infid"=>"id", "vmid"=>"vid", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['RemoveResource'])
@@ -86,8 +98,8 @@ final class OperateTest extends TestCase
     public function testStopVM()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"stopvm", "infid"=>"id", "vmid"=>"vid");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"stopvm", "infid"=>"id", "vmid"=>"vid", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['StopVM'])
@@ -107,8 +119,8 @@ final class OperateTest extends TestCase
     public function testStartVM()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"startvm", "infid"=>"id", "vmid"=>"vid");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"startvm", "infid"=>"id", "vmid"=>"vid", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['StartVM'])
@@ -128,8 +140,8 @@ final class OperateTest extends TestCase
     public function testRebootVM()
     {
     	$this->expectOutputString('');
-    	$_SESSION = array("user"=>"admin", "password"=>"admin");
-    	$_GET = array("op"=>"rebootvm", "infid"=>"id", "vmid"=>"vid");
+    	$_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+    	$_POST = array("op"=>"rebootvm", "infid"=>"id", "vmid"=>"vid", "rand"=>"123");
     	
     	$im = $this->getMockBuilder(IMRest::class)
     	->setMethods(['RebootVM'])
@@ -149,9 +161,8 @@ final class OperateTest extends TestCase
     public function testAddResource()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"addresource");
-        $_POST = array("radl"=>"radl", "infid"=>"id");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"addresource", "radl"=>"radl", "infid"=>"id", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['AddResource'])
@@ -171,8 +182,8 @@ final class OperateTest extends TestCase
     public function testReconfigure()
     {
         $this->expectOutputString('');
-        $_SESSION = array("user"=>"admin", "password"=>"admin");
-        $_GET = array("op"=>"reconfigure", "infid"=>"id");
+        $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
+        $_POST = array("op"=>"reconfigure", "infid"=>"id", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['Reconfigure'])
