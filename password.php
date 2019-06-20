@@ -48,6 +48,15 @@
                         <tbody>
                                 <tr>
                                         <th align="left">
+                                            Old Password:
+
+                                        </th>
+                                        <td>
+                                            <input type="password" name="oldpassword" id="oldpassword">
+                                        </td>
+                               </tr>
+                                <tr>
+                                        <th align="left">
                                             New Password:
 
                                         </th>

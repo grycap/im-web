@@ -51,6 +51,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
             }
         } elseif ($op == "password") {
             $username = $_SESSION["user"];
+            $oldpassword = $_POST['oldpassword'];
             $password = $_POST['password'];
             $password2 = $_POST['password2'];
 
@@ -62,10 +63,10 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
             }
                         
             if ($err == "") {
-                $err = change_password($username, $password);
+            	$err = change_password($username, $oldpassword, $password);
             }
             if (strlen($err) > 0) {
-            	invalid_user_error($err);
+            	error($err);
             } else {
                 $_SESSION['password'] = $password;
                 header('Location: list.php');
