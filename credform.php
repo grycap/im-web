@@ -29,6 +29,9 @@ if (!check_session_user()) {
     if (isset($_GET['id'])) {
         $rowid = $_GET['id'];
     }
+    
+    $rand = sha1(rand());
+    $_SESSION['rand'] = $rand;
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -154,6 +157,7 @@ if (!check_session_user()) {
          <form action="credinfo.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="op" value="edit"/>
             <input type="hidden" name="rowid" value="<?php echo $rowid;?>"/>
+            <input type="hidden" name="rand" value="<?php echo $rand;?>"/>
 
         <?php
     } else {
