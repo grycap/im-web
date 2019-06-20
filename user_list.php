@@ -27,6 +27,8 @@ if (!check_session_user() || !check_admin_user()) {
 } else {
     $users = get_users();
 
+    $rand = sha1(rand());
+    $_SESSION['rand'] = $rand;
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -89,10 +91,10 @@ if (!check_session_user() || !check_admin_user()) {
                 } );
         } );
         
-        function confirm_delete(url, username) {
+        function confirm_delete(username) {
             var r=confirm("Sure that you want to delete the User with username: " + username + "?");
             if (r==true) {
-                window.location.href = url;
+                document.getElementById('deleteuser_' + username).submit();
             }
         }
     </script>
@@ -146,7 +148,12 @@ if (!check_session_user() || !check_admin_user()) {
                     <a href="userform.php?id=<?php echo htmlspecialchars($user['username']);?>"><img src="images/modificar.gif" border="0" alt="Edit" title="Edit"></a>
                 </td>
                 <td>
-                    <a onclick="javascript:confirm_delete('userinfo.php?op=delete&id=<?php echo htmlspecialchars($user['username']);?>', '<?php echo htmlspecialchars($user['username'])?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                	<form action="userinfo.php" id="deleteuser_<?php echo htmlspecialchars($user['username']);?>" method="post">
+                	<input type="hidden" name="op" value="delete"/>
+                	<input type="hidden" name="id" value="<?php echo htmlspecialchars($user['username']);?>"/>
+                	<input type="hidden" name="rand" value="<?php echo $rand;?>"/>
+                	</form>
+                    <a onclick="javascript:confirm_delete('<?php echo htmlspecialchars($user['username'])?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
             </tr>
                 <?php
