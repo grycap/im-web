@@ -31,14 +31,21 @@ if (!check_session_user() || !check_admin_user()) {
     $op = "";
     if (isset($_POST['op'])) {
         $op = $_POST['op'];
-    } elseif (isset($_GET['op'])) {
-        $op = $_GET['op'];
     }
 
+    $rand = "";
+    if (isset($_POST['rand'])) {
+    	$rand = $_POST['rand'];
+    }
+    
+    if ($rand != $_SESSION["rand"]) {
+    	error("Invalid rand parameter.");
+    } else {
+    
     if (strlen($op) > 0) {
         if ($op == "delete") {
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
+        	if (isset($_POST['id'])) {
+        		$id = $_POST['id'];
                 $err = delete_recipe($id);
                 if (strlen($err) > 0) {
                 	error($err);
@@ -88,6 +95,8 @@ if (!check_session_user() || !check_admin_user()) {
         }
     } else {
     	error('No op');
+    }
+    
     }
 }
 ?>

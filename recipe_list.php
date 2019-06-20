@@ -28,6 +28,8 @@ if (!check_session_user()) {
     include_once 'recipe.php';
     $recipes = get_recipes();
 
+    $rand = sha1(rand());
+    $_SESSION['rand'] = $rand;
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -96,11 +98,11 @@ if (!check_session_user()) {
                         ]
                 } );
         } );
-        
-        function confirm_delete(url, name) {
-            var r=confirm("Sure that you want to delete the Recipe with name: " + name + "?");
+
+        function confirm_delete(id, name) {
+        	var r=confirm("Sure that you want to delete the Recipe with name: " + name + "?");
             if (r==true) {
-                window.location.href = url;
+                document.getElementById('recipedel_' + id).submit();
             }
         }
     </script>
@@ -139,10 +141,10 @@ if (!check_session_user()) {
                 ?>
             <tr>
                 <td>
-                    <?php echo $recipe['name']?>
+                    <?php echo htmlspecialchars($recipe['name'])?>
                 </td>
                 <td>
-                <?php echo $recipe['version']?>
+                <?php echo htmlspecialchars($recipe['version'])?>
                 </td>
                 <td>
                 <?php
@@ -161,7 +163,12 @@ if (!check_session_user()) {
                 if (check_admin_user()) {
                     ?>
                 <td>
-                        <a onclick="javascript:confirm_delete('recipeinfo.php?op=delete&id=<?php echo $recipe['rowid'];?>', '<?php echo $recipe['name']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                	<form action="recipeinfo.php" id="recipedel_<?php echo $user['rowid'];?>" method="post">
+                	<input type="hidden" name="op" value="delete"/>
+                	<input type="hidden" name="id" value="<?php echo $user['rowid'];?>"/>
+                	<input type="hidden" name="rand" value="<?php echo $rand;?>"/>
+                	</form>
+                        <a onclick="javascript:confirm_delete('<?php echo $recipe['rowid'];?>', '<?php echo $recipe['name']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
                 </td>
                     <?php
                 }
