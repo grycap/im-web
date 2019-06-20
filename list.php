@@ -26,7 +26,7 @@ if (isset($_POST['password'])) {
 if (isset($_POST['username'])) {
     $_SESSION['user'] = $_POST['username'];
 }
-    
+
 require_once 'format.php';
 require_once 'user.php';
 if (!check_session_user()) {
