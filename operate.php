@@ -40,8 +40,7 @@ if (!check_session_user()) {
     
     if ($rand != $_SESSION["rand"]) {
     	error("Invalid rand parameter.");
-    	exit();
-    }
+    } else {
     
     if (strlen($op) > 0) {
         if ($op == "create") {
@@ -168,6 +167,7 @@ if (!check_session_user()) {
             
     } else {
     	error('No op');
+    }
     }
 }
 ?>
