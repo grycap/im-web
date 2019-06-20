@@ -142,7 +142,7 @@ if (!check_session_user()) {
                         <tbody>
                 <tr>
                     <td colspan=2>
-                    Topology
+                    RADL / TOSCA
                     </td>
                 </tr>
                 <tr>
