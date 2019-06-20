@@ -163,9 +163,9 @@ if (!check_session_user()) {
                 if (check_admin_user()) {
                     ?>
                 <td>
-                	<form action="recipeinfo.php" id="recipedel_<?php echo $user['rowid'];?>" method="post">
+                	<form action="recipeinfo.php" id="recipedel_<?php echo $recipe['rowid'];?>" method="post">
                 	<input type="hidden" name="op" value="delete"/>
-                	<input type="hidden" name="id" value="<?php echo $user['rowid'];?>"/>
+                	<input type="hidden" name="id" value="<?php echo $recipe['rowid'];?>"/>
                 	<input type="hidden" name="rand" value="<?php echo $rand;?>"/>
                 	</form>
                         <a onclick="javascript:confirm_delete('<?php echo $recipe['rowid'];?>', '<?php echo $recipe['name']?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
