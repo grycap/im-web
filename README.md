@@ -18,7 +18,7 @@ IM web interface is based on PHP, so a web server with PHP support must be insta
 
 Also the mcrypt PHP modules must be installed and enabled.
 
-It is also required to install the PHP module to access SQLite databases.
+It is also required to install the PHP module to access MySQL or SQLite databases.
 
 In case of using the REST API it is also required to install the CURL PHP module.
 
@@ -79,6 +79,14 @@ $openid_name="INDIGO IAM";
 $CLIENT_ID = 'client_id';
 $CLIENT_SECRET = 'client_secret';
 $REDIRECT_URI = 'https://server.com/im-web/openid_auth.php';
+```
+*   Key to crypt the credentials data it must be 32 chars.
+```php
+$cred_crypt_key = "n04ykjinrswda5sdfnb5680yu21+qgh3";
+```
+*   Start substring (for internal use).
+```php
+$cred_cryp_start = "#Crypt@d";
 ```
 
 ### 1.3 DEFAULT USER
