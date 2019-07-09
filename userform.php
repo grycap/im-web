@@ -142,6 +142,7 @@ if (!check_session_user() || !check_admin_user()) {
         <form action="userinfo.php" method="post" onsubmit="javascript:set_users()">
             <input type="hidden" name="op" value="edit"/>
             <input type="hidden" name="id" value="<?php echo htmlspecialchars($username);?>"/>
+            <input type="hidden" name="rand" value="<?php echo $rand;?>"/>
             <?php
     } else {
         ?>
