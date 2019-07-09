@@ -167,6 +167,7 @@ if (!check_session_user()) {
  
  <form action="credinfo.php" method="post" enctype="multipart/form-data">
             <input type="hidden" name="op" value="add"/>
+            <input type="hidden" name="rand" value="<?php echo $rand;?>"/>
 
         <?php
     }
