@@ -57,7 +57,7 @@ final class OperateTest extends TestCase
     {
         $this->expectOutputString('');
         $_SESSION = array("user"=>"admin", "password"=>"admin", "rand"=>"123");
-        $_POST = array("op"=>"destroy", "id"=>"id", "rand"=>"123");
+        $_POST = array("op"=>"destroy", "infid"=>"id", "rand"=>"123");
 
         $im = $this->getMockBuilder(IMRest::class)
             ->setMethods(['DestroyInfrastructure'])
