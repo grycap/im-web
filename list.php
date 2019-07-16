@@ -139,7 +139,7 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
         <tbody>
 			<form action="operate.php" method="post" id="operateinf">
 			<input type="hidden" name="op" value="" id="opfield"/>
-			<input type="hidden" name="id" value="" id="infidfeld"/>
+			<input type="hidden" name="infid" value="" id="infidfeld"/>
 			<input type="hidden" name="rand" value="<?php echo htmlspecialchars($rand);?>"/>
 			</form>
         </tbody>

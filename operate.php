@@ -58,8 +58,8 @@ if (!check_session_user()) {
                 header('Location: list.php');
             }
         } elseif ($op == "destroy") {
-        	if (isset($_POST['id'])) {
-        		$id = $_POST['id'];
+        	if (isset($_POST['infid'])) {
+        		$id = $_POST['infid'];
                 $res = GetIM()->DestroyInfrastructure($id);
                     
                 if (strpos($res, "Error") !== false) {
