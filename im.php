@@ -12,14 +12,14 @@ function GetIM()
     }
 
     if ($im_use_rest) {
-    	return IMRest::connect($im_host, $im_port, $path);
+    	return IMRest::connect($im_host, $im_port, $im_path);
     } else {
         if ($im_use_ssl) {
             $im_method = 'https';
         } else {
             $im_method = 'http';
         }
-        return IMXML::connect($im_host, $im_port, $im_method, $path);
+        return IMXML::connect($im_host, $im_port, $im_method, $im_path);
     }
 }
 ?>
