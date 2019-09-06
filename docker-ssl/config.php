@@ -37,7 +37,7 @@ if (getenv('im_port')) {
 }
 $im_path='/';
 if (getenv('im_path')) {
-	$im_path = intval(getenv('im_path'));
+	$im_path = getenv('im_path');
 }
 $im_db="/var/www/www-data/im.db";
 if (getenv('im_db')) {
