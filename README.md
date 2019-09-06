@@ -10,9 +10,65 @@ integrates a contextualization system to enable the installation and
 configuration of all the user required applications providing the user with a
 fully functional infrastructure.
 
-## 1 INSTALLATION
+## 1 DOCKER IMAGE
 
-### 1.1 REQUISITES
+A Docker image named `grycap/im-web` has been created to make easier the deployment of an IM web GUI using the 
+default configuration. Information about this image can be found here: <https://registry.hub.docker.com/u/grycap/im-web/>.
+
+This container is prepaired to work linked with the IM service container `grycap/im`, in this way:
+
+*   First launch the IM service specifying the name "im":
+
+```sh
+sudo docker run -d -p 8899:8899 --name im grycap/im 
+```
+
+*   Then launch the im-web container linking to the im:
+
+```sh
+sudo docker run -d -p 80:80 --name im-web --link im:im grycap/im-web 
+```
+
+It also supports environment variables to set the IM service location:
+
+*   im_use_rest: Uses the REST API instead of the XML-RPC that is the default one. Default value "false".
+*   im_use_ssl: Uses HTTPS to connect with the APIs. Default value "false".
+*   im_host: Hostname of the IM service. Default value "im".
+*   im_port: Port of the IM service. Default value "8899".
+*   im_path: Path of the IM service. Default value "/".
+*   im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
+*   openid_issuer: URL of the OpenID Issuer. Default value "".
+*   openid_name: OpenID Issuer name. Default value "".
+*   client_id: OpenID Client ID. Default value "client_id".
+*   client_secret: OpenID Client Secret. Default value "client_secret".
+*   redirect_uri: OpenID redirect URI . Default value "https://server.com/im-web/opend_auth.php". 
+
+```sh
+docker run -p 80:80 -e "im_use_rest=true" -e "im_host=server.domain" -e "im_port=8800" -d grycap/im-web
+```
+
+There is also a version SSL enabled. In this case the docker image have a selfsigned certificate for testing purposes. Add your own in the docker command:
+
+```sh
+docker run -p 80:80 -p 443:443 -v server.crt:/etc/ssl/certs/server.crt -v server.key:/etc/ssl/certs/server.key -d grycap/im-web:1.5.5-ssl
+```
+
+## 2 Kubernetes Helm Chart
+
+The IM service and web interface can be installed on top of [Kubernetes](https://kubernetes.io/) using [Helm](https://helm.sh/).
+
+How to install the IM chart:
+
+```sh
+$ helm repo add grycap https://grycap.github.io/helm-charts/
+$ helm install --namespace=im --name=im  grycap/IM
+```
+
+All the information about this chart is available at the [IM chart README](https://github.com/grycap/helm-charts/blob/master/IM/README.md).
+
+## 3 INSTALLATION
+
+### 3.1 REQUISITES
 
 IM web interface is based on PHP, so a web server with PHP support must be installed.
 
@@ -22,7 +78,7 @@ It is also required to install the PHP module to access MySQL or SQLite database
 
 In case of using the REST API it is also required to install the CURL PHP module.
 
-### 1.2 INSTALLING
+### 3.2 INSTALLING
 
 Select a proper path in the document root of the web server to install the IM web interface
 (i.e. /var/www/im).
@@ -33,7 +89,7 @@ mv IM-X.XX /var/www/im
 chown -R www-data /var/www/im
 ```
 
-### 1.2 CONFIGURATION
+### 3.2 CONFIGURATION
 
 Adjust the configuration settings in the file config.php:
 
@@ -93,49 +149,7 @@ $cred_crypt_key = "n04ykjinrswda5sdfnb5680yu21+qgh3";
 $cred_cryp_start = "#Crypt@d";
 ```
 
-### 1.3 DEFAULT USER
+### 3.3 DEFAULT USER
 
 The default administrator user is admin with password admin.
 
-## 2 DOCKER IMAGE
-
-A Docker image named `grycap/im-web` has been created to make easier the deployment of an IM web GUI using the 
-default configuration. Information about this image can be found here: <https://registry.hub.docker.com/u/grycap/im-web/>.
-
-This container is prepaired to work linked with the IM service container `grycap/im`, in this way:
-
-*   First launch the IM service specifying the name "im":
-
-```sh
-sudo docker run -d -p 8899:8899 --name im grycap/im 
-```
-
-*   Then launch the im-web container linking to the im:
-
-```sh
-sudo docker run -d -p 80:80 --name im-web --link im:im grycap/im-web 
-```
-
-It also supports environment variables to set the IM service location:
-
-*   im_use_rest: Uses the REST API instead of the XML-RPC that is the default one. Default value "false".
-*   im_use_ssl: Uses HTTPS to connect with the APIs. Default value "false".
-*   im_host: Hostname of the IM service. Default value "im".
-*   im_port: Port of the IM service. Default value "8899".
-*   im_path: Path of the IM service. Default value "/".
-*   im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
-*   openid_issuer: URL of the OpenID Issuer. Default value "".
-*   openid_name: OpenID Issuer name. Default value "".
-*   client_id: OpenID Client ID. Default value "client_id".
-*   client_secret: OpenID Client Secret. Default value "client_secret".
-*   redirect_uri: OpenID redirect URI . Default value "https://server.com/im-web/opend_auth.php". 
-
-```sh
-docker run -p 80:80 -e "im_use_rest=true" -e "im_host=server.domain" -e "im_port=8800" -d grycap/im-web
-```
-
-There is also a version SSL enabled. In this case the docker image have a selfsigned certificate for testing purposes. Add your own in the docker command:
-
-```sh
-docker run -p 80:80 -p 443:443 -v server.crt:/etc/ssl/certs/server.crt -v server.key:/etc/ssl/certs/server.key -d grycap/im-web:1.5.5-ssl
-```
