@@ -7,16 +7,17 @@ require_once 'cred.php';
 class IMXML
 {
 
-    static public function connect($host, $port, $method)
+    static public function connect($host, $port, $method = "http", $path = "/")
     {
-        return new self($host, $port, $method);
+        return new self($host, $port, $method, $path);
     }
 
-    public function __construct($host = "localhost", $port = 8800, $method = "http")
+    public function __construct($host = "localhost", $port = 8800, $method = "http", $path = "/")
     {
         $this->_host     = $host;
         $this->_port     = $port;
         $this->_method     = $method;
+        $this->_path     = $path;
     }
 
     public function get_auth_data()
@@ -104,7 +105,7 @@ class IMXML
     // helper function to make easier mocking
     public function send_xmlrpc_call($xmlrpc_msg)
     {
-        $xmlrpc_client = new xmlrpc_client('/', $this->_host, $this->_port, $this->_method);
+    	$xmlrpc_client = new xmlrpc_client($this->_path, $this->_host, $this->_port, $this->_method);
         return $xmlrpc_client->send($xmlrpc_msg);
     }
 
