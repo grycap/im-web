@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=1.5.12
+VERSION=1.5.13
 
 if [ ! -d dist ]
 then
