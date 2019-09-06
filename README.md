@@ -53,6 +53,10 @@ $im_host="im-server.domain.com";
 ```php
 $im_port=8899;
 ```
+*   Path of the IM service
+```php
+$im_path='/';
+```
 *   Path of the IM web interface DB. The original path will be /var/www/im/im.db
     but is more secure to move it to a path not in the path of the web server.
     The file and the directory must have write permissions to the web server user.
@@ -118,6 +122,7 @@ It also supports environment variables to set the IM service location:
 *   im_use_ssl: Uses HTTPS to connect with the APIs. Default value "false".
 *   im_host: Hostname of the IM service. Default value "im".
 *   im_port: Port of the IM service. Default value "8899".
+*   im_path: Path of the IM service. Default value "/".
 *   im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
 *   openid_issuer: URL of the OpenID Issuer. Default value "".
 *   openid_name: OpenID Issuer name. Default value "".
