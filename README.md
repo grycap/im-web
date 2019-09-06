@@ -53,6 +53,10 @@ $im_host="im-server.domain.com";
 ```php
 $im_port=8899;
 ```
+*   Path of the IM service
+```php
+$im_path='/';
+```
 *   Path of the IM web interface DB. The original path will be /var/www/im/im.db
     but is more secure to move it to a path not in the path of the web server.
     The file and the directory must have write permissions to the web server user.
