@@ -4,15 +4,16 @@ require_once 'cred.php';
 
 class IMRest
 {
-    static public function connect($host, $port)
+    static public function connect($host, $port, $path = "/")
     {
-        return new self($host, $port);
+        return new self($host, $port, $path);
     }
 
-    public function __construct($host = "localhost", $port = 8800)
+    public function __construct($host = "localhost", $port = 8800, $path = "/")
     {
         $this->_host     = $host;
         $this->_port     = $port;
+        $this->_path     = $path;
     }
 
     public function get_auth_data()
@@ -92,7 +93,7 @@ class IMRest
         try {
             $res = Http::connect($this->_host, $this->_port, $protocol)
             ->setHeaders($headers)
-            ->exec($verb, $path, $params);
+            ->exec($verb, $this->_path . $path, $params);
                 
             $status = $res->getStatus();
             $output = $res->getOutput();
