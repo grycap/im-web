@@ -4,7 +4,7 @@ require_once 'cred.php';
 
 class IMRest
 {
-	static public function connect($host, $port, $path = "/")
+    static public function connect($host, $port, $path = "/")
     {
         return new self($host, $port, $path);
     }

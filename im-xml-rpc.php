@@ -7,7 +7,7 @@ require_once 'cred.php';
 class IMXML
 {
 
-    static public function connect($host, $port, $method = "http", $path = "/")
+    static public function connect($host, $port, $method, $path = "/")
     {
         return new self($host, $port, $method, $path);
     }
@@ -16,7 +16,7 @@ class IMXML
     {
         $this->_host     = $host;
         $this->_port     = $port;
-        $this->_method     = $method;
+        $this->_method   = $method;
         $this->_path     = $path;
     }
 
