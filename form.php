@@ -113,7 +113,7 @@ if (!check_session_user()) {
                          </tr>
                         <tr>
                               <td align="right">
-                     <input type="submit" value="Save"/>
+                     <input type="submit" value="Add"/>
                     <a href="list.php"><input type="button" name="Cancelar" value="Cancel"></a>
                                              </td>
                          </tr>
