@@ -13,6 +13,9 @@ class IMRest
     {
         $this->_host     = $host;
         $this->_port     = $port;
+        if (substr($path, -1) == "/") {
+            $path = substr($path, 0, -1);
+        }
         $this->_path     = $path;
     }
 
