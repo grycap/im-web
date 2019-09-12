@@ -55,7 +55,11 @@ class IMXML
                             $auth_cloud['password'] = new xmlrpcval($cred['password']);
                         }
                         if (!is_null($cred['proxy']) && strlen(trim($cred['proxy'])) > 0) {
-                            $auth_cloud['proxy'] = new xmlrpcval($cred['proxy']);
+                        	if ($cred['type'] == "FogBow") {
+                        		$auth_cloud['token'] = new xmlrpcval($cred['proxy']);
+                        	} else {
+                            	$auth_cloud['proxy'] = new xmlrpcval($cred['proxy']);
+                        	}
                         }
                         if (!is_null($cred['token_type']) && strlen(trim($cred['token_type'])) > 0) {
                             $auth_cloud['token_type'] = new xmlrpcval($cred['token_type']);

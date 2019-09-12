@@ -53,9 +53,11 @@ class IMRest
                             if (!is_null($cred[$field]) && strlen(trim($cred[$field])) > 0) {
                                 $value = str_replace("\n", $AUTH_NEW_LINE_SEPARATOR, $cred[$field]);
                                 if ($field == "certificate") {
-                                          $auth = $auth . "password = " . $value . "; ";
+                                    $auth = $auth . "password = " . $value . "; ";
+                                } elseif ($field == "proxy" and $cred['type'] == "FogBow"){
+                                	$auth = $auth . "token = " . $value . "; ";
                                 } else {
-                                       $auth = $auth . $field ." = " . $value . "; ";
+                                    $auth = $auth . $field ." = " . $value . "; ";
                                 }
                             }
                         }
