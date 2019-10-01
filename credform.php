@@ -444,9 +444,12 @@ if (!check_session_user()) {
                                             <option value="">Select VO to load...</option>
                                         </select>
                                     </td>
-                                    <th align="center" colspan="2">
-                                    Only fill these parameters if <br>you know what are you doing.
-                                    </th>
+                                    <th align="left">
+                                            Tenant:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="tenant" value="<?php echo $tenant != "" ? $tenant : "openid";?>">
+                                         </td>
                             </tr>
                             <tr>
                                     <th align="left">
