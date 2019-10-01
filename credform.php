@@ -45,6 +45,8 @@ if (!check_session_user()) {
     <link rel="stylesheet" href="css/style_menu2.css">
     <link rel="stylesheet" href="css/style_menutab.css">
 
+    <script src="js/jquery.js"></script>
+
     <script type="text/javascript" charset="utf-8">
         function showForm(form_id) {
             if (form_id == "") return;
@@ -75,6 +77,42 @@ if (!check_session_user()) {
               link.download = filename;
               link.href = 'data:Application/octet-stream,' + encodeURIComponent(dataToDownload);
               link.click();
+            }
+
+            function fillVOs(obj)
+            {
+                $('#vos').empty();
+                $('#vos').append("<option value=''>Loading VOs ...</option>");
+                $.ajax({
+                        type: "POST",
+                        url: "./show_vo_sites.php",
+                        success: function(res){
+                            $('#vos').empty();
+                            $('#vos').append("<option value=''> - Select one VO - </option>");
+                            $('#vos').append(res);
+                        }
+                    });
+            }
+
+            function loadHosts() {
+                $('#hosts').empty();
+                $('#hosts').append("<option value=''>Loading Sites ...</option>");
+                $.ajax({
+                    method: "POST",
+                    url: "./show_vo_sites.php",
+                    data:{vo: $('#vos').val()},
+                    success : function(text)
+                    {
+                        $('#hosts').empty();
+                        $('#hosts').append("<option value=''> - Select one site - </option>");
+                        $('#hosts').append(text);
+                    }
+                });
+            }
+
+            function setFedCloudID() {
+                var elem = document.getElementById('FedCloudID');
+                elem.value = $('#hosts option:selected').text();
             }
     </script>
 </head>
@@ -120,7 +158,7 @@ if (!check_session_user()) {
     }
     ?>
 
-<body onload="showForm('<?php echo $type;?>')">
+<body onload="showForm('<?php echo $type;?>');fillVOs();">
 
 <div id="caja_total_blanca">
 
@@ -176,6 +214,20 @@ if (!check_session_user()) {
 <div id="caja_logosVM">
 <div class='h1'>Select type:</div>
 
+<input onchange="showForm('FedCloud')" type="radio" id="radio4" name="type" value="OpenStack">
+   <label for="radio4"><img class="logoVM" src="images/logosVM/fedcloud.png" title="EGI FedCloud"></label>
+
+<input onchange="showForm('OpenNebula')" type="radio" id="radio1" name="type" value="OpenNebula" <?php echo ($type == "OpenNebula" ? 'checked="checked"' : ''); ?> >
+   <label for="radio1" ><img class="logoVM" src="images/logosVM/OpenNebula.png" title="OpenNebula"></label>
+
+<input onchange="showForm('OpenStack')" type="radio" id="radio3" name="type" value="OpenStack" <?php echo ($type == "OpenStack" ? 'checked="checked"' : ''); ?>>
+   <label for="radio3"><img class="logoVM" src="images/logosVM/openstack.png" title="OpenStack"></label>
+   
+<input onchange="showForm('FogBow')" type="radio" id="radio9" name="type" value="FogBow" <?php echo ($type == "FogBow" ? 'checked="checked"' : ''); ?>>
+   <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png" title="FogBow"></label> 
+
+<br>
+
 <input onchange="showForm('EC2')" type="radio" id="radio2" name="type" value="EC2" <?php echo ($type == "EC2" ? 'checked="checked"' : '');?>>
    <label for="radio2"><img class="logoVM" src="images/logosVM/ec2.png" title="Amazon EC2"></label>
    
@@ -190,19 +242,6 @@ if (!check_session_user()) {
    
 <br>
 
-<input onchange="showForm('OpenNebula')" type="radio" id="radio1" name="type" value="OpenNebula" <?php echo ($type == "OpenNebula" ? 'checked="checked"' : ''); ?> >
-   <label for="radio1" ><img class="logoVM" src="images/logosVM/OpenNebula.png" title="OpenNebula"></label>
-
-<input onchange="showForm('OpenStack')" type="radio" id="radio3" name="type" value="OpenStack" <?php echo ($type == "OpenStack" ? 'checked="checked"' : ''); ?>>
-   <label for="radio3"><img class="logoVM" src="images/logosVM/openstack.png" title="OpenStack"></label>
-
-<input onchange="showForm('OCCI')" type="radio" id="radio4" name="type" value="OCCI" <?php echo ($type == "OCCI" ? 'checked="checked"' : ''); ?>>
-   <label for="radio4"><img class="logoVM" src="images/logosVM/OCCI.png" title="OCCI"></label>
-   
-<input onchange="showForm('FogBow')" type="radio" id="radio9" name="type" value="FogBow" <?php echo ($type == "FogBow" ? 'checked="checked"' : ''); ?>>
-   <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png" title="FogBow"></label> 
-
-<br>
 
 <input onchange="showForm('Docker')" type="radio" id="radio10" name="type" value="Docker" <?php echo ($type == "Docker" ? 'checked="checked"' : '');  ?>>
    <label for="radio10"><img class="logoVM" src="images/logosVM/Docker.png" title="Docker"></label>
@@ -374,6 +413,82 @@ if (!check_session_user()) {
                         </tbody>
                 </table>
     </div>
+
+
+<div id="FedCloud" class="caja_form_credentials">
+            <table>
+                    <tbody>
+                            <tr>
+                                    <th align="left">
+                                        VOs:
+                                    </th>
+                                    <td>
+                                        <select id="vos" onchange="loadHosts()" name="vo" style="width:150px;">
+                                        </select>
+                                    </td>
+
+                                    <th align="left">
+                                        Username:
+                                    </th>
+                                    <td>
+                                        <input type="text" name="username" value="<?php echo $username != "" ? $username : "egi.eu";?>">
+                                    </td>
+
+                            </tr>
+                            <tr>
+                                <th align="left">
+                                        Host:
+                                    </th>
+                                    <td>
+                                        <select id="hosts" onchange="setFedCloudID()" name="host" style="width:150px;">
+                                            <option value="">Select VO to load...</option>
+                                        </select>
+                                    </td>
+                                    <th align="left">
+                                            Tenant:
+                                        </th>
+                                        <td>
+                                           <input type="text" name="tenant" value="<?php echo $tenant != "" ? $tenant : "openid";?>">
+                                         </td>
+                            </tr>
+                            <tr>
+                                    <th align="left">
+                                        ID:
+                                    </th>
+                                    <td>
+                                        <input type="text" id="FedCloudID" name="id" value="<?php echo $id;?>">
+                                    </td>
+                                    <th align="left">
+                                        Domain:
+                                    </th>
+                                    <td>
+                                        <input type="text" name="domain" value="<?php echo $domain;?>">
+                                    </td>
+                            </tr>
+                            <tr>
+                                    <th align="left">
+                                        Auth Version:
+                                    </th>
+                                    <td>
+                                        <input type="text" name="auth_version" value="<?php echo $auth_version != "" ? $auth_version : "3.x_oidc_access_token";?>">
+                                    </td>
+                                    <th align="left">
+                                        Region:
+                                    </th>
+                                    <td>
+                                        <input type="text" name="service_region" value="<?php echo $service_region;?>">
+                                    </td>
+                            </tr>
+
+            <tr>
+                <td colspan="4" align="right">
+                        <input type="submit" value="Save"/>
+                    <a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+                </td>
+            </tr>
+                    </tbody>
+            </table>
+</div>
 
 <div id="OpenStack" class="caja_form_credentials">
                 <table>
@@ -604,47 +719,6 @@ if (!check_session_user()) {
                     </td>
                 </tr>
         
-                                
-                        </tbody>
-                </table>
-    </div>
-
-<div id="OCCI" class="caja_form_credentials">
-                <table>
-                        <tbody>
-                                <tr>
-                                        <th align="left">
-                                            ID:
-                                        </th>
-                                        <td>
-                                            <input type="text" name="id" value="<?php echo $id;?>"/>
-                                        </td>
-
-                                         <th align="left">
-                                            Host:
-                                        </th>
-                                        <td>
-                                            <input type="text" name="host" value="<?php echo $host;?>"/>
-                                        </td>
-                               </tr>
-                                <tr>
-                                        <th align="left">
-                                            Proxy
-                                        </th>
-                                        <td colspan="3">
-                                           <input type="file" name="proxy"/>
-                                         </td>
-                                        <th align="left">
-                                        </th>
-                                        <td>
-                                        </td>
-                            </tr>
-                <tr>
-                    <td colspan="4" align="right">
-                         <input type="submit" value="Save"/>
-                        <a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"/></a>
-                    </td>
-                </tr>                  
                                 
                         </tbody>
                 </table>
