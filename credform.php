@@ -214,9 +214,14 @@ if (!check_session_user()) {
 <div id="caja_logosVM">
 <div class='h1'>Select type:</div>
 
+<?php
+	if (isset($_SESSION['user_token'])) {
+        ?>
 <input onchange="showForm('FedCloud')" type="radio" id="radio4" name="type" value="OpenStack">
    <label for="radio4"><img class="logoVM" src="images/logosVM/fedcloud.png" title="EGI FedCloud"></label>
-
+        <?php
+	}
+?>
 <input onchange="showForm('OpenNebula')" type="radio" id="radio1" name="type" value="OpenNebula" <?php echo ($type == "OpenNebula" ? 'checked="checked"' : ''); ?> >
    <label for="radio1" ><img class="logoVM" src="images/logosVM/OpenNebula.png" title="OpenNebula"></label>
 
