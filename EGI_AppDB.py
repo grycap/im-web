@@ -21,6 +21,7 @@ import sys
 import httplib
 import xmltodict
 from urlparse import urlparse
+from __builtin__ import isinstance
 
 __copyright__ = "Copyright (c) 2016 EGI Foundation"
 __license__ = "Apache Licence v2.0"
@@ -32,9 +33,11 @@ def get_vo_list():
         vos.append(vo['@name'])
     return vos
 
-def check_supported_VOs(id):
+def check_supported_VOs(data, vo):
+    """
+    Check if there are an image of the supported VO
+    """
     try:
-        data = appdb_call('/rest/1.0/va_providers/%s' %id)
         value = 0
         for os_tpl in data['appdb:appdb']['virtualization:provider']['provider:image']:
             try:
@@ -59,7 +62,11 @@ def get_sites(vo):
     data = appdb_call('/rest/1.0/sites?flt=%%2B%%3Dvo.name:%s&%%2B%%3Dsite.supports:1' % vo)
     providersID = []
     if 'appdb:site' in data['appdb:appdb']:
-        for site in data['appdb:appdb']['appdb:site']:
+        if isinstance(data['appdb:appdb']['appdb:site'], list):
+            sites = data['appdb:appdb']['appdb:site']
+        else:
+            sites = [data['appdb:appdb']['appdb:site']]
+        for site in sites:
             if  type(site['site:service']) == type([]):
                 for service in site['site:service']:
                     providersID.append(service['@id'])
@@ -69,9 +76,9 @@ def get_sites(vo):
     # Get provider metadata
     endpoints = []
     for ID in providersID:
-        if check_supported_VOs(ID):
-            data = appdb_call('/rest/1.0/va_providers/%s' % ID)
-            if (data['appdb:appdb']['virtualization:provider'].has_key('provider:endpoint_url') and
+        data = appdb_call('/rest/1.0/va_providers/%s' % ID)
+        if check_supported_VOs(data, vo):
+            if ('provider:url' in data['appdb:appdb']['virtualization:provider'] and
                     data['appdb:appdb']['virtualization:provider']['@service_type'] == 'org.openstack.nova'):
                 provider_name = data['appdb:appdb']['virtualization:provider']['provider:name']
                 provider_endpoint_url = data['appdb:appdb']['virtualization:provider']['provider:url']
