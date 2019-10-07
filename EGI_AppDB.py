@@ -67,7 +67,7 @@ def get_sites(vo):
         else:
             sites = [data['appdb:appdb']['appdb:site']]
         for site in sites:
-            if  type(site['site:service']) == type([]):
+            if  isinstance(site['site:service'], list):
                 for service in site['site:service']:
                     providersID.append(service['@id'])
             else:
