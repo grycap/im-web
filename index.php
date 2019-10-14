@@ -65,8 +65,8 @@ if (!empty($openid_issuer)) {
 
     <div id="caja_pie_portada">
         <div id="caja_texto_pie_portada">
-            &copy GRyCAP&nbsp&nbsp|&nbsp&nbsp<a href="terms.html">Terms of Service</a>&nbsp&nbsp|&nbsp&nbspUniversidad Polit&eacutecnica de Valencia&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
-&nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbspwww.grycap.upv.es
+            &copy GRyCAP&nbsp&nbsp|&nbsp&nbsp<a href="terms.html">Terms of Service</a>&nbsp&nbsp|&nbsp&nbsp<a href="https://www.upv.es" target="_blank">Universidad Polit&eacutecnica de Valencia</a>&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
+&nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbsp<a href="https://www.grycap.upv.es" target="_blank">www.grycap.upv.es</a>
         </div>
     </div>    
 
