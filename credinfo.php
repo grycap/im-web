@@ -109,9 +109,11 @@ if (!check_session_user()) {
             if (isset($_POST['subscription_id'])) {
                 $subscription_id = $_POST['subscription_id'];
             }
-                
+
             if (isset($_FILES['proxy']['tmp_name'])) {
                 $proxy = file_get_contents($_FILES['proxy']['tmp_name']);
+            } else if (isset($_POST['proxy'])) {
+                $proxy = $_POST['proxy'];
             }
             if (isset($_FILES['public_key']['tmp_name'])) {
                 $public_key = file_get_contents($_FILES['public_key']['tmp_name']);
@@ -187,6 +189,8 @@ if (!check_session_user()) {
                     
                 if (isset($_FILES['proxy']['tmp_name'])) {
                     $proxy = file_get_contents($_FILES['proxy']['tmp_name']);
+                } else if (isset($_POST['proxy'])) {
+                    $proxy = $_POST['proxy'];
                 }
                 if (isset($_FILES['public_key']['tmp_name'])) {
                     $public_key = file_get_contents($_FILES['public_key']['tmp_name']);
