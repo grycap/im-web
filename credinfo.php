@@ -110,18 +110,18 @@ if (!check_session_user()) {
                 $subscription_id = $_POST['subscription_id'];
             }
 
-            if (isset($_FILES['proxy']['tmp_name'])) {
+            if (isset($_FILES['proxy']['tmp_name']) && isset($_POST['proxy'])) {
                 $proxy = file_get_contents($_FILES['proxy']['tmp_name']);
             } else if (isset($_POST['proxy'])) {
                 $proxy = $_POST['proxy'];
             }
-            if (isset($_FILES['public_key']['tmp_name'])) {
+            if (isset($_FILES['public_key']['tmp_name']) && isset($_POST['public_key'])) {
                 $public_key = file_get_contents($_FILES['public_key']['tmp_name']);
             }
-            if (isset($_FILES['private_key']['tmp_name'])) {
+            if (isset($_FILES['private_key']['tmp_name']) && isset($_POST['private_key'])) {
                 $private_key = file_get_contents($_FILES['private_key']['tmp_name']);
             }
-            if (isset($_FILES['certificate']['tmp_name'])) {
+            if (isset($_FILES['certificate']['tmp_name']) && isset($_POST['certificate'])) {
                 $certificate = file_get_contents($_FILES['certificate']['tmp_name']);
             }
                 
@@ -186,21 +186,21 @@ if (!check_session_user()) {
                 if (isset($_POST['subscription_id'])) {
                     $subscription_id = $_POST['subscription_id'];
                 }
-                    
-                if (isset($_FILES['proxy']['tmp_name'])) {
+
+                if (isset($_FILES['proxy']['tmp_name']) && isset($_POST['proxy'])) {
                     $proxy = file_get_contents($_FILES['proxy']['tmp_name']);
                 } else if (isset($_POST['proxy'])) {
                     $proxy = $_POST['proxy'];
                 }
-                if (isset($_FILES['public_key']['tmp_name'])) {
+                if (isset($_FILES['public_key']['tmp_name']) && isset($_POST['public_key'])) {
                     $public_key = file_get_contents($_FILES['public_key']['tmp_name']);
                 }
-                if (isset($_FILES['private_key']['tmp_name'])) {
+                if (isset($_FILES['private_key']['tmp_name']) && isset($_POST['private_key'])) {
                     $private_key = file_get_contents($_FILES['private_key']['tmp_name']);
                 }
-                if (isset($_FILES['certificate']['tmp_name'])) {
+                if (isset($_FILES['certificate']['tmp_name']) && isset($_POST['certificate'])) {
                     $certificate = file_get_contents($_FILES['certificate']['tmp_name']);
-                }                                    
+                }
 
                     $err = edit_credential($rowid, $id, $type, $host, $username, $password, $token_type, $project, $proxy, $public_key, $private_key, $certificate, $tenant, $subscription_id, $auth_version, $domain, $service_region, $base_url);
                 if (strlen($err) > 0) {
