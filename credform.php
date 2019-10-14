@@ -222,6 +222,9 @@ if (!check_session_user()) {
         <?php
 	}
 ?>
+<input onchange="showForm('OCCI')" type="radio" id="radio14" name="type" value="OCCI" <?php echo ($type == "OCCI" ? 'checked="checked"' : ''); ?>>
+   <label for="radio14"><img class="logoVM" src="images/logosVM/OCCI.png" title="OCCI"></label>
+
 <input onchange="showForm('OpenNebula')" type="radio" id="radio1" name="type" value="OpenNebula" <?php echo ($type == "OpenNebula" ? 'checked="checked"' : ''); ?> >
    <label for="radio1" ><img class="logoVM" src="images/logosVM/OpenNebula.png" title="OpenNebula"></label>
 
@@ -243,7 +246,7 @@ if (!check_session_user()) {
    <label for="radio11"><img class="logoVM" src="images/logosVM/Azure.png" title="Azure RM"></label>
 
 <input onchange="showForm('AzureClassic')" type="radio" id="radio12" name="type" value="AzureClassic" <?php echo ($type == "AzureClassic" ? 'checked="checked"' : ''); ?>>
-   <label for="radio11"><img class="logoVM" src="images/logosVM/AzureClassic.png" title="Azure Classic"></label>
+   <label for="radio12"><img class="logoVM" src="images/logosVM/AzureClassic.png" title="Azure Classic"></label>
    
 <br>
 
@@ -419,6 +422,46 @@ if (!check_session_user()) {
                 </table>
     </div>
 
+<div id="OCCI" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>"/>
+                                        </td>
+
+                                         <th align="left">
+                                            Host:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="host" value="<?php echo $host;?>"/>
+                                        </td>
+                               </tr>
+                                <tr>
+                                        <th align="left">
+                                            Proxy
+                                        </th>
+                                        <td colspan="3">
+                                           <input type="file" name="proxy"/>
+                                         </td>
+                                        <th align="left">
+                                        </th>
+                                        <td>
+                                        </td>
+                            </tr>
+                <tr>
+                    <td colspan="4" align="right">
+                         <input type="submit" value="Save"/>
+                        <a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"/></a>
+                    </td>
+                </tr>
+
+                        </tbody>
+                </table>
+</div>
 
 <div id="FedCloud" class="caja_form_credentials">
             <table>
