@@ -1,12 +1,11 @@
 # Dockerfile to create a container with the IM web GUI
 FROM php:apache
 MAINTAINER Miguel Caballer <micafer1@upv.es>
-LABEL version="1.5.14"
+LABEL version="1.6.0"
 LABEL description="Container image to run the IM web GUI. (http://www.grycap.upv.es/im)"
 
 RUN apt-get update && apt-get install --no-install-recommends -y wget unzip python python-xmltodict && rm -rf /var/lib/apt/lists/* && \
-    #wget https://github.com/grycap/im-web/archive/master.zip && unzip master.zip && rm -f master.zip && mv im-web-master /var/www/html/im-web && \  
-    wget https://github.com/grycap/im-web/archive/devel.zip && unzip devel.zip && rm -f devel.zip && mv im-web-devel /var/www/html/im-web && \  
+    wget https://github.com/grycap/im-web/archive/master.zip && unzip master.zip && rm -f master.zip && mv im-web-master /var/www/html/im-web && \    
     mkdir /var/www/www-data && mv /var/www/html/im-web/im.db /var/www/www-data/im.db  && \
     chown -R www-data /var/www && \
     apt-get purge -y wget unzip && \
