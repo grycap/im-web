@@ -31,8 +31,8 @@
 
 <div id="caja_pie">
 <div id="caja_texto_pie">
-&copy GRyCAP&nbsp&nbsp|&nbsp&nbsp<a href="terms.html">Terms of Service</a>&nbsp&nbsp|&nbsp&nbspwww.grycap.upv.es&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
-&nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbspUniversidad Polit&eacutecnica de Valencia&nbsp&nbsp
+&copy GRyCAP&nbsp&nbsp|&nbsp&nbsp<a href="terms.html">Terms of Service</a>&nbsp&nbsp|&nbsp&nbsp<a href="https://www.grycap.upv.es">www.grycap.upv.es</a>&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
+&nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbsp<a href="https://www.upv.es">Universidad Polit&eacutecnica de Valencia</a>&nbsp&nbsp
 </div>
 </div>
 
