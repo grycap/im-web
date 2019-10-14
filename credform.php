@@ -113,6 +113,8 @@ if (!check_session_user()) {
             function setFedCloudID() {
                 var elem = document.getElementById('FedCloudID');
                 elem.value = $('#hosts option:selected').text();
+                var elem2 = document.getElementById('fedhost');
+                elem2.value = $('#hosts option:selected').val();
             }
     </script>
 </head>
@@ -158,7 +160,7 @@ if (!check_session_user()) {
     }
     ?>
 
-<body onload="showForm('<?php echo $type;?>');fillVOs();">
+<body onload="showForm('<?php echo $type;?>');">
 
 <div id="caja_total_blanca">
 
@@ -217,7 +219,7 @@ if (!check_session_user()) {
 <?php
 	if (isset($_SESSION['user_token'])) {
         ?>
-<input onchange="showForm('FedCloud')" type="radio" id="radio4" name="type" value="OpenStack">
+<input onchange="showForm('FedCloud');fillVOs();" type="radio" id="radio4" name="type" value="OpenStack">
    <label for="radio4"><img class="logoVM" src="images/logosVM/fedcloud.png" title="EGI FedCloud"></label>
         <?php
 	}
@@ -488,9 +490,10 @@ if (!check_session_user()) {
                                         Host:
                                     </th>
                                     <td>
-                                        <select id="hosts" onchange="setFedCloudID()" name="host" style="width:150px;">
+                                        <select id="hosts" onchange="setFedCloudID()" name="hosts" style="width:150px;">
                                             <option value="">Select VO to load...</option>
                                         </select>
+                                        <input id="fedhost" type="text" name="host" value="<?php echo $host;?>">
                                     </td>
                                     <th align="left">
                                             Tenant:
