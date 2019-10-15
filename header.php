@@ -19,7 +19,17 @@
 
 require_once "analyticstracking.php";
 ?>
+<script type="text/javascript" language="javascript" src="js/cookie.js"></script>
+
 <div id="caja_login_superior_contenido">
+    <div id="cookie_banner" style="display:none;height: 30px;">
+    	This website uses cookies to ensure you get the best experience on our website.
+    	<a href="http://cookiesandyou.com/">Learn more</a>
+    	<a href="#" onclick="removeMe();"><input type="button" style="padding:4px 10px 4px 10px;margin:1px 1px;" name="gotit" value="Got it!"></a>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    showCookieBanner()
+     </script>
     <?php require 'user_connected.php'?>        
 </div>
 <div id="imagen-transpa-logo">
