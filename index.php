@@ -23,9 +23,11 @@ require_once "analyticstracking.php";
 
     <div id="caja_login_superior">
     <div id="cookie_banner" style="display:none;">
-    	This website uses cookies to ensure you get the best experience on our website.
-    	<a href="http://cookiesandyou.com/">Learn more</a>
-    	<a href="#" onclick="removeMe();"><input type="button" name="gotit" value="Got it!"></a>
+    	This website uses cookies to ensure you the best experience on our website.
+    	<a href="http://cookiesandyou.com/" target="_blank">
+    	<input type="button" name="learn" value="Learn more"/>
+    	</a>
+    	<input type="button" name="gotit" onclick="removeMe();" value="Accept"/>
     </div>
         <div id="caja_login_superior_componentes">
             <form action="list.php" method="post">
