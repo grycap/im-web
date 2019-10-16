@@ -1442,3 +1442,16 @@ a.download:hover {
 a.download:visited {
   color: white;
 }
+
+ #cookie_banner {
+  position:absolute;
+  z-index:20;
+  left: 0;
+  top: 0;
+  border: 0px solid red;
+  height: 50px;
+  width: 650px;
+  padding-left:20px;
+  color: white;
+  background-color: black;
+ }

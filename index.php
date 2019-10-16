@@ -12,15 +12,21 @@ require 'config.php';
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
 <link rel="stylesheet" href="css/style_login2.css"> 
 <link rel="stylesheet" href="css/style_intro2.css"> 
+<script type="text/javascript" language="javascript" src="js/cookie.js"></script>
 <?php
 require_once "analyticstracking.php";
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
 </head>
-<body>
+<body onload="showCookieBanner()">
 <div id="caja_total_blanca">
 
     <div id="caja_login_superior">
+    <div id="cookie_banner" style="display:none;">
+    	This website uses cookies to ensure you get the best experience on our website.
+    	<a href="http://cookiesandyou.com/">Learn more</a>
+    	<a href="#" onclick="removeMe();"><input type="button" name="gotit" value="Got it!"></a>
+    </div>
         <div id="caja_login_superior_componentes">
             <form action="list.php" method="post">
 <?php
