@@ -468,6 +468,11 @@ if (!check_session_user()) {
 <div id="FedCloud" class="caja_form_credentials">
             <table>
                     <tbody>
+                        <tr>
+                            <th colspan="4">
+                            Select VO and Site. Only modify other fields if you know what are you doing.
+                            <th>
+                        </tr>
                             <tr>
                                     <th align="left">
                                         VOs:
@@ -487,7 +492,7 @@ if (!check_session_user()) {
                             </tr>
                             <tr>
                                 <th align="left">
-                                        Host:
+                                        Site:
                                     </th>
                                     <td>
                                         <select id="hosts" onchange="setFedCloudID()" name="hosts" style="width:150px;">
