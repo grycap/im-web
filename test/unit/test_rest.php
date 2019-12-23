@@ -66,7 +66,7 @@ final class RESTTest extends TestCase
     public function testDestroyInfrastructure()
     {
         $im = $this->getIM("");
-        $res = $im->DestroyInfrastructure("infid1");
+        $res = $im->DestroyInfrastructure("infid1", true);
         $this->assertEquals("", $res);
     }
 

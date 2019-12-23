@@ -50,7 +50,7 @@ final class XMLTest extends TestCase
     {
         $value = new xmlrpcval("");
         $im = $this->getIM($value);
-        $res = $im->DestroyInfrastructure("radl");
+        $res = $im->DestroyInfrastructure("radl", true);
         $this->assertEquals("", $res);
     }
 
