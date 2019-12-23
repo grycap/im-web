@@ -171,7 +171,8 @@ class IMRest
     {
         $headers = array('Accept: text/*');
         if ($async) {
-            $res = $this->BasicRESTCall("DELETE", '/infrastructures/'.$id.'?async=yes', $headers);
+            $params = array("async" => "yes");
+            $res = $this->BasicRESTCall("DELETE", '/infrastructures/'.$id, $headers, $params);
         } else {
             $res = $this->BasicRESTCall("DELETE", '/infrastructures/'.$id, $headers);
         }        
