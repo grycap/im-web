@@ -60,7 +60,7 @@ if (!check_session_user()) {
         } elseif ($op == "destroy") {
         	if (isset($_POST['infid'])) {
                 $id = $_POST['infid'];
-                $async = false;
+                $async = true;
                 if (isset($_POST['async'])) {
                         $async = $_POST['async'];
                 }
