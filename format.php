@@ -19,8 +19,7 @@
 
 function formatState($state)
 {
-    // posibles estados: unknown, pending, running, off, failed
-    // en el caso de la otra vers del IM tabien configured
+    // posibles estados: unknown, pending, running, off, failed, configured and deleting
  
     $res = $state;
 
@@ -35,6 +34,9 @@ function formatState($state)
     }
     if ($state == "configured") {
         $res = "<span style='color:green'>configured</span>";
+    }
+    if ($state == "deleting") {
+        $res = "<span style='color:orange'>deleting</span>";
     }
 
     return $res;
