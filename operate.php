@@ -59,8 +59,12 @@ if (!check_session_user()) {
             }
         } elseif ($op == "destroy") {
         	if (isset($_POST['infid'])) {
-        		$id = $_POST['infid'];
-                $res = GetIM()->DestroyInfrastructure($id);
+                $id = $_POST['infid'];
+                $async = false;
+                if (isset($_POST['async'])) {
+                        $async = $_POST['async'];
+                }
+                $res = GetIM()->DestroyInfrastructure($id, $async);
                     
                 if (strpos($res, "Error") !== false) {
                 	error($res);

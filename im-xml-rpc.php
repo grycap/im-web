@@ -162,11 +162,11 @@ class IMXML
         }
     }
 
-    public function DestroyInfrastructure($id)
+    public function DestroyInfrastructure($id, $async)
     {
         $auth = $this->get_auth_data();
         
-        $xmlrpc_msg = new xmlrpcmsg('DestroyInfrastructure', array(new xmlrpcval($id, "string"), $auth));
+        $xmlrpc_msg = new xmlrpcmsg('DestroyInfrastructure', array(new xmlrpcval($id, "string"), $auth, new xmlrpcval($async, "boolean")));
         
         $xmlrpc_resp = $this->send_xmlrpc_call($xmlrpc_msg);
         

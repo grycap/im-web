@@ -167,10 +167,14 @@ class IMRest
         }
     }
 
-    public function DestroyInfrastructure($id)
+    public function DestroyInfrastructure($id, $async)
     {
         $headers = array('Accept: text/*');
-        $res = $this->BasicRESTCall("DELETE", '/infrastructures/'.$id, $headers);
+        if ($async) {
+            $res = $this->BasicRESTCall("DELETE", '/infrastructures/'.$id.'?async=yes', $headers);
+        } else {
+            $res = $this->BasicRESTCall("DELETE", '/infrastructures/'.$id, $headers);
+        }        
         
         if ($res->getStatus() != 200) {
             return $res->getOutput();
