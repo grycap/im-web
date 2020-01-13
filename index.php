@@ -74,7 +74,12 @@ if (!empty($openid_issuer)) {
     <div id="caja_pie_portada">
         <div id="caja_texto_pie_portada">
             &copy GRyCAP&nbsp&nbsp|&nbsp&nbsp<a href="terms.html">Terms of Service</a>&nbsp&nbsp|&nbsp&nbsp<a href="https://www.upv.es" target="_blank">Universidad Polit&eacutecnica de Valencia</a>&nbsp&nbsp|&nbsp&nbspEdificio 8B, Acceso N, Planta 1
-&nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbsp<a href="https://www.grycap.upv.es" target="_blank">www.grycap.upv.es</a>
+&nbsp&nbsp|&nbsp&nbspCamino de Vera s/n, 46022, Valencia&nbsp&nbsp|&nbsp&nbsp<a href="https://www.grycap.upv.es" target="_blank">www.grycap.upv.es</a><br>
+            	
+            IM is co-funded by <a href="http://eosc-hub.eu/" target="_blank">EOSC-hub</a>
+            <img src="https://wiki.eosc-hub.eu/download/attachments/1867786/eu%20logo.jpeg?version=1&modificationDate=1459256840098&api=v2" height="10">
+            <img src="https://wiki.eosc-hub.eu/download/attachments/18973612/eosc-hub-web.png?version=1&modificationDate=1516099993132&api=v2" height="10">
+
         </div>
     </div>    
 
