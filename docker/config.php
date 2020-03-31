@@ -19,7 +19,7 @@
 
 require_once 'db.php';
 
-$im_use_rest=false;
+$im_use_rest=true;
 if (getenv('im_use_rest')) {
 	$im_use_rest = filter_var(getenv('im_use_rest'), FILTER_VALIDATE_BOOLEAN);
 }
@@ -31,7 +31,7 @@ $im_host="im";
 if (getenv('im_host')) {
 	$im_host = getenv('im_host');
 }
-$im_port=8899;
+$im_port=8800;
 if (getenv('im_port')) {
 	$im_port = intval(getenv('im_port'));
 }
