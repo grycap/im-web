@@ -36,7 +36,7 @@ It also supports environment variables to set the IM service location:
 *   im_host: Hostname of the IM service. Default value "im".
 *   im_port: Port of the IM service. Default value "8899".
 *   im_path: Path of the IM service. Default value "/".
-*   im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
+*   im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db". It can be also set a MySQL server URL, using this format: 'mysql://user:pass@mysqlserver/im_web_db'
 *   openid_issuer: URL of the OpenID Issuer. Default value "".
 *   openid_name: OpenID Issuer name. Default value "".
 *   client_id: OpenID Client ID. Default value "client_id".
@@ -116,6 +116,8 @@ $im_path='/';
 *   Path of the IM web interface DB. The original path will be /var/www/im/im.db
     but is more secure to move it to a path not in the path of the web server.
     The file and the directory must have write permissions to the web server user.
+    It can be also set a MySQL server URL, using this format: 'mysql://user:pass@mysqlserver/im_web_db'.
+    Use MySQL in case of production instances.
 ```php
 $im_db="/home/www-data/im.db";
 ```
