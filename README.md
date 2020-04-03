@@ -53,6 +53,8 @@ There is also a version SSL enabled. In this case the docker image have a selfsi
 docker run -p 80:80 -p 443:443 -v server.crt:/etc/ssl/certs/server.crt -v server.key:/etc/ssl/certs/server.key -d grycap/im-web:1.5.5-ssl
 ```
 
+Then you can access the IM Web portal in the following URL: http://localhost/im-web/
+
 ## 2 Kubernetes Helm Chart
 
 The IM service and web interface can be installed on top of [Kubernetes](https://kubernetes.io/) using [Helm](https://helm.sh/).
@@ -89,7 +91,7 @@ mv IM-X.XX /var/www/im
 chown -R www-data /var/www/im
 ```
 
-### 3.2 CONFIGURATION
+### 3.3 CONFIGURATION
 
 Adjust the configuration settings in the file config.php:
 
@@ -151,7 +153,7 @@ $cred_crypt_key = "n04ykjinrswda5sdfnb5680yu21+qgh3";
 $cred_cryp_start = "#Crypt@d";
 ```
 
-### 3.3 DEFAULT USER
+### 3.4 DEFAULT USER
 
 The default administrator user is admin with password admin.
 
