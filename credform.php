@@ -236,6 +236,9 @@ if (!check_session_user()) {
 <input onchange="showForm('FogBow')" type="radio" id="radio9" name="type" value="FogBow" <?php echo ($type == "FogBow" ? 'checked="checked"' : ''); ?>>
    <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png" title="FogBow"></label> 
 
+<input onchange="showForm('Orange')" type="radio" id="radio13" name="type" value="Orange" <?php echo ($type == "Orange" ? 'checked="checked"' : ''); ?>>
+   <label for="radio13"><img class="logoVM" src="images/logosVM/Orange.png" title="Orange"></label>
+
 <br>
 
 <input onchange="showForm('EC2')" type="radio" id="radio2" name="type" value="EC2" <?php echo ($type == "EC2" ? 'checked="checked"' : '');?>>
@@ -892,7 +895,65 @@ if (!check_session_user()) {
                         </tbody>
                 </table>
     </div>
-    
+
+    <div id="Orange" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>"/>
+                                        </td>
+
+                                         <th align="left">
+                                            Domain:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="domain" value="<?php echo $domain;?>"/>
+                                        </td>
+                               </tr>
+                                <tr>
+                                        <th align="left">
+                                            Username:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>"/>
+                                        </td>
+                                        <th align="left">
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="password" value="<?php echo $password;?>"/>
+                                        </td>
+                            </tr>
+                            <tr>
+                                        <th align="left">
+                                            Tenant:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="tenant" value="<?php echo $tenant;?>"/>
+                                        </td>
+                                        <th align="left">
+                                            Region:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="service_region" value="<?php echo $service_region;?>"/>
+                                        </td>
+                            </tr>
+                <tr>
+                    <td colspan="4" align="right">
+                         <input type="submit" value="Save"/>
+                        <a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+                    </td>
+                </tr>
+
+                        </tbody>
+                </table>
+
+    </div>
+
     </form>
 
  </div>
