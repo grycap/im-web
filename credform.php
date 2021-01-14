@@ -925,7 +925,7 @@ if (!check_session_user()) {
                                             Password:
                                         </th>
                                         <td>
-                                            <input type="text" name="password" value="<?php echo $password;?>"/>
+                                            <input type="password" name="password">
                                         </td>
                             </tr>
                             <tr>
