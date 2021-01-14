@@ -206,6 +206,10 @@ if (!check_session_user()) {
             <img src="images/logosVM/KubernetesRow.png">
                 <?php } ?>
 
+                <?php if (strcmp($cred['type'], "Orange") == 0) { ?>
+            <img src="images/logosVM/OrangeRow.png">
+                <?php } ?>
+
                 </td>
                 <td>
                 <?php echo htmlspecialchars($cred['host'])?>
