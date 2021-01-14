@@ -45,7 +45,7 @@ function formatState($state)
 function formatCloud($tokens)
 {
     $res = "";
-    $public_clouds = array("EC2", "GCE", "Azure");
+    $public_clouds = array("EC2", "GCE", "Azure", "Orange");
     if (in_array($tokens["provider.type"], $public_clouds)) {
         return $tokens["provider.type"];
     } else {
