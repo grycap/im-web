@@ -86,7 +86,11 @@ class IMXML
                             $auth_cloud['domain'] = new xmlrpcval($cred['domain']);
                         }
                         if (!is_null($cred['service_region']) && strlen(trim($cred['service_region'])) > 0) {
-                            $auth_cloud['service_region'] = new xmlrpcval($cred['service_region']);
+                        	if ($cred['type'] == "Orange") {
+                        		$auth_cloud['region'] = new xmlrpcval($cred['service_region']);
+                        	} else {
+                            	$auth_cloud['service_region'] = new xmlrpcval($cred['service_region']);
+                        	}
                         }
                         if (!is_null($cred['base_url']) && strlen(trim($cred['base_url'])) > 0) {
                             $auth_cloud['base_url'] = new xmlrpcval($cred['base_url']);

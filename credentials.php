@@ -198,12 +198,16 @@ if (!check_session_user()) {
             <img src="images/logosVM/AzureRow.png">
                 <?php } ?>
 
-                <?php if (strcmp($cred['type'], "AzureClassic") == 0) { ?>
-            <img src="images/logosVM/AzureClassicRow.png">
+                <?php if (strcmp($cred['type'], "Linode") == 0) { ?>
+            <img src="images/logosVM/LinodeRow.png">
                 <?php } ?>
 
                 <?php if (strcmp($cred['type'], "Kubernetes") == 0) { ?>
             <img src="images/logosVM/KubernetesRow.png">
+                <?php } ?>
+
+                <?php if (strcmp($cred['type'], "Orange") == 0) { ?>
+            <img src="images/logosVM/OrangeRow.png">
                 <?php } ?>
 
                 </td>

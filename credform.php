@@ -236,6 +236,9 @@ if (!check_session_user()) {
 <input onchange="showForm('FogBow')" type="radio" id="radio9" name="type" value="FogBow" <?php echo ($type == "FogBow" ? 'checked="checked"' : ''); ?>>
    <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png" title="FogBow"></label> 
 
+<input onchange="showForm('Orange')" type="radio" id="radio13" name="type" value="Orange" <?php echo ($type == "Orange" ? 'checked="checked"' : ''); ?>>
+   <label for="radio13"><img class="logoVM" src="images/logosVM/Orange.png" title="Orange"></label>
+
 <br>
 
 <input onchange="showForm('EC2')" type="radio" id="radio2" name="type" value="EC2" <?php echo ($type == "EC2" ? 'checked="checked"' : '');?>>
@@ -247,8 +250,8 @@ if (!check_session_user()) {
 <input onchange="showForm('Azure')" type="radio" id="radio11" name="type" value="Azure" <?php echo ($type == "Azure" ? 'checked="checked"' : '');  ?>>
    <label for="radio11"><img class="logoVM" src="images/logosVM/Azure.png" title="Azure RM"></label>
 
-<input onchange="showForm('AzureClassic')" type="radio" id="radio12" name="type" value="AzureClassic" <?php echo ($type == "AzureClassic" ? 'checked="checked"' : ''); ?>>
-   <label for="radio12"><img class="logoVM" src="images/logosVM/AzureClassic.png" title="Azure Classic"></label>
+<input onchange="showForm('Linode')" type="radio" id="radio12" name="type" value="Linode" <?php echo ($type == "Linode" ? 'checked="checked"' : ''); ?>>
+   <label for="radio12"><img class="logoVM" src="images/logosVM/Linode.png" title="Linode"></label>
    
 <br>
 
@@ -714,8 +717,8 @@ if (!check_session_user()) {
                 </table>
     </div>
 
-<div id="AzureClassic" class="caja_form_credentials">
-                <table>
+<div id="Linode" class="caja_form_credentials">
+<table>
                         <tbody>
                                 <tr>
                                         <th align="left">
@@ -726,56 +729,19 @@ if (!check_session_user()) {
                                         </td>
 
                          <th align="left">
-                                            Subscription ID:
+                                            API Token:
                                         </th>
                                         <td>
                                             <input type="text" name="username" value="<?php echo $username;?>">
                                         </td>
                                </tr>
-                               <tr>
-                                        <th align="left">
-                                            Private Key:
-                                        </th>
-                                        <td colspan="3">
-                                           <input type="file" name="private_key">
-                                       <?php
-                                        if (strlen(trim($private_key)) > 0) {
-                                               echo "<textarea id='private_key_value' name='private_key_value' style='display:none;'>" . $private_key . "</textarea>";
-                                               echo "<a class='download' href='javascript:download(\"private_key_value\", \"key.pem\");'>Download</a>";
-                                        }
-                                        ?>
-                                         </td>
-                                        <th align="left">
-                                        </th>
-                                        <td>
-                                        </td>
-                            </tr>
-                               <tr>
-                                        <th align="left">
-                                            Public Key:
-                                        </th>
-                                        <td colspan="3">
-                                           <input type="file" name="public_key">
-                                           <?php
-                                            if (strlen(trim($public_key)) > 0) {
-                                                echo "<textarea id='public_key_value' name='public_key_value' style='display:none;'>" . $public_key . "</textarea>";
-                                                echo "<a class='download' href='javascript:download(\"public_key_value\", \"cert.pem\");'>Download</a>";
-                                            }
-                                            ?>
-                                         </td>
-                                        <th align="left">
-                                        </th>
-                                        <td>
-                                        </td>
-                            </tr>
                 <tr>
                     <td colspan="4" align="right">
                          <input type="submit" value="Save"/>
                         <a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
                     </td>
                 </tr>
-        
-                                
+
                         </tbody>
                 </table>
     </div>
@@ -929,7 +895,65 @@ if (!check_session_user()) {
                         </tbody>
                 </table>
     </div>
-    
+
+    <div id="Orange" class="caja_form_credentials">
+                <table>
+                        <tbody>
+                                <tr>
+                                        <th align="left">
+                                            ID:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="id" value="<?php echo $id;?>"/>
+                                        </td>
+
+                                         <th align="left">
+                                            Domain:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="domain" value="<?php echo $domain;?>"/>
+                                        </td>
+                               </tr>
+                                <tr>
+                                        <th align="left">
+                                            Username:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="username" value="<?php echo $username;?>"/>
+                                        </td>
+                                        <th align="left">
+                                            Password:
+                                        </th>
+                                        <td>
+                                            <input type="password" name="password">
+                                        </td>
+                            </tr>
+                            <tr>
+                                        <th align="left">
+                                            Tenant:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="tenant" value="<?php echo $tenant;?>"/>
+                                        </td>
+                                        <th align="left">
+                                            Region:
+                                        </th>
+                                        <td>
+                                            <input type="text" name="service_region" value="<?php echo $service_region;?>"/>
+                                        </td>
+                            </tr>
+                <tr>
+                    <td colspan="4" align="right">
+                         <input type="submit" value="Save"/>
+                        <a href="credentials.php"><input type="button" name="Cancelar" value="Cancel"></a>
+                    </td>
+                </tr>
+
+                        </tbody>
+                </table>
+
+    </div>
+
     </form>
 
  </div>
