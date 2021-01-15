@@ -36,7 +36,7 @@ It also supports environment variables to set the IM service location:
 *   im_host: Hostname of the IM service. Default value "im".
 *   im_port: Port of the IM service. Default value "8899".
 *   im_path: Path of the IM service. Default value "/".
-*   im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db".
+*   im_db: Location of the D.B. file used in the web application to store data. Default value "/home/www-data/im.db". It can be also set a MySQL server URL, using this format: 'mysql://user:pass@mysqlserver/im_web_db'
 *   openid_issuer: URL of the OpenID Issuer. Default value "".
 *   openid_name: OpenID Issuer name. Default value "".
 *   client_id: OpenID Client ID. Default value "client_id".
@@ -52,6 +52,8 @@ There is also a version SSL enabled. In this case the docker image have a selfsi
 ```sh
 docker run -p 80:80 -p 443:443 -v server.crt:/etc/ssl/certs/server.crt -v server.key:/etc/ssl/certs/server.key -d grycap/im-web:1.5.5-ssl
 ```
+
+Then you can access the IM Web portal in the following URL: http://localhost/im-web/
 
 ## 2 Kubernetes Helm Chart
 
@@ -89,7 +91,7 @@ mv IM-X.XX /var/www/im
 chown -R www-data /var/www/im
 ```
 
-### 3.2 CONFIGURATION
+### 3.3 CONFIGURATION
 
 Adjust the configuration settings in the file config.php:
 
@@ -116,6 +118,8 @@ $im_path='/';
 *   Path of the IM web interface DB. The original path will be /var/www/im/im.db
     but is more secure to move it to a path not in the path of the web server.
     The file and the directory must have write permissions to the web server user.
+    It can be also set a MySQL server URL, using this format: 'mysql://user:pass@mysqlserver/im_web_db'.
+    Use MySQL in case of production instances.
 ```php
 $im_db="/home/www-data/im.db";
 ```
@@ -149,7 +153,7 @@ $cred_crypt_key = "n04ykjinrswda5sdfnb5680yu21+qgh3";
 $cred_cryp_start = "#Crypt@d";
 ```
 
-### 3.3 DEFAULT USER
+### 3.4 DEFAULT USER
 
 The default administrator user is admin with password admin.
 

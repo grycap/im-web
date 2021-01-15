@@ -55,7 +55,9 @@ class IMRest
                                 if ($field == "certificate") {
                                     $auth = $auth . "password = " . $value . "; ";
                                 } elseif ($field == "proxy" and $cred['type'] == "FogBow"){
-                                	$auth = $auth . "token = " . $value . "; ";
+                                    $auth = $auth . "token = " . $value . "; ";
+                                } elseif ($field == "service_region" and $cred['type'] == "Orange"){
+                                    $auth = $auth . "region = " . $value . "; ";
                                 } else {
                                     $auth = $auth . $field ." = " . $value . "; ";
                                 }
