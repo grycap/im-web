@@ -473,7 +473,8 @@ if (!check_session_user()) {
                     <tbody>
                         <tr>
                             <th colspan="4">
-                            Select VO and Site. Only modify other fields if you know what are you doing.
+                            Select VO and Site. Set the Project Name/ID mapped to your VO.<br>
+                            Only in few sites the field Region is needed.
                             <th>
                         </tr>
                             <tr>
@@ -518,7 +519,7 @@ if (!check_session_user()) {
                                         <input type="text" id="FedCloudID" name="id" value="<?php echo $id;?>">
                                     </td>
                                     <th align="left">
-                                        Domain:
+                                        Project Nane/ID:
                                     </th>
                                     <td>
                                         <input type="text" name="domain" value="<?php echo $domain;?>">

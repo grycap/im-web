@@ -34,6 +34,15 @@ if (!check_session_user()) {
 } else {
 	$rand = sha1(rand());
 	$_SESSION['rand'] = $rand;
+
+    include('im.php');
+    include('config.php');
+    //$res = GetIM()->GetInfrastructureList();
+    $res = ["infid1", "infid2"];
+
+    if (is_string($res) and strpos($res, "Error") !== false) {
+        error($res);
+    } else {
     ?>
 <!DOCTYPE HTML>
 <html>
@@ -42,7 +51,7 @@ if (!check_session_user()) {
 <title>Infrastructure Manager | GRyCAP | UPV</title>
 <link rel="shortcut icon" href="images/favicon.ico">
     <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-    <link href="css/jquery.dynatable.css" rel="stylesheet" type="text/css" media="all"/>
+    <link href="css/datatable.css" rel="stylesheet" type="text/css" media="all"/>
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/style_login2.css"> 
     <link rel="stylesheet" href="css/style_intro2.css"> 
@@ -50,7 +59,7 @@ if (!check_session_user()) {
     <link rel="stylesheet" href="css/style_menutab.css">
     <script type="text/javascript" language="javascript" src="js/jquery.js"></script>
     <script type="text/javascript" language="javascript" src="js/jquery-ui.js"></script>
-    <script type="text/javascript" language="javascript" src="js/jquery.dynatable.js"></script>
+    <script type="text/javascript" language="javascript" src="js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 
@@ -78,9 +87,12 @@ if (!check_session_user()) {
 
 <div id="caja_contenido_tab">    
 
-
-  <div id="main">
-
+<div id="main">
+    
+    <?php
+        if (count($res) > 0)
+        {
+    ?>
     <script type="text/javascript" charset="utf-8">
 	    function operateinf(op, id) {
 	    	document.getElementById('opfield').value = op;
@@ -94,62 +106,178 @@ if (!check_session_user()) {
 	        }
 	    }
 
-        $(document).ready(function() {
-            $('#example').dynatable({
-                  inputs: {
-                        processingText: 'Listing Infrastructures ... <img src="images/loading.gif" width="20px"/>'
-                      },
-                  dataset: {
-                        ajax: true,
-                        ajaxUrl: 'list_json.php',
-                        ajaxOnLoad: true,
-                        records: [],
-                        queryRecordCount: 0,
-                        totalRecordCount: 0
-                      }
+        function loadInfrState(infid) {
+            var vms = document.getElementById(infid + "_vms");
+            var status = document.getElementById(infid + "_status");
+            $.ajax({
+                // En data puedes utilizar un objeto JSON, un array o un query string
+                data: {"infid" : infid},
+                //Cambiar a type: POST si necesario
+                type: "GET",
+                // Formato de datos que se espera en la respuesta
+                dataType: "json",
+                // URL a la que se enviará la solicitud Ajax
+                url: "inf_status.php",
+            })
+            .done(function( data, textStatus, jqXHR ) {
+                status.innerHTML = data.state_format;
+                vms.innerHTML = data.vms;
+                if (data.state == "pending" || data.state == "running") {
+                    setTimeout(function(){loadInfrState(infid);},30000);
+                } else if (data.state == "error") {
+                    setTimeout(function(){loadInfrState(infid);},15000);
+                } else if (data.state == "deleting") {
+                    setTimeout(function(){location.reload();},30000);
+                }
+            })
+            .fail(function( jqXHR, textStatus, errorThrown ) {
+                status.innerHTML = "<span style='color:red'>error</span>";
+                vms.innerHTML = ""
+                setTimeout(function(){loadInfrState(infid);},10000);
             });
+        }
+
+        $(document).ready(function() {
+                $('#example').dataTable( {
+                        //"oLanguage": {
+                        //        "sUrl": "dataTables.spanish.txt"
+                        //},
+                        // initially do not sort
+                        "aaSorting": [],
+                        "aoColumns": [
+                            { "bSortable": true },
+                            { "bSortable": false },
+                            { "bSortable": false },
+                            	<?php
+                                    if ($im_use_rest)
+                                    {
+                                ?>
+                                { "bSortable": false },
+                                <?php
+                                    }
+                                ?>
+                            { "bSortable": true },
+                            { "bSortable": false },
+                            { "bSortable": false },
+                            { "bSortable": false }
+                        ]
+                } );
         } );
     </script>
     
 <p align="left">
 Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/reload.png" style="vertical-align:middle" border="0"></a>
 </p>
+    <form action="operate.php" method="post" id="operateinf">
+    <input type="hidden" name="op" value="" id="opfield"/>
+    <input type="hidden" name="infid" value="" id="infidfeld"/>
+    <input type="hidden" name="rand" value="<?php echo htmlspecialchars($rand);?>"/>
+    </form>
+
     <table>
     <tr>
     <td>
     <table class="list" id="example">
         <thead>
             <tr>
-                <th>ID</th>
-                <th data-dynatable-column="vms">VM IDs</th>
-    <?php
-    if ($im_use_rest) {
-        ?>
-                <th>Outputs</th>
-        <?php
-    }
-    ?>
-                <th>Cont. Message</th>
-                <th>Status</th>
-                <th style="font-style:italic;">Reconfigure</th>
-                <th style="font-style:italic;">Delete</th>
-                <th style="font-style:italic;">Add Resources</th>
+                <th>
+                ID
+                </th>
+                <th>
+                VM IDs
+                </th>
+				<?php
+				if ($im_use_rest)
+				{
+				?>
+                <th width="100px">
+                Outputs
+                </th>
+				<?php
+				}
+				?>
+                <th width="100px">
+                Cont. Message
+                </th>
+                <th>
+                Status
+                </th>
+                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspReconfigure</th>
+                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspDelete</th>
+                <th style="font-style:italic;">&nbsp&nbsp&nbsp&nbspAdd Resources</th>
+
             </tr>
         </thead>
         <tbody>
-			<form action="operate.php" method="post" id="operateinf">
-			<input type="hidden" name="op" value="" id="opfield"/>
-			<input type="hidden" name="infid" value="" id="infidfeld"/>
-			<input type="hidden" name="rand" value="<?php echo htmlspecialchars($rand);?>"/>
-			</form>
+    <?php
+        
+            foreach ($res as $inf) {
+                ?>
+            <tr>
+                <td>
+                    <?php echo $inf;?>
+                </td>
+                <td>
+                    <div id="<?php echo $inf?>_vms">
+                    Loading ...
+                    </div>
+                </td>
+                <?php
+                if ($im_use_rest)
+                {
+                ?>
+                <td>
+                        <a href="getoutputs.php?id=<?php echo $inf;?>">Show</a>
+                </td>
+                <?php
+                }
+                ?>
+                <td>
+                        <a href="getcontmsg.php?id=<?php echo $inf;?>">Show</a>
+                </td>
+                <td>
+                    <div id="<?php echo $inf?>_status">
+                    Loading ...
+                    </div>
+                </td>
+                <td>
+                    <a onclick="javascript:operateinf('reconfigure', '<?php echo $inf;?>')" href="#"><img src="images/reload.png" border="0" alt="Reconfigure" title="Reconfigure"></a>
+                </td>
+                <td>
+                    <a onclick="javascript:operateinf('destroy', '<?php echo $inf;?>')" href="#"><img src="images/borrar.gif" border="0" alt="Delete" title="Delete"></a>
+                </td>
+                <td>
+                    <a href="form.php?id=<?php echo $inf;?>"><img src="images/add_resources_icon.png" border="0" alt="Add Resources" title="Add Resources"></a>
+                </td>
+
+                <script>
+                      loadInfrState("<?php echo $inf;?>");
+                </script>
+
+            </tr>
+            <?php
+            }
+        
+    ?>
+
         </tbody>
     </table>
     </td>
     </tr>
     </table>
+<?php
+        } else {
+              ?>
+            
 
+        <div class='h1'>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp:: No infrastructures available ::</div>
+
+<?php
+        }
+?>
     <br>
     </div>
+
 </div>
  
 
@@ -157,5 +285,6 @@ Refresh <a href="#" onclick="javascript:location.reload();"><img src="images/rel
 </body>
 </html>
     <?php
+    }
 }
 ?>
