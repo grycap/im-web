@@ -8,28 +8,47 @@ final class InfPagesTest extends TestCase
     /**
      * @runInSeparateProcess
      */
+    public function testInfStatus()
+    {
+        $res = '{"state": "running", "state_format": "<span style=\'color:green\'>configuring</span>", "vms": "<a href=\'getvminfo.php?id=infid&vmid=vmid1\' alt=\'VM Info\' title=\'VM Info\'>vmid1<br>"}';
+        $this->expectOutputString($expected_res);
+        $_SESSION = array("user"=>"admin", "password"=>"admin");
+
+        $im = $this->getMockBuilder(IMXML::class)
+            ->setMethods(['GetInfrastructureState'])
+            ->getMock();
+
+        $res = array("state"=>"running", "vm_states"=>array("vmid1"=>"running"));
+        $im->method('GetInfrastructureState')
+            ->willReturn($res);
+
+        $GLOBALS['mock_im'] = $im;
+        $_GET = array('infid'=>'infid');
+
+        include('../../inf_status.php');
+        unset($GLOBALS['mock_im']);
+    }
+
+    /**
+     * @runInSeparateProcess
+     */
     public function testInfList()
     {
-    	$expected_res = '{ "records": [{"id":"infid1","vms":"<a href=\'getvminfo.php?id=infid1&vmid=vmid1\' alt=\'VM Info\' title=\'VM Info\'>vmid1<br><a href=\'getvminfo.php?id=infid1&vmid=vmid2\' alt=\'VM Info\' title=\'VM Info\'>vmid2<br>","outputs":"<a href=\"getoutputs.php?id=infid1\">Show</a>","cont.Message":"<a href=\"getcontmsg.php?id=infid1\">Show</a>","status":"<span style=\'color:green\'>configuring</span>","reconfigure":"N/A","delete": "<a onclick=\"javascript:operateinf(\'destroy\', \'infid1\')\" href=\"#\"><img src=\"images/borrar.gif\" border=\"0\" alt=\"Delete\" title=\"Delete\"></a>","addResources":"<a href=\"form.php?id=infid1?>\"><img src=\"images/add_resources_icon.png\" border=\"0\" alt=\"Add Resources\" title=\"Add Resources\"></a>"}], "queryRecordCount": 1, "totalRecordCount": 1}';
-   		$this->expectOutputString($expected_res);
-        #$this->expectOutputRegex('/.*infid1.*/');
+        $this->expectOutputRegex('/.*infid1.*/');
         #$this->expectOutputRegex("/.*style='color:green'>configuring.*/");
         #$this->expectOutputRegex("/.*getvminfo.php\?id=infid1&vmid=vmid1.*/");
         #$this->expectOutputRegex("/.*getvminfo.php\?id=infid1&vmid=vmid2.*/");
         $_SESSION = array("user"=>"admin", "password"=>"admin");
 
         $im = $this->getMockBuilder(IMXML::class)
-            ->setMethods(['GetInfrastructureList', 'GetInfrastructureInfo', 'GetInfrastructureState'])
+            ->setMethods(['GetInfrastructureList'])
             ->getMock();
         $im->method('GetInfrastructureList')
             ->willReturn(array("infid1"));
-        $res = array("state"=>"running", "vm_states"=>array("vmid1"=>"running","vmid2"=>"running"));
-        $im->method('GetInfrastructureState')
-            ->willReturn($res);
 
         $GLOBALS['mock_im'] = $im;
 
-        include('../../list_json.php');
+        include('../../list.php');
         unset($GLOBALS['mock_im']);
     }
 
