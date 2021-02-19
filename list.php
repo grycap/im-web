@@ -37,8 +37,7 @@ if (!check_session_user()) {
 
     include('im.php');
     include('config.php');
-    //$res = GetIM()->GetInfrastructureList();
-    $res = ["infid1", "infid2"];
+    $res = GetIM()->GetInfrastructureList();
 
     if (is_string($res) and strpos($res, "Error") !== false) {
         error($res);
