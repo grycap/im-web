@@ -10,7 +10,7 @@ final class InfPagesTest extends TestCase
      */
     public function testInfStatus()
     {
-        $res = '{"state": "running", "state_format": "<span style=\'color:green\'>configuring</span>", "vms": "<a href=\'getvminfo.php?id=infid&vmid=vmid1\' alt=\'VM Info\' title=\'VM Info\'>vmid1<br>"}';
+        $expected_res = '{"state": "running", "state_format": "<span style=\'color:green\'>configuring</span>", "vms": "<a href=\'getvminfo.php?id=infid&vmid=vmid1\' alt=\'VM Info\' title=\'VM Info\'>vmid1<br>"}';
         $this->expectOutputString($expected_res);
         $_SESSION = array("user"=>"admin", "password"=>"admin");
 

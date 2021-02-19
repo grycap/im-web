@@ -55,7 +55,6 @@ function check_user_token()
 
 function check_session_user()
 {
-    return true;
     include 'config.php';
 
     if (isset($_SESSION['user']) && isset($_SESSION['password'])) {

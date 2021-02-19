@@ -42,10 +42,10 @@ if (!check_session_user()) {
     if (is_string($res) && strpos($res, "Error") !== false) {
         echo '{"state": "error", "state_format": "<span style=\'color:red\'>error</span>", "vms": ""}';
     } else {
-        $state = $res["state"]["state"];
+        $state = $res["state"];
         $status = formatState($state);
 
-        $vmids = array_keys($res["state"]["vm_states"]);
+        $vmids = array_keys($res["vm_states"]);
         sort($vmids);
         
         $vms = "";
