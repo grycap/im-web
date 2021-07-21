@@ -70,6 +70,7 @@ $_SESSION['rand'] = $rand;
 
         <form action="userinfo.php" method="post">
             <input type="hidden" name="op" value="register"/>
+            <input type="hidden" name="rand" value="<?php echo $rand;?>"/>
 
                 <table>
                         <tbody>
