@@ -236,9 +236,6 @@ if (!check_session_user()) {
 <input onchange="showForm('FogBow')" type="radio" id="radio9" name="type" value="FogBow" <?php echo ($type == "FogBow" ? 'checked="checked"' : ''); ?>>
    <label for="radio9"><img class="logoVM" src="images/logosVM/FogBow.png" title="FogBow"></label> 
 
-<input onchange="showForm('Orange')" type="radio" id="radio13" name="type" value="Orange" <?php echo ($type == "Orange" ? 'checked="checked"' : ''); ?>>
-   <label for="radio13"><img class="logoVM" src="images/logosVM/Orange.png" title="Orange"></label>
-
 <br>
 
 <input onchange="showForm('EC2')" type="radio" id="radio2" name="type" value="EC2" <?php echo ($type == "EC2" ? 'checked="checked"' : '');?>>
@@ -255,6 +252,8 @@ if (!check_session_user()) {
    
 <br>
 
+<input onchange="showForm('Orange')" type="radio" id="radio13" name="type" value="Orange" <?php echo ($type == "Orange" ? 'checked="checked"' : ''); ?>>
+   <label for="radio13"><img class="logoVM" src="images/logosVM/Orange.png" title="Orange"></label>
 
 <input onchange="showForm('Docker')" type="radio" id="radio10" name="type" value="Docker" <?php echo ($type == "Docker" ? 'checked="checked"' : '');  ?>>
    <label for="radio10"><img class="logoVM" src="images/logosVM/Docker.png" title="Docker"></label>
@@ -473,7 +472,8 @@ if (!check_session_user()) {
                     <tbody>
                         <tr>
                             <th colspan="4">
-                            Select VO and Site. Only modify other fields if you know what are you doing.
+                            Select VO and Site. Set the Project Name/ID mapped to your VO.<br>
+                            Only in few sites the field Region is needed.
                             <th>
                         </tr>
                             <tr>
@@ -518,7 +518,7 @@ if (!check_session_user()) {
                                         <input type="text" id="FedCloudID" name="id" value="<?php echo $id;?>">
                                     </td>
                                     <th align="left">
-                                        Domain:
+                                        Project Nane/ID:
                                     </th>
                                     <td>
                                         <input type="text" name="domain" value="<?php echo $domain;?>">
