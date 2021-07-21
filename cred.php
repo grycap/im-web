@@ -32,7 +32,11 @@ function decrypt_credentials($row)
 	$fields = array("username", "password", "private_key", "certificate");
 	foreach ($fields as $field) {
 		if ((substr( $row[$field], 0, strlen($cred_cryp_start)) ) === $cred_cryp_start) {
-			$row[$field] = decrypt(substr($row[$field], strlen($cred_cryp_start)), $cred_crypt_key);
+            try {
+			    $row[$field] = decrypt(substr($row[$field], strlen($cred_cryp_start)), $cred_crypt_key);
+            } catch (Exception $e) {
+                $row[$field] = NULL;
+            }
 		}
 	}
 	
