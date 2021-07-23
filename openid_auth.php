@@ -40,13 +40,23 @@ if (isset($_GET['error'])) {
     $response = $client->fetch($USER_INFO_ENDPOINT, $params);
 
     if ($response['code'] == 200) {
-        $_SESSION["user_name"] = $response['result']['name'];
         $_SESSION["user"] = $response['result']['sub'];
-        $_SESSION["password"] = $response['result']['name'];
+
+        $username = $response['result']['sub'];
+        if (isset($response['result']['name']) && $response['result']['name'] != "") {
+            $username = $response['result']['name'];
+        } elseif (isset($response['result']['given_name']) && $response['result']['given_name'] != "") {
+            $username = $response['result']['given_name'];
+            if (isset($response['result']['family_name']) && $response['result']['family_name'] != "") {
+                $username = $username . " " . $response['result']['family_name'];
+            }
+        }
+        $_SESSION["user_name"] = $username;
+        $_SESSION["password"] = $username;
 
         if (is_null(get_user($_SESSION["user"]))) {
             // this the first login of the user
-            $err = insert_user($_SESSION["user"], $response['result']['name'], array('users'), 0);
+            $err = insert_user($_SESSION["user"],  $username, array('users'), 0);
             $err = insert_credential($_SESSION["user"], "", "InfrastructureManager", "", $_SESSION["user"], '', '', '', '', '', '', '', '', '', '', '', '', '');
             $err = insert_credential($_SESSION["user"], "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
         }
