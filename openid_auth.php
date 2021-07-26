@@ -54,6 +54,11 @@ if (isset($_GET['error'])) {
         $_SESSION["user_name"] = $username;
         $_SESSION["password"] = $username;
 
+        // Get expiration time
+        $access_token_data = OAuth2\JWT::decode($_SESSION['user_token'], "", array("RS256"));
+        $access_token_data = json_decode(json_encode($access_token_data), true);
+        $_SESSION["token_exp"] = $access_token_data["exp"];
+
         if (is_null(get_user($_SESSION["user"]))) {
             // this the first login of the user
             $err = insert_user($_SESSION["user"],  $username, array('users'), 0);
