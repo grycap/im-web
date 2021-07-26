@@ -3,6 +3,7 @@ require 'config.php';
 
 require_once 'cred.php';
 require_once 'user.php';
+require_once 'OAuth2/JWT.php';
 require_once 'OAuth2/Client.php';
 require_once 'OAuth2/GrantType/IGrantType.php';
 require_once 'OAuth2/GrantType/AuthorizationCode.php';
