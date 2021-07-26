@@ -3,6 +3,7 @@ require 'config.php';
 
 require_once 'cred.php';
 require_once 'user.php';
+require_once 'OAuth2/JWT.php';
 require_once 'OAuth2/Client.php';
 require_once 'OAuth2/GrantType/IGrantType.php';
 require_once 'OAuth2/GrantType/AuthorizationCode.php';
@@ -53,6 +54,11 @@ if (isset($_GET['error'])) {
         }
         $_SESSION["user_name"] = $username;
         $_SESSION["password"] = $username;
+
+        // Get expiration time
+        $access_token_data = OAuth2\JWT::decode($_SESSION['user_token'], "", array("RS256"));
+        $access_token_data = json_decode(json_encode($access_token_data), true);
+        $_SESSION["token_exp"] = $access_token_data["exp"];
 
         if (is_null(get_user($_SESSION["user"]))) {
             // this the first login of the user
