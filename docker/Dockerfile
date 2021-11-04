@@ -6,7 +6,7 @@ LABEL description="Container image to run the IM web GUI. (http://www.grycap.upv
 
 RUN apt-get update && apt-get install --no-install-recommends -y wget unzip python3 python3-xmltodict && rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/python3 /usr/bin/python && \
-    wget https://github.com/grycap/im-web/archive/master.zip && unzip master.zip && rm -f master.zip && mv im-web-master /var/www/html/im-web && \  
+    wget https://github.com/grycap/im-web/archive/eoschub.zip && unzip eoschub.zip && rm -f eoschub.zip && mv im-web-eoschub /var/www/html/im-web && \  
     mkdir /var/www/www-data && mv /var/www/html/im-web/im.db /var/www/www-data/im.db  && \
     chown -R www-data /var/www && \
     apt-get purge -y wget unzip && \
