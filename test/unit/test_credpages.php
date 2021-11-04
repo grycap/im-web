@@ -23,7 +23,7 @@ final class CredPagesTest extends TestCase
     {
         $this->expectOutputRegex('/.*IMRow\.png.*/');
         $this->expectOutputRegex('/.*credinfo.php\?op=delete&id=2.*/');
-        $this->expectOutputRegex('/.*http:\/\/servproject.i3m.upv.es:8080\/vmrc\/vmrc.*/');
+        $this->expectOutputRegex('/.*http:\/\/appsgrycap.i3m.upv.es:32080\/vmrc\/vmrc.*/');
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         include('../../credentials.php');
     }

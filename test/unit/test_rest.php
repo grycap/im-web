@@ -24,7 +24,7 @@ final class RESTTest extends TestCase
         $_SESSION = array("user"=>"admin", "password"=>"admin");
         $im = IMRest::connect("","");
         $res = $im->get_auth_data();
-        $this->assertEquals("type = InfrastructureManager; username = admin; password = admin\\ntype = VMRC; host = http://servproject.i3m.upv.es:8080/vmrc/vmrc; username = micafer; password = ttt25\\n", $res);
+        $this->assertEquals("type = InfrastructureManager; username = admin; password = admin\\ntype = VMRC; host = http://appsgrycap.i3m.upv.es:32080/vmrc/vmrc; username = micafer; password = ttt25\\n", $res);
     }
 
     public function testBasicRESTCall()
