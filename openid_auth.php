@@ -64,7 +64,7 @@ if (isset($_GET['error'])) {
             // this the first login of the user
             $err = insert_user($_SESSION["user"],  $username, array('users'), 0);
             $err = insert_credential($_SESSION["user"], "", "InfrastructureManager", "", $_SESSION["user"], '', '', '', '', '', '', '', '', '', '', '', '', '');
-            $err = insert_credential($_SESSION["user"], "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
+            $err = insert_credential($_SESSION["user"], "", "VMRC", "http://appsgrycap.i3m.upv.es:32080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
         }
 
         header('Location: list.php');

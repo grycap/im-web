@@ -98,7 +98,7 @@ if (($op == "password" && !check_session_user()) || ($op != "register" && $op !=
             if ($err == "") {
                 $err = insert_user($username, $password, array('users'), 0);
                 $err = insert_credential($username, "", "InfrastructureManager", "", $username, $password, '', '', '', '', '', '', '', '', '', '', '', '');
-                $err = insert_credential($username, "", "VMRC", "http://servproject.i3m.upv.es:8080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
+                $err = insert_credential($username, "", "VMRC", "http://appsgrycap.i3m.upv.es:32080/vmrc/vmrc", "micafer", "ttt25", '', '', '', '', '', '', '', '', '', '', '', '');
             }
             if (strlen($err) > 0) {
             	invalid_user_error($err);
