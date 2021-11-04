@@ -18,9 +18,9 @@
 #
 
 import sys
-import httplib
+import http.client
 import xmltodict
-from urlparse import urlparse
+from urllib.parse import urlparse
 
 __copyright__ = "Copyright (c) 2016 EGI Foundation"
 __license__ = "Apache Licence v2.0"
@@ -37,15 +37,18 @@ def check_supported_VOs(data, vo):
     Check if there are an image of the supported VO
     """
     if 'provider:image' in data['appdb:appdb']['virtualization:provider']:
-        for os_tpl in data['appdb:appdb']['virtualization:provider']['provider:image']:
+        images = data['appdb:appdb']['virtualization:provider']['provider:image']
+        if not isinstance(images, list):
+            images = [images]
+        for os_tpl in images:
             if '@voname' in os_tpl and vo in os_tpl['@voname']:
                 return True
     return False
 
 def appdb_call(c):
-    conn = httplib.HTTPSConnection('appdb.egi.eu')
+    conn = http.client.HTTPSConnection('appdb.egi.eu')
     conn.request("GET", c)
-    data = conn.getresponse().read()
+    data = conn.getresponse().read().decode()
     conn.close()
     data.replace('\n', '')
     return xmltodict.parse(data)

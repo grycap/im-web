@@ -4,7 +4,8 @@ LABEL maintainer="Miguel Caballer <micafer1@upv.es>"
 LABEL version="1.6.1"
 LABEL description="Container image to run the IM web GUI. (http://www.grycap.upv.es/im)"
 
-RUN apt-get update && apt-get install --no-install-recommends -y wget unzip python python-xmltodict && rm -rf /var/lib/apt/lists/* && \
+RUN apt-get update && apt-get install --no-install-recommends -y wget unzip python3 python3-xmltodict && rm -rf /var/lib/apt/lists/* && \
+    ln -s /usr/bin/python3 /usr/bin/python && \
     wget https://github.com/grycap/im-web/archive/master.zip && unzip master.zip && rm -f master.zip && mv im-web-master /var/www/html/im-web && \  
     mkdir /var/www/www-data && mv /var/www/html/im-web/im.db /var/www/www-data/im.db  && \
     chown -R www-data /var/www && \
