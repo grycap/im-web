@@ -8,9 +8,9 @@ require_once 'OAuth2/Client.php';
 require_once 'OAuth2/GrantType/IGrantType.php';
 require_once 'OAuth2/GrantType/AuthorizationCode.php';
 
-$AUTHORIZATION_ENDPOINT = $openid_issuer . 'authorize';
-$TOKEN_ENDPOINT         = $openid_issuer . 'token';
-$USER_INFO_ENDPOINT     = $openid_issuer . 'userinfo';
+$AUTHORIZATION_ENDPOINT = $openid_issuer . '/protocol/openid-connect/auth';
+$TOKEN_ENDPOINT         = $openid_issuer . '/protocol/openid-connect/token';
+$USER_INFO_ENDPOINT     = $openid_issuer . '/protocol/openid-connect/userinfo';
 
 $client = new OAuth2\Client($CLIENT_ID, $CLIENT_SECRET, OAuth2\Client::AUTH_TYPE_AUTHORIZATION_BASIC);
 
